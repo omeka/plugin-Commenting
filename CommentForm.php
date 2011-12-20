@@ -15,7 +15,7 @@ class Commenting_CommentForm extends Omeka_Form
                 'captcha' => 'Figlet',
             )
         ));
-        */
+//        */
         $this->addElement('text', 'author_url', array('label'=>'Website') );
         $this->addElement('text', 'author_email',
             array(

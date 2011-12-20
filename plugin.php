@@ -1,7 +1,7 @@
 <?php
 
 define('COMMENTING_PLUGIN_DIR', PLUGIN_DIR . '/Commenting');
-
+require_once(COMMENTING_PLUGIN_DIR . '/helpers/commenting.php');
 
 class CommentingPlugin extends Omeka_Plugin_Abstract
 {
@@ -58,18 +58,15 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         );
         
         
-        $comments = get_db()->getTable('Comment')->findBy($findArray);
+       // $comments = get_db()->getTable('Comment')->findBy($findArray);
 
         $html = '';
         $html .= "<div id='comments-flash'>". flash(true) . "</div>";
         $html .= "<div class='comments'><h2>Comments</h2>";
-        foreach($comments as $comment) {
-            $html .= "<div id='comment-{$comment->id}' class='comment'>";
-            $html .= "<p class='comment-author'>" . $comment->author_name . "</p>";
-            $html .= "<p class='comment-body'>" . $comment->body . "</p>";
-            $html .= "</div>";
-        }
-        
+        $options = array();
+        $html .= commenting_get_comments($params['id'], 'Item', $options);
+//        $html .= commenting_render_comments($comments);
+
         $html .= "</div>";
         echo $html;
         

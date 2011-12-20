@@ -16,9 +16,62 @@
  * @param array $options
  */
 
-function get_comments($record_type, $record_id, $options=array())
+function commenting_get_comments($record_id, $record_type = 'Item', $options=array())
 {
+    $db = get_db();
+    $commentTable = $db->getTable('Comment');
+    $params = array(
+        'record_type' => $record_type,
+        'record_id' => $record_id,
+    );
+    $select = $commentTable->getSelectForFindBy($params);
+    if(isset($options['order'])) {
+        $select->order("ORDER BY added " . $options['order']);
+    }
     
-    
-    
+    $comments = $commentTable->fetchObjects($select);
+    if(isset($options['threaded']) && $options['threaded']) {
+        return commenting_render_threaded_comments($comments);
+    } else {
+        return commenting_render_comments($comments);
+    }
+   
+}
+
+function commenting_render_threaded_comments($comments, $parent_id = null)
+{
+
+    $html = "";
+
+    foreach($comments as $index=>$comment) {
+        if($comment->parent_comment_id == $parent_id) {
+            $html .= "<div id='comment-{$comment->id}' class='comment'>";
+            $html .= "<p class='comment-author'>" . $comment->author_name . "</p>";
+            $html .= "<p class='comment-body'>" . $comment->body . "</p>";
+
+            $html .= "<div class='comment-children'>";
+
+            $html .= commenting_render_threaded_comments($comments, $comment->id);
+            $html .= "</div>";
+
+            $html .= "</div>";
+            unset($comments[$index]);
+        }
+    }
+        
+    return $html;
+}
+
+function commenting_render_comments($comments)
+{
+    $html = "";
+
+    foreach($comments as $index=>$comment) {
+        $html .= "<div id='comment-{$comment->id}' class='comment'>";
+        $html .= "<p class='comment-author'>" . $comment->author_name . "</p>";
+        $html .= "<p class='comment-body'>" . $comment->body . "</p>";
+        $html .= "</div>";
+    }
+        
+    return $html;
 }
