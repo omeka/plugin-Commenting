@@ -46,7 +46,9 @@ class Commenting_CommentController extends Omeka_Controller_Action
             $commentSession->form = serialize($form);
             $this->_redirect($destination);
         }
-
+        //need getValue to run the filter
+        $_POST['body'] = $form->getElement('body')->getValue();
+        $_POST['approved'] = false;
         $record->saveForm($_POST);
         $destination .= "#comment-" . $record->id;
         $this->redirect->gotoUrl($destination);

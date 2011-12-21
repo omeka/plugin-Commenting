@@ -17,9 +17,13 @@ class Commenting_CommentForm extends Omeka_Form
             )
         ));
 //        */
-        $this->addElement('text', 'author_url', array('label'=>'Website') );
-        $this->addElement('text', 'author_email',
-            array(
+        $user = current_user();
+        $urlOptions = array('label'=>'Website');
+        if($user) {
+            $urlOptions['value'] = WEB_ROOT;
+        }
+        $this->addElement('text', 'author_url', $urlOptions);
+        $emailOptions = array(
             	'label'=>'Email',
             	'required'=>true,
             	'description'=>"Valid email address",
@@ -27,9 +31,28 @@ class Commenting_CommentForm extends Omeka_Form
                     array('validator' => 'EmailAddress'
                     )
                 )
-            ));
-        $this->addElement('text', 'author_name', array('label'=>'Your name'));
-        $this->addElement('textarea', 'body', array('label'=>'Comment', 'required'=>true));
+            );
+        
+
+        if($user) {
+            $emailOptions['value'] = $user->email;
+        }
+        $this->addElement('text', 'author_email', $emailOptions);
+        $nameOptions =  array('label'=>'Your name');
+        if($user) {
+            $nameOptions['value'] = $user->first_name . " " . $user->last_name;
+        }
+        $this->addElement('text', 'author_name', $nameOptions);
+        $this->addElement('textarea', 'body',
+            array('label'=>'Comment',
+            	 'required'=>true,
+                  'filters'=> array(
+                      array('StripTags', array('p', 'a','ul','ol','li')),
+                  ),
+                )
+            );
+        
+        
         $request = Omeka_Context::getInstance()->getRequest();
         $params = $request->getParams();
         $model = ucfirst(Inflector::singularize($params['controller']));

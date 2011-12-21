@@ -8,6 +8,7 @@ div.comments {
 div.comment {
 	margin-left: 12px;
 	margin-top: 3px;
+	margin-bottom: 6px;
 	border-bottom: 1px solid black;
 }
 div.comment-body {
