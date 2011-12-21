@@ -8,6 +8,7 @@ class Commenting_CommentForm extends Omeka_Form
     {
         parent::init();
         $this->setAction(WEB_ROOT . '/commenting/comment/add');
+        $this->setAttrib('id', 'comment-form');
 /*
         $this->addElement('captcha', 'captcha',  array(
             'label' => "Please verify you're a human",
@@ -34,7 +35,7 @@ class Commenting_CommentForm extends Omeka_Form
         $model = ucfirst(Inflector::singularize($params['controller']));
         $this->addElement('text', 'record_id', array('value'=>$params['id'], 'hidden'=>true));
         $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true));
-        $this->addElement('text', 'parent_comment_id', array('value'=>null, 'hidden'=>true));
+        $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true));
         $this->addElement('submit', 'submit');
         
     }

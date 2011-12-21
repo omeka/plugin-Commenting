@@ -46,9 +46,12 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
     foreach($comments as $index=>$comment) {
         if($comment->parent_comment_id == $parent_id) {
             $html .= "<div id='comment-{$comment->id}' class='comment'>";
-            $html .= "<p class='comment-author'>" . $comment->author_name . "</p>";
-            $html .= "<p class='comment-body'>" . $comment->body . "</p>";
-
+            if(!empty($comment->author_name)) {
+                $html .= "<p class='comment-author'>From: " . $comment->author_name . "</p>";
+            }
+            
+            $html .= "<div class='comment-body'>" . $comment->body . "</div>";
+            $html .= "<p class='comment-reply'>Reply</p>";
             $html .= "<div class='comment-children'>";
 
             $html .= commenting_render_threaded_comments($comments, $comment->id);
@@ -68,8 +71,10 @@ function commenting_render_comments($comments)
 
     foreach($comments as $index=>$comment) {
         $html .= "<div id='comment-{$comment->id}' class='comment'>";
-        $html .= "<p class='comment-author'>" . $comment->author_name . "</p>";
-        $html .= "<p class='comment-body'>" . $comment->body . "</p>";
+        if(!empty($comment->author_name)) {
+            $html .= "<p class='comment-author'>From: " . $comment->author_name . "</p>";
+        }
+        $html .= "<div class='comment-body'>" . $comment->body . "</div>";
         $html .= "</div>";
     }
         

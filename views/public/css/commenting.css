@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+
+div.comments {
+	
+}
+
+div.comment {
+	margin-left: 12px;
+	margin-top: 3px;
+	border-bottom: 1px solid black;
+}
+div.comment-body {
+	font-size: 1.5em;	
+}
+	
+p.comment-author {
+	
+}
+

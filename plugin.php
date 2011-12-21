@@ -10,6 +10,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         'install',
         'uninstall',
         'public_append_to_items_show',
+        'public_theme_header'
     );
     
     public function hookInstall()
@@ -43,6 +44,12 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         $db->exec($sql);
     }
     
+    public function hookPublicThemeHeader()
+    {
+        queue_css('commenting');
+        queue_js('commenting');
+    }
+    
     public function hookPublicAppendToItemsShow()
     {
         require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
@@ -56,16 +63,12 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
             'record_type' => $model,
             'record_id' => $params['id']
         );
-        
-        
-       // $comments = get_db()->getTable('Comment')->findBy($findArray);
 
         $html = '';
         $html .= "<div id='comments-flash'>". flash(true) . "</div>";
         $html .= "<div class='comments'><h2>Comments</h2>";
-        $options = array();
+        $options = array('threaded'=>true);
         $html .= commenting_get_comments($params['id'], 'Item', $options);
-//        $html .= commenting_render_comments($comments);
 
         $html .= "</div>";
         echo $html;
