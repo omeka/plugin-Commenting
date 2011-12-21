@@ -6,6 +6,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
     public function init()
     {
         $this->_modelClass = 'Comment';
+        
     }
     
     public function addAction()
@@ -50,6 +51,21 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $destination .= "#comment-" . $record->id;
         $this->redirect->gotoUrl($destination);
 
+    }
+    
+    public function approveAction()
+    {
+        
+        $id = $_POST['id'];
+        $comment = $this->getTable()->find($id);
+        $comment->approved = true;
+        try {
+            $comment->save();
+            $response = array('status'=>'ok');
+        } catch(Exception $e) {
+            $response = array('status'=>'fail', 'message'=>$e->getMessage());
+        }
+        $this->_helper->json($response);
     }
     
     private function getForm()

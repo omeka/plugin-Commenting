@@ -13,7 +13,11 @@ div.comment {
 div.comment-body {
 	font-size: 1.5em;	
 }
-	
+
+p.comment-reply {
+	cursor: pointer;	
+}
+
 p.comment-author {
 	
 }

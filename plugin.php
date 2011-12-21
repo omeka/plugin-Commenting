@@ -13,6 +13,10 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         'public_theme_header'
     );
     
+    protected $_filters = array(
+        'admin_navigation_main'
+    );
+    
     public function hookInstall()
     {
         $db = get_db();
@@ -29,6 +33,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
               `ip` tinytext COLLATE utf8_unicode_ci,
               `user_id` int(11) DEFAULT NULL,
               `parent_comment_id` int(11) DEFAULT NULL,
+              `approved` tinyint(1) NOT NULL DEFAULT '0',
               PRIMARY KEY (`id`),
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -67,15 +72,11 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         $html = '';
         $html .= "<div id='comments-flash'>". flash(true) . "</div>";
         $html .= "<div class='comments'><h2>Comments</h2>";
-        $options = array('threaded'=>true);
+        $options = array('threaded'=>true, 'approved'=>true);
         $html .= commenting_get_comments($params['id'], 'Item', $options);
 
         $html .= "</div>";
         echo $html;
-        
-        //get the form -- need to figure out how guarantee it goes at end.
-        //also tricky: getting all the threaded comments, and options for threading/not, etc
-        
         
         if(isset($commentSession->form)) {
             $form = unserialize($commentSession->form);
@@ -87,6 +88,12 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         if(isset($commentSession->form)) {
             unset($commentSession->form);
         }
+    }
+    
+    public function filterAdminNavigationMain($tabs)
+    {
+        $tabs['Comments'] = uri('commenting/comment/browse');
+        return $tabs;
     }
     
     private function getForm()

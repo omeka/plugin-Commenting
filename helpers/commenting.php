@@ -24,6 +24,9 @@ function commenting_get_comments($record_id, $record_type = 'Item', $options=arr
         'record_type' => $record_type,
         'record_id' => $record_id,
     );
+    if(isset($options['approved'])) {
+        $params['approved'] = $options['approved'];
+    }
     $select = $commentTable->getSelectForFindBy($params);
     if(isset($options['order'])) {
         $select->order("ORDER BY added " . $options['order']);
@@ -79,4 +82,20 @@ function commenting_render_comments($comments)
     }
         
     return $html;
+}
+
+function commenting_comment_uri($comment, $includeHash = true)
+{
+    $controller = lcfirst(Inflector::pluralize($comment->record_type));
+    $id = $comment->record_id;
+    $uri = public_uri(array(
+        'controller' => 'items',
+        'action' => 'show',
+        'id' => $id
+        
+    ), null, array() ,true);
+    if($includeHash) {
+        $uri .= "#comment-" . $comment->id;
+    }
+    return $uri;
 }
