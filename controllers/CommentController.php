@@ -2,11 +2,24 @@
 
 class Commenting_CommentController extends Omeka_Controller_Action
 {
+    protected $_browseRecordsPerPage = 10;
     
     public function init()
     {
         $this->_modelClass = 'Comment';
         
+    }
+    
+    public function browseAction()
+    {
+        if(!$this->_hasParam('sort_field')) {
+            $this->_setParam('sort_field', 'added');
+        }
+        
+        if(!$this->_hasParam('sort_dir')) {
+            $this->_setParam('sort_dir', 'd');
+        }
+        parent::browseAction();
     }
     
     public function addAction()
@@ -31,21 +44,17 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $valid = $form->isValid($this->getRequest()->getPost());
         if(!$valid) {
             $errors = $form->getErrors();
-            //echo $form->render();
-           // die();
-            //$form->setErrorMessages($errors);
             foreach($errors as $element=>$elErrors) {
                 foreach($elErrors as $error) {
                     $this->flashError($error);
                 }
-                
             }
-           
             $destination .= "#comments-flash";
             $commentSession = new Zend_Session_Namespace('commenting', true);
             $commentSession->form = serialize($form);
             $this->_redirect($destination);
         }
+        $this->flashSuccess("Your comment is awaiting moderation");
         //need getValue to run the filter
         $_POST['body'] = $form->getElement('body')->getValue();
         $_POST['approved'] = false;
@@ -57,7 +66,6 @@ class Commenting_CommentController extends Omeka_Controller_Action
     
     public function approveAction()
     {
-        
         $id = $_POST['id'];
         $comment = $this->getTable()->find($id);
         $comment->approved = true;

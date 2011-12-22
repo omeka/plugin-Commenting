@@ -10,7 +10,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         'install',
         'uninstall',
         'public_append_to_items_show',
-        'public_theme_header'
+        'public_theme_header',
     );
     
     protected $_filters = array(

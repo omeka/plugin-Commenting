@@ -13,12 +13,17 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('captcha', 'captcha',  array(
             'label' => "Please verify you're a human",
         	'captcha' => array(
-                'captcha' => 'Figlet',
+                'captcha' => 'ReCaptcha',
+                'pubkey' => get_option('recaptcha_public_key'),
+                'privkey' => get_option('recaptcha_private_key')
             )
         ));
 //        */
         $user = current_user();
-        $urlOptions = array('label'=>'Website');
+        $urlOptions = array(
+        		'label'=>'Website',
+             //   'validators' => array('validator' => 'Hostname')
+            );
         if($user) {
             $urlOptions['value'] = WEB_ROOT;
         }
@@ -26,7 +31,6 @@ class Commenting_CommentForm extends Omeka_Form
         $emailOptions = array(
             	'label'=>'Email',
             	'required'=>true,
-            	'description'=>"Valid email address",
                 'validators' => array(
                     array('validator' => 'EmailAddress'
                     )
@@ -45,9 +49,10 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('text', 'author_name', $nameOptions);
         $this->addElement('textarea', 'body',
             array('label'=>'Comment',
+                  'description'=>"Allowed tags: <p>, <a>, <em>, <strong>, <ul>, <ol>, <li>",
             	 'required'=>true,
                   'filters'=> array(
-                      array('StripTags', array('p', 'a','ul','ol','li')),
+                      array('StripTags', array('p', 'em', 'strong', 'a','ul','ol','li')),
                   ),
                 )
             );
