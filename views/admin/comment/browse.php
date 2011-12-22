@@ -22,7 +22,36 @@ queue_js('commenting');
         </div>
     </div>
 <h1>Comments</h1>
-<?php echo commenting_render_comments($comments); ?>
+
+<p class="button" style="float:left" id="batch-approve">Approve checked</p>
+<table>
+<thead>
+<tr>
+<th><input id="batch-select" type="checkbox" /></th>
+<th>Record</th>
+<th>Author</th>
+<th>Url</th>
+<th>Email</th>
+<th>Comment</th>
+<th>Approved</th>
+</tr>
+</thead>
+<tbody>
+<?php foreach($this->comments as $comment): ?>
+<tr>
+<td><input class="batch-select-comment" id="batch-approve-<?php echo $comment->id; ?>"  type="checkbox" /></td>
+<td><a href="<?php echo commenting_comment_uri($comment); ?>">Link</a></td>
+<td><?php echo $comment->author_name; ?></td>
+<td><?php echo $comment->author_url; ?></td>
+<td><?php echo $comment->author_email; ?></td>
+<td><?php echo $comment->body; ?></td>
+<td><?php echo $comment->approved ? 'Yes' : "<span class='approve' id='approve-{$comment->id}'>Approve</span>"; ?></td>
+</tr>
+<?php endforeach; ?>
+</tbody>
+
+</table>
+
 </div>
 
 <?php foot(); ?>

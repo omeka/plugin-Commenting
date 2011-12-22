@@ -49,9 +49,12 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
     foreach($comments as $index=>$comment) {
         if($comment->parent_comment_id == $parent_id) {
             $html .= "<div id='comment-{$comment->id}' class='comment'>";
+            $html .= "<div class='comment-author'>";
+            $html .= commenting_get_gravatar($comment);
             if(!empty($comment->author_name)) {
-                $html .= "<p class='comment-author'>From: " . $comment->author_name . "</p>";
+                $html .= "<p class='comment-author-name'>" . $comment->author_name . "</p>";
             }
+            $html .= "</div>";
             
             $html .= "<div class='comment-body'>" . $comment->body . "</div>";
             $html .= "<p class='comment-reply'>Reply</p>";
@@ -74,9 +77,12 @@ function commenting_render_comments($comments)
 
     foreach($comments as $index=>$comment) {
         $html .= "<div id='comment-{$comment->id}' class='comment'>";
+        $html .= "<div class='comment-author'>";
+        $html .= commenting_get_gravatar($comment);
         if(!empty($comment->author_name)) {
-            $html .= "<p class='comment-author'>From: " . $comment->author_name . "</p>";
+            $html .= "<p class='comment-author-name'>" . $comment->author_name . "</p>";
         }
+        $html .= "</div>";
         $html .= "<div class='comment-body'>" . $comment->body . "</div>";
         $html .= "</div>";
     }
@@ -98,4 +104,11 @@ function commenting_comment_uri($comment, $includeHash = true)
         $uri .= "#comment-" . $comment->id;
     }
     return $uri;
+}
+
+function commenting_get_gravatar($comment)
+{
+    $hash = md5(strtolower(trim($comment->author_email)));
+    $url = "http://www.gravatar.com/avatar/$hash";
+    return "<img class='commenting-gravatar' src='$url' />";
 }
