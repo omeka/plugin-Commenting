@@ -22,9 +22,11 @@ queue_js('commenting');
         </div>
     </div>
 <h1>Comments</h1>
+<p class="button" style="float:left" id="batch-approve">Approve checked</p>
 <table>
 <thead>
 <tr>
+<th><input id="batch-select" type="checkbox" /></th>
 <th>Record</th>
 <th>Author</th>
 <th>Url</th>
@@ -36,6 +38,7 @@ queue_js('commenting');
 <tbody>
 <?php foreach($this->comments as $comment): ?>
 <tr>
+<td><input class="batch-select-comment" id="batch-approve-<?php echo $comment->id; ?>"  type="checkbox" /></td>
 <td><a href="<?php echo commenting_comment_uri($comment); ?>">Link</a></td>
 <td><?php echo $comment->author_name; ?></td>
 <td><?php echo $comment->author_url; ?></td>
