@@ -6,6 +6,7 @@ class Comment extends Omeka_Record
     public $id;
     public $record_id;
     public $record_type;
+    public $path;
     public $added;
     public $body;
     public $author_email;
@@ -19,7 +20,7 @@ class Comment extends Omeka_Record
     public $is_spam;
     
     
-    protected function checkSpam()
+    public function checkSpam()
     {
         $wordPressAPIKey = get_option('commenting_wpapi_key');
         $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );

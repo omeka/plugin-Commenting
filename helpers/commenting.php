@@ -1,5 +1,50 @@
 <?php
 
+function commenting_echo_comments($options = array('approved'=>true))
+{
+    if(!isset($options['threaded'])) {
+        $options['threaded'] = get_option('commenting_threaded');
+    }
+    $request = Omeka_Context::getInstance()->getRequest();
+    $params = $request->getParams();
+    $model = ucfirst(Inflector::singularize($params['controller']));
+            
+    $findArray = array(
+        'record_type' => $model,
+        'record_id' => $params['id']
+    );
+
+    $html = '';
+    $html .= "<div id='comments-flash'>". flash(true) . "</div>";
+    $html .= "<div class='comments'><h2>Comments</h2>";
+    
+    $html .= commenting_get_comments($params['id'], 'Item', $options);
+
+    $html .= "</div>";
+
+    echo $html;
+    
+    
+}
+
+function commenting_echo_comment_form()
+{
+    require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
+    $commentSession = new Zend_Session_Namespace('commenting', true);
+    
+    if(isset($commentSession->form)) {
+        $form = unserialize($commentSession->form);
+    } else {
+        $form = new Commenting_CommentForm();
+    }
+        
+    echo $form;
+    if(isset($commentSession->form)) {
+        unset($commentSession->form);
+    }
+    
+}
+
 /**
  *
  * Get the comments for a record
@@ -96,14 +141,7 @@ function commenting_render_comments($comments, $admin=false)
 
 function commenting_comment_uri($comment, $includeHash = true)
 {
-    $controller = lcfirst(Inflector::pluralize($comment->record_type));
-    $id = $comment->record_id;
-    $uri = public_uri(array(
-        'controller' => 'items',
-        'action' => 'show',
-        'id' => $id
-        
-    ), null, array() ,true);
+    $uri = $comment->path;
     if($includeHash) {
         $uri .= "#comment-" . $comment->id;
     }

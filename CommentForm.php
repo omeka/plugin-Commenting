@@ -9,16 +9,21 @@ class Commenting_CommentForm extends Omeka_Form
         parent::init();
         $this->setAction(WEB_ROOT . '/commenting/comment/add');
         $this->setAttrib('id', 'comment-form');
-/*
-        $this->addElement('captcha', 'captcha',  array(
-            'label' => "Please verify you're a human",
-        	'captcha' => array(
-                'captcha' => 'ReCaptcha',
-                'pubkey' => get_option('recaptcha_public_key'),
-                'privkey' => get_option('recaptcha_private_key')
-            )
-        ));
-//        */
+        $user = current_user();
+        
+        //@TODO: Add ACL checks on roles
+        if(!user) {
+            $this->addElement('captcha', 'captcha',  array(
+                'label' => "Please verify you're a human",
+            	'captcha' => array(
+                    'captcha' => 'ReCaptcha',
+                    'pubkey' => get_option('recaptcha_public_key'),
+                    'privkey' => get_option('recaptcha_private_key')
+                )
+            ));
+            
+        }
+
         
         $urlOptions = array(
         		'label'=>'Website',
@@ -33,7 +38,7 @@ class Commenting_CommentForm extends Omeka_Form
                 )
             );
         $nameOptions =  array('label'=>'Your name');
-        $user = current_user();
+
         if($user) {
             $urlOptions['value'] = WEB_ROOT;
             $emailOptions['value'] = $user->email;
@@ -59,8 +64,16 @@ class Commenting_CommentForm extends Omeka_Form
         
         $request = Omeka_Context::getInstance()->getRequest();
         $params = $request->getParams();
-        $model = ucfirst(Inflector::singularize($params['controller']));
+        if(isset($params['module'])) {
+            $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
+        } else {
+            $model = ucfirst(Inflector::singularize($params['controller']));
+        }
+        
+        
         $this->addElement('text', 'record_id', array('value'=>$params['id'], 'hidden'=>true));
+        $this->addElement('text', 'req_uri', array('value'=>$request->getPathInfo(), 'hidden'=>true));
+        $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true));
         $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true));
         $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true));
         $this->addElement('submit', 'submit');

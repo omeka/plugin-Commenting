@@ -24,13 +24,9 @@ class Commenting_CommentController extends Omeka_Controller_Action
     
     public function addAction()
     {
-        $destArray = array(
-        	'controller'=> strtolower(Inflector::pluralize($_POST['record_type'])),
-            'action' => 'show',
-            'id' => $_POST['record_id']
         
-        );
-        $destination = implode('/', $destArray);
+        
+        $destination = $_POST['req_uri'];
         
         $comment = new Comment();
         $form = $this->getForm();
