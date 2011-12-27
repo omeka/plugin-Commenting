@@ -1,13 +1,17 @@
 var Commenting = {
 	approve: function() {
-		id = jQuery(this).attr('id').substring(8);
+		var id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
 		Commenting.element = this;
 		jQuery.post("approve/", {'id': id}, Commenting.approveResponseHandler);
 	},
 	
 	approveResponseHandler: function(response, a, b) {
 		if(response.status == 'ok') {
-			jQuery(Commenting.element).replaceWith('Yes');	
+			var unapproveEl = jQuery(document.createElement('li'));
+			unapproveEl.text("Unapprove");
+			unapproveEl.addClass('unapprove');
+			unapproveEl.click(Commenting.unapprove);
+			jQuery(Commenting.element).replaceWith(unapproveEl);	
 		} else {
 			alert('Error trying to approve: ' + response.message);
 		}		

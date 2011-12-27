@@ -11,6 +11,8 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         'uninstall',
         'public_append_to_items_show',
         'public_theme_header',
+        'config_form',
+        'config'
     );
     
     protected $_filters = array(
@@ -31,9 +33,11 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
               `author_url` tinytext COLLATE utf8_unicode_ci,
               `author_name` tinytext COLLATE utf8_unicode_ci,
               `ip` tinytext COLLATE utf8_unicode_ci,
+              `user_agent` tinytext COLLATE utf8_unicode_ci,
               `user_id` int(11) DEFAULT NULL,
               `parent_comment_id` int(11) DEFAULT NULL,
               `approved` tinyint(1) NOT NULL DEFAULT '0',
+              `is_spam` tinyint(1) NOT NULL DEFAULT '0',
               PRIMARY KEY (`id`),
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -57,37 +61,53 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     
     public function hookPublicAppendToItemsShow()
     {
-        require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
-        $commentSession = new Zend_Session_Namespace('commenting', true);
-        //get the existing comments
-        $request = Omeka_Context::getInstance()->getRequest();
-        $params = $request->getParams();
-        $model = ucfirst(Inflector::singularize($params['controller']));
-                
-        $findArray = array(
-            'record_type' => $model,
-            'record_id' => $params['id']
-        );
-
-        $html = '';
-        $html .= "<div id='comments-flash'>". flash(true) . "</div>";
-        $html .= "<div class='comments'><h2>Comments</h2>";
-        $options = array('threaded'=>true, 'approved'=>true);
-        $html .= commenting_get_comments($params['id'], 'Item', $options);
-
-        $html .= "</div>";
-        echo $html;
-        
-        if(isset($commentSession->form)) {
-            $form = unserialize($commentSession->form);
-        } else {
-            $form = $this->getForm();
-        }
+        if( (get_option('commenting_allow_public') == 1) || current_user() ) {
+            require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
+            $commentSession = new Zend_Session_Namespace('commenting', true);
+            //get the existing comments
+            $request = Omeka_Context::getInstance()->getRequest();
+            $params = $request->getParams();
+            $model = ucfirst(Inflector::singularize($params['controller']));
+                    
+            $findArray = array(
+                'record_type' => $model,
+                'record_id' => $params['id']
+            );
+    
+            $html = '';
+            $html .= "<div id='comments-flash'>". flash(true) . "</div>";
+            $html .= "<div class='comments'><h2>Comments</h2>";
+            $options = array('threaded'=>true, 'approved'=>true);
+            $html .= commenting_get_comments($params['id'], 'Item', $options);
+    
+            $html .= "</div>";
+            echo $html;
             
-        echo $form;
-        if(isset($commentSession->form)) {
-            unset($commentSession->form);
+            if(isset($commentSession->form)) {
+                $form = unserialize($commentSession->form);
+            } else {
+                $form = $this->getForm();
+            }
+                
+            echo $form;
+            if(isset($commentSession->form)) {
+                unset($commentSession->form);
+            }
         }
+
+    }
+    
+    public function hookConfig($post)
+    {
+        foreach($post as $key=>$value) {
+            set_option($key, $value);
+        }
+    }
+    
+    public function hookConfigForm()
+    {
+        include COMMENTING_PLUGIN_DIR . '/config_form.php';
+        
     }
     
     public function filterAdminNavigationMain($tabs)

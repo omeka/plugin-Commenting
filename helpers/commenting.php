@@ -71,12 +71,15 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
     return $html;
 }
 
-function commenting_render_comments($comments)
+function commenting_render_comments($comments, $admin=false)
 {
     $html = "";
 
     foreach($comments as $index=>$comment) {
         $html .= "<div id='comment-{$comment->id}' class='comment'>";
+        if($admin) {
+            $html .= commenting_render_admin($comment);
+        }
         $html .= "<div class='comment-author'>";
         $html .= commenting_get_gravatar($comment);
         if(!empty($comment->author_name)) {
@@ -84,6 +87,7 @@ function commenting_render_comments($comments)
         }
         $html .= "</div>";
         $html .= "<div class='comment-body'>" . $comment->body . "</div>";
+
         $html .= "</div>";
     }
         
@@ -104,6 +108,20 @@ function commenting_comment_uri($comment, $includeHash = true)
         $uri .= "#comment-" . $comment->id;
     }
     return $uri;
+}
+
+function commenting_render_admin($comment)
+{
+    $html = "<div class='commenting-admin'>";
+    $html .= "<input class='batch-select-comment' type='checkbox' />";
+    $html .= "<ul class='comment-admin-menu'>";
+    $html .= (bool) $comment->approved ? "<li class='unapprove'>Unapprove</li>" : "<li class='approve'>Approve</li>";
+    $html .= (bool) $comment->spam ? "<li class='report-spam'>Report Spam</li>" : "<li class='report-ham'>Report Ham</li>";
+    $html .= "<li><a href='" . commenting_comment_uri($comment) . "'>View</a></li>";
+    $html .= "<li><a href='mailto:$comment->author_email'>$comment->author_email</a></li>";
+    $html .= "</ul>";
+    $html .= "</div>";
+    return $html;
 }
 
 function commenting_get_gravatar($comment)

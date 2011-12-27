@@ -24,8 +24,6 @@ class Commenting_CommentController extends Omeka_Controller_Action
     
     public function addAction()
     {
-        $varName = strtolower($this->_modelClass);
-        $class = $this->_modelClass;
         $destArray = array(
         	'controller'=> strtolower(Inflector::pluralize($_POST['record_type'])),
             'action' => 'show',
@@ -34,13 +32,8 @@ class Commenting_CommentController extends Omeka_Controller_Action
         );
         $destination = implode('/', $destArray);
         
-        $record = new $class();
-
+        $comment = new Comment();
         $form = $this->getForm();
-    
-        
-        //can I assign the form to the view being redirected to, so that the append hooks
-        //can work with whatever data is there about how to render the form/error messages, etc?
         $valid = $form->isValid($this->getRequest()->getPost());
         if(!$valid) {
             $errors = $form->getErrors();
@@ -56,12 +49,34 @@ class Commenting_CommentController extends Omeka_Controller_Action
         }
         $this->flashSuccess("Your comment is awaiting moderation");
         //need getValue to run the filter
-        $_POST['body'] = $form->getElement('body')->getValue();
-        $_POST['approved'] = false;
-        $record->saveForm($_POST);
-        $destination .= "#comment-" . $record->id;
+        $data = $_POST;
+        $data['body'] = $form->getElement('body')->getValue();
+        $data['ip'] = $_SERVER['REMOTE_ADDR'];
+        $data['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
+        $data['approved'] = false;
+        $comment->setArray($data);
+        $comment->checkSpam();
+        $comment->save();
+        $destination .= "#comment-" . $comment->id;
         $this->redirect->gotoUrl($destination);
 
+    }
+    
+    public function updateApprovedAction()
+    {
+        $commentIds = $_POST['ids'];
+        $status = $_POST['status'];
+        $table = $this->getTable();
+        foreach($commentIds as $commentId) {
+            $comment = $table->find($commentId);
+            $comment->approved = status;
+            try {
+                $comment->save();
+            } catch(Exception $e) {
+                $response = array('status'=>'fail', 'message'=>$e->getMessage());
+            }
+        }
+        $this->_helper->json($response);
     }
     
     public function approveAction()
@@ -76,6 +91,38 @@ class Commenting_CommentController extends Omeka_Controller_Action
             $response = array('status'=>'fail', 'message'=>$e->getMessage());
         }
         $this->_helper->json($response);
+    }
+    
+    public function reportHamAction()
+    {
+        $id = $_POST['id'];
+        $comment = $this->getTable()->find($id);
+        $comment->isSpam = false;
+        $wordPressAPIKey = get_option('commenting_wpapi_key');
+        $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
+        $data = $this->getAkismetData();
+        try{
+            $ak->submitHam($data);
+        } catch (Exception $e){
+            
+        }
+        $comment->save();
+    }
+    
+    public function reportSpamAction()
+    {
+        $id = $_POST['id'];
+        $comment = $this->getTable()->find($id);
+        $comment->isSpam = true;
+        $wordPressAPIKey = get_option('commenting_wpapi_key');
+        $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
+        $data = $this->getAkismetData();
+        try {
+            $ak->submitSpam($data);
+        } catch(Exception $e) {
+            
+        }
+        $comment->save();
     }
     
     private function getForm()

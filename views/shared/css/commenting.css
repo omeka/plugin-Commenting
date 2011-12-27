@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+form#comment-form {
+	clear:both;	
+}
+
+div.comments {
+	
+}
+
+div.comment {
+	margin-left: 12px;
+	margin-top: 3px;
+	margin-bottom: 6px;
+	clear: both;
+}
+
+div.comment-author {
+	float: left;	
+	margin: 6px;
+}
+
+div.comment-body {
+	font-size: 1.5em;	
+}
+
+div.comment-body p {
+	font-size: 1em;	
+}
+
+p.comment-reply {
+	cursor: pointer;	
+}
+
+p.comment-author-name {
+	
+}
+
+div.commenting-admin {
+	float: left;	
+	width: 180px;
+}
+
+div#comment-batch-actions {
+	font-size: 1.2em;
+	line-height: 1.5em;		
+}
+
+ul.comment-batch-actions {
+	display: inline;
+	color: #338899;
+	cursor: pointer;	
+}
+
+ul.comment-batch-actions li {
+	display: inline;
+	margin-left: 12px;
+}
+
+ul.comment-admin-menu {
+	padding-left: 20px;	
+}
+
+ul.comment-admin-menu li {
+	color: #338899;
+	cursor: pointer;
+	margin-bottom: .5em	
+}
+
+input.batch-select-comment {
+	float: left;	
+	position: relative;
+	left: -12px;
+}

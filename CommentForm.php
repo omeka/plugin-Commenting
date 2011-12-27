@@ -19,15 +19,11 @@ class Commenting_CommentForm extends Omeka_Form
             )
         ));
 //        */
-        $user = current_user();
+        
         $urlOptions = array(
         		'label'=>'Website',
              //   'validators' => array('validator' => 'Hostname')
             );
-        if($user) {
-            $urlOptions['value'] = WEB_ROOT;
-        }
-        $this->addElement('text', 'author_url', $urlOptions);
         $emailOptions = array(
             	'label'=>'Email',
             	'required'=>true,
@@ -36,16 +32,19 @@ class Commenting_CommentForm extends Omeka_Form
                     )
                 )
             );
-        
-
-        if($user) {
-            $emailOptions['value'] = $user->email;
-        }
-        $this->addElement('text', 'author_email', $emailOptions);
         $nameOptions =  array('label'=>'Your name');
+        $user = current_user();
         if($user) {
+            $urlOptions['value'] = WEB_ROOT;
+            $emailOptions['value'] = $user->email;
             $nameOptions['value'] = $user->first_name . " " . $user->last_name;
+            $this->addElement('text', 'user_id', array('value'=>$user->id,  'hidden'=>true));
         }
+        $this->addElement('text', 'author_url', $urlOptions);
+
+
+        $this->addElement('text', 'author_email', $emailOptions);
+
         $this->addElement('text', 'author_name', $nameOptions);
         $this->addElement('textarea', 'body',
             array('label'=>'Comment',
