@@ -24,10 +24,10 @@ queue_js('commenting');
 <h1>Comments</h1>
 <div id='comment-batch-actions'><input id='batch-select' type='checkbox' /> Select All | With Selected:
 <ul class='comment-batch-actions'>
-<li>Approve</li>
-<li>Unapprove</li>
-<li>Report Spam</li>
-<li>Report Ham</li>
+<li onclick="Commenting.batchApprove()">Approve</li>
+<li onclick="Commenting.batchUnapprove">Unapprove</li>
+<li onclick="Commenting.batchReportSpam">Report Spam</li>
+<li onclick="Commenting.batchReportHam">Report Ham</li>
 </ul>
 </div>
 

@@ -24,9 +24,14 @@ class Commenting_CommentController extends Omeka_Controller_Action
     
     public function addAction()
     {
+        $destination = $_POST['path'];
+        $destArray = array(
+            'module' => Inflector::camelize($_POST['module']),
+        	'controller'=> strtolower(Inflector::pluralize($_POST['record_type'])),
+            'action' => 'show',
+            'id' => $_POST['record_id']
         
-        
-        $destination = $_POST['req_uri'];
+        );
         
         $comment = new Comment();
         $form = $this->getForm();
@@ -41,7 +46,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
             $destination .= "#comments-flash";
             $commentSession = new Zend_Session_Namespace('commenting', true);
             $commentSession->form = serialize($form);
-            $this->_redirect($destination);
+            $this->redirect->gotoUrl($destination);
         }
         $this->flashSuccess("Your comment is awaiting moderation");
         //need getValue to run the filter
@@ -55,14 +60,42 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $comment->save();
         $destination .= "#comment-" . $comment->id;
         $this->redirect->gotoUrl($destination);
-
     }
     
-    public function updateApprovedAction()
+    public function updatespamAction()
     {
         $commentIds = $_POST['ids'];
-        $status = $_POST['status'];
+        $spam = (bool) $_POST['spam'];
         $table = $this->getTable();
+        $wordPressAPIKey = get_option('commenting_wpapi_key');
+        $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
+                
+        foreach($commentIds as $commentId) {
+            $comment = $table->find($commentId);
+            $comment->isSpam = $spam;
+            $data = $comment->getAkismetData();
+            if($spam) {
+                $submitMethod = 'submitSpam';
+            } else {
+                $submitMethod = 'submitHam';
+            }
+            try{
+                $ak->$submitMethod($data);
+            } catch (Exception $e){
+                _log($e->getMessage());
+            }
+            $comment->save();
+        }
+    }
+    
+    public function updateapprovedAction()
+    {
+        $commentIds = $_POST['ids'];
+        $status = $_POST['approved'];
+        $table = $this->getTable();
+        if(!commentIds) {
+            return;
+        }
         foreach($commentIds as $commentId) {
             $comment = $table->find($commentId);
             $comment->approved = status;
@@ -75,51 +108,6 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $this->_helper->json($response);
     }
     
-    public function approveAction()
-    {
-        $id = $_POST['id'];
-        $comment = $this->getTable()->find($id);
-        $comment->approved = true;
-        try {
-            $comment->save();
-            $response = array('status'=>'ok');
-        } catch(Exception $e) {
-            $response = array('status'=>'fail', 'message'=>$e->getMessage());
-        }
-        $this->_helper->json($response);
-    }
-    
-    public function reportHamAction()
-    {
-        $id = $_POST['id'];
-        $comment = $this->getTable()->find($id);
-        $comment->isSpam = false;
-        $wordPressAPIKey = get_option('commenting_wpapi_key');
-        $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
-        $data = $this->getAkismetData();
-        try{
-            $ak->submitHam($data);
-        } catch (Exception $e){
-            
-        }
-        $comment->save();
-    }
-    
-    public function reportSpamAction()
-    {
-        $id = $_POST['id'];
-        $comment = $this->getTable()->find($id);
-        $comment->isSpam = true;
-        $wordPressAPIKey = get_option('commenting_wpapi_key');
-        $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
-        $data = $this->getAkismetData();
-        try {
-            $ak->submitSpam($data);
-        } catch(Exception $e) {
-            
-        }
-        $comment->save();
-    }
     
     private function getForm()
     {

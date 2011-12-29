@@ -7,8 +7,8 @@ function commenting_echo_comments($options = array('approved'=>true))
     }
     $request = Omeka_Context::getInstance()->getRequest();
     $params = $request->getParams();
-    $model = ucfirst(Inflector::singularize($params['controller']));
-            
+    $model = commenting_get_model();
+
     $findArray = array(
         'record_type' => $model,
         'record_id' => $params['id']
@@ -18,7 +18,7 @@ function commenting_echo_comments($options = array('approved'=>true))
     $html .= "<div id='comments-flash'>". flash(true) . "</div>";
     $html .= "<div class='comments'><h2>Comments</h2>";
     
-    $html .= commenting_get_comments($params['id'], 'Item', $options);
+    $html .= commenting_get_comments($params['id'], $model, $options);
 
     $html .= "</div>";
 
@@ -102,6 +102,7 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
             $html .= "</div>";
             
             $html .= "<div class='comment-body'>" . $comment->body . "</div>";
+            $html .= "<p class='comment-time'>" . $comment->added . "</p>";
             $html .= "<p class='comment-reply'>Reply</p>";
             $html .= "<div class='comment-children'>";
 
@@ -132,7 +133,7 @@ function commenting_render_comments($comments, $admin=false)
         }
         $html .= "</div>";
         $html .= "<div class='comment-body'>" . $comment->body . "</div>";
-
+        $html .= "<p class='comment-time'>" . $comment->added . "</p>";
         $html .= "</div>";
     }
         
@@ -167,4 +168,20 @@ function commenting_get_gravatar($comment)
     $hash = md5(strtolower(trim($comment->author_email)));
     $url = "http://www.gravatar.com/avatar/$hash";
     return "<img class='commenting-gravatar' src='$url' />";
+}
+
+function commenting_get_model($request = null)
+{
+    if(is_null($request)) {
+        $request = Omeka_Context::getInstance()->getRequest();
+    }
+    
+    $params = $request->getParams();
+    if(isset($params['module'])) {
+        $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
+    } else {
+        $model = ucfirst(Inflector::singularize($params['controller']));
+    }
+    return $model;
+    
 }

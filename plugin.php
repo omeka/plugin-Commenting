@@ -11,6 +11,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         'uninstall',
         'public_append_to_items_show',
         'public_theme_header',
+        'admin_theme_header',
         'config_form',
         'config'
     );
@@ -58,6 +59,11 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     {
         queue_css('commenting');
         queue_js('commenting');
+    }
+    
+    public function hookAdminThemeHeader()
+    {
+        queue_css('commenting');
     }
     
     public function hookPublicAppendToItemsShow()

@@ -1,8 +1,16 @@
 var Commenting = {
 	approve: function() {
-		var id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
+		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
 		Commenting.element = this;
-		jQuery.post("approve/", {'id': id}, Commenting.approveResponseHandler);
+		json = {'ids': [id], 'approved': true};
+		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
+	},
+	
+	unapprove: function() {
+		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
+		Commenting.element = this;
+		json = {'ids': [id], 'approved': false};
+		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);				
 	},
 	
 	approveResponseHandler: function(response, a, b) {
@@ -21,8 +29,51 @@ var Commenting = {
 		jQuery('input.batch-select-comment:checked').each(function() {
 			ids[ids.length] = this.id.substring(14);
 		});
-		json = {'ids': ids};
-		jQuery().post("batchApprove/", json, Commenting.batchApproveResponseHandler);
+		json = {'ids': ids, 'approved': true};
+		console.log(json);
+		jQuery.post("updateApproved", json, Commenting.batchApproveResponseHandler);
+	},
+
+	batchUnapprove: function() {
+		ids = new Array();
+		jQuery('input.batch-select-comment:checked').each(function() {
+			ids[ids.length] = this.id.substring(14);
+		});
+		json = {'ids': ids, 'approved': false};
+		jQuery.post("updateApproved", json, Commenting.batchUnapproveResponseHandler);
+	},	
+	
+	reportSpam: function() {
+		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
+		Commenting.element = this;
+		json = {'ids': [id], 'spam': true};
+		jQuery.post("updateSpam", json, Commenting.updateSpamResponseHandler);		
+	},
+	
+	reportHam: function() {
+		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
+		Commenting.element = this;
+		json = {'ids': [id], 'spam': false};
+		jQuery.post("updateSpam", json, Commenting.updateHamResponseHandler);		
+	},
+	
+	
+	batchReportSpam: function() {
+		ids = new Array();
+		jQuery('input.batch-select-comment:checked').each(function() {
+			ids[ids.length] = this.id.substring(14);
+		});
+		json = {'ids': ids, 'spam': true};
+		jQuery.post("updateSpam", json, Commenting.batchSpamResponseHandler);		
+	},
+	
+	batchReportHam: function() {
+		ids = new Array();
+		jQuery('input.batch-select-comment:checked').each(function() {
+			ids[ids.length] = this.id.substring(14);
+		});
+		json = {'ids': ids, 'spam': false};
+		jQuery.post("updateSpam", json, Commenting.batchHamResponseHandler);		
 	},
 	
 	batchApproveResponseHandler: function(status, a, b) {
@@ -32,6 +83,17 @@ var Commenting = {
 			alert('Error trying to approve: ' + response.message);
 		}
 	},
+	
+	batchSpamResponseHandler: function(status, a, b)
+	{
+		
+	},
+	
+	batchHamResponseHandler: function(status, a, b)
+	{
+		
+	},
+	
 	
 	toggleSelected: function() {
 		if(jQuery(this).is(':checked')) {

@@ -61,18 +61,13 @@ class Commenting_CommentForm extends Omeka_Form
                 )
             );
         
-        
+
         $request = Omeka_Context::getInstance()->getRequest();
         $params = $request->getParams();
-        if(isset($params['module'])) {
-            $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
-        } else {
-            $model = ucfirst(Inflector::singularize($params['controller']));
-        }
-        
+        $model = commenting_get_model($request);
         
         $this->addElement('text', 'record_id', array('value'=>$params['id'], 'hidden'=>true));
-        $this->addElement('text', 'req_uri', array('value'=>$request->getPathInfo(), 'hidden'=>true));
+        $this->addElement('text', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true));
         $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true));
         $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true));
         $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true));
