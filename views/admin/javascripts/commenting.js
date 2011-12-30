@@ -1,46 +1,70 @@
 var Commenting = {
+		
+	elements: [],
+	
 	approve: function() {
 		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
-		Commenting.element = this;
-		json = {'ids': [id], 'approved': true};
+		Commenting.elements = [jQuery(this)];
+		json = {'ids': [id], 'approved': 1};
 		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
 	},
 	
 	unapprove: function() {
 		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
-		Commenting.element = this;
-		json = {'ids': [id], 'approved': false};
-		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);				
+		Commenting.elements = [jQuery(this)];
+		json = {'ids': [id], 'approved': 0};
+		jQuery.post("updateApproved", json, Commenting.unapproveResponseHandler);				
 	},
 	
 	approveResponseHandler: function(response, a, b) {
 		if(response.status == 'ok') {
-			var unapproveEl = jQuery(document.createElement('li'));
-			unapproveEl.text("Unapprove");
-			unapproveEl.addClass('unapprove');
-			unapproveEl.click(Commenting.unapprove);
-			jQuery(Commenting.element).replaceWith(unapproveEl);	
+			for(var i=0; i < Commenting.elements.length; i++) {
+				var unapproveEl = jQuery(document.createElement('li'));
+				unapproveEl.text("Unapprove");
+				unapproveEl.addClass('unapprove');
+				unapproveEl.click(Commenting.unapprove);
+				Commenting.elements[i].replaceWith(unapproveEl);	
+			}
 		} else {
 			alert('Error trying to approve: ' + response.message);
 		}		
 	},
+	
+	unapproveResponseHandler: function(response, a, b) {
+		if(response.status == 'ok') {
+			for(var i=0; i < Commenting.elements.length; i++) {
+				var approveEl = jQuery(document.createElement('li'));
+				approveEl.text("Approve");
+				approveEl.addClass('approve');
+				approveEl.click(Commenting.approve);
+				Commenting.elements[i].replaceWith(approveEl);	
+			}
+		} else {
+			alert('Error trying to approve: ' + response.message);
+		}		
+	},	
 	batchApprove: function() {
 		ids = new Array();
 		jQuery('input.batch-select-comment:checked').each(function() {
-			ids[ids.length] = this.id.substring(14);
+			var target = jQuery(this.parentNode.parentNode);
+			ids[ids.length] = target.attr('id').substring(8);
+			Commenting.elements[Commenting.elements.length] = target.find('li.approve');
 		});
-		json = {'ids': ids, 'approved': true};
+		json = {'ids': ids, 'approved': 1};
 		console.log(json);
-		jQuery.post("updateApproved", json, Commenting.batchApproveResponseHandler);
+		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
 	},
 
 	batchUnapprove: function() {
 		ids = new Array();
 		jQuery('input.batch-select-comment:checked').each(function() {
-			ids[ids.length] = this.id.substring(14);
+			var target = jQuery(this.parentNode.parentNode);
+			ids[ids.length] = target.attr('id').substring(8);
+			Commenting.elements[Commenting.elements.length] = target.find('li.unapprove'); 
 		});
-		json = {'ids': ids, 'approved': false};
-		jQuery.post("updateApproved", json, Commenting.batchUnapproveResponseHandler);
+		json = {'ids': ids, 'approved': 0};
+		console.log(Commenting.elements);
+		jQuery.post("updateApproved", json, Commenting.unapproveResponseHandler);
 	},	
 	
 	reportSpam: function() {
@@ -78,7 +102,9 @@ var Commenting = {
 	
 	batchApproveResponseHandler: function(status, a, b) {
 		if(response.status == 'ok') {
-			
+			for(var i=0; i < Commenting.elements.length; i++) {
+				
+			}
 		} else {
 			alert('Error trying to approve: ' + response.message);
 		}
@@ -114,6 +140,7 @@ var Commenting = {
 
 jQuery(document).ready(function() {
 	jQuery('.approve').click(Commenting.approve);
+	jQuery('.unapprove').click(Commenting.unapprove);
 	jQuery('#batch-select').click(Commenting.toggleSelected);
-	jQuery('#batch-approve').click(Commenting.batchApprove);
+	//jQuery('#batch-approve').click(Commenting.batchApprove);
 }); 

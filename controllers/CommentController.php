@@ -92,15 +92,17 @@ class Commenting_CommentController extends Omeka_Controller_Action
     {
         $commentIds = $_POST['ids'];
         $status = $_POST['approved'];
+_log(print_r($_POST, true));
         $table = $this->getTable();
         if(!commentIds) {
             return;
         }
         foreach($commentIds as $commentId) {
             $comment = $table->find($commentId);
-            $comment->approved = status;
+            $comment->approved = $status;
             try {
                 $comment->save();
+                $response = array('status'=>'ok');
             } catch(Exception $e) {
                 $response = array('status'=>'fail', 'message'=>$e->getMessage());
             }
