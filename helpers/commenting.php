@@ -177,7 +177,6 @@ function commenting_get_model($request = null)
             case 'exhibit-builder':
                 //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                 //to dig up the record_id and model
-_log(print_r($params, true));
                 if(!empty($params['page_slug'])) {
                     $page = exhibit_builder_get_current_page();
                     $model = 'ExhibitPage';
@@ -194,7 +193,6 @@ _log(print_r($params, true));
     } else {
         $model = ucfirst(Inflector::singularize($params['controller']));
     }
-_log('wtf model: ' . $model);
     return $model;
 }
 
