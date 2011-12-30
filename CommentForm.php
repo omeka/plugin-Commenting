@@ -65,8 +65,9 @@ class Commenting_CommentForm extends Omeka_Form
         $request = Omeka_Context::getInstance()->getRequest();
         $params = $request->getParams();
         $model = commenting_get_model($request);
+        $record_id = commenting_get_record_id($request);
         
-        $this->addElement('text', 'record_id', array('value'=>$params['id'], 'hidden'=>true));
+        $this->addElement('text', 'record_id', array('value'=>$record_id, 'hidden'=>true));
         $this->addElement('text', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true));
         $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true));
         $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true));

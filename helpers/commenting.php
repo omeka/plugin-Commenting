@@ -7,18 +7,14 @@ function commenting_echo_comments($options = array('approved'=>true))
     }
     $request = Omeka_Context::getInstance()->getRequest();
     $params = $request->getParams();
-    $model = commenting_get_model();
-
-    $findArray = array(
-        'record_type' => $model,
-        'record_id' => $params['id']
-    );
+    $model = commenting_get_model($request);
+    $record_id = commenting_get_record_id($request);
 
     $html = '';
     $html .= "<div id='comments-flash'>". flash(true) . "</div>";
     $html .= "<div class='comments'><h2>Comments</h2>";
     
-    $html .= commenting_get_comments($params['id'], $model, $options);
+    $html .= commenting_get_comments($record_id, $model, $options);
 
     $html .= "</div>";
 
@@ -76,7 +72,7 @@ function commenting_get_comments($record_id, $record_type = 'Item', $options=arr
     if(isset($options['order'])) {
         $select->order("ORDER BY added " . $options['order']);
     }
-    
+
     $comments = $commentTable->fetchObjects($select);
     if(isset($options['threaded']) && $options['threaded']) {
         return commenting_render_threaded_comments($comments);
@@ -175,13 +171,60 @@ function commenting_get_model($request = null)
     if(is_null($request)) {
         $request = Omeka_Context::getInstance()->getRequest();
     }
-    
     $params = $request->getParams();
     if(isset($params['module'])) {
-        $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
+        switch($params['module']) {
+            case 'exhibit-builder':
+                //ExhibitBuilder uses slugs in the params, so need to negotiate around those
+                //to dig up the record_id and model
+_log(print_r($params, true));
+                if(!empty($params['page_slug'])) {
+                    $page = exhibit_builder_get_current_page();
+                    $model = 'ExhibitPage';
+                } else {
+                    $section = exhibit_builder_get_current_section();
+                    $model = 'ExhibitSection';
+                }
+                break;
+                
+            default:
+                $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
+                break;
+        }
     } else {
         $model = ucfirst(Inflector::singularize($params['controller']));
     }
+_log('wtf model: ' . $model);
     return $model;
-    
+}
+
+function commenting_get_record_id($request = null)
+{
+    if(is_null($request)) {
+        $request = Omeka_Context::getInstance()->getRequest();
+    }
+    $params = $request->getParams();
+
+    if(isset($params['module'])) {
+        switch($params['module']) {
+            case 'exhibit-builder':
+                //ExhibitBuilder uses slugs in the params, so need to negotiate around those
+                //to dig up the record_id and model
+                if(!empty($params['page_slug'])) {
+                    $page = exhibit_builder_get_current_page();
+                    $id = $page->id;
+                } else {
+                    $section = exhibit_builder_get_current_section();
+                    $id = $section->id;
+                }
+                break;
+                
+            default:
+                $id = $params['id'];
+                break;
+        }
+    } else {
+        $id = $params['id'];
+    }
+    return $id;
 }
