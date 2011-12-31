@@ -37,7 +37,7 @@ class Comment extends Omeka_Record
         }
     }
     
-    private function getAkismetData()
+    public function getAkismetData()
     {
         $data = array(
             'user_ip' => $this->ip,

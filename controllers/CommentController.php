@@ -69,10 +69,9 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $table = $this->getTable();
         $wordPressAPIKey = get_option('commenting_wpapi_key');
         $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
-                
+        $response = array('errors'=> array());
         foreach($commentIds as $commentId) {
             $comment = $table->find($commentId);
-            $comment->isSpam = $spam;
             $data = $comment->getAkismetData();
             if($spam) {
                 $submitMethod = 'submitSpam';
@@ -81,11 +80,17 @@ class Commenting_CommentController extends Omeka_Controller_Action
             }
             try{
                 $ak->$submitMethod($data);
+                //only save the update if updating to Akismet is successful
+                $comment->isSpam = $spam;
+                $comment->save();
             } catch (Exception $e){
+                $response['status'] = 'fail';
+                $response['errors'][] = array('id'=>$comment->id);
+                $response['message'] = $e->getMessage();
                 _log($e->getMessage());
             }
-            $comment->save();
         }
+        $this->_helper->json($response);
     }
     
     public function updateapprovedAction()

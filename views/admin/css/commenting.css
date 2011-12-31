@@ -70,11 +70,32 @@ ul.comment-admin-menu {
 ul.comment-admin-menu li {
 	color: #338899;
 	cursor: pointer;
-	margin-bottom: .5em	
+	margin-bottom: .5em;
+	padding-left: 20px;	
+	background-repeat: no-repeat;
 }
+
+
 
 input.batch-select-comment {
 	float: left;	
 	position: relative;
 	left: -12px;
+}
+
+
+li.approve {
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
+}
+
+li.unapprove {
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
+}	
+
+li.report-spam {
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/flag_green.png');
+}
+
+li.report-ham {
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/flag_red.png');
 }
