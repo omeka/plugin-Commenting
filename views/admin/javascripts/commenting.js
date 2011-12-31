@@ -51,7 +51,6 @@ var Commenting = {
 			Commenting.elements[Commenting.elements.length] = target.find('li.approve');
 		});
 		json = {'ids': ids, 'approved': 1};
-		console.log(json);
 		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
 	},
 
@@ -63,7 +62,6 @@ var Commenting = {
 			Commenting.elements[Commenting.elements.length] = target.find('li.unapprove'); 
 		});
 		json = {'ids': ids, 'approved': 0};
-		console.log(Commenting.elements);
 		jQuery.post("updateApproved", json, Commenting.unapproveResponseHandler);
 	},	
 	

@@ -18,8 +18,6 @@ class CommentTable extends Omeka_Db_Table
     
     public function applySorting($select, $sortField, $sortDir)
     {
-        _log($sortField);
-        _log($sortDir);
         parent::applySorting($select, $sortField, $sortDir);
     }
     

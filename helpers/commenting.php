@@ -175,11 +175,14 @@ function commenting_get_model($request = null)
     if(isset($params['module'])) {
         switch($params['module']) {
             case 'exhibit-builder':
+_log(print_r($params, true));
                 //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                 //to dig up the record_id and model
                 if(!empty($params['page_slug'])) {
                     $page = exhibit_builder_get_current_page();
                     $model = 'ExhibitPage';
+                } else if(!empty($params['item_id'])) {
+                    $model = 'Item';
                 } else {
                     $section = exhibit_builder_get_current_section();
                     $model = 'ExhibitSection';
@@ -211,6 +214,8 @@ function commenting_get_record_id($request = null)
                 if(!empty($params['page_slug'])) {
                     $page = exhibit_builder_get_current_page();
                     $id = $page->id;
+                } else if(!empty($params['item_id'])) {
+                    $id = $params['item_id'];
                 } else {
                     $section = exhibit_builder_get_current_section();
                     $id = $section->id;

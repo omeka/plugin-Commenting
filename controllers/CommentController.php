@@ -92,7 +92,6 @@ class Commenting_CommentController extends Omeka_Controller_Action
     {
         $commentIds = $_POST['ids'];
         $status = $_POST['approved'];
-_log(print_r($_POST, true));
         $table = $this->getTable();
         if(!commentIds) {
             return;

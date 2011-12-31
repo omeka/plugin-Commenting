@@ -23,12 +23,17 @@ class Comment extends Omeka_Record
     public function checkSpam()
     {
         $wordPressAPIKey = get_option('commenting_wpapi_key');
-        $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
-        $data = $this->getAkismetData();
-        try {
-            $this->is_spam = $ak->isSpam($data);
-        } catch (Exception $e) {
-            $this->is_spam = 1;
+        if(!empty($wordPressAPIKey)) {
+            $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
+            $data = $this->getAkismetData();
+            try {
+                $this->is_spam = $ak->isSpam($data);
+            } catch (Exception $e) {
+                $this->is_spam = 1;
+            }
+        } else {
+            //if not using Akismet, assume only registered users are commenting
+            $this->is_spam = 0;
         }
     }
     
