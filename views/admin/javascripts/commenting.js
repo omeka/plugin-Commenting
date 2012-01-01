@@ -3,14 +3,14 @@ var Commenting = {
 	elements: [],
 	
 	approve: function() {
-		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
+		id = jQuery(this.parentNode.parentNode.parentNode.parentNode).attr('id').substring(8);
 		Commenting.elements = [jQuery(this)];
 		json = {'ids': [id], 'approved': 1};
 		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
 	},
 	
 	unapprove: function() {
-		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
+		id = jQuery(this.parentNode.parentNode.parentNode.parentNode).attr('id').substring(8);
 		Commenting.elements = [jQuery(this)];
 		json = {'ids': [id], 'approved': 0};
 		jQuery.post("updateApproved", json, Commenting.unapproveResponseHandler);				
@@ -68,14 +68,14 @@ var Commenting = {
 	},	
 	
 	reportSpam: function() {
-		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
+		id = jQuery(this.parentNode.parentNode.parentNode.parentNode).attr('id').substring(8);
 		Commenting.elements = [jQuery(this)];
 		json = {'ids': [id], 'spam': true};
 		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
 	},
 	
 	reportHam: function() {
-		id = jQuery(this.parentNode.parentNode.parentNode).attr('id').substring(8);
+		id = jQuery(this.parentNode.parentNode.parentNode.parentNode).attr('id').substring(8);
 		Commenting.elements = [jQuery(this)];
 		json = {'ids': [id], 'spam': false};
 		jQuery.post("updateSpam", json, Commenting.hamResponseHandler);		

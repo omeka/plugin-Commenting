@@ -22,6 +22,7 @@ queue_js('commenting');
         </div>
     </div>
 <h1>Comments</h1>
+<?php if(has_permission('Commenting_Comment', 'updateapproved') ) :?>
 <div id='comment-batch-actions'><input id='batch-select' type='checkbox' /> Select All | With Selected:
 <ul class='comment-batch-actions'>
 <li onclick="Commenting.batchApprove()">Approve</li>
@@ -30,7 +31,7 @@ queue_js('commenting');
 <li onclick="Commenting.batchReportHam()">Report Ham</li>
 </ul>
 </div>
-
+<?php endif; ?>
 
 <?php echo commenting_render_comments($comments, true); ?>
 

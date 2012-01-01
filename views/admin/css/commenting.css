@@ -23,7 +23,7 @@ div.comment-author {
 
 div.comment-body {
 	font-size: 1.5em;
-	margin-left: 280px;
+	margin-left: 300px;
 	border: 1px solid grey;
 	border-radius: 15px;
 	min-height: 60px;
@@ -34,17 +34,13 @@ div.comment-body p {
 	font-size: 1em;	
 }
 
-p.comment-reply {
-	cursor: pointer;	
-}
-
 p.comment-author-name {
 	
 }
 
 div.commenting-admin {
 	float: left;	
-	width: 180px;
+	width: 200px;
 }
 
 div#comment-batch-actions {
@@ -68,14 +64,13 @@ ul.comment-admin-menu {
 }
 
 ul.comment-admin-menu li {
-	color: #338899;
-	cursor: pointer;
-	margin-bottom: .5em;
-	padding-left: 20px;	
-	background-repeat: no-repeat;
+	margin-bottom: .5em;	
+	padding-left: 10px;
 }
 
-
+ul.comment-admin-menu span {
+	background-repeat: no-repeat;
+}
 
 input.batch-select-comment {
 	float: left;	
@@ -83,19 +78,55 @@ input.batch-select-comment {
 	left: -12px;
 }
 
-
-li.approve {
-	background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
+span.approved {
+	position:relative;
+	left: -20px;
+	padding-left: 20px;
+	margin-right: 3px;
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
 }
 
-li.unapprove {
-	background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
+span.unapproved {
+	position:relative;
+	left: -20px;
+	padding-left: 20px;
+	margin-right: 3px;	
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
+
+}
+
+span.ham {
+	position:relative;
+	left: -20px;
+	padding-left: 20px;
+	margin-right: 3px;
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/flag_green.png');		
+}
+
+span.spam {
+	position:relative;
+	left: -20px;
+	padding-left: 20px;
+	margin-right: 3px;
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/flag_red.png');		
+}
+	
+span.approve {
+	color: #338899;
+	cursor: pointer;	
+}
+
+span.unapprove {
+	color: #338899;
+	cursor: pointer;	
 }	
 
-li.report-spam {
-	background-image: url('../../../../../application/views/scripts/images/silk-icons/flag_green.png');
+span.report-spam {
+	color: #338899;
+	cursor: pointer;	
 }
 
-li.report-ham {
-	background-image: url('../../../../../application/views/scripts/images/silk-icons/flag_red.png');
+span.report-ham {	
+	color: #338899;
+	cursor: pointer;	
 }

@@ -2,43 +2,44 @@
 
 function commenting_echo_comments($options = array('approved'=>true))
 {
-    if(!isset($options['threaded'])) {
-        $options['threaded'] = get_option('commenting_threaded');
+    if( (get_option('commenting_allow_public') == 1) || has_permission('Commenting_Comment', 'show') ) {
+        if(!isset($options['threaded'])) {
+            $options['threaded'] = get_option('commenting_threaded');
+        }
+        $request = Omeka_Context::getInstance()->getRequest();
+        $params = $request->getParams();
+        $model = commenting_get_model($request);
+        $record_id = commenting_get_record_id($request);
+    
+        $html = '';
+        $html .= "<div id='comments-flash'>". flash(true) . "</div>";
+        $html .= "<div class='comments'><h2>Comments</h2>";
+        
+        $html .= commenting_get_comments($record_id, $model, $options);
+    
+        $html .= "</div>";
+    
+        echo $html;
     }
-    $request = Omeka_Context::getInstance()->getRequest();
-    $params = $request->getParams();
-    $model = commenting_get_model($request);
-    $record_id = commenting_get_record_id($request);
-
-    $html = '';
-    $html .= "<div id='comments-flash'>". flash(true) . "</div>";
-    $html .= "<div class='comments'><h2>Comments</h2>";
-    
-    $html .= commenting_get_comments($record_id, $model, $options);
-
-    $html .= "</div>";
-
-    echo $html;
-    
-    
 }
 
 function commenting_echo_comment_form()
 {
-    require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
-    $commentSession = new Zend_Session_Namespace('commenting', true);
-    
-    if(isset($commentSession->form)) {
-        $form = unserialize($commentSession->form);
-    } else {
-        $form = new Commenting_CommentForm();
-    }
+    if( (get_option('commenting_allow_public') == 1) || has_permission('Commenting_Comment', 'add') ) {
+        require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
+        $commentSession = new Zend_Session_Namespace('commenting', true);
         
-    echo $form;
-    if(isset($commentSession->form)) {
-        unset($commentSession->form);
+        if(isset($commentSession->form)) {
+            $form = unserialize($commentSession->form);
+        } else {
+            $form = new Commenting_CommentForm();
+        }
+            
+        echo $form;
+        if(isset($commentSession->form)) {
+            unset($commentSession->form);
+        }
     }
-    
 }
 
 /**
@@ -150,8 +151,9 @@ function commenting_render_admin($comment)
     $html = "<div class='commenting-admin'>";
     $html .= "<input class='batch-select-comment' type='checkbox' />";
     $html .= "<ul class='comment-admin-menu'>";
-    $html .= (bool) $comment->approved ? "<li class='unapprove'>Unapprove</li>" : "<li class='approve'>Approve</li>";
-    $html .= (bool) $comment->spam ? "<li class='report-spam'>Report Spam</li>" : "<li class='report-ham'>Report Ham</li>";
+    $html .= (bool) $comment->approved ? "<li><span class='approved'>Approved</span><span class='unapprove'>Unapprove</span></li>" : "<li><span class='unapproved'>Not Approved</span><span class='approve'>Approve</span></li>";
+    //$html .= (bool) $comment->approved ? "<li class='unapprove'>Unapprove</li>" : "<li class='approve'>Approve</li>";
+    $html .= (bool) $comment->spam ? "<li><span class='ham'>Ham</span><span class='report-spam'>Report Spam</span></li>" : "<li><span class='ham'>Ham</span><span class='report-ham'>Report Ham</span></li>";
     $html .= "<li><a href='" . commenting_comment_uri($comment) . "'>View</a></li>";
     $html .= "<li><a href='mailto:$comment->author_email'>$comment->author_email</a></li>";
     $html .= "</ul>";

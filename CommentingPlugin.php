@@ -162,12 +162,14 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         'public_theme_header',
         'admin_theme_header',
         'config_form',
-        'config'
+        'config',
+        'define_acl'
     );
     
     protected $_filters = array(
         'admin_navigation_main'
     );
+    
     
     public function hookInstall()
     {
@@ -195,6 +197,11 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         ";
         $db->exec($sql);
         
+        $commentRoles = array('super');
+        $moderateRoles = array('super');
+        set_option('commenting_comment_roles', serialize($commentRoles));
+        set_option('commenting_moderate_roles', serialize($moderateRoles));
+        
     }
     
     public function hookUninstall()
@@ -217,17 +224,17 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     
     public function hookPublicAppendToItemsShow()
     {
-        if( (get_option('commenting_allow_public') == 1) || current_user() ) {
-            $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
-            commenting_echo_comments($options);
-            commenting_echo_comment_form();
-        }
-
+        $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
+        commenting_echo_comments($options);
+        commenting_echo_comment_form();
     }
     
     public function hookConfig($post)
     {
         foreach($post as $key=>$value) {
+            if( ($key == 'commenting_comment_roles') || ($key == 'commenting_moderate_roles') || ($key == 'commenting_view_roles')  ) {
+                $value = serialize($value);
+            }
             set_option($key, $value);
         }
     }
@@ -235,6 +242,34 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     public function hookConfigForm()
     {
         include COMMENTING_PLUGIN_DIR . '/config_form.php';
+        
+    }
+    
+    public function hookDefineAcl($acl)
+    {
+        $resourceList = array(
+            'Commenting_Comment' => array(
+                'add', 'updateapproved', 'updatespam', 'show'
+            )
+        );
+        
+        $acl->loadResourceList($resourceList);
+        $commentRoles = unserialize(get_option('commenting_comment_roles'));
+        $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
+        $viewRoles = unserialize(get_option('commenting_view_roles'));
+
+        foreach($viewRoles as $role) {
+            $acl->allow($role, 'Commenting_Comment', array('show'));
+        }
+        
+        foreach($commentRoles as $role) {
+            $acl->allow($role, 'Commenting_Comment', array('add'));
+        }
+        
+        foreach($moderateRoles as $role) {
+            $acl->allow($role, 'Commenting_Comment', array('updateapproved'));
+            $acl->allow($role, 'Commenting_Comment', array('updatespam'));
+        }
         
     }
     

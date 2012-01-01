@@ -11,7 +11,7 @@ class Commenting_CommentForm extends Omeka_Form
         $this->setAttrib('id', 'comment-form');
         $user = current_user();
         
-        //@TODO: Add ACL checks on roles
+        //assume registered users are trusted and don't make them play recaptcha
         if(!user) {
             $this->addElement('captcha', 'captcha',  array(
                 'label' => "Please verify you're a human",
@@ -24,10 +24,8 @@ class Commenting_CommentForm extends Omeka_Form
             
         }
 
-        
         $urlOptions = array(
         		'label'=>'Website',
-             //   'validators' => array('validator' => 'Hostname')
             );
         $emailOptions = array(
             	'label'=>'Email',
@@ -75,6 +73,4 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('submit', 'submit');
         
     }
-    
-    
 }
