@@ -30,22 +30,16 @@ class Commenting_CommentController extends Omeka_Controller_Action
         	'controller'=> strtolower(Inflector::pluralize($_POST['record_type'])),
             'action' => 'show',
             'id' => $_POST['record_id']
-        
         );
         
         $comment = new Comment();
         $form = $this->getForm();
         $valid = $form->isValid($this->getRequest()->getPost());
         if(!$valid) {
-            $errors = $form->getErrors();
-            foreach($errors as $element=>$elErrors) {
-                foreach($elErrors as $error) {
-                    $this->flashError($error);
-                }
-            }
             $destination .= "#comments-flash";
-            $commentSession = new Zend_Session_Namespace('commenting', true);
-            $commentSession->form = serialize($form);
+            $commentSession = new Zend_Session_Namespace('commenting');
+            $commentSession->post = serialize($_POST);
+            
             $this->redirect->gotoUrl($destination);
         }
         $this->flashSuccess("Your comment is awaiting moderation");

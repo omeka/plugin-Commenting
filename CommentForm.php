@@ -12,8 +12,9 @@ class Commenting_CommentForm extends Omeka_Form
         $user = current_user();
         
         //assume registered users are trusted and don't make them play recaptcha
-        if(!user) {
+        if(!$user) {
             $this->addElement('captcha', 'captcha',  array(
+                'class' => 'hidden',
                 'label' => "Please verify you're a human",
             	'captcha' => array(
                     'captcha' => 'ReCaptcha',
@@ -65,11 +66,11 @@ class Commenting_CommentForm extends Omeka_Form
         $model = commenting_get_model($request);
         $record_id = commenting_get_record_id($request);
         
-        $this->addElement('text', 'record_id', array('value'=>$record_id, 'hidden'=>true));
-        $this->addElement('text', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true));
-        $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true));
-        $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true));
-        $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true));
+        $this->addElement('text', 'record_id', array('value'=>$record_id, 'hidden'=>true, 'class' => 'hidden'));
+        $this->addElement('text', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true, 'class' => 'hidden'));
+        $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden'));
+        $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true, 'class' => 'hidden'));
+        $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden'));
         $this->addElement('submit', 'submit');
         
     }

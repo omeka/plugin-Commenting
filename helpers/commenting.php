@@ -27,21 +27,15 @@ function commenting_echo_comment_form()
 {
     if( (get_option('commenting_allow_public') == 1) || has_permission('Commenting_Comment', 'add') ) {
         require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
-        $commentSession = new Zend_Session_Namespace('commenting', true);
-        
-        if(isset($commentSession->form)) {
-            $form = unserialize($commentSession->form);
-        } else {
-            $form = new Commenting_CommentForm();
-        }
-            
-        echo $form;
-        if(isset($commentSession->form)) {
-            unset($commentSession->form);
-        }
+        $commentSession = new Zend_Session_Namespace('commenting');
+         $form = new Commenting_CommentForm();
+         if($commentSession->post) {
+             $form->isValid(unserialize($commentSession->post));
+         }
+         echo $form;
+         unset($commentSession->post);
     }
 }
-
 /**
  *
  * Get the comments for a record
@@ -153,7 +147,7 @@ function commenting_render_admin($comment)
     $html .= "<ul class='comment-admin-menu'>";
     $html .= (bool) $comment->approved ? "<li><span class='approved'>Approved</span><span class='unapprove'>Unapprove</span></li>" : "<li><span class='unapproved'>Not Approved</span><span class='approve'>Approve</span></li>";
     //$html .= (bool) $comment->approved ? "<li class='unapprove'>Unapprove</li>" : "<li class='approve'>Approve</li>";
-    $html .= (bool) $comment->spam ? "<li><span class='ham'>Ham</span><span class='report-spam'>Report Spam</span></li>" : "<li><span class='ham'>Ham</span><span class='report-ham'>Report Ham</span></li>";
+    $html .= (bool) $comment->spam ? "<li><span class='spam'>Spam</span><span class='report-spam'>Report Spam</span></li>" : "<li><span class='spam'>Spam</span><span class='report-ham'>Report Ham</span></li>";
     $html .= "<li><a href='" . commenting_comment_uri($comment) . "'>View</a></li>";
     $html .= "<li><a href='mailto:$comment->author_email'>$comment->author_email</a></li>";
     $html .= "</ul>";
@@ -177,7 +171,6 @@ function commenting_get_model($request = null)
     if(isset($params['module'])) {
         switch($params['module']) {
             case 'exhibit-builder':
-_log(print_r($params, true));
                 //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                 //to dig up the record_id and model
                 if(!empty($params['page_slug'])) {

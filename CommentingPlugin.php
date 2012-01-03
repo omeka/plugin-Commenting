@@ -159,6 +159,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         'install',
         'uninstall',
         'public_append_to_items_show',
+        'public_append_to_collections_show',
         'public_theme_header',
         'admin_theme_header',
         'config_form',
@@ -229,6 +230,13 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         commenting_echo_comment_form();
     }
     
+    public function hookPublicAppendToCollectionsShow()
+    {
+        $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
+        commenting_echo_comments($options);
+        commenting_echo_comment_form();
+    }
+    
     public function hookConfig($post)
     {
         foreach($post as $key=>$value) {
@@ -271,6 +279,9 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
             $acl->allow($role, 'Commenting_Comment', array('updatespam'));
         }
         
+        if(get_option('commenting_allow_public')) {
+            $acl->allow(null, 'Commenting_Comment', array('show', 'add'));
+        }
     }
     
     public function filterAdminNavigationMain($tabs)

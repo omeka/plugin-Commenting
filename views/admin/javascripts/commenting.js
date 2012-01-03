@@ -3,15 +3,17 @@ var Commenting = {
 	elements: [],
 	
 	approve: function() {
-		id = jQuery(this.parentNode.parentNode.parentNode.parentNode).attr('id').substring(8);
-		Commenting.elements = [jQuery(this)];
+		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
+		id = commentEl.attr('id').substring(8);
+		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'approved': 1};
 		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
 	},
 	
 	unapprove: function() {
-		id = jQuery(this.parentNode.parentNode.parentNode.parentNode).attr('id').substring(8);
-		Commenting.elements = [jQuery(this)];
+		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
+		id = commentEl.attr('id').substring(8);
+		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'approved': 0};
 		jQuery.post("updateApproved", json, Commenting.unapproveResponseHandler);				
 	},
@@ -19,11 +21,14 @@ var Commenting = {
 	approveResponseHandler: function(response, a, b) {
 		if(response.status == 'ok') {
 			for(var i=0; i < Commenting.elements.length; i++) {
-				var unapproveEl = jQuery(document.createElement('li'));
+				var unapproveEl = jQuery(document.createElement('span'));
 				unapproveEl.text("Unapprove");
 				unapproveEl.addClass('unapprove');
 				unapproveEl.click(Commenting.unapprove);
-				Commenting.elements[i].replaceWith(unapproveEl);	
+				approveEl = Commenting.elements[i].find('span.approve');
+				unapprovedEl = Commenting.elements[i].find('span.unapproved');
+				unapprovedEl.attr('class', 'approved');
+				approveEl.replaceWith(unapproveEl);	
 			}
 		} else {
 			alert('Error trying to approve: ' + response.message);
@@ -33,11 +38,14 @@ var Commenting = {
 	unapproveResponseHandler: function(response, a, b) {
 		if(response.status == 'ok') {
 			for(var i=0; i < Commenting.elements.length; i++) {
-				var approveEl = jQuery(document.createElement('li'));
+				var approveEl = jQuery(document.createElement('span'));
 				approveEl.text("Approve");
 				approveEl.addClass('approve');
 				approveEl.click(Commenting.approve);
-				Commenting.elements[i].replaceWith(approveEl);	
+				unapproveEl = Commenting.elements[i].find('span.unapprove');
+				approvedEl = Commenting.elements[i].find('span.approved');
+				approvedEl.attr('class', 'unapproved');
+				unapproveEl.replaceWith(approveEl);	
 			}
 		} else {
 			alert('Error trying to unapprove: ' + response.message);
@@ -49,7 +57,7 @@ var Commenting = {
 		jQuery('input.batch-select-comment:checked').each(function() {
 			var target = jQuery(this.parentNode.parentNode);
 			ids[ids.length] = target.attr('id').substring(8);
-			Commenting.elements[Commenting.elements.length] = target.find('li.approve');
+			Commenting.elements[Commenting.elements.length] = target;
 		});
 		json = {'ids': ids, 'approved': 1};
 		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
@@ -61,22 +69,24 @@ var Commenting = {
 		jQuery('input.batch-select-comment:checked').each(function() {
 			var target = jQuery(this.parentNode.parentNode);
 			ids[ids.length] = target.attr('id').substring(8);
-			Commenting.elements[Commenting.elements.length] = target.find('li.unapprove'); 
+			Commenting.elements[Commenting.elements.length] = target; 
 		});
 		json = {'ids': ids, 'approved': 0};
 		jQuery.post("updateApproved", json, Commenting.unapproveResponseHandler);
 	},	
 	
 	reportSpam: function() {
-		id = jQuery(this.parentNode.parentNode.parentNode.parentNode).attr('id').substring(8);
-		Commenting.elements = [jQuery(this)];
+		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
+		id = commentEl.attr('id').substring(8);
+		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'spam': true};
 		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
 	},
 	
 	reportHam: function() {
-		id = jQuery(this.parentNode.parentNode.parentNode.parentNode).attr('id').substring(8);
-		Commenting.elements = [jQuery(this)];
+		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
+		id = commentEl.attr('id').substring(8);
+		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'spam': false};
 		jQuery.post("updateSpam", json, Commenting.hamResponseHandler);		
 	},
@@ -86,7 +96,7 @@ var Commenting = {
 		jQuery('input.batch-select-comment:checked').each(function() {
 			var target = jQuery(this.parentNode.parentNode);
 			ids[ids.length] = target.attr('id').substring(8);
-			Commenting.elements[Commenting.elements.length] = target.find('li.report-spam');
+			Commenting.elements[Commenting.elements.length] = target;
 		});
 		json = {'ids': ids, 'spam': true};
 		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
@@ -97,7 +107,7 @@ var Commenting = {
 		jQuery('input.batch-select-comment:checked').each(function() {
 			var target = jQuery(this.parentNode.parentNode);
 			ids[ids.length] = target.attr('id').substring(8);
-			Commenting.elements[Commenting.elements.length] = target.find('li.report-ham');
+			Commenting.elements[Commenting.elements.length] = target;
 		});
 		json = {'ids': ids, 'spam': false};
 		jQuery.post("updateSpam", json, Commenting.hamResponseHandler);		
@@ -107,11 +117,14 @@ var Commenting = {
 	{
 		if(response.status == 'ok') {
 			for(var i=0; i < Commenting.elements.length; i++) {
-				var reportHamEl = jQuery(document.createElement('li'));
+				var reportHamEl = jQuery(document.createElement('span'));
 				reportHamEl.text("Report Ham");
 				reportHamEl.addClass('report-ham');
 				reportHamEl.click(Commenting.reportHam);
-				Commenting.elements[i].replaceWith(reportHamEl);	
+				reportSpamEl = Commenting.elements[i].find('span.report-spam');
+				hamEl = Commenting.elements[i].find('span.ham');
+				hamEl.attr('class', 'spam');
+				reportSpamEl.replaceWith(reportHamEl);	
 			}
 		} else {
 			alert('Error trying to submit spam: ' + response.message);
@@ -126,7 +139,10 @@ var Commenting = {
 				reportSpamEl.text("Report Spam");
 				reportSpamEl.addClass('report-spam');
 				reportSpamEl.click(Commenting.reportSpam);
-				Commenting.elements[i].replaceWith(reportSpamEl);	
+				reportHamEl = Commenting.elements[i].find('span.report-ham');
+				spamEl = Commenting.elements[i].find('span.spam');
+				spamEl.attr('class', 'ham');
+				reportHamEl.replaceWith(reportSpamEl);	
 			}
 		} else {
 			alert('Error trying to submit ham: ' + response.message);
