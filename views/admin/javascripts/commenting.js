@@ -81,7 +81,7 @@ var Commenting = {
 		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
-		json = {'ids': [id], 'spam': true};
+		json = {'ids': [id], 'spam': 1};
 		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
 	},
 	
@@ -89,7 +89,7 @@ var Commenting = {
 		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
-		json = {'ids': [id], 'spam': false};
+		json = {'ids': [id], 'spam': 0};
 		jQuery.post("updateSpam", json, Commenting.hamResponseHandler);		
 	},
 	
@@ -138,7 +138,7 @@ var Commenting = {
 	{
 		if(response.status == 'ok') {
 			for(var i=0; i < Commenting.elements.length; i++) {
-				var reportSpamEl = jQuery(document.createElement('li'));
+				var reportSpamEl = jQuery(document.createElement('span'));
 				reportSpamEl.text("Report Spam");
 				reportSpamEl.addClass('report-spam');
 				reportSpamEl.click(Commenting.reportSpam);

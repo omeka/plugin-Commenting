@@ -147,7 +147,7 @@ function commenting_render_admin($comment)
     $html .= "<ul class='comment-admin-menu'>";
     $html .= (bool) $comment->approved ? "<li><span class='approved'>Approved</span><span class='unapprove'>Unapprove</span></li>" : "<li><span class='unapproved'>Not Approved</span><span class='approve'>Approve</span></li>";
     //$html .= (bool) $comment->approved ? "<li class='unapprove'>Unapprove</li>" : "<li class='approve'>Approve</li>";
-    $html .= (bool) $comment->spam ? "<li><span class='spam'>Spam</span><span class='report-spam'>Report Spam</span></li>" : "<li><span class='spam'>Spam</span><span class='report-ham'>Report Ham</span></li>";
+    $html .= (bool) $comment->is_spam ? "<li><span class='spam'>Spam</span><span class='report-ham'>Report Ham</span></li>" : "<li><span class='ham'>Ham</span><span class='report-spam'>Report Spam</span></li>";
     $html .= "<li><a href='" . commenting_comment_uri($comment) . "'>View</a></li>";
     $html .= "<li><a href='mailto:$comment->author_email'>$comment->author_email</a></li>";
     $html .= "</ul>";
