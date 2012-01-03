@@ -104,10 +104,10 @@ class Commenting_CommentController extends Omeka_Controller_Action
                 $comment->is_spam = 0;
                 $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
                 $data = $comment->getAkismetData();
-                
+                $ak->submitHam($data);
             }
             try {
-                $ak->submitHam($data);
+                
                 $comment->save();
                 $response = array('status'=>'ok');
             } catch(Exception $e) {
