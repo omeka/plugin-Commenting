@@ -99,11 +99,20 @@ class Commenting_CommentController extends Omeka_Controller_Action
         foreach($commentIds as $commentId) {
             $comment = $table->find($commentId);
             $comment->approved = $status;
+            //if approved, it isn't spam
+            if($comment->is_spam == 1) {
+                $comment->is_spam = 0;
+                $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
+                $data = $comment->getAkismetData();
+                
+            }
             try {
+                $ak->submitHam($data);
                 $comment->save();
                 $response = array('status'=>'ok');
             } catch(Exception $e) {
                 $response = array('status'=>'fail', 'message'=>$e->getMessage());
+                _log($e->getMessage());
             }
         }
         $this->_helper->json($response);
