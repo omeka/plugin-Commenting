@@ -1,0 +1,47 @@
+@CHARSET "UTF-8";
+
+form#comment-form {
+	clear:both;	
+}
+
+div.comments {
+	
+}
+
+div.comment {
+	margin-left: 12px;
+	margin-top: 3px;
+	margin-bottom: 6px;
+	clear: both;
+	min-height: 120px;
+}
+
+div.comment-author {
+	float: left;	
+	margin: 6px;
+}
+
+div.comment-body {
+	font-size: 1.5em;
+	margin-left: 100px;
+	border: 1px solid grey;
+	border-radius: 15px;
+	min-height: 60px;
+	padding: 6px;	
+}
+
+div.comment-body p {
+	font-size: 1em;	
+}
+
+p.comment-reply {
+	cursor: pointer;	
+}
+
+p.comment-author-name {
+	
+}
+
+input.hidden {
+	display:none;		
+}
