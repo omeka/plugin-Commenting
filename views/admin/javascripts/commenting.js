@@ -28,6 +28,7 @@ var Commenting = {
 				approveEl = Commenting.elements[i].find('span.approve');
 				unapprovedEl = Commenting.elements[i].find('span.unapproved');
 				unapprovedEl.attr('class', 'approved');
+				unapprovedEl.text('Approved');
 				approveEl.replaceWith(unapproveEl);	
 			}
 		} else {
@@ -45,6 +46,7 @@ var Commenting = {
 				unapproveEl = Commenting.elements[i].find('span.unapprove');
 				approvedEl = Commenting.elements[i].find('span.approved');
 				approvedEl.attr('class', 'unapproved');
+				approvedEl.text('Not Approved');
 				unapproveEl.replaceWith(approveEl);	
 			}
 		} else {
@@ -124,6 +126,7 @@ var Commenting = {
 				reportSpamEl = Commenting.elements[i].find('span.report-spam');
 				hamEl = Commenting.elements[i].find('span.ham');
 				hamEl.attr('class', 'spam');
+				hamEl.text('Spam');
 				reportSpamEl.replaceWith(reportHamEl);	
 			}
 		} else {
@@ -142,6 +145,7 @@ var Commenting = {
 				reportHamEl = Commenting.elements[i].find('span.report-ham');
 				spamEl = Commenting.elements[i].find('span.spam');
 				spamEl.attr('class', 'ham');
+				spamEl.text('Ham');
 				reportHamEl.replaceWith(reportSpamEl);	
 			}
 		} else {
