@@ -1,9 +1,20 @@
+== ABOUT ==
+
+Commenting provides a beefier implementation of comments than the earlier Comment plugin. It allows for comments
+on any record type (in theory, at least), and includes both ReCaptchas and Akismet spam detection.
+
+Commenting also allows for moderation and commenting permissions based on role. Logged-in users are not
+required to submit recaptchas.
+
+== REQUIREMENTS ==
+
+The commenting plugin makes use of both ReCaptchas and the Akismet spam-detection service. You will want to get
+API keys to both of these services and add them to the plugin's configuration.
 
 
+== DISPLAYING COMMENTS ==
 
-== USAGE ==
-
-Commenting will automatically add commenting options to Item Show pages. To enable commenting on other
+Commenting will automatically add commenting options to Item and Collection show pages. To enable commenting on other
 record types from modules (e.g. SimplePages or ExhibitBuilder), you will have to add the following lines
 to the appropriate place in the plugin's public view script:
 
@@ -35,9 +46,9 @@ could look like:
 </div>
 <?php foot(); ?>
 
-Keep in mind that updating plugins or themes will clobber your addition of the commenting functions.
+Keep in mind that updating themes will clobber your addition of the commenting functions.
 
-The Commenting plugin knows how to work with SimplePages, Collections, and ExhibitBuilder. Due to variability
+The Commenting plugin knows how to work with SimplePages and ExhibitBuilder. Due to variability
 in how plugins store their data in the database, other record types and views supplied by other plugins 
 might or might not work out of the box. Please ask on the forums or dev list if you would like Commenting
 to work with other plugins. 
