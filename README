@@ -46,7 +46,7 @@ could look like:
 </div>
 <?php foot(); ?>
 
-Keep in mind that updating themes will clobber your addition of the commenting functions.
+Keep in mind that updating themes or plugins will clobber your addition of the commenting functions.
 
 The Commenting plugin knows how to work with SimplePages and ExhibitBuilder. Due to variability
 in how plugins store their data in the database, other record types and views supplied by other plugins 
