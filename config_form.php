@@ -4,7 +4,7 @@
 <div class='inputs'>
 <?php echo __v()->formCheckbox('commenting_threaded', null,
     array('checked'=> (bool) get_option('commenting_threaded') ? 'checked' : ''
-    
+
     )
 ); ?>
 
@@ -18,7 +18,7 @@
 <div class='inputs'>
 <?php echo __v()->formText('recaptcha_public_key', get_option('recaptcha_public_key'),
     array('size'=>45)
-    
+
     ); ?>
 <p class='explanation'>This can also be set in the Security Settings.</p>
 
@@ -47,23 +47,23 @@
 	    $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
 
 	    echo '<ul>';
-	    
+
 	    echo '<li>';
 	    echo __v()->formCheckbox('commenting_moderate_roles[]', 'contributor',
 	        array('checked'=> in_array('contributor', $moderateRoles) ? 'checked' : '')
 	    	);
 	    echo 'Contributor';
 	    echo '</li>';
-	    
+
 	    echo '<li>';
 	    echo __v()->formCheckbox('commenting_moderate_roles[]', 'researcher',
 	        array('checked'=> in_array('researcher', $moderateRoles) ? 'checked' : '' )
 	        );
 	    echo 'Researcher';
 	    echo '</li>';
-	    
+
 	    echo '<li>';
-	    
+
 	    echo __v()->formCheckbox('commenting_moderate_roles[]', 'admin',
 	        array('checked'=> in_array('admin', $moderateRoles) ? 'checked' : '' )
 	        );
@@ -83,21 +83,21 @@
 	    $commentRoles = unserialize(get_option('commenting_comment_roles'));
 
 	    echo '<ul>';
-	    
+
 	    echo '<li>';
 	    echo __v()->formCheckbox('commenting_comment_roles[]', 'contributor',
 	        array('checked'=> in_array('contributor', $commentRoles) ? 'checked' : '' )
 	        );
 	    echo 'Contributor';
 	    echo '</li>';
-	    
+
 	    echo '<li>';
 	    echo __v()->formCheckbox('commenting_comment_roles[]', 'researcher',
 	        array('checked'=> in_array('researcher', $commentRoles) ? 'checked' : '' )
 	        );
 	    echo 'Researcher';
 	    echo '</li>';
-	    
+
 	    echo '<li>';
 	    echo __v()->formCheckbox('commenting_comment_roles[]', 'admin',
 	        array('checked'=> in_array('admin', $commentRoles) ? 'checked' : '' )
@@ -115,23 +115,25 @@
 <div class='inputs'>
 	<?php
 	    $viewRoles = unserialize(get_option('commenting_view_roles'));
-
+        if(!$viewRoles) {
+            $viewRoles = array();
+        }
 	    echo '<ul>';
-	    
+
 	    echo '<li>';
 	    echo __v()->formCheckbox('commenting_view_roles[]', 'contributor',
 	        array('checked'=> in_array('contributor', $viewRoles) ? 'checked' : '' )
 	        );
 	    echo 'Contributor';
 	    echo '</li>';
-	    
+
 	    echo '<li>';
 	    echo __v()->formCheckbox('commenting_view_roles[]', 'researcher',
 	        array('checked'=> in_array('researcher', $viewRoles) ? 'checked' : '' )
 	        );
 	    echo 'Researcher';
 	    echo '</li>';
-	    
+
 	    echo '<li>';
 	    echo __v()->formCheckbox('commenting_view_roles[]', 'admin',
 	        array('checked'=> in_array('admin', $viewRoles) ? 'checked' : '' )

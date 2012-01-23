@@ -1,7 +1,7 @@
 <?php
 
 if(!class_exists('Omeka_Plugin_Abstract')) {
-        
+
     abstract class Omeka_Plugin_Abstract
     {
         /**
@@ -10,7 +10,7 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
          * @var Omeka_Db
          */
         protected $_db;
-        
+
         /**
          * Plugin hooks.
          *
@@ -22,7 +22,7 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
          * @var array
          */
         protected $_hooks;
-        
+
         /**
          * Plugin filters.
          *
@@ -34,7 +34,7 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
          * @var array
          */
         protected $_filters;
-        
+
         /**
          * Plugin options.
          *
@@ -50,7 +50,7 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
          * @var array
          */
         protected $_options;
-        
+
         /**
          * Construct the plugin object.
          *
@@ -61,7 +61,7 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
         {
             $this->_db = Omeka_Context::getInstance()->getDb();
         }
-        
+
         /**
          * Set up the plugin to hook into Omeka.
          *
@@ -73,7 +73,7 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
             $this->_addHooks();
             $this->_addFilters();
         }
-        
+
         /**
          * Set options with default values.
          *
@@ -94,7 +94,7 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
                 set_option($name, $value);
             }
         }
-        
+
         /**
          * Delete all options.
          *
@@ -111,7 +111,7 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
                 delete_option($name);
             }
         }
-        
+
         /**
          * Validate and add hooks.
          */
@@ -129,7 +129,7 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
                 add_plugin_hook($hookName, array($this, $functionName));
             }
         }
-        
+
         /**
          * Validate and add filters.
          */
@@ -148,13 +148,13 @@ if(!class_exists('Omeka_Plugin_Abstract')) {
             }
         }
     }
-       
+
 }
 
 
 class CommentingPlugin extends Omeka_Plugin_Abstract
 {
-    
+
     protected $_hooks = array(
         'install',
         'uninstall',
@@ -166,12 +166,12 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         'config',
         'define_acl'
     );
-    
+
     protected $_filters = array(
         'admin_navigation_main'
     );
-    
-    
+
+
     public function hookInstall()
     {
         $db = get_db();
@@ -197,46 +197,46 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ";
         $db->exec($sql);
-        
+
         $commentRoles = array('super');
         $moderateRoles = array('super');
         set_option('commenting_comment_roles', serialize($commentRoles));
         set_option('commenting_moderate_roles', serialize($moderateRoles));
-        
+
     }
-    
+
     public function hookUninstall()
     {
         $db = get_db();
         $sql = "DROP TABLE IF EXISTS `$db->Comment`";
         $db->exec($sql);
     }
-    
+
     public function hookPublicThemeHeader()
     {
         queue_css('commenting');
         queue_js('commenting');
     }
-    
+
     public function hookAdminThemeHeader()
     {
         queue_css('commenting');
     }
-    
+
     public function hookPublicAppendToItemsShow()
     {
         $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
         commenting_echo_comments($options);
         commenting_echo_comment_form();
     }
-    
+
     public function hookPublicAppendToCollectionsShow()
     {
         $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
         commenting_echo_comments($options);
         commenting_echo_comment_form();
     }
-    
+
     public function hookConfig($post)
     {
         foreach($post as $key=>$value) {
@@ -246,13 +246,13 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
             set_option($key, $value);
         }
     }
-    
+
     public function hookConfigForm()
     {
         include COMMENTING_PLUGIN_DIR . '/config_form.php';
-        
+
     }
-    
+
     public function hookDefineAcl($acl)
     {
         $resourceList = array(
@@ -260,30 +260,31 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
                 'add', 'updateapproved', 'updatespam', 'show'
             )
         );
-        
+
         $acl->loadResourceList($resourceList);
         $commentRoles = unserialize(get_option('commenting_comment_roles'));
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
+        if($viewRoles !== false) {
+            foreach($viewRoles as $role) {
+                $acl->allow($role, 'Commenting_Comment', array('show'));
+            }
 
-        foreach($viewRoles as $role) {
-            $acl->allow($role, 'Commenting_Comment', array('show'));
+            foreach($commentRoles as $role) {
+                $acl->allow($role, 'Commenting_Comment', array('add'));
+            }
+
+            foreach($moderateRoles as $role) {
+                $acl->allow($role, 'Commenting_Comment', array('updateapproved'));
+                $acl->allow($role, 'Commenting_Comment', array('updatespam'));
+            }
         }
-        
-        foreach($commentRoles as $role) {
-            $acl->allow($role, 'Commenting_Comment', array('add'));
-        }
-        
-        foreach($moderateRoles as $role) {
-            $acl->allow($role, 'Commenting_Comment', array('updateapproved'));
-            $acl->allow($role, 'Commenting_Comment', array('updatespam'));
-        }
-        
+
         if(get_option('commenting_allow_public')) {
             $acl->allow(null, 'Commenting_Comment', array('show', 'add'));
         }
     }
-    
+
     public function filterAdminNavigationMain($tabs)
     {
         $tabs['Comments'] = uri('commenting/comment/browse');

@@ -11,6 +11,20 @@ required to submit recaptchas.
 The commenting plugin makes use of both ReCaptchas and the Akismet spam-detection service. You will want to get
 API keys to both of these services and add them to the plugin's configuration.
 
+== CONFIGURATION ==
+
+* Threaded Comments
+** Check to display threaded comments
+
+* ReCaptcha Keys
+** These keys duplicate the fields found in the Omeka Security settings
+
+* Permissions
+** Options are available to specify what roles can moderate, add, and view comments
+** Allowing Public commenting will override the permissions set for adding and viewing comments -- they will be open to all
+
+* Akismet API key
+** You should get an API key to the Akismet spam management service if you use public commenting
 
 == DISPLAYING COMMENTS ==
 
