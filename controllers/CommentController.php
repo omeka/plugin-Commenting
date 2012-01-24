@@ -3,25 +3,25 @@
 class Commenting_CommentController extends Omeka_Controller_Action
 {
     protected $_browseRecordsPerPage = 10;
-    
+
     public function init()
     {
         $this->_modelClass = 'Comment';
-        
+
     }
-    
+
     public function browseAction()
     {
         if(!$this->_hasParam('sort_field')) {
             $this->_setParam('sort_field', 'added');
         }
-        
+
         if(!$this->_hasParam('sort_dir')) {
             $this->_setParam('sort_dir', 'd');
         }
         parent::browseAction();
     }
-    
+
     public function addAction()
     {
         $destination = $_POST['path'];
@@ -31,7 +31,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
             'action' => 'show',
             'id' => $_POST['record_id']
         );
-        
+
         $comment = new Comment();
         $form = $this->getForm();
         $valid = $form->isValid($this->getRequest()->getPost());
@@ -39,7 +39,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
             $destination .= "#comments-flash";
             $commentSession = new Zend_Session_Namespace('commenting');
             $commentSession->post = serialize($_POST);
-            
+
             $this->redirect->gotoUrl($destination);
         }
         $this->flashSuccess("Your comment is awaiting moderation");
@@ -55,7 +55,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $destination .= "#comment-" . $comment->id;
         $this->redirect->gotoUrl($destination);
     }
-    
+
     public function updatespamAction()
     {
         $commentIds = $_POST['ids'];
@@ -87,7 +87,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
         }
         $this->_helper->json($response);
     }
-    
+
     public function updateapprovedAction()
     {
         $commentIds = $_POST['ids'];
@@ -109,7 +109,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
                 } catch (Exception $e) {
                     _log($e->getMessage());
                 }
-                
+
             } else {
                 try {
                     $comment->save();
@@ -123,12 +123,12 @@ class Commenting_CommentController extends Omeka_Controller_Action
         }
         $this->_helper->json($response);
     }
-    
-    
+
+
     private function getForm()
     {
         require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
         return new Commenting_CommentForm();
     }
-    
+
 }

@@ -10,15 +10,15 @@ function commenting_echo_comments($options = array('approved'=>true))
         $params = $request->getParams();
         $model = commenting_get_model($request);
         $record_id = commenting_get_record_id($request);
-    
+
         $html = '';
         $html .= "<div id='comments-flash'>". flash(true) . "</div>";
         $html .= "<div class='comments'><h2>Comments</h2>";
-        
+
         $html .= commenting_get_comments($record_id, $model, $options);
-    
+
         $html .= "</div>";
-    
+
         echo $html;
     }
 }
@@ -74,7 +74,7 @@ function commenting_get_comments($record_id, $record_type = 'Item', $options=arr
     } else {
         return commenting_render_comments($comments);
     }
-   
+
 }
 
 function commenting_render_threaded_comments($comments, $parent_id = null)
@@ -91,7 +91,7 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
                 $html .= "<p class='comment-author-name'>" . $comment->author_name . "</p>";
             }
             $html .= "</div>";
-            
+
             $html .= "<div class='comment-body'>" . $comment->body . "</div>";
             $html .= "<p class='comment-time'>" . $comment->added . "</p>";
             $html .= "<p class='comment-reply'>Reply</p>";
@@ -104,7 +104,7 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
             unset($comments[$index]);
         }
     }
-        
+
     return $html;
 }
 
@@ -127,7 +127,7 @@ function commenting_render_comments($comments, $admin=false)
         $html .= "<p class='comment-time'>" . $comment->added . "</p>";
         $html .= "</div>";
     }
-        
+
     return $html;
 }
 
@@ -146,8 +146,9 @@ function commenting_render_admin($comment)
     $html .= "<input class='batch-select-comment' type='checkbox' />";
     $html .= "<ul class='comment-admin-menu'>";
     $html .= (bool) $comment->approved ? "<li><span class='approved'>Approved</span><span class='unapprove'>Unapprove</span></li>" : "<li><span class='unapproved'>Not Approved</span><span class='approve'>Approve</span></li>";
-    //$html .= (bool) $comment->approved ? "<li class='unapprove'>Unapprove</li>" : "<li class='approve'>Approve</li>";
-    $html .= (bool) $comment->is_spam ? "<li><span class='spam'>Spam</span><span class='report-ham'>Report Ham</span></li>" : "<li><span class='ham'>Ham</span><span class='report-spam'>Report Spam</span></li>";
+    if(get_option('commenting_wpapi_key') != '') {
+        $html .= (bool) $comment->is_spam ? "<li><span class='spam'>Spam</span><span class='report-ham'>Report Ham</span></li>" : "<li><span class='ham'>Ham</span><span class='report-spam'>Report Spam</span></li>";
+    }
     $html .= "<li><a href='" . commenting_comment_uri($comment) . "'>View</a></li>";
     $html .= "<li><a href='mailto:$comment->author_email'>$comment->author_email</a></li>";
     $html .= "</ul>";
@@ -183,7 +184,7 @@ function commenting_get_model($request = null)
                     $model = 'ExhibitSection';
                 }
                 break;
-                
+
             default:
                 $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
                 break;
@@ -216,7 +217,7 @@ function commenting_get_record_id($request = null)
                     $id = $section->id;
                 }
                 break;
-                
+
             default:
                 $id = $params['id'];
                 break;
