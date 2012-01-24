@@ -1,4 +1,3 @@
-@CHARSET "UTF-8";
 
 form#comment-form {
 	clear:both;	
@@ -40,6 +39,10 @@ p.comment-reply {
 
 p.comment-author-name {
 	
+}
+
+div.success {
+    font-size: 1.8em;
 }
 
 input.hidden {
