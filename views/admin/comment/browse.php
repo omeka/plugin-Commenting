@@ -27,8 +27,10 @@ queue_js('commenting');
 <ul class='comment-batch-actions'>
 <li onclick="Commenting.batchApprove()">Approve</li>
 <li onclick="Commenting.batchUnapprove()">Unapprove</li>
+<?php if(get_option('commenting_wpapi_key') != ''): ?>
 <li onclick="Commenting.batchReportSpam()">Report Spam</li>
 <li onclick="Commenting.batchReportHam()">Report Ham</li>
+<?php endif; ?>
 </ul>
 </div>
 <?php endif; ?>
