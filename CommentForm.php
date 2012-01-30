@@ -3,14 +3,14 @@
 
 class Commenting_CommentForm extends Omeka_Form
 {
-    
+
     public function init()
     {
         parent::init();
         $this->setAction(WEB_ROOT . '/commenting/comment/add');
         $this->setAttrib('id', 'comment-form');
         $user = current_user();
-        
+
         //assume registered users are trusted and don't make them play recaptcha
         if(!$user) {
             $this->addElement('captcha', 'captcha',  array(
@@ -22,7 +22,7 @@ class Commenting_CommentForm extends Omeka_Form
                     'privkey' => get_option('recaptcha_private_key')
                 )
             ));
-            
+
         }
 
         $urlOptions = array(
@@ -59,19 +59,21 @@ class Commenting_CommentForm extends Omeka_Form
                   ),
                 )
             );
-        
+
 
         $request = Omeka_Context::getInstance()->getRequest();
         $params = $request->getParams();
         $model = commenting_get_model($request);
         $record_id = commenting_get_record_id($request);
-        
+
         $this->addElement('text', 'record_id', array('value'=>$record_id, 'hidden'=>true, 'class' => 'hidden'));
         $this->addElement('text', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true, 'class' => 'hidden'));
-        $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden'));
+        if(isset($params['module'])) {
+        	$this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden'));
+        }
         $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true, 'class' => 'hidden'));
         $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden'));
         $this->addElement('submit', 'submit');
-        
+
     }
 }

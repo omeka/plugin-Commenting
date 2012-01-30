@@ -93,7 +93,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $commentIds = $_POST['ids'];
         $status = $_POST['approved'];
         $table = $this->getTable();
-        if(!commentIds) {
+        if(! $commentIds) {
             return;
         }
         foreach($commentIds as $commentId) {
