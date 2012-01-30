@@ -107,8 +107,11 @@ class Commenting_CommentController extends Omeka_Controller_Action
                 $data = $comment->getAkismetData();
                 try {
                     $ak->submitHam($data);
+                    $response = array('status'=>'ok');
+                    $comment->save();
                 } catch (Exception $e) {
                     _log($e->getMessage());
+                    $response = array('status'=>'fail', 'message'=>$e->getMessage());
                 }
 
             } else {
