@@ -90,6 +90,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
 
     public function updateapprovedAction()
     {
+    	$wordPressAPIKey = get_option('commenting_wpapi_key');
         $commentIds = $_POST['ids'];
         $status = $_POST['approved'];
         $table = $this->getTable();

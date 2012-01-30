@@ -146,7 +146,16 @@
 </div>
 </div>
 
+<div class='field'>
+<label for='commenting_allow_public_view'>Allow Public to view comments?</label>
+    <div class='inputs'>
+        <?php echo __v()->formCheckbox('commenting_allow_public_view', null,
+            array('checked'=> (bool) get_option('commenting_allow_public_view') ? 'checked' : '',
+            )
+        ); ?>
 
+    </div>
+</div>
 
 <div class='field'>
 <label for='commenting_allow_public'>Allow Public Commenting? (This overrides all of the above limitations on commenting and viewing)</label>

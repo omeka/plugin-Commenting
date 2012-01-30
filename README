@@ -17,7 +17,8 @@ API keys to both of these services and add them to the plugin's configuration.
 ** Check to display threaded comments
 
 * ReCaptcha Keys
-** These keys duplicate the fields found in the Omeka Security settings
+** These keys duplicate the fields found in the Omeka Security settings. ReCaptcha challenges only appear when there
+is no user logged in.
 
 * Permissions
 ** Options are available to specify what roles can moderate, add, and view comments
@@ -25,6 +26,8 @@ API keys to both of these services and add them to the plugin's configuration.
 
 * Akismet API key
 ** You should get an API key to the Akismet spam management service if you use public commenting
+
+See USE CASES below for examples of configuration combinations
 
 == DISPLAYING COMMENTS ==
 
@@ -66,3 +69,14 @@ The Commenting plugin knows how to work with SimplePages and ExhibitBuilder. Due
 in how plugins store their data in the database, other record types and views supplied by other plugins 
 might or might not work out of the box. Please ask on the forums or dev list if you would like Commenting
 to work with other plugins. 
+
+
+== USE CASES ==
+
+=== Limited, moderated commenting ===
+An institution wants only trusted people to leave comments for anyone to read. It doesn't trust some of them enough to allow 
+comments to be automatically public.
+
+The trusted people could have the Researcher role in Omeka, with commenting configured to allow Researchers to comment.
+The Admin role is the only role that can moderate comments, and Public is allowed to view comments.
+
