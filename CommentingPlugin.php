@@ -104,13 +104,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
     public function hookDefineAcl($acl)
     {
-        $resourceList = array(
-            'Commenting_Comment' => array(
-                'add', 'updateapproved', 'updatespam', 'show'
-            )
-        );
-
-        $acl->loadResourceList($resourceList);
+        $acl->addResource('Commenting_Comment');
         $commentRoles = unserialize(get_option('commenting_comment_roles'));
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
