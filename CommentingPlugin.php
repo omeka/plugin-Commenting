@@ -45,7 +45,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ";
-        $db->exec($sql);
+        $db->query($sql);
 
         $commentRoles = array('super');
         $moderateRoles = array('super');
@@ -58,7 +58,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     {
         $db = get_db();
         $sql = "DROP TABLE IF EXISTS `$db->Comment`";
-        $db->exec($sql);
+        $db->query($sql);
     }
 
     public function hookPublicThemeHeader()
@@ -104,13 +104,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
     public function hookDefineAcl($acl)
     {
-        $resourceList = array(
-            'Commenting_Comment' => array(
-                'add', 'updateapproved', 'updatespam', 'show'
-            )
-        );
-
-        $acl->loadResourceList($resourceList);
+        $acl->addResource('Commenting_Comment');
         $commentRoles = unserialize(get_option('commenting_comment_roles'));
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
