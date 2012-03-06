@@ -45,7 +45,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ";
-        $db->exec($sql);
+        $db->query($sql);
 
         $commentRoles = array('super');
         $moderateRoles = array('super');
@@ -58,7 +58,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     {
         $db = get_db();
         $sql = "DROP TABLE IF EXISTS `$db->Comment`";
-        $db->exec($sql);
+        $db->query($sql);
     }
 
     public function hookPublicThemeHeader()
