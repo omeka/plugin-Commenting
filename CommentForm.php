@@ -12,25 +12,24 @@ class Commenting_CommentForm extends Omeka_Form
         $user = current_user();
 
         //assume registered users are trusted and don't make them play recaptcha
-        if(!$user) {
+        if(!$user && get_option('recaptcha_public_key') && get_option('recaptcha_private_key')) {
             $this->addElement('captcha', 'captcha',  array(
                 'class' => 'hidden',
                 'label' => "Please verify you're a human",
-            	'captcha' => array(
+                'captcha' => array(
                     'captcha' => 'ReCaptcha',
                     'pubkey' => get_option('recaptcha_public_key'),
                     'privkey' => get_option('recaptcha_private_key')
                 )
             ));
-
         }
 
         $urlOptions = array(
-        		'label'=>'Website',
+                'label'=>'Website',
             );
         $emailOptions = array(
-            	'label'=>'Email',
-            	'required'=>true,
+                'label'=>'Email',
+                'required'=>true,
                 'validators' => array(
                     array('validator' => 'EmailAddress'
                     )
@@ -53,7 +52,7 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('textarea', 'body',
             array('label'=>'Comment',
                   'description'=>"Allowed tags: <p>, <a>, <em>, <strong>, <ul>, <ol>, <li>",
-            	 'required'=>true,
+                 'required'=>true,
                   'filters'=> array(
                       array('StripTags', array('p', 'em', 'strong', 'a','ul','ol','li')),
                   ),
@@ -69,11 +68,14 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('text', 'record_id', array('value'=>$record_id, 'hidden'=>true, 'class' => 'hidden'));
         $this->addElement('text', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true, 'class' => 'hidden'));
         if(isset($params['module'])) {
-        	$this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden'));
+            $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden'));
         }
         $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true, 'class' => 'hidden'));
         $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden'));
+        fire_plugin_hook('commenting_append_to_form', $this);
         $this->addElement('submit', 'submit');
+
+
 
     }
 }

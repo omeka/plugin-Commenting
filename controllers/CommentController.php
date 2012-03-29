@@ -4,9 +4,15 @@ class Commenting_CommentController extends Omeka_Controller_Action
 {
     protected $_browseRecordsPerPage = 10;
 
+
     public function init()
     {
-        $this->_modelClass = 'Comment';
+
+       if (version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {
+          $this->_helper->db->setDefaultModelName('Comment');
+       } else {
+          $this->_modelClass = 'Comment';
+       }
 
     }
 
@@ -27,7 +33,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $destination = $_POST['path'];
         $destArray = array(
             'module' => Inflector::camelize($_POST['module']),
-        	'controller'=> strtolower(Inflector::pluralize($_POST['record_type'])),
+            'controller'=> strtolower(Inflector::pluralize($_POST['record_type'])),
             'action' => 'show',
             'id' => $_POST['record_id']
         );
@@ -90,7 +96,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
 
     public function updateapprovedAction()
     {
-    	$wordPressAPIKey = get_option('commenting_wpapi_key');
+        $wordPressAPIKey = get_option('commenting_wpapi_key');
         $commentIds = $_POST['ids'];
         $status = $_POST['approved'];
         $table = $this->getTable();
