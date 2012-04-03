@@ -12,7 +12,7 @@ class Commenting_CommentForm extends Omeka_Form
         $user = current_user();
 
         //assume registered users are trusted and don't make them play recaptcha
-        if(!$user) {
+        if(!$user && get_option('recaptcha_public_key') && get_option('recaptcha_private_key')) {
             $this->addElement('captcha', 'captcha',  array(
                 'class' => 'hidden',
                 'label' => "Please verify you're a human",
@@ -22,7 +22,6 @@ class Commenting_CommentForm extends Omeka_Form
                     'privkey' => get_option('recaptcha_private_key')
                 )
             ));
-
         }
 
         $urlOptions = array(
@@ -73,7 +72,7 @@ class Commenting_CommentForm extends Omeka_Form
         }
         $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true, 'class' => 'hidden'));
         $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden'));
+        fire_plugin_hook('commenting_append_to_form', $this);
         $this->addElement('submit', 'submit');
-
     }
 }

@@ -18,8 +18,8 @@ class Comment extends Omeka_Record
     public $parent_comment_id;
     public $approved;
     public $is_spam;
-    
-    
+
+
     public function checkSpam()
     {
         $wordPressAPIKey = get_option('commenting_wpapi_key');
@@ -36,7 +36,7 @@ class Comment extends Omeka_Record
             $this->is_spam = 0;
         }
     }
-    
+
     public function getAkismetData()
     {
         $data = array(
@@ -46,12 +46,12 @@ class Comment extends Omeka_Record
             'comment_type' => 'comment',
             'comment_author_email' => $this->author_email,
             'comment_content' => $this->body
-        
+
         );
         if($this->author_url) {
             $data['comment_author_url'] = $this->author_url;
         }
-        
+
         if($this->author_name) {
             $data['comment_author_name'] = $this->author_name;
         }

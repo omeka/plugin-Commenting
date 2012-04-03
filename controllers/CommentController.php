@@ -4,6 +4,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
 {
     protected $_browseRecordsPerPage = 10;
 
+
     public function init()
     {
         if (version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {

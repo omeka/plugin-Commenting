@@ -2,9 +2,9 @@
 
 class CommentTable extends Omeka_Db_Table
 {
-    
+
     protected $_alias = 'ct';
-    
+
     public function applySearchFilters($select, $params)
     {
         $columns = $this->getColumns();
@@ -13,12 +13,5 @@ class CommentTable extends Omeka_Db_Table
                 $select->where($this->_alias . ".$column = ? ", $params[$column]);
             }
         }
-        return $select;
     }
-    
-    public function applySorting($select, $sortField, $sortDir)
-    {
-        parent::applySorting($select, $sortField, $sortDir);
-    }
-    
 }

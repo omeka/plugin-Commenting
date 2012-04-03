@@ -130,7 +130,10 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
     public function filterAdminNavigationMain($tabs)
     {
-        $tabs['Comments'] = uri('commenting/comment/browse');
+        if(has_permission('Commenting_Comment', 'updateapproved') || has_permission('Commenting_Comment', 'updatespam')) {
+            $tabs['Comments'] = uri('commenting/comment/browse');
+        }
+
         return $tabs;
     }
 }

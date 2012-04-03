@@ -10,15 +10,18 @@ function commenting_echo_comments($options = array('approved'=>true))
         $params = $request->getParams();
         $model = commenting_get_model($request);
         $record_id = commenting_get_record_id($request);
+        $comments = commenting_get_comments($record_id, $model, $options);
 
         $html = '';
         $html .= "<div id='comments-flash'>". flash(true) . "</div>";
         $html .= "<div class='comments'><h2>Comments</h2>";
-
-        $html .= commenting_get_comments($record_id, $model, $options);
-
+        $html = apply_filters('commenting_prepend_to_comments', $html, $comments);
+        if(isset($options['threaded']) && $options['threaded']) {
+            $html .= commenting_render_threaded_comments($comments);
+        } else {
+            $html .= commenting_render_comments($comments);
+        }
         $html .= "</div>";
-
         echo $html;
     }
 }
@@ -67,14 +70,7 @@ function commenting_get_comments($record_id, $record_type = 'Item', $options=arr
     if(isset($options['order'])) {
         $select->order("ORDER BY added " . $options['order']);
     }
-
-    $comments = $commentTable->fetchObjects($select);
-    if(isset($options['threaded']) && $options['threaded']) {
-        return commenting_render_threaded_comments($comments);
-    } else {
-        return commenting_render_comments($comments);
-    }
-
+    return $commentTable->fetchObjects($select);
 }
 
 function commenting_render_threaded_comments($comments, $parent_id = null)
@@ -84,22 +80,21 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
 
     foreach($comments as $index=>$comment) {
         if($comment->parent_comment_id == $parent_id) {
-            $html .= "<div id='comment-{$comment->id}' class='comment'>";
-            $html .= "<div class='comment-author'>";
-            $html .= commenting_get_gravatar($comment);
+            $comment_html = "<div id='comment-{$comment->id}' class='comment'>";
+            $comment_html .= "<div class='comment-author'>";
+            $comment_html .= commenting_get_gravatar($comment);
             if(!empty($comment->author_name)) {
-                $html .= "<p class='comment-author-name'>" . $comment->author_name . "</p>";
+                $comment_html .= "<p class='comment-author-name'>" . $comment->author_name . "</p>";
             }
-            $html .= "</div>";
-
-            $html .= "<div class='comment-body'>" . $comment->body . "</div>";
-            $html .= "<p class='comment-time'>" . $comment->added . "</p>";
-            $html .= "<p class='comment-reply'>Reply</p>";
+            $comment_html .= "</div>";
+            $comment_html .= "<div class='comment-body'>" . $comment->body . "</div>";
+            $comment_html .= "<p class='comment-time'>" . $comment->added . "</p>";
+            $comment_html .= "<p class='comment-reply'>Reply</p>";
+            $comment_html = apply_filters('commenting_append_to_comment', $comment_html, $comment);
+            $html .= $comment_html;
             $html .= "<div class='comment-children'>";
-
             $html .= commenting_render_threaded_comments($comments, $comment->id);
             $html .= "</div>";
-
             $html .= "</div>";
             unset($comments[$index]);
         }
@@ -111,7 +106,6 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
 function commenting_render_comments($comments, $admin=false)
 {
     $html = "";
-
     foreach($comments as $index=>$comment) {
         $html .= "<div id='comment-{$comment->id}' class='comment'>";
         if($admin) {
@@ -125,10 +119,12 @@ function commenting_render_comments($comments, $admin=false)
         $html .= "</div>";
         $html .= "<div class='comment-body'>" . $comment->body . "</div>";
         $html .= "<p class='comment-time'>" . $comment->added . "</p>";
+
+        $html = apply_filters('commenting_append_to_comment', $html, $comment);
         $html .= "</div>";
     }
-
     return $html;
+
 }
 
 function commenting_comment_uri($comment, $includeHash = true)
