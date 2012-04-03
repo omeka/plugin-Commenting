@@ -91,8 +91,6 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
             $comment_html .= "<p class='comment-time'>" . $comment->added . "</p>";
             $comment_html .= "<p class='comment-reply'>Reply</p>";
             $comment_html = apply_filters('commenting_append_to_comment', $comment_html, $comment);
-
-
             $html .= $comment_html;
             $html .= "<div class='comment-children'>";
             $html .= commenting_render_threaded_comments($comments, $comment->id);
