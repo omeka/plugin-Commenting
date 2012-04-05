@@ -46,7 +46,6 @@
     <?php
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $userRoles = get_user_roles();
-        _log(print_r($userRoles, true));
         echo '<ul>';
 
         foreach($userRoles as $role=>$label) {
@@ -66,7 +65,7 @@
 
 
 <div class='field'>
-<label for='commenting_comment_roles'>User roles that can comment</label>
+<label for='commenting_comment_roles'>User roles that can comment WITH approval</label>
 <div class='inputs'>
     <?php
         $commentRoles = unserialize(get_option('commenting_comment_roles'));
@@ -87,6 +86,31 @@
 
 </div>
 </div>
+
+<div class='field'>
+<label for='commenting_comment_roles'>User roles that can comment WITHOUT approval</label>
+<div class='inputs'>
+    <?php
+        $noAppCommentRoles = unserialize(get_option('commenting_noapp_comment_roles'));
+
+        echo '<ul>';
+
+        foreach($userRoles as $role=>$label) {
+            echo '<li>';
+            echo __v()->formCheckbox('commenting_noapp_comment_roles[]', $role,
+                array('checked'=> in_array($role, $noAppCommentRoles) ? 'checked' : '')
+                );
+            echo $label;
+            echo '</li>';
+
+        }
+        echo '</ul>';
+    ?>
+
+</div>
+</div>
+
+
 
 <div class='field'>
 <label for='commenting_view_roles'>User roles that can view comments</label>

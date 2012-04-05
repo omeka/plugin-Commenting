@@ -51,6 +51,8 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         $moderateRoles = array('super');
         set_option('commenting_comment_roles', serialize($commentRoles));
         set_option('commenting_moderate_roles', serialize($moderateRoles));
+        set_option('commenting_noapp_comment_roles', serialize(array()));
+        set_option('commenting_view_roles', serialize(array()));
 
     }
 
@@ -89,7 +91,11 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     public function hookConfig($post)
     {
         foreach($post as $key=>$value) {
-            if( ($key == 'commenting_comment_roles') || ($key == 'commenting_moderate_roles') || ($key == 'commenting_view_roles')  ) {
+            if( ($key == 'commenting_comment_roles') ||
+                ($key == 'commenting_moderate_roles') ||
+                ($key == 'commenting_view_roles') ||
+                ($key == 'commenting_noapp_comment_roles')
+            ) {
                 $value = serialize($value);
             }
             set_option($key, $value);
@@ -106,21 +112,24 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     {
         $acl->addResource('Commenting_Comment');
         $commentRoles = unserialize(get_option('commenting_comment_roles'));
+        $noAppCommentRoles = unserialize(get_option('commenting_noapp_comment_roles'));
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
-        if($viewRoles !== false) {
-            foreach($viewRoles as $role) {
-                $acl->allow($role, 'Commenting_Comment', array('show'));
-            }
+        foreach($viewRoles as $role) {
+            $acl->allow($role, 'Commenting_Comment', array('show'));
+        }
 
-            foreach($commentRoles as $role) {
-                $acl->allow($role, 'Commenting_Comment', array('add'));
-            }
+        foreach($commentRoles as $role) {
+            $acl->allow($role, 'Commenting_Comment', array('add'));
+        }
 
-            foreach($moderateRoles as $role) {
-                $acl->allow($role, 'Commenting_Comment', array('updateapproved'));
-                $acl->allow($role, 'Commenting_Comment', array('updatespam'));
-            }
+        foreach($moderateRoles as $role) {
+            $acl->allow($role, 'Commenting_Comment', array('updateapproved'));
+            $acl->allow($role, 'Commenting_Comment', array('updatespam'));
+        }
+        //comment without approval does not really limmit access to an action, but is handy for use in the controller
+        foreach($noAppCommentRoles as $role) {
+            $acl->allow($role, 'Commenting_Comment', array('noappcomment'));
         }
 
         if(get_option('commenting_allow_public')) {

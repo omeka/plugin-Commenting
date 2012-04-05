@@ -46,13 +46,17 @@ class Commenting_CommentController extends Omeka_Controller_Action
 
             $this->redirect->gotoUrl($destination);
         }
-        $this->flashSuccess("Your comment is awaiting moderation");
+        $noApprovalNeeded = has_permission('Commenting_Comment', 'noappcomment');
+        if(!$noApprovalNeeded) {
+            $this->flashSuccess("Your comment is awaiting moderation");
+        }
+
         //need getValue to run the filter
         $data = $_POST;
         $data['body'] = $form->getElement('body')->getValue();
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
         $data['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-        $data['approved'] = false;
+        $data['approved'] = $noApprovalNeeded;
         $comment->setArray($data);
         $comment->checkSpam();
         $comment->save();
