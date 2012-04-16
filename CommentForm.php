@@ -52,7 +52,7 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('textarea', 'body',
             array('label'=>'Comment',
                   'description'=>"Allowed tags: <p>, <a>, <em>, <strong>, <ul>, <ol>, <li>",
-                 'required'=>true,
+                  'required'=>true,
                   'filters'=> array(
                       array('StripTags', array('p', 'em', 'strong', 'a','ul','ol','li')),
                   ),
@@ -74,8 +74,5 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden'));
         fire_plugin_hook('commenting_append_to_form', $this);
         $this->addElement('submit', 'submit');
-
-
-
     }
 }
