@@ -129,7 +129,9 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         }
         //comment without approval does not really limmit access to an action, but is handy for use in the controller
         foreach($noAppCommentRoles as $role) {
-            $acl->allow($role, 'Commenting_Comment', array('noappcomment'));
+            if($acl->hasRole($role)) {
+                $acl->allow($role, 'Commenting_Comment', array('noappcomment'));
+            }
         }
 
         if(get_option('commenting_allow_public')) {
