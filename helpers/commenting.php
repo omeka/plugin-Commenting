@@ -84,8 +84,14 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
             $comment_html .= "<div class='comment-author'>";
             $comment_html .= commenting_get_gravatar($comment);
             if(!empty($comment->author_name)) {
-                $comment_html .= "<p class='comment-author-name'>" . $comment->author_name . "</p>";
+                if(empty($comment->author_url)) {
+                    $text = $comment->author_name;
+                } else {
+                    $text = "<a href='{$comment->author_url}'>{$comment->author_name}</a>";
+                }
+                $comment_html .= "<p class='comment-author-name'>$text</p>";
             }
+
             $comment_html .= "</div>";
             $comment_html .= "<div class='comment-body'>" . $comment->body . "</div>";
             $comment_html .= "<p class='comment-time'>" . $comment->added . "</p>";
@@ -114,7 +120,12 @@ function commenting_render_comments($comments, $admin=false)
         $html .= "<div class='comment-author'>";
         $html .= commenting_get_gravatar($comment);
         if(!empty($comment->author_name)) {
-            $html .= "<p class='comment-author-name'>" . $comment->author_name . "</p>";
+            if(empty($comment->author_url)) {
+                $text = $comment->author_name;
+            } else {
+                $text = "<a href='{$comment->author_url}'>{$comment->author_name}</a>";
+            }
+            $html .= "<p class='comment-author-name'>$text</p>";
         }
         $html .= "</div>";
         $html .= "<div class='comment-body'>" . $comment->body . "</div>";

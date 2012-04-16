@@ -40,7 +40,12 @@ class Commenting_CommentForm extends Omeka_Form
         if($user) {
             $urlOptions['value'] = WEB_ROOT;
             $emailOptions['value'] = $user->email;
-            $nameOptions['value'] = $user->first_name . " " . $user->last_name;
+            if(version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {
+                $nameOptions['value'] = $user->name;
+            } else {
+                $nameOptions['value'] = $user->first_name . " " . $user->last_name;
+            }
+
             $this->addElement('text', 'user_id', array('value'=>$user->id,  'hidden'=>true));
         }
         $this->addElement('text', 'author_url', $urlOptions);
