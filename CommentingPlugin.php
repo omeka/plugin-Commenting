@@ -110,16 +110,23 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         $viewRoles = unserialize(get_option('commenting_view_roles'));
         if($viewRoles !== false) {
             foreach($viewRoles as $role) {
-                $acl->allow($role, 'Commenting_Comment', array('show'));
+                //check that all the roles exist, in case a plugin-added role has been removed (e.g. GuestUser)
+                if($acl->hasRole($role)) {
+                    $acl->allow($role, 'Commenting_Comment', array('show'));
+                }
             }
 
             foreach($commentRoles as $role) {
-                $acl->allow($role, 'Commenting_Comment', array('add'));
+                if($acl->hasRole($role)) {
+                    $acl->allow($role, 'Commenting_Comment', array('add'));
+                }
             }
 
             foreach($moderateRoles as $role) {
-                $acl->allow($role, 'Commenting_Comment', array('updateapproved'));
-                $acl->allow($role, 'Commenting_Comment', array('updatespam'));
+                if($acl->hasRole($role)) {
+                    $acl->allow($role, 'Commenting_Comment', array('updateapproved'));
+                    $acl->allow($role, 'Commenting_Comment', array('updatespam'));
+                }
             }
         }
 
