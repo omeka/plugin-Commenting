@@ -46,7 +46,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
 
             $this->redirect->gotoUrl($destination);
         }
-        $noApprovalNeeded = has_permission('Commenting_Comment', 'noappcomment');
+        $noApprovalNeeded = $this->isAllowed('noappcomment');
         if(!$noApprovalNeeded) {
             $this->flashSuccess("Your comment is awaiting moderation");
         }
