@@ -19,7 +19,8 @@ class Commenting_CommentForm extends Omeka_Form
                 'captcha' => array(
                     'captcha' => 'ReCaptcha',
                     'pubkey' => get_option('recaptcha_public_key'),
-                    'privkey' => get_option('recaptcha_private_key')
+                    'privkey' => get_option('recaptcha_private_key'),
+                    'ssl' => true //make the connection secure so IE8 doesn't complain. if works, should branch around http: vs https:
                 )
             ));
         }
