@@ -1,21 +1,23 @@
 <?php
 
-function commenting_echo_comments($options = array('approved'=>true))
+function commenting_echo_comments($options = array('approved'=>true), $comments = null)
 {
     if( (get_option('commenting_allow_public') == 1) || (get_option('commenting_allow_public_view') == 1) || has_permission('Commenting_Comment', 'show') ) {
         if(!isset($options['threaded'])) {
             $options['threaded'] = get_option('commenting_threaded');
         }
-        $request = Omeka_Context::getInstance()->getRequest();
-        $params = $request->getParams();
-        $model = commenting_get_model($request);
-        $record_id = commenting_get_record_id($request);
-        $comments = commenting_get_comments($record_id, $model, $options);
-
+        if(!$comments) {
+            $request = Omeka_Context::getInstance()->getRequest();
+            $params = $request->getParams();
+            $model = commenting_get_model($request);
+            $record_id = commenting_get_record_id($request);
+            $comments = commenting_get_comments($record_id, $model, $options);
+        }
         $html = '';
         $html .= "<div id='comments-flash'>". flash(true) . "</div>";
         $html .= "<div class='comments'><h2>Comments</h2>";
         $html = apply_filters('commenting_prepend_to_comments', $html, $comments);
+        
         if(isset($options['threaded']) && $options['threaded']) {
             $html .= commenting_render_threaded_comments($comments);
         } else {
