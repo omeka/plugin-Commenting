@@ -1,6 +1,7 @@
 <?php
 queue_css('commenting');
 queue_js('commenting');
+queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/admin/commenting/comment/'");
     head(array('title' => 'Comments', 'bodyclass' => 'primary'));
 
 ?>
