@@ -58,4 +58,5 @@ input.hidden {
 
 span.comment-flag, span.comment-unflag {
     padding-left: 6px;
+    cursor: pointer;
 }

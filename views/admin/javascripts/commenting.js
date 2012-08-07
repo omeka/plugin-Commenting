@@ -194,7 +194,6 @@ var Commenting = {
     
     batchUpdateFlagResponseHandler: function(response, status, jqxhr)
     {
-        console.log(response);
         for(var i=0; i<response.ids.length; i++) {
             Commenting.flagResponse(response.ids[i], response.action);
         }
@@ -219,7 +218,6 @@ var Commenting = {
     },
     
     flagResponse: function(id, action) {
-        console.log(id);
         var comment = jQuery('#comment-' + id);
         if(action == 'flagged') {
             comment.find('div.comment-body').addClass('comment-flagged');
