@@ -168,7 +168,76 @@ var Commenting = {
     
     batchUnselect: function() {
         jQuery('input.batch-select-comment').removeAttr('checked');
-    }       
+    },
+
+    batchFlag: function() {
+        ids = new Array();
+        jQuery('input.batch-select-comment:checked').each(function() {
+            var target = jQuery(this.parentNode.parentNode);
+            ids[ids.length] = target.attr('id').substring(8);
+            Commenting.elements[Commenting.elements.length] = target;
+        });
+        json = {'ids': ids, 'flagged': 1};
+        jQuery.post(Commenting.pluginRoot + "update-flagged", json, Commenting.batchUpdateFlagResponseHandler);        
+    },    
+    
+    batchRemoveFlag: function() {
+        ids = new Array();
+        jQuery('input.batch-select-comment:checked').each(function() {
+            var target = jQuery(this.parentNode.parentNode);
+            ids[ids.length] = target.attr('id').substring(8);
+            Commenting.elements[Commenting.elements.length] = target;
+        });
+        json = {'ids': ids, 'flagged': 0};
+        jQuery.post(Commenting.pluginRoot + "update-flagged", json, Commenting.batchUpdateFlagResponseHandler);        
+    },    
+    
+    batchUpdateFlagResponseHandler: function(response, status, jqxhr)
+    {
+        console.log(response);
+        for(var i=0; i<response.ids.length; i++) {
+            Commenting.flagResponse(response.ids[i], response.action);
+        }
+    },
+    
+    flag: function(event) {
+        var commentId = Commenting.getCommentId(event.target);
+        var json = {'id': commentId }; 
+        jQuery.post(Commenting.pluginRoot + "flag", json, Commenting.flagResponseHandler);
+        
+    },
+
+    unflag: function(event) {
+        var commentId = Commenting.getCommentId(event.target);
+        var json = {'id': commentId }; 
+        jQuery.post(Commenting.pluginRoot + "unflag", json, Commenting.flagResponseHandler);
+        
+    },    
+    
+    flagResponseHandler: function(response, status, jqxhr) {
+        Commenting.flagResponse(response.id, response.action);        
+    },
+    
+    flagResponse: function(id, action) {
+        console.log(id);
+        var comment = jQuery('#comment-' + id);
+        if(action == 'flagged') {
+            comment.find('div.comment-body').addClass('comment-flagged');
+            comment.find('span.comment-flag').hide();
+            comment.find('span.comment-unflag').show();
+        }
+        
+        if(action == 'unflagged') {           
+            comment.find('div.comment-body').removeClass('comment-flagged');           
+            comment.find('span.comment-flag').show();           
+            comment.find('span.comment-unflag').hide();
+        }        
+    },
+    
+    getCommentId: function(el) {
+        return jQuery(el).parents('div.comment').first().attr('id').substring(8);
+    }    
+    
 };
 
 jQuery(document).ready(function() {
@@ -177,4 +246,6 @@ jQuery(document).ready(function() {
     jQuery('#batch-select').click(Commenting.toggleSelected);
     jQuery('.report-ham').click(Commenting.reportHam);
     jQuery('.report-spam').click(Commenting.reportSpam);
+    jQuery('.comment-flag').click(Commenting.flag);
+    jQuery('.comment-unflag').click(Commenting.unflag);    
 }); 

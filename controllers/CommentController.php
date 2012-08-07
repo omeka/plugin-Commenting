@@ -59,6 +59,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $data['approved'] = $noApprovalNeeded;
         $comment->setArray($data);
         $comment->checkSpam();
+        $comment->flagged = 0;
         $comment->save();
         $destination .= "#comment-" . $comment->id;
         $this->redirect->gotoUrl($destination);
@@ -72,26 +73,30 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $wordPressAPIKey = get_option('commenting_wpapi_key');
         $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
         $response = array('errors'=> array());
-        foreach($commentIds as $commentId) {
-            $comment = $table->find($commentId);
-            $data = $comment->getAkismetData();
-            if($spam) {
-                $submitMethod = 'submitSpam';
-            } else {
-                $submitMethod = 'submitHam';
+        if($commentIds) {    
+            foreach($commentIds as $commentId) {
+                $comment = $table->find($commentId);
+                $data = $comment->getAkismetData();
+                if($spam) {
+                    $submitMethod = 'submitSpam';
+                } else {
+                    $submitMethod = 'submitHam';
+                }
+                try{
+                    $ak->$submitMethod($data);
+                    //only save the update if updating to Akismet is successful
+                    $comment->is_spam = $spam;
+                    $comment->save();
+                    $response['status'] = 'ok';
+                } catch (Exception $e){
+                    $response['status'] = 'fail';
+                    $response['errors'][] = array('id'=>$comment->id);
+                    $response['message'] = $e->getMessage();
+                    _log($e->getMessage());
+                }
             }
-            try{
-                $ak->$submitMethod($data);
-                //only save the update if updating to Akismet is successful
-                $comment->is_spam = $spam;
-                $comment->save();
-                $response['status'] = 'ok';
-            } catch (Exception $e){
-                $response['status'] = 'fail';
-                $response['errors'][] = array('id'=>$comment->id);
-                $response['message'] = $e->getMessage();
-                _log($e->getMessage());
-            }
+        } else {
+            $response = array('status'=>'empty', 'message'=>'No Comments Found');
         }
         $this->_helper->json($response);
     }
@@ -101,41 +106,82 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $wordPressAPIKey = get_option('commenting_wpapi_key');
         $commentIds = $_POST['ids'];
         $status = $_POST['approved'];
-        $table = $this->getTable();
-        if(! $commentIds) {
-            return;
-        }
-        foreach($commentIds as $commentId) {
-            $comment = $table->find($commentId);
-            $comment->approved = $status;
-            //if approved, it isn't spam
-            if( ($status == 1) && ($comment->is_spam == 1) ) {
-                $comment->is_spam = 0;
-                $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
-                $data = $comment->getAkismetData();
-                try {
-                    $ak->submitHam($data);
-                    $response = array('status'=>'ok');
-                    $comment->save();
-                } catch (Exception $e) {
-                    _log($e->getMessage());
-                    $response = array('status'=>'fail', 'message'=>$e->getMessage());
+        $table = $this->getTable(); 
+        if($commentIds) {          
+            foreach($commentIds as $commentId) {
+                $comment = $table->find($commentId);
+                $comment->approved = $status;
+                //if approved, it isn't spam
+                if( ($status == 1) && ($comment->is_spam == 1) ) {
+                    $comment->is_spam = 0;
+                    $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
+                    $data = $comment->getAkismetData();
+                    try {
+                        $ak->submitHam($data);
+                        $response = array('status'=>'ok');
+                        $comment->save();
+                    } catch (Exception $e) {
+                        _log($e->getMessage());
+                        $response = array('status'=>'fail', 'message'=>$e->getMessage());
+                    }
+    
+                } else {
+                    try {
+                        $comment->save();
+                        $response = array('status'=>'ok');
+                    } catch(Exception $e) {
+                        $response = array('status'=>'fail', 'message'=>$e->getMessage());
+                        _log($e->getMessage());
+                    }
                 }
-
-            } else {
-                try {
-                    $comment->save();
-                    $response = array('status'=>'ok');
-                } catch(Exception $e) {
-                    $response = array('status'=>'fail', 'message'=>$e->getMessage());
-                    _log($e->getMessage());
-                }
+    
             }
-
+        } else {
+            $response = array('status'=>'empty', 'message'=>'No Comments Found');
         }
         $this->_helper->json($response);
     }
 
+    public function updateFlaggedAction()
+    {
+        $commentIds = $_POST['ids'];
+        $flagged = $_POST['flagged'];
+        
+        if($commentIds) {
+            foreach($commentIds as $id) {
+                $comment = $this->findById($id);
+                $comment->flagged = $flagged;        
+                $comment->save();
+            }
+        } else {
+            $response = array('status'=>'empty', 'message'=>'No Comments Found');
+        }
+        if($flagged) {
+            $action = 'flagged';
+        } else {
+            $action = 'unflagged';
+        }
+        $response = array('status'=>'ok', 'action'=>$action, 'ids'=>$commentIds);
+        $this->_helper->json($response);
+    }
+    
+    public function flagAction() {
+        $commentId = $_POST['id'];
+        $comment = $this->findById($commentId);
+        $comment->flagged = true;
+        $comment->save();
+        $response = array('status'=>'ok', 'id'=>$commentId, 'action'=>'flagged');
+        $this->_helper->json($response);
+    }
+    
+    public function unflagAction() {
+        $commentId = $_POST['id'];
+        $comment = $this->findById($commentId);
+        $comment->flagged = 0;
+        $comment->save();
+        $response = array('status'=>'ok', 'id'=>$commentId, 'action'=>'unflagged');
+        $this->_helper->json($response);        
+    }
 
     private function getForm()
     {

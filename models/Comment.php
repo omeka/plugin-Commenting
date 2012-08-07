@@ -17,6 +17,7 @@ class Comment extends Omeka_Record
     public $user_id;
     public $parent_comment_id;
     public $approved;
+    public $flagged;
     public $is_spam;
 
 

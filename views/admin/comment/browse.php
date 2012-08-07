@@ -35,6 +35,8 @@ queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/admin/commenting/comm
 <li onclick="Commenting.batchReportSpam()">Report Spam</li>
 <li onclick="Commenting.batchReportHam()">Report Ham</li>
 <?php endif; ?>
+<li onclick="Commenting.batchFlag()">Flag Inappropriate</li>
+<li onclick="Commenting.batchRemoveFlag()">Remove Flag</li>
 </ul>
 </div>
 <?php endif; ?>

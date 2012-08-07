@@ -41,6 +41,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
               `user_id` int(11) DEFAULT NULL,
               `parent_comment_id` int(11) DEFAULT NULL,
               `approved` tinyint(1) NOT NULL DEFAULT '0',
+              `flagged` tinyint(1) NOT NULL DEFAULT '0',
               `is_spam` tinyint(1) NOT NULL DEFAULT '0',
               PRIMARY KEY (`id`),
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
@@ -94,6 +95,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     {
         queue_css('commenting');
         queue_js('commenting');
+        queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/commenting/comment/'");
     }
 
     public function hookAdminThemeHeader()
@@ -143,11 +145,13 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
 
+        
+        
         if($viewRoles !== false) {
             foreach($viewRoles as $role) {
                 //check that all the roles exist, in case a plugin-added role has been removed (e.g. GuestUser)
                 if($acl->hasRole($role)) {
-                    $acl->allow($role, 'Commenting_Comment', array('show'));
+                    $acl->allow($role, 'Commenting_Comment', array('show', 'flag'));
                 }
             }
 
@@ -159,8 +163,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
             foreach($moderateRoles as $role) {
                 if($acl->hasRole($role)) {
-                    $acl->allow($role, 'Commenting_Comment', array('updateapproved'));
-                    $acl->allow($role, 'Commenting_Comment', array('updatespam'));
+                    $acl->allow($role, 'Commenting_Comment', array('updateapproved', 'updatespam', 'unflag', 'update-flagged'));
                 }
             }
 

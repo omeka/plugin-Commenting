@@ -7,6 +7,7 @@ div.comments {
 	
 }
 
+
 div.comment {
 	margin-left: 12px;
 	margin-top: 3px;
@@ -29,6 +30,12 @@ div.comment-body {
 	padding: 6px;	
 }
 
+
+div.comment-flagged {
+    background-color: pink;
+}
+
+
 div.comment-body p {
 	font-size: 1em;	
 }
@@ -47,4 +54,8 @@ div.success {
 
 input.hidden {
 	display:none;		
+}
+
+span.comment-flag, span.comment-unflag {
+    padding-left: 6px;
 }

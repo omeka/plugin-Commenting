@@ -95,9 +95,32 @@ function commenting_render_threaded_comments($comments, $parent_id = null)
             }
 
             $comment_html .= "</div>";
-            $comment_html .= "<div class='comment-body'>" . $comment->body . "</div>";
-            $comment_html .= "<p class='comment-time'>" . $comment->added . "</p>";
-            $comment_html .= "<p class='comment-reply'>Reply</p>";
+            $comment_html .= "<div class='comment-body" ; 
+            if($comment->flagged) {
+                $comment_html .= " comment-flagged";
+            } 
+                
+            $comment_html .= "'>" . $comment->body . "</div>";
+            $comment_html .= "<p><span class='comment-time'>" . $comment->added . "</span>";
+            $comment_html .= "</p>";
+            $comment_html .= "<p><span class='comment-reply'>Reply</span>";
+            if(!is_admin_theme()) {
+                $comment_html .= "<span class='comment-flag' " ;
+                if($comment->flagged) {
+                    $comment_html .= "style='display:none;'";
+                }
+                $comment_html .= ">Flag inappropriate</span>";
+                if(has_permission('Commenting_Comment', 'unflag')  )  {
+                    $comment_html .= "<span class='comment-unflag' ";
+                    if(!$comment->flagged) {
+                        $comment_html .= "style='display:none' ";
+                    }
+                
+                    $comment_html .= ">Remove flag</span>";
+                }                
+            }
+
+            $comment_html .= "</p>";
             $comment_html = apply_filters('commenting_append_to_comment', $comment_html, $comment);
             $html .= $comment_html;
             $html .= "<div class='comment-children'>";
@@ -130,8 +153,37 @@ function commenting_render_comments($comments, $admin=false)
             $html .= "<p class='comment-author-name'>$text</p>";
         }
         $html .= "</div>";
-        $html .= "<div class='comment-body'>" . $comment->body . "</div>";
-        $html .= "<p class='comment-time'>" . $comment->added . "</p>";
+        $html .= "<div class='comment-body" ; 
+        if($comment->flagged) {
+            $html .= " comment-flagged";
+        } 
+            
+        $html .= "'>" . $comment->body . "</div>";
+        $html .= "<p><span class='comment-time'>" . $comment->added . "</span></p>";
+        if(!is_admin_theme()) {
+            $html .= "<p><span class='comment-flag' ";
+            if($comment->flagged) {
+                $html .= "style='display:none;'";
+            }
+            $html .= ">Flag inappropriate</span>";
+            if(has_permission('Commenting_Comment', 'unflag')  )  {
+                $html .= "<span class='comment-unflag' ";
+                if(!$comment->flagged) {
+                    $html .= "style='display:none' ";
+                }
+            
+                $html .= ">Remove flag</span>";
+            }
+            
+            
+            $html .= "</p>";
+            
+            $html .= "<p><span class='comment-flag'>Flag inappropriate</span>";
+            if(has_permission('Commenting_Comment', 'unflag') && ($comment->flagged == 1) )  {
+                $html .= "<span class='comment-unflag'>Remove flag</span>";
+            }
+            $html .= "</p>";            
+        }
 
         $html = apply_filters('commenting_append_to_comment', $html, $comment);
         $html .= "</div>";
@@ -159,6 +211,12 @@ function commenting_render_admin($comment)
     if(get_option('commenting_wpapi_key') != '') {
         $html .= (bool) $comment->is_spam ? "<li><span class='spam'>Spam</span><span class='report-ham'>Report Ham</span></li>" : "<li><span class='ham'>Ham</span><span class='report-spam'>Report Spam</span></li>";
     }
+    if($comment->flagged) {
+        $html .= "<li><span class='comment-unflag'>Remove flag</span><span style='display:none' class='comment-flag'>Flag inappropriate</span></li>";
+    } else {
+        $html .= "<li><span style='display:none' class='comment-unflag'>Remove flag</span><span class='comment-flag'>Flag inappropriate</span></li>";
+    }
+    
     $html .= "<li><a href='" . commenting_comment_uri($comment) . "'>View</a></li>";
     $html .= "<li><a href='mailto:$comment->author_email'>$comment->author_email</a></li>";
     $html .= "</ul>";
