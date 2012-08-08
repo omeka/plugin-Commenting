@@ -153,6 +153,17 @@ var Commenting = {
         }               
     },
     
+    batchDelete: function() {
+        ids = new Array();
+        Commenting.elements = [];
+        jQuery('input.batch-select-comment:checked').each(function() {
+            var target = jQuery(this.parentNode.parentNode);
+            ids[ids.length] = target.attr('id').substring(8);
+            Commenting.elements[Commenting.elements.length] = target;
+        });
+        json = {'ids': ids, 'approved': 1};
+        jQuery.post(Commenting.pluginRoot + "batch-delete", json, Commenting.deleteResponseHandler);        
+    },
     
     toggleSelected: function() {
         if(jQuery(this).is(':checked')) {

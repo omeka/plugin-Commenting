@@ -53,7 +53,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         $moderateRoles = array('super');
         set_option('commenting_comment_roles', serialize($commentRoles));
         set_option('commenting_moderate_roles', serialize($moderateRoles));
-        set_option('commenting_noapp_comment_roles', serialize(array()));
+        set_option('commenting_moderated_comment_roles', serialize(array()));
         set_option('commenting_view_roles', serialize(array()));
 
     }
@@ -119,15 +119,23 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
     public function hookConfig($post)
     {
+        $arrayedFields = array(
+                'commenting_comment_roles',
+                'commenting_moderate_roles',
+                'commenting_view_roles',
+                'commenting_moderated_comment_roles'
+                );
+        
         foreach($post as $key=>$value) {
-            if( ($key == 'commenting_comment_roles') ||
-                ($key == 'commenting_moderate_roles') ||
-                ($key == 'commenting_view_roles') ||
-                ($key == 'commenting_noapp_comment_roles')
-            ) {
+            if( in_array($key, $arrayedFields)) {
                 $value = serialize($value);
             }
             set_option($key, $value);
+        }
+        foreach($arrayedFields as $key) {
+            if(!isset($_POST[$key])) {
+                set_option($key, serialize(array()));
+            }
         }
     }
 
@@ -141,7 +149,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     {
         $acl->addResource('Commenting_Comment');
         $commentRoles = unserialize(get_option('commenting_comment_roles'));
-        $noAppCommentRoles = unserialize(get_option('commenting_noapp_comment_roles'));
+        $moderatedCommentRoles = unserialize(get_option('commenting_moderated_comment_roles'));
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
 
@@ -168,9 +176,9 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
             }
 
             //comment without approval does not really limmit access to an action, but is handy for use in the controller
-            foreach($noAppCommentRoles as $role) {
+            foreach($moderatedCommentRoles as $role) {
                 if($acl->hasRole($role)) {
-                    $acl->allow($role, 'Commenting_Comment', array('noappcomment'));
+                    $acl->deny($role, 'Commenting_Comment', array('noappcomment'));
 
                 }
             }

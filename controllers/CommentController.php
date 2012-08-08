@@ -26,6 +26,23 @@ class Commenting_CommentController extends Omeka_Controller_Action
         parent::browseAction();
     }
 
+    public function batchDeleteAction()
+    {
+        $commentIds = $_POST['ids'];
+        
+        if($commentIds) {
+            foreach($commentIds as $id) {
+                $comment = $this->findById($id);
+                $comment->delete();
+            }
+        } else {
+            $response = array('status'=>'empty', 'message'=>'No Comments Found');
+        }
+        $response = array('status'=>'ok', 'action'=>'delete', 'ids'=>$commentIds);
+        $this->_helper->json($response);        
+        
+    }
+    
     public function addAction()
     {
         $destination = $_POST['path'];

@@ -68,6 +68,10 @@ function commenting_get_comments($record_id, $record_type = 'Item', $options=arr
     if(isset($options['approved'])) {
         $params['approved'] = $options['approved'];
     }
+    if(!has_permission('Commenting_Comment', 'unflag')) {
+        $params['flagged'] = 0;
+    }
+    
     $select = $commentTable->getSelectForFindBy($params);
     if(isset($options['order'])) {
         $select->order("ORDER BY added " . $options['order']);

@@ -37,6 +37,7 @@ queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/admin/commenting/comm
 <?php endif; ?>
 <li onclick="Commenting.batchFlag()">Flag Inappropriate</li>
 <li onclick="Commenting.batchRemoveFlag()">Remove Flag</li>
+<li onclick="Commenting.batchDelete()">Delete</li>
 </ul>
 </div>
 <?php endif; ?>
