@@ -6,13 +6,17 @@
 <div class='field'>
     <label for='commenting_threaded'>Use Threaded Comments?</label>
     <div class='inputs'>
-    <?php echo __v()->formCheckbox('commenting_threaded', null,
-        array('checked'=> (bool) get_option('commenting_threaded') ? 'checked' : ''
-    
-        )
-    ); ?>
-    
+        <?php echo __v()->formCheckbox('commenting_threaded', null,
+            array('checked'=> (bool) get_option('commenting_threaded') ? 'checked' : '')); ?>    
     </div>
+</div>
+
+<div class='field'>
+    <label for='commenting_flag_email'>Notify this email of flagged content</label>
+    <div class='inputs'>
+        <?php echo __v()->formText('commenting_flag_email', get_option('commenting_flag_email'));?>
+    </div>
+    
 </div>
 
 <!--  Basic settings -->

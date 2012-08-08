@@ -187,6 +187,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $comment = $this->findById($commentId);
         $comment->flagged = true;
         $comment->save();
+        $this->emailFlagged($comment);
         $response = array('status'=>'ok', 'id'=>$commentId, 'action'=>'flagged');
         $this->_helper->json($response);
     }
@@ -200,6 +201,25 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $this->_helper->json($response);        
     }
 
+    private function emailFlagged($comment)
+    {
+        $mail = new Zend_Mail();
+        $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
+        $mail->setFrom(get_option('administrator_email'), settings('site_title'));
+        $mail->addTo(get_option('commenting_flag_email'));
+        $subject = "A comment on " . settings('site_title') . " has been flagged as inappropriate";
+        $body = "<p>The comment <blockquote>{$comment->body}</blockquote> has been flagged as inappropriate.</p>";
+        $body .= "<p>You can manage the comment <a href='" . WEB_ROOT ."{$comment->path}'>here</a></p>";
+        $mail->setSubject($subject);
+        $mail->setBodyHtml($body);        
+        try {
+            $mail->send();
+        } catch(Exception $e) {
+            _log($e);
+        }
+        
+    }
+    
     private function getForm()
     {
         require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
