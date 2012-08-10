@@ -153,8 +153,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
 
-        
-        
+
         if($viewRoles !== false) {
             foreach($viewRoles as $role) {
                 //check that all the roles exist, in case a plugin-added role has been removed (e.g. GuestUser)
@@ -171,21 +170,27 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
             foreach($moderateRoles as $role) {
                 if($acl->hasRole($role)) {
-                    $acl->allow($role, 'Commenting_Comment', array('updateapproved', 'updatespam', 'unflag', 'update-flagged'));
+                    $acl->allow($role, 'Commenting_Comment', array('updateapproved', 'updatespam', 'unflag', 'update-flagged', 'noappcomment', 'browse'));
                 }
             }
 
-            //comment without approval does not really limmit access to an action, but is handy for use in the controller
-            foreach($moderatedCommentRoles as $role) {
-                if($acl->hasRole($role)) {
-                    $acl->deny($role, 'Commenting_Comment', array('noappcomment'));
-
-                }
+ 
+        }
+        //comment without approval does not really limmit access to an action, but is handy for use in the controller
+        
+        $publicModeration = get_option('commenting_require_public_moderation');
+        if(!$publicModeration) {
+            $acl->allow(null, 'Commenting_Comment', array('noappcomment'));
+        }
+        
+        foreach($moderatedCommentRoles as $role) {
+            if($acl->hasRole($role)) {
+                $acl->deny($role, 'Commenting_Comment', array('noappcomment'));
             }
-
-            if(get_option('commenting_allow_public')) {
-                $acl->allow(null, 'Commenting_Comment', array('show', 'add'));
-            }
+        }        
+        
+        if(get_option('commenting_allow_public')) {
+            $acl->allow(null, 'Commenting_Comment', array('show', 'add', 'flag'));
         }
     }
 

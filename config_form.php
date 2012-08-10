@@ -33,7 +33,7 @@
 </div>
 
 
-<div class='field'>
+<div class='field' id='commenting-moderate-public'>
     <label for='commenting_require_public_moderation'>Require moderation for all public comments?</label>
     <div class='inputs'>
         <?php echo __v()->formCheckbox('commenting_require_public_moderation', null, 
