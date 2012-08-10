@@ -165,6 +165,10 @@ var Commenting = {
         jQuery.post(Commenting.pluginRoot + "batch-delete", json, Commenting.deleteResponseHandler);        
     },
     
+    deleteResponseHandler: function(response, status, jqxhr) {
+        window.location.reload(true);
+    },
+    
     toggleSelected: function() {
         if(jQuery(this).is(':checked')) {
             Commenting.batchSelect();

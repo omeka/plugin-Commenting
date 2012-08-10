@@ -21,7 +21,6 @@ var Commenting = {
     },	
 	
 	flagResponseHandler: function(response, status, jqxhr) {
-	    console.log(response);
 	    var comment = jQuery('#comment-' + response.id);
 	    if(response.action == 'flagged') {
 	        comment.find('div.comment-body').addClass('comment-flagged');
