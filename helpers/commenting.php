@@ -15,7 +15,7 @@ function commenting_echo_comments($options = array('approved'=>true), $comments 
         }
         $html = '';
         $html .= "<div id='comments-flash'>". flash(true) . "</div>";
-        $html .= "<div class='comments'><h2>Comments</h2>";
+        $html .= "<div class='comments'><h2>" . get_option('commenting_comments_label') . "</h2>";
         $html = apply_filters('commenting_prepend_to_comments', $html, $comments);
         
         if(isset($options['threaded']) && $options['threaded']) {

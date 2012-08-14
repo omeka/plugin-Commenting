@@ -6,11 +6,12 @@ queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/admin/commenting/comm
 
 ?>
 <div id='primary'>
-<div class="pagination"><?php echo pagination_links(); ?></div>
+
     <?php echo flash(); ?>
     <?php if(!Omeka_Captcha::isConfigured()): ?>
     <p class="alert">You have not entered your <a href="http://recaptcha.net/">reCAPTCHA</a> API keys under <a href="<?php echo uri('security#recaptcha_public_key'); ?>">security settings</a>. We recommend adding these keys, or the commenting form will be vulnerable to spam.</p>
     <?php endif; ?>
+    <div class="pagination"><?php echo pagination_links(); ?></div>
     <div id="browse-meta" class="group">
         <div id="browse-meta-lists">
             <ul class="navigation">
@@ -43,7 +44,7 @@ queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/admin/commenting/comm
 <?php endif; ?>
 
 <?php echo commenting_render_comments($comments, true); ?>
-
+<div class="pagination"><?php echo pagination_links(); ?></div>
 </div>
 
 <?php foot(); ?>

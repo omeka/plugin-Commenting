@@ -49,6 +49,8 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         ";
         $db->query($sql);
 
+        set_option('commenting_comments_label', 'Comments');
+        
         $commentRoles = array('super');
         $moderateRoles = array('super');
         set_option('commenting_comment_roles', serialize($commentRoles));

@@ -12,6 +12,14 @@
 </div>
 
 <div class='field'>
+    <label for='commenting_comments_label'>Text for comments label</label>
+    <div class='inputs'>
+        <?php echo __v()->formText('commenting_comments_label', get_option('commenting_comments_label')); ?>
+    </div>
+
+</div>
+
+<div class='field'>
     <label for='commenting_flag_email'>Notify this email of flagged content</label>
     <div class='inputs'>
         <?php echo __v()->formText('commenting_flag_email', get_option('commenting_flag_email'));?>
