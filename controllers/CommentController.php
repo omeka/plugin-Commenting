@@ -204,9 +204,9 @@ class Commenting_CommentController extends Omeka_Controller_Action
     {
         $mail = new Zend_Mail();
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
-        $mail->setFrom(get_option('administrator_email'), settings('site_title'));
+        $mail->setFrom(get_option('administrator_email'), get_option('site_title'));
         $mail->addTo(get_option('commenting_flag_email'));
-        $subject = "A comment on " . settings('site_title') . " has been flagged as inappropriate";
+        $subject = "A comment on " . get_option('site_title') . " has been flagged as inappropriate";
         $body = "<p>The comment <blockquote>{$comment->body}</blockquote> has been flagged as inappropriate.</p>";
         $body .= "<p>You can manage the comment <a href='" . WEB_ROOT ."{$comment->path}'>here</a></p>";
         $mail->setSubject($subject);
