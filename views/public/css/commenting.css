@@ -40,11 +40,11 @@ div.comment-body p {
 	font-size: 1em;	
 }
 
-p.comment-reply {
+.comment-reply {
 	cursor: pointer;	
 }
 
-p.comment-author-name {
+.comment-author-name {
 	
 }
 
