@@ -63,36 +63,33 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
     public function hookUpgrade($old, $new)
     {
-        switch($old) {
-            case '1.0' :
-                if(!get_option('commenting_comment_roles')) {
-                    $commentRoles = array('super');
-                    set_option('commenting_comment_roles', serialize($commentRoles));
-                }
-
-                if(!get_option('commenting_moderate_roles')) {
-                    $moderateRoles = array('super');
-                    set_option('commenting_moderate_roles', serialize($moderateRoles));
-                }
-
-                if(!get_option('commenting_noapp_comment_roles')) {
-                    set_option('commenting_noapp_comment_roles', serialize(array()));
-                }
-
-                if(!get_option('commenting_view_roles')) {
-                    set_option('commenting_view_roles', serialize(array()));
-                }
-
-            break;
+        
+        if(version_compare($oldVersion, '1.1', '<') ) {
+            if(!get_option('commenting_comment_roles')) {
+                $commentRoles = array('super');
+                set_option('commenting_comment_roles', serialize($commentRoles));
+            }
             
-            case '1.1':
-                set_option('commenting_moderated_comment_roles', serialize(array()));
-                set_option('commenting_view_roles', serialize(array()));
-                set_option('commenting_comments_label', 'Comments');
+            if(get_option('commenting_moderate_roles')) {
                 remove_option('commenting_moderate_roles');
-                $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT FALSE AFTER `approved` ";
-                get_db()->query($sql);
-        }
+            }
+            
+            if(!get_option('commenting_noapp_comment_roles')) {
+                set_option('commenting_noapp_comment_roles', serialize(array()));
+            }
+            
+            if(!get_option('commenting_view_roles')) {
+                set_option('commenting_view_roles', serialize(array()));
+            }
+            
+            set_option('commenting_moderated_comment_roles', serialize(array()));
+            set_option('commenting_view_roles', serialize(array()));
+            set_option('commenting_comments_label', 'Comments');
+            
+            $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT FALSE AFTER `approved` ";
+            get_db()->query($sql);            
+            
+        }    
     }
 
     public function hookUninstall()
