@@ -55,12 +55,12 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('text', 'author_email', $emailOptions);
 
         $this->addElement('text', 'author_name', $nameOptions);
-        $this->addElement('textarea', 'body',
+        $this->addElement('textarea', 'commenting_body',
             array('label'=>'Comment',
-                  'description'=>"Allowed tags: <p>, <a>, <em>, <strong>, <ul>, <ol>, <li>",
+                  'description'=>"Allowed tags: <p>, <a>, <em>, <strong>",
                   'required'=>true,
                   'filters'=> array(
-                      array('StripTags', array('p', 'em', 'strong', 'a','ul','ol','li')),
+                      array('StripTags', array('allowTags' => array('p', 'em', 'strong', 'a'))),
                   ),
                 )
             );

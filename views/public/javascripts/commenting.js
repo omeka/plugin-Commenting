@@ -1,9 +1,13 @@
 var Commenting = {
 		
 	moveForm: function(event) {
+	    //first make tinyMCE go away so it is safe to move around in the DOM
+	    tinymce.EditorManager.execCommand('mceRemoveControl',true, 'commenting_body');
 		jQuery('#comment-form').insertAfter(event.target);
 		commentId = Commenting.getCommentId(event.target);
 		jQuery('#parent-id').val(commentId);
+		//reinitialize the form
+		Commenting.wysiwyg();
 	},
 	
 	flag: function(event) {
@@ -44,10 +48,54 @@ var Commenting = {
 	}
 };
 
+/**
+ * Add the TinyMCE WYSIWYG editor to a page.
+ * Default is to add to all textareas.
+ * Modified from the admin-side global.js Omeka.wysiwyg
+ *
+ * @param {Object} [params] Parameters to pass to TinyMCE, these override the
+ * defaults.
+ */
+Commenting.wysiwyg = function (params) {
+    // Default parameters
+    initParams = {
+        plugins: "paste,inlinepopups",
+        convert_urls: false,
+        mode: "exact", 
+        elements: 'commenting_body',
+        object_resizing: true,
+        theme: "advanced",
+        theme_advanced_toolbar_location: "top",
+        force_br_newlines: false,
+        forced_root_block: 'p', // Needed for 3.x
+        remove_linebreaks: true,
+        fix_content_duplication: false,
+        fix_list_elements: true,
+        valid_child_elements: "ul[li],ol[li]",
+        theme_advanced_buttons1: "bold,italic,underline,link",
+        theme_advanced_buttons2: "",
+        theme_advanced_buttons3: "",
+        theme_advanced_toolbar_align: "left"
+    };
+
+    // Overwrite default params with user-passed ones.
+    for (var attribute in params) {
+        // Account for annoying scripts that mess with prototypes.
+        if (params.hasOwnProperty(attribute)) {
+            initParams[attribute] = params[attribute];
+        }
+    }
+
+    tinyMCE.init(initParams);
+};
+
+
+
 jQuery(document).ready(function() {	
 	jQuery('.comment-reply').click(Commenting.moveForm);
 	jQuery('.comment-flag').click(Commenting.flag);
 	jQuery('.comment-unflag').click(Commenting.unflag);
+	Commenting.wysiwyg();
 });
 		
 		

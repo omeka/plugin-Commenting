@@ -60,7 +60,6 @@ class Commenting_CommentController extends Omeka_Controller_Action
             $destination .= "#comments-flash";
             $commentSession = new Zend_Session_Namespace('commenting');
             $commentSession->post = serialize($_POST);
-
             $this->redirect->gotoUrl($destination);
         }
         $noApprovalNeeded = $this->isAllowed('noappcomment');
@@ -70,7 +69,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
 
         //need getValue to run the filter
         $data = $_POST;
-        $data['body'] = $form->getElement('body')->getValue();
+        $data['body'] = $form->getElement('commenting_body')->getValue();
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
         $data['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
         $data['approved'] = $noApprovalNeeded;

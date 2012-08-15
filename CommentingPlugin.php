@@ -57,6 +57,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         set_option('commenting_moderate_roles', serialize($moderateRoles));
         set_option('commenting_moderated_comment_roles', serialize(array()));
         set_option('commenting_view_roles', serialize(array()));
+        set_option('commenting_comments_label', 'Comments');
 
     }
 
@@ -83,6 +84,14 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
                 }
 
             break;
+            
+            case '1.1':
+                set_option('commenting_moderated_comment_roles', serialize(array()));
+                set_option('commenting_view_roles', serialize(array()));
+                set_option('commenting_comments_label', 'Comments');
+                remove_option('commenting_moderate_roles');
+                $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT FALSE AFTER `approved` ";
+                get_db()->query($sql);
         }
     }
 
@@ -97,6 +106,7 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
     {
         queue_css('commenting');
         queue_js('commenting');
+        queue_js('tiny_mce', 'javascripts/tiny_mce');
         queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/commenting/comment/'");
     }
 
