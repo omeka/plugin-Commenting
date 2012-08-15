@@ -70,8 +70,8 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
                 set_option('commenting_comment_roles', serialize($commentRoles));
             }
             
-            if(get_option('commenting_moderate_roles')) {
-                remove_option('commenting_moderate_roles');
+            if(!get_option('commenting_moderate_roles')) {
+                set_option('commenting_moderate_roles', serialize(array('super')));
             }
             
             if(!get_option('commenting_noapp_comment_roles')) {
@@ -85,9 +85,11 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
             set_option('commenting_moderated_comment_roles', serialize(array()));
             set_option('commenting_view_roles', serialize(array()));
             set_option('commenting_comments_label', 'Comments');
+            set_option('commenting_flag_email', get_option('administrator_email'));
             
+            $db = get_db();
             $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT FALSE AFTER `approved` ";
-            get_db()->query($sql);            
+            $db->query($sql);            
             
         }    
     }
