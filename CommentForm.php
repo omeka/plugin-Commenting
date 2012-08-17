@@ -39,7 +39,10 @@ class Commenting_CommentForm extends Omeka_Form
         $nameOptions =  array('label'=>'Your name');
 
         if($user) {
-            $urlOptions['value'] = WEB_ROOT;
+            if(plugin_is_active('UserProfiles')) {
+                $urlOptions['value'] = WEB_ROOT . "/user-profiles/profiles/user/id/{$user->id}";
+            }
+            
             $emailOptions['value'] = $user->email;
             if(version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {
                 $nameOptions['value'] = $user->name;
