@@ -76,6 +76,7 @@ function commenting_get_comments($record_id, $record_type = 'Item', $options=arr
     if(isset($options['order'])) {
         $select->order("ORDER BY added " . $options['order']);
     }
+
     return $commentTable->fetchObjects($select);
 }
 
