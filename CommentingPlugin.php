@@ -143,11 +143,19 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
             }
             set_option($key, $value);
         }
+        
+        //clear out fields that have nothing checked
         foreach($arrayedFields as $key) {
             if(!isset($_POST[$key])) {
                 set_option($key, serialize(array()));
             }
         }
+        
+        //if public can comment without moderation, so can all roles
+        if($_POST['commenting_require_public_moderation'] == 0) {
+            set_option('commenting_moderated_comment_roles', serialize(array()));
+        }
+        
     }
 
     public function hookConfigForm()

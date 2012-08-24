@@ -21,6 +21,11 @@ class Comment extends Omeka_Record
     public $is_spam;
 
 
+    protected function beforeSave()
+    {
+        $this->checkSpam();
+    }
+    
     public function checkSpam()
     {
         $wordPressAPIKey = get_option('commenting_wpapi_key');
@@ -58,4 +63,38 @@ class Comment extends Omeka_Record
         }
         return $data;
     }
+    
+    public function isValid()
+    {
+        $this->validate();
+        if(trim(strip_tags($this->body)) == '' ) {
+            return false;
+        }        
+        return !$this->hasErrors();
+    }    
+
+    public function saveForm($post)
+    {
+        if(!empty($post))
+        {
+            $clean = $this->filterInput($post);
+            $clean = new ArrayObject($clean);
+            $this->runCallbacks('beforeSaveForm', $clean);
+            $clean = $this->setFromPost($clean);
+    
+            //Save will return TRUE if there are no validation errors
+            if ($this->save()) {
+                $this->runCallbacks('afterSaveForm', $clean);
+                return true;
+            } else {
+                $errors = $this->getErrors();
+                if($errors->count() != 0) {
+                    throw new Omeka_Validator_Exception($errors);
+                }
+                return false;
+            }
+        }
+        return false;
+    }    
+    
 }

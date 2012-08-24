@@ -56,28 +56,33 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $comment = new Comment();
         $form = $this->getForm();
         $valid = $form->isValid($this->getRequest()->getPost());
+        
+        //no using zend's validation on the empty body to allow for the admittedly odd case of 
+        //plugins adding a second comment form specific to their models (e.g., Groups)
+
+        
         if(!$valid) {
             $destination .= "#comments-flash";
             $commentSession = new Zend_Session_Namespace('commenting');
             $commentSession->post = serialize($_POST);
             $this->redirect->gotoUrl($destination);
         }
+        
         $noApprovalNeeded = $this->isAllowed('noappcomment');
         if(!$noApprovalNeeded) {
             $this->flashSuccess("Your comment is awaiting moderation");
         }
 
-        //need getValue to run the filter
         $data = $_POST;
-        $data['body'] = $form->getElement('commenting_body')->getValue();
+        
+        $data['body'] = $body;
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
         $data['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
         $data['approved'] = $noApprovalNeeded;
-        $comment->setArray($data);
-        $comment->checkSpam();
-        $comment->flagged = 0;
-        $comment->save();
-        $destination .= "#comment-" . $comment->id;
+        $data['flagged'] = 0;
+        $comment->saveForm($data);
+        $destination .= "#comment-" . $comment->id;                        
+    
         $this->redirect->gotoUrl($destination);
     }
 
