@@ -59,7 +59,6 @@ class Commenting_CommentController extends Omeka_Controller_Action
         
         //no using zend's validation on the empty body to allow for the admittedly odd case of 
         //plugins adding a second comment form specific to their models (e.g., Groups)
-
         
         if(!$valid) {
             $destination .= "#comments-flash";
