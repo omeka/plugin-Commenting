@@ -68,7 +68,7 @@ class Commenting_CommentForm extends Omeka_Form
             );
 
 
-        $request = Omeka_Context::getInstance()->getRequest();
+        $request = Zend_Controller_Front::getInstance()->getRequest();
         $params = $request->getParams();
         $model = commenting_get_model($request);
         $record_id = commenting_get_record_id($request);
@@ -80,7 +80,7 @@ class Commenting_CommentForm extends Omeka_Form
         }
         $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true, 'class' => 'hidden'));
         $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden'));
-        fire_plugin_hook('commenting_append_to_form', $this);
+        fire_plugin_hook('commenting_append_to_form', array('form'=>$this));
         $this->addElement('submit', 'submit');
     }
 }

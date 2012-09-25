@@ -7,7 +7,7 @@ function commenting_echo_comments($options = array('approved'=>true), $comments 
             $options['threaded'] = get_option('commenting_threaded');
         }
         if(!$comments) {
-            $request = Omeka_Context::getInstance()->getRequest();
+            $request = Zend_Controller_Front::getInstance()->getRequest();
             $params = $request->getParams();
             $model = commenting_get_model($request);
             $record_id = commenting_get_record_id($request);
