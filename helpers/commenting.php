@@ -199,7 +199,7 @@ function commenting_render_comments($comments, $admin=false)
 
 }
 
-function commenting_comment_uri($comment, $includeHash = true)
+function commenting_comment_url($comment, $includeHash = true)
 {
     $uri = PUBLIC_BASE_URL . $comment->path;
 
@@ -241,7 +241,7 @@ function commenting_get_gravatar($comment)
 function commenting_get_model($request = null)
 {
     if(is_null($request)) {
-        $request = Omeka_Context::getInstance()->getRequest();
+        $request = Zend_Controller_Front::getInstance()->getRequest();
     }
     $params = $request->getParams();
     if(isset($params['module'])) {
@@ -273,7 +273,7 @@ function commenting_get_model($request = null)
 function commenting_get_record_id($request = null)
 {
     if(is_null($request)) {
-        $request = Omeka_Context::getInstance()->getRequest();
+        $request = Zend_Controller_Front::getInstance()->getRequest();
     }
     $params = $request->getParams();
 
