@@ -1,15 +1,18 @@
 <?php
-queue_css('commenting');
-queue_js('commenting');
+
+queue_css_file('commenting');
+queue_js_file('commenting');
 queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/admin/commenting/comment/'");
-    head(array('title' => 'Comments', 'bodyclass' => 'primary'));
+
+
+echo head(array('title' => 'Comments', 'bodyclass' => 'primary'));
 
 ?>
 <div id='primary'>
 
     <?php echo flash(); ?>
     <?php if(!Omeka_Captcha::isConfigured()): ?>
-    <p class="alert">You have not entered your <a href="http://recaptcha.net/">reCAPTCHA</a> API keys under <a href="<?php echo uri('security#recaptcha_public_key'); ?>">security settings</a>. We recommend adding these keys, or the commenting form will be vulnerable to spam.</p>
+    <p class="alert">You have not entered your <a href="http://recaptcha.net/">reCAPTCHA</a> API keys under <a href="<?php echo url('security#recaptcha_public_key'); ?>">security settings</a>. We recommend adding these keys, or the commenting form will be vulnerable to spam.</p>
     <?php endif; ?>
     <div class="pagination"><?php echo pagination_links(); ?></div>
     <div id="browse-meta" class="group">
@@ -18,9 +21,9 @@ queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/admin/commenting/comm
                 <li><strong>Quick Filter</strong></li>
             <?php
                 echo nav(array(
-                    'All' => uri('commenting/comment/browse'),
-                    'Approved' => uri('commenting/comment/browse?approved=1'),
-                    'Needs Approval' => uri('commenting/comment/browse?approved=0')
+                    'All' => url('commenting/comment/browse'),
+                    'Approved' => url('commenting/comment/browse?approved=1'),
+                    'Needs Approval' => url('commenting/comment/browse?approved=0')
                 ));
             ?>
             </ul>

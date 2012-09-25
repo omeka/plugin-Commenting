@@ -1,7 +1,7 @@
 <?php
 
 
-class CommentingPlugin extends Omeka_Plugin_Abstract
+class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 {
 
     protected $_hooks = array(
@@ -103,15 +103,15 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
     public function hookPublicThemeHeader()
     {
-        queue_css('commenting');
-        queue_js('commenting');
-        queue_js('tiny_mce', 'javascripts/tiny_mce');
+        queue_css_file('commenting');
+        queue_js_file('commenting');
+        queue_js_file('tiny_mce', 'javascripts/tiny_mce');
         queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/commenting/comment/'");
     }
 
     public function hookAdminThemeHeader()
     {
-        queue_css('commenting');
+        queue_css_file('commenting');
     }
 
     public function hookPublicAppendToItemsShow()
@@ -128,8 +128,9 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
         commenting_echo_comment_form();
     }
 
-    public function hookConfig($post)
+    public function hookConfig($args)
     {
+        $post = $args['post'];
         $arrayedFields = array(
                 'commenting_comment_roles',
                 'commenting_moderate_roles',
@@ -164,8 +165,9 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
     }
 
-    public function hookDefineAcl($acl)
+    public function hookDefineAcl($args)
     {
+        $acl = $args['acl'];
         $acl->addResource('Commenting_Comment');
         $commentRoles = unserialize(get_option('commenting_comment_roles'));
         $moderatedCommentRoles = unserialize(get_option('commenting_moderated_comment_roles'));
@@ -215,10 +217,12 @@ class CommentingPlugin extends Omeka_Plugin_Abstract
 
     public function filterAdminNavigationMain($tabs)
     {
+                
         if(has_permission('Commenting_Comment', 'updateapproved') || has_permission('Commenting_Comment', 'updatespam')) {
-            $tabs['Comments'] = uri('commenting/comment/browse');
+            $tabs['Comments'] = url('commenting/comment/browse');
         }
-
         return $tabs;
+        
     }
+
 }

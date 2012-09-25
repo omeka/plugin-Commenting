@@ -41,6 +41,8 @@ function commenting_echo_comment_form()
          unset($commentSession->post);
     }
 }
+
+
 /**
  *
  * Get the comments for a record
@@ -190,7 +192,7 @@ function commenting_render_comments($comments, $admin=false)
             $html .= "</p>";            
         }
 
-        $html = apply_filters('commenting_append_to_comment', $html, $comment);
+        $html = apply_filters('commenting_append_to_comment', $html, array('comment'=>$comment));
         $html .= "</div>";
     }
     return $html;

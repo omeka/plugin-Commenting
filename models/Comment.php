@@ -1,7 +1,6 @@
 <?php
 
-
-class Comment extends Omeka_Record
+class Comment extends Omeka_Record_AbstractRecord
 {
     public $id;
     public $record_id;
@@ -64,14 +63,12 @@ class Comment extends Omeka_Record
         return $data;
     }
     
-    public function isValid()
+    protected function _validate()
     {
-        $this->validate();
         if(trim(strip_tags($this->body)) == '' ) {
-            return false;
+            $this->addError('body', "Can't leave an empty comment!");
         }        
-        return !$this->hasErrors();
-    }    
+    }  
 
     public function saveForm($post)
     {

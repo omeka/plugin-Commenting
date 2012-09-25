@@ -1,6 +1,5 @@
 <?php
 
-
 class Commenting_CommentForm extends Omeka_Form
 {
 

@@ -1,12 +1,12 @@
 <script type='text/javascript'>
 <?php include('config_form.js'); ?>
 </script>
-
+<?php $view = get_view(); ?>
 <h2>Basic Setup</h2>
 <div class='field'>
     <label for='commenting_threaded'>Use Threaded Comments?</label>
     <div class='inputs'>
-        <?php echo __v()->formCheckbox('commenting_threaded', null,
+        <?php echo $view->formCheckbox('commenting_threaded', null,
             array('checked'=> (bool) get_option('commenting_threaded') ? 'checked' : '')); ?>    
     </div>
 </div>
@@ -14,7 +14,7 @@
 <div class='field'>
     <label for='commenting_comments_label'>Text for comments label</label>
     <div class='inputs'>
-        <?php echo __v()->formText('commenting_comments_label', get_option('commenting_comments_label')); ?>
+        <?php echo $view->formText('commenting_comments_label', get_option('commenting_comments_label')); ?>
     </div>
 
 </div>
@@ -22,7 +22,7 @@
 <div class='field'>
     <label for='commenting_flag_email'>Notify this email of flagged content</label>
     <div class='inputs'>
-        <?php echo __v()->formText('commenting_flag_email', get_option('commenting_flag_email'));?>
+        <?php echo $view->formText('commenting_flag_email', get_option('commenting_flag_email'));?>
     </div>
     
 </div>
@@ -32,7 +32,7 @@
 <div class='field'>
     <label for='commenting_allow_public'>Allow public commenting?</label>
     <div class='inputs'>
-        <?php echo __v()->formCheckbox('commenting_allow_public', null,
+        <?php echo $view->formCheckbox('commenting_allow_public', null,
             array('checked'=> (bool) get_option('commenting_allow_public') ? 'checked' : '',
             )
         ); ?>
@@ -44,7 +44,7 @@
 <div class='field' id='commenting-moderate-public'>
     <label for='commenting_require_public_moderation'>Require moderation for all public comments?</label>
     <div class='inputs'>
-        <?php echo __v()->formCheckbox('commenting_require_public_moderation', null, 
+        <?php echo $view->formCheckbox('commenting_require_public_moderation', null, 
                         array('checked'=> (bool) get_option('commenting_require_public_moderation') ? 'checked' : '',
                         )); ?>
         <p class='explanation'>If unchecked, comments will appear immediately.</p>
@@ -62,7 +62,7 @@
     
             foreach($userRoles as $role=>$label) {
                 echo '<li>';
-                echo __v()->formCheckbox('commenting_moderate_roles[]', $role,
+                echo $view->formCheckbox('commenting_moderate_roles[]', $role,
                     array('checked'=> in_array($role, $moderateRoles) ? 'checked' : '')
                     );
                 echo $label;
@@ -91,7 +91,7 @@
         
                 foreach($userRoles as $role=>$label) {
                     echo '<li>';
-                    echo __v()->formCheckbox('commenting_comment_roles[]', $role,
+                    echo $view->formCheckbox('commenting_comment_roles[]', $role,
                         array('checked'=> in_array($role, $commentRoles) ? 'checked' : '')
                         );
                     echo $label;
@@ -114,7 +114,7 @@
         
                 foreach($userRoles as $role=>$label) {
                     echo '<li>';
-                    echo __v()->formCheckbox('commenting_moderated_comment_roles[]', $role,
+                    echo $view->formCheckbox('commenting_moderated_comment_roles[]', $role,
                         array('checked'=> in_array($role, $moderatedCommentRoles) ? 'checked' : '')
                         );
                     echo $label;
@@ -132,7 +132,7 @@
     <div class='field'>
         <label for='commenting_allow_public_view'>Allow public to view comments?</label>
         <div class='inputs'>
-            <?php echo __v()->formCheckbox('commenting_allow_public_view', null,
+            <?php echo $view->formCheckbox('commenting_allow_public_view', null,
                 array('checked'=> (bool) get_option('commenting_allow_public_view') ? 'checked' : '',
                 )
             ); ?>
@@ -153,7 +153,7 @@
             echo '<ul>';
             foreach($userRoles as $role=>$label) {
                 echo '<li>';
-                echo __v()->formCheckbox('commenting_view_roles[]', $role,
+                echo $view->formCheckbox('commenting_view_roles[]', $role,
                     array('checked'=> in_array($role, $viewRoles) ? 'checked' : '')
                     );
                 echo $label;
@@ -170,7 +170,7 @@
 <div class='field'>
     <label for='recaptcha_public_key'>Recaptcha Public Key</label>
     <div class='inputs'>
-        <?php echo __v()->formText('recaptcha_public_key', get_option('recaptcha_public_key'),
+        <?php echo $view->formText('recaptcha_public_key', get_option('recaptcha_public_key'),
             array('size'=>45)
         
             ); ?>
@@ -181,7 +181,7 @@
 <div class='field'>
     <label for='recaptcha_private_key'>Recaptcha Private Key</label>
     <div class='inputs'>    
-        <?php echo __v()->formText('recaptcha_private_key', get_option('recaptcha_private_key'),
+        <?php echo $view->formText('recaptcha_private_key', get_option('recaptcha_private_key'),
             array('size'=>45)
         
             ); ?>
@@ -197,7 +197,7 @@
 <div class='field'>
 <label for='commenting_wpapi_key'>WordPress API key for Akismet</label>
     <div class='inputs'>
-        <?php echo __v()->formText('commenting_wpapi_key', get_option('commenting_wpapi_key'),
+        <?php echo $view->formText('commenting_wpapi_key', get_option('commenting_wpapi_key'),
             array('size'=> 45)
         );?>
     </div>

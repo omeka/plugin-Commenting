@@ -1,17 +1,14 @@
 <?php
 
-class Commenting_CommentController extends Omeka_Controller_Action
+
+class Commenting_CommentController extends Omeka_Controller_AbstractActionController
 {
     protected $_browseRecordsPerPage = 10;
 
 
     public function init()
     {
-        if (version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {
             $this->_helper->db->setDefaultModelName('Comment');
-        } else {
-            $this->_modelClass = 'Comment';
-        }
     }
 
     public function browseAction()
@@ -32,7 +29,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
         
         if($commentIds) {
             foreach($commentIds as $id) {
-                $comment = $this->findById($id);
+                $comment = $this->_helper->db->getTable('Comment')->find($id);
                 $comment->delete();
             }
         } else {
@@ -89,7 +86,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
     {
         $commentIds = $_POST['ids'];
         $spam = $_POST['spam'];
-        $table = $this->getTable();
+        $table = $this->_helper->db->getTable('Comment');
         $wordPressAPIKey = get_option('commenting_wpapi_key');
         $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
         $response = array('errors'=> array());
@@ -126,7 +123,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
         $wordPressAPIKey = get_option('commenting_wpapi_key');
         $commentIds = $_POST['ids'];
         $status = $_POST['approved'];
-        $table = $this->getTable(); 
+        $table = $this->_helper->db->getTable('Comment'); 
         if($commentIds) {          
             foreach($commentIds as $commentId) {
                 $comment = $table->find($commentId);
@@ -169,7 +166,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
         
         if($commentIds) {
             foreach($commentIds as $id) {
-                $comment = $this->findById($id);
+                $comment = $this->_helper->db->getTable('Comment')->find($id);
                 $comment->flagged = $flagged;        
                 $comment->save();
             }
@@ -187,7 +184,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
     
     public function flagAction() {
         $commentId = $_POST['id'];
-        $comment = $this->findById($commentId);
+        $comment = $this->_helper->db->getTable('Comment')->find($commentId);
         $comment->flagged = true;
         $comment->save();
         $this->emailFlagged($comment);
@@ -197,7 +194,7 @@ class Commenting_CommentController extends Omeka_Controller_Action
     
     public function unflagAction() {
         $commentId = $_POST['id'];
-        $comment = $this->findById($commentId);
+        $comment = $this->_helper->db->getTable('Comment')->find($commentId);
         $comment->flagged = 0;
         $comment->save();
         $response = array('status'=>'ok', 'id'=>$commentId, 'action'=>'unflagged');
@@ -230,3 +227,4 @@ class Commenting_CommentController extends Omeka_Controller_Action
     }
 
 }
+
