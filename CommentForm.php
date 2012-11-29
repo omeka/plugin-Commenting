@@ -1,5 +1,6 @@
 <?php
 
+
 class Commenting_CommentForm extends Omeka_Form
 {
 
@@ -38,49 +39,104 @@ class Commenting_CommentForm extends Omeka_Form
         $nameOptions =  array('label'=>'Your name');
 
         if($user) {
-            if(plugin_is_active('UserProfiles')) {
-                $urlOptions['value'] = WEB_ROOT . "/user-profiles/profiles/user/id/{$user->id}";
-            }
-            
+            $urlOptions['value'] = WEB_ROOT;
             $emailOptions['value'] = $user->email;
-            if(version_compare(OMEKA_VERSION, '2.0-dev', '>=')) {
-                $nameOptions['value'] = $user->name;
-            } else {
-                $nameOptions['value'] = $user->first_name . " " . $user->last_name;
-            }
-
+            $nameOptions['value'] = $user->name;
             $this->addElement('text', 'user_id', array('value'=>$user->id,  'hidden'=>true));
         }
         $this->addElement('text', 'author_url', $urlOptions);
-
-
         $this->addElement('text', 'author_email', $emailOptions);
-
         $this->addElement('text', 'author_name', $nameOptions);
-        $this->addElement('textarea', 'commenting_body',
+        $this->addElement('textarea', 'body',
             array('label'=>'Comment',
-                  'description'=>"Allowed tags: <p>, <a>, <em>, <strong>",
-                  'rows'=>5,
+                  'description'=>"Allowed tags: &lt;p&gt;, &lt;a&gt;, &lt;em&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;",
+                  'rows' => 10,
+                  'id'=>'comment-form-body',
+                  'required'=>true,
                   'filters'=> array(
-                      array('StripTags', array('allowTags' => array('p', 'em', 'strong', 'a'))),
+                      array('StripTags', array('p', 'em', 'strong', 'a','ul','ol','li')),
                   ),
                 )
             );
-
-
+        
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $params = $request->getParams();
-        $model = commenting_get_model($request);
-        $record_id = commenting_get_record_id($request);
+        
+        $record_id = $this->_getRecordId($params);
+        $record_type = $this->_getRecordType($params);
 
-        $this->addElement('text', 'record_id', array('value'=>$record_id, 'hidden'=>true, 'class' => 'hidden'));
-        $this->addElement('text', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true, 'class' => 'hidden'));
+        $this->addElement('text', 'record_id', array('value'=>$record_id, 
+                                                    'hidden'=>true, 
+                                                    'class' => 'hidden',
+                                                    'decorators'=>array('ViewHelper') ));
+        $this->addElement('text', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
         if(isset($params['module'])) {
-            $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden'));
+            $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
         }
-        $this->addElement('text', 'record_type', array('value'=>$model, 'hidden'=>true, 'class' => 'hidden'));
-        $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden'));
-        fire_plugin_hook('commenting_append_to_form', array('form'=>$this));
+        $this->addElement('text', 'record_type', array('value'=>$record_type, 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
+        $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
+        fire_plugin_hook('commenting_append_to_form', array('comment_form' => $this) );
         $this->addElement('submit', 'submit');
     }
+    
+    
+    private function _getRecordId($params)
+    {
+    
+        if(isset($params['module'])) {
+            switch($params['module']) {
+                case 'exhibit-builder':
+                    //ExhibitBuilder uses slugs in the params, so need to negotiate around those
+                    //to dig up the record_id and model
+                    if(!empty($params['page_slug'])) {
+                        $page = exhibit_builder_get_current_page();
+                        $id = $page->id;
+                    } else if(!empty($params['item_id'])) {
+                        $id = $params['item_id'];
+                    } else {
+                        $section = exhibit_builder_get_current_section();
+                        $id = $section->id;
+                    }
+                    break;
+    
+                default:
+                    $id = $params['id'];
+                    break;
+            }
+        } else {
+            $id = $params['id'];
+        }
+        return $id;
+    
+    
+    }
+    
+    private function _getRecordType($params)
+    {
+        if(isset($params['module'])) {
+            switch($params['module']) {
+                case 'exhibit-builder':
+                    //ExhibitBuilder uses slugs in the params, so need to negotiate around those
+                    //to dig up the record_id and model
+                    if(!empty($params['page_slug'])) {
+                        $page = exhibit_builder_get_current_page();
+                        $model = 'ExhibitPage';
+                    } else if(!empty($params['item_id'])) {
+                        $model = 'Item';
+                    } else {
+                        $section = exhibit_builder_get_current_section();
+                        $model = 'ExhibitSection';
+                    }
+                    break;
+    
+                default:
+                    $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
+                    break;
+            }
+        } else {
+            $model = ucfirst(Inflector::singularize($params['controller']));
+        }
+        return $model;
+    }    
+    
 }

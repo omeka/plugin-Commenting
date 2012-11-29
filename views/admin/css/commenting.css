@@ -15,6 +15,7 @@ div.comment {
 	margin-bottom: 6px;
 	clear: both;
 	min-height: 120px;
+	
 }
 
 
@@ -22,10 +23,10 @@ div.comment {
 div.comment-author {
 	float: left;	
 	margin: 6px;
+	width: 80px;
 }
 
-div.comment-body {
-	font-size: 1.5em;
+div.comment-body {	
 	margin-left: 300px;
 	border: 1px solid grey;
 	border-radius: 15px;
@@ -43,38 +44,32 @@ div.comment-body p {
 	font-size: 1em;	
 }
 
-p.comment-author-name {
-	
-}
 
 div.commenting-admin {
 	float: left;	
 	width: 200px;
 }
 
-div#comment-batch-actions {
+div#commenting-batch-actions {
 	font-size: 1.2em;
-	line-height: 1.5em;		
+	line-height: 1em;
+	float: left;		
 }
 
-ul.comment-batch-actions {
-	display: inline;
-	color: #338899;
-	cursor: pointer;	
-}
-
-ul.comment-batch-actions li {
-	display: inline;
-	margin-left: 12px;
+div#commenting-batch-actions a.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
 }
 
 ul.comment-admin-menu {
 	padding-left: 20px;	
+	margin-top: 0;
 }
 
 ul.comment-admin-menu li {
 	margin-bottom: .5em;	
 	padding-left: 10px;
+	list-style: none;
 }
 
 ul.comment-admin-menu span {

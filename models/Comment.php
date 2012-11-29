@@ -1,5 +1,6 @@
 <?php
 
+
 class Comment extends Omeka_Record_AbstractRecord
 {
     public $id;
@@ -16,15 +17,9 @@ class Comment extends Omeka_Record_AbstractRecord
     public $user_id;
     public $parent_comment_id;
     public $approved;
-    public $flagged;
     public $is_spam;
 
 
-    protected function beforeSave()
-    {
-        $this->checkSpam();
-    }
-    
     public function checkSpam()
     {
         $wordPressAPIKey = get_option('commenting_wpapi_key');
@@ -47,7 +42,7 @@ class Comment extends Omeka_Record_AbstractRecord
         $data = array(
             'user_ip' => $this->ip,
             'user_agent' => $this->user_agent,
-            'permalink' => commenting_comment_uri($this),
+            'permalink' => $this->getAbsoluteUrl(),
             'comment_type' => 'comment',
             'comment_author_email' => $this->author_email,
             'comment_content' => $this->body
@@ -62,36 +57,21 @@ class Comment extends Omeka_Record_AbstractRecord
         }
         return $data;
     }
-    
+        
     protected function _validate()
     {
         if(trim(strip_tags($this->body)) == '' ) {
             $this->addError('body', "Can't leave an empty comment!");
-        }        
-    }  
-
-    public function saveForm($post)
-    {
-        if(!empty($post))
-        {
-            $clean = $this->filterInput($post);
-            $clean = new ArrayObject($clean);
-            $this->runCallbacks('beforeSaveForm', $clean);
-            $clean = $this->setFromPost($clean);
-    
-            //Save will return TRUE if there are no validation errors
-            if ($this->save()) {
-                $this->runCallbacks('afterSaveForm', $clean);
-                return true;
-            } else {
-                $errors = $this->getErrors();
-                if($errors->count() != 0) {
-                    throw new Omeka_Validator_Exception($errors);
-                }
-                return false;
-            }
         }
-        return false;
-    }    
-    
+    }
+        
+    public function getAbsoluteUrl($includeHash = true) 
+    {
+        $uri = PUBLIC_BASE_URL . $this->path;
+        
+        if($includeHash) {
+            $uri .= "#comment-" . $this->id;
+        }
+        return $uri;        
+    }
 }

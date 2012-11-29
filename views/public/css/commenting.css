@@ -1,28 +1,43 @@
 
 form#comment-form {
-	clear:both;	
+	clear:both;
+	line-height: 1em;	
+}
+
+form#comment-form input, form#comment-form textarea {
+    height: inherit;
+    font-size: 14px;
+    line-height: 1em;
+}
+
+textarea#comment-form-body {
+    width: 60%;    
 }
 
 div.comments {
 	
 }
 
+div.comment-children {
+    margin-left: 18px;
+}
 
 div.comment {
 	margin-left: 12px;
 	margin-top: 3px;
 	margin-bottom: 6px;
 	clear: both;
-	min-height: 120px;
+	min-height: 80px;
+	width: 60%;
 }
 
 div.comment-author {
 	float: left;	
 	margin: 6px;
+	width: 80px;
 }
 
 div.comment-body {
-	font-size: 1.5em;
 	margin-left: 100px;
 	border: 1px solid grey;
 	border-radius: 15px;
@@ -42,6 +57,7 @@ div.comment-body p {
 
 .comment-reply {
 	cursor: pointer;	
+	float: right;
 }
 
 .comment-author-name {
