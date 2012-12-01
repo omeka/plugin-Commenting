@@ -38,6 +38,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
               `user_id` int(11) DEFAULT NULL,
               `parent_comment_id` int(11) DEFAULT NULL,
               `approved` tinyint(1) NOT NULL DEFAULT '0',
+              `flagged` tinyint(1) DEFAULT '0',
               `is_spam` tinyint(1) NOT NULL DEFAULT '0',
               PRIMARY KEY (`id`),
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
@@ -73,6 +74,13 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
                     set_option('commenting_view_roles', serialize(array()));
                 }
             break;
+            
+            case '1.1':
+                $db = $this->_db;
+                $sql = "ALTER TABLE `comments` ADD `flagged` BOOLEAN AFTER `approved` ";
+                $db->query($sql);
+                break;
+                
         }
     }
 
@@ -132,7 +140,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             if( ($key == 'commenting_comment_roles') ||
                 ($key == 'commenting_moderate_roles') ||
                 ($key == 'commenting_view_roles') ||
-                ($key == 'commenting_noapp_comment_roles')
+                ($key == 'commenting_reqapp_comment_roles')
             ) {
                 $value = serialize($value);
             }
@@ -149,8 +157,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $acl = $args['acl'];
         $acl->addResource('Commenting_Comment');
-        $commentRoles = unserialize(get_option('commenting_comment_roles'));
-        $noAppCommentRoles = unserialize(get_option('commenting_noapp_comment_roles'));
+        $commentRoles = unserialize(get_option('commenting_comment_roles'));        
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
 
@@ -170,16 +177,12 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
             foreach($moderateRoles as $role) {
                 if($acl->hasRole($role)) {
-                    $acl->allow($role, 'Commenting_Comment', array('updateapproved'));
-                    $acl->allow($role, 'Commenting_Comment', array('updatespam'));
-                }
-            }
-
-            //comment without approval does not really limmit access to an action, but is handy for use in the controller
-            foreach($noAppCommentRoles as $role) {
-                if($acl->hasRole($role)) {
-                    $acl->allow($role, 'Commenting_Comment', array('noappcomment', 'add'));
-
+                    $acl->allow($role, 'Commenting_Comment', array(
+                                'updateapproved',
+                                'updatespam',
+                                'batch-delete',
+                                'delete'
+                                ));
                 }
             }
 

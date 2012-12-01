@@ -53,6 +53,49 @@ var Commenting = {
 			alert('Error trying to unapprove: ' + response.message);
 		}		
 	},	
+	
+	deleteResponseHandler: function(response, a, b) {
+	    window.location.reload();	    
+	},
+	
+	batchDelete: function() {
+        ids = new Array();
+        Commenting.elements = [];
+        jQuery('input.batch-select-comment:checked').each(function() {
+            var target = jQuery(this.parentNode.parentNode);
+            ids[ids.length] = target.attr('id').substring(8);            
+        });
+        json = {'ids': ids};
+        jQuery.post("batchdelete", json, Commenting.deleteResponseHandler);
+	    
+	},
+
+    batchFlag: function() {
+        ids = new Array();
+        Commenting.elements = [];
+        jQuery('input.batch-select-comment:checked').each(function() {
+            var target = jQuery(this.parentNode.parentNode);
+            ids[ids.length] = target.attr('id').substring(8);
+            Commenting.elements[Commenting.elements.length] = target;
+        });
+        json = {'ids': ids, 'flagged': 1};
+        jQuery.post("updateFlagged", json, Commenting.flagResponseHandler);
+    },
+
+    batchUnflag: function() {
+        ids = new Array();
+        Commenting.elements = [];
+        jQuery('input.batch-select-comment:checked').each(function() {
+            var target = jQuery(this.parentNode.parentNode);
+            ids[ids.length] = target.attr('id').substring(8);
+            Commenting.elements[Commenting.elements.length] = target; 
+        });
+        json = {'ids': ids, 'flagged': 0};
+        jQuery.post("updateFlagged", json, Commenting.unflagResponseHandler);
+    },  
+	
+	
+	
 	batchApprove: function() {
 		ids = new Array();
 		Commenting.elements = [];
@@ -166,12 +209,14 @@ var Commenting = {
 	    //toggle whether the bulk actions should be active
 	    //check all in checkboxes, if any are checked, must be active
 	    if(jQuery('.batch-select-comment:checked').length == 0) {
+	        jQuery('#batch-delete').unbind('click');
 	        jQuery('#batch-approve').unbind('click');
 	        jQuery('#batch-unapprove').unbind('click');
 	        jQuery('#batch-report-spam').unbind('click');
 	        jQuery('#batch-report-ham').unbind('click');
 	        jQuery('#commenting-batch-actions > a').addClass('disabled');	        
 	    } else {
+	        jQuery('#batch-delete').click(Commenting.batchDelete);
 	        jQuery('#batch-approve').click(Commenting.batchApprove);
 	        jQuery('#batch-unapprove').click(Commenting.batchUnapprove);
 	        jQuery('#batch-report-spam').click(Commenting.batchReportSpam);

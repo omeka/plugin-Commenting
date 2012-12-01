@@ -15,16 +15,17 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'primary'));
     
     
     
-<?php if(is_allowed('Commenting_Comment', 'updateapproved') ) :?>
+<?php if(is_allowed('Commenting_Comment', 'updateapproved') ) : //updateapproved is standing in for all moderation options?>
 <div id='commenting-batch-actions'>
-
+<a class="small blue button disabled" id="batch-delete" >Delete</a>
 <a class="small blue button disabled" id="batch-approve" >Approve</a>
 <a class="small blue button disabled" id="batch-unapprove" >Unapprove</a>
 <?php if(get_option('commenting_wpapi_key') != ''): ?>
 <a class="small blue button disabled" id="batch-report-spam" onclick="Commenting.batchReportSpam()">Report Spam</a>
 <a class="small blue button disabled" id="batch-report-ham" onclick="Commenting.batchReportHam()">Report Ham</a>
 <?php endif; ?>
-
+<a class="small blue button disabled" id="batch-flag" >Flag</a>
+<a class="small blue button disabled" id="batch-unflag" >Unflag</a>
 </div>
 <?php endif; ?>
 <?php echo common('quick-filters'); ?>
@@ -36,8 +37,6 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'primary'));
         echo $this->partial('comment.php', array('comment' => $comment));
     }    
 ?>
-
-<?php //echo commenting_render_comments($comments, true); ?>
 
 </div>
 

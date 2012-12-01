@@ -1,7 +1,7 @@
 Commenting = {
         
         toggleCommentOptions: function() {
-            jQuery('div#non-public-options').toggle('slow');
+            jQuery('div#non-public-options').toggle();
       
             if(jQuery(this).attr('checked') == 'checked') {
                 jQuery('div#commenting-moderate-public').show();    
@@ -16,7 +16,7 @@ Commenting = {
         },
         
         toggleViewOptions: function() {
-            jQuery('div.view-options').toggle('slow');
+            jQuery('div.view-options').toggle();
         },
         
         toggleModerateOptions: function() {
@@ -24,12 +24,12 @@ Commenting = {
             if( jQuery('input#commenting_allow_public').attr('checked') == 'checked') {
                 jQuery('div#commenting-moderate-public').show();
                 if(jQuery('input#commenting_require_public_moderation').attr('checked') == 'checked') {
-                    jQuery('div.moderate-options').show('slow');
+                    jQuery('div#moderate-options').show();
                 } else {
-                    jQuery('div.moderate-options').hide('slow');
+                    jQuery('div#moderate-options').hide();
                 }
             } else {
-                jQuery('div.moderate-options').show('slow');
+                jQuery('div#moderate-options').show();
                 jQuery('div#commenting-moderate-public').hide();
                 jQuery('input#commenting_require_public_moderation').removeAttr('checked');
                 

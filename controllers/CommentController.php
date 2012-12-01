@@ -22,6 +22,19 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         parent::browseAction();
     }
 
+    public function batchdeleteAction()
+    {
+        //debug('yep. deleting!');
+        $ids = $_POST['ids'];
+        foreach($ids as $id) {
+            $record = $this->_helper->db->findById($id);
+            $record->delete();
+        }
+        $response = array('status'=>'ok');
+        //debug(print_r($response, true));
+        $this->_helper->json($response);
+    }
+    
     public function addAction()
     {
         $destination = $_POST['path'];
@@ -43,8 +56,11 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
 
             $this->redirect->gotoUrl($destination);
         }
-        $noApprovalNeeded = $this->_helper->acl->isAllowed('noappcomment');
-        if(!$noApprovalNeeded) {
+        
+        $role = current_user()->role;
+        $reqAppCommentRoles = unserialize(get_option('commenting_reqapp_comment_roles'));
+        $requiresApproval = in_array($role, $reqAppCommentRoles);
+        if($requiresApproval) {
             $this->_helper->flashMessenger("Your comment is awaiting moderation", 'success');
         }
         
@@ -53,7 +69,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $data['body'] = $form->getElement('body')->getValue();
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
         $data['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
-        $data['approved'] = $noApprovalNeeded;
+        $data['approved'] = !$requiresApproval;
         $comment->setArray($data);
         $comment->checkSpam();
         $comment->save();
@@ -133,6 +149,68 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $this->_helper->json($response);
     }
 
+
+    public function updateflaggedAction()
+    {
+        $commentIds = $_POST['ids'];
+        $flagged = $_POST['flagged'];
+    
+        if($commentIds) {
+            foreach($commentIds as $id) {
+                $comment = $this->_helper->db->getTable('Comment')->find($id);
+                $comment->flagged = $flagged;
+                $comment->save();
+            }
+        } else {
+            $response = array('status'=>'empty', 'message'=>'No Comments Found');
+        }
+        if($flagged) {
+            $action = 'flagged';
+        } else {
+            $action = 'unflagged';
+        }
+        $response = array('status'=>'ok', 'action'=>$action, 'ids'=>$commentIds);
+        $this->_helper->json($response);
+    }
+    
+    public function flagAction() {
+        $commentId = $_POST['id'];
+        $comment = $this->_helper->db->getTable('Comment')->find($commentId);
+        $comment->flagged = true;
+        $comment->save();
+        $this->emailFlagged($comment);
+        $response = array('status'=>'ok', 'id'=>$commentId, 'action'=>'flagged');
+        $this->_helper->json($response);
+    }
+    
+    public function unflagAction() {
+        $commentId = $_POST['id'];
+        $comment = $this->_helper->db->getTable('Comment')->find($commentId);
+        $comment->flagged = 0;
+        $comment->save();
+        $response = array('status'=>'ok', 'id'=>$commentId, 'action'=>'unflagged');
+        $this->_helper->json($response);
+    }
+    
+    private function emailFlagged($comment)
+    {
+        $mail = new Zend_Mail();
+        $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
+        $mail->setFrom(get_option('administrator_email'), get_option('site_title'));
+        $mail->addTo(get_option('commenting_flag_email'));
+        $subject = "A comment on " . get_option('site_title') . " has been flagged as inappropriate";
+        $body = "<p>The comment <blockquote>{$comment->body}</blockquote> has been flagged as inappropriate.</p>";
+        $body .= "<p>You can manage the comment <a href='" . WEB_ROOT ."{$comment->path}'>here</a></p>";
+        $mail->setSubject($subject);
+        $mail->setBodyHtml($body);
+        try {
+            $mail->send();
+        } catch(Exception $e) {
+            _log($e);
+        }
+    
+    }
+        
 
     private function getForm()
     {

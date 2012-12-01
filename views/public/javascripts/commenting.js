@@ -1,13 +1,24 @@
 var Commenting = {
 		
+        
+    handleReply: function(event) {        
+        Commenting.moveForm(event);
+        //without a delay tinyMCE leaves itself hidden for some reason
+        window.setTimeout(Commenting.finalizeMove, 100);    
+    },
+    
+    finalizeMove: function() {
+        jQuery('#comment-form-body_parent').attr('style', '')  
+    },
+    
 	moveForm: function(event) {
 	    //first make tinyMCE go away so it is safe to move around in the DOM
-	    tinymce.EditorManager.execCommand('mceRemoveControl',true, 'commenting_body');
+	    tinyMCE.execCommand('mceRemoveControl', false, 'comment-form-body');
 		jQuery('#comment-form').insertAfter(event.target);
 		commentId = Commenting.getCommentId(event.target);
 		jQuery('#parent-id').val(commentId);
-		//reinitialize the form
-		Commenting.wysiwyg();
+		tinyMCE.execCommand('mceAddControl', false, 'comment-form-body');
+		
 	},
 	
 	flag: function(event) {
@@ -62,7 +73,7 @@ Commenting.wysiwyg = function (params) {
         plugins: "paste,inlinepopups",
         convert_urls: false,
         mode: "exact", 
-        elements: 'commenting_body',
+        elements: 'comment-form-body',
         object_resizing: true,
         theme: "advanced",
         theme_advanced_toolbar_location: "top",
@@ -92,7 +103,7 @@ Commenting.wysiwyg = function (params) {
 
 
 jQuery(document).ready(function() {	
-	jQuery('.comment-reply').click(Commenting.moveForm);
+	jQuery('.comment-reply').click(Commenting.handleReply);
 	jQuery('.comment-flag').click(Commenting.flag);
 	jQuery('.comment-unflag').click(Commenting.unflag);
 	Commenting.wysiwyg();

@@ -45,6 +45,10 @@ div.comment-body {
 	padding: 6px;	
 }
 
+.comment-flag , .comment-unflag {
+    float:left;
+    cursor: pointer;
+}
 
 div.comment-flagged {
     background-color: pink;
