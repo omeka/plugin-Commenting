@@ -16,7 +16,8 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     );
 
     protected $_filters = array(
-        'admin_navigation_main'
+        'admin_navigation_main',
+        'search_record_types'
     );
     
     public function hookInstall()
@@ -201,7 +202,10 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         return $tabs;
     }
     
-    private function _getCommentsHtml($view) {
+    public function filterSearchRecordTypes($types)
+    {
+        $types['Comment'] = __('Comments');
+        return $types;
         
     }
 }
