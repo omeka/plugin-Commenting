@@ -2,9 +2,7 @@ var Commenting = {
 		
         
     handleReply: function(event) {        
-        Commenting.moveForm(event);
-        //without a delay tinyMCE leaves itself hidden for some reason
-        window.setTimeout(Commenting.finalizeMove, 100);    
+        Commenting.moveForm(event);    
     },
     
     finalizeMove: function() {
