@@ -105,13 +105,18 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         queue_css_file('commenting');
     }
 
-    public function showComments($args)
+    public static function showComments($args)
     {    
         
         if( (get_option('commenting_allow_public') == 1) 
                 || (get_option('commenting_allow_public_view') == 1) 
                 || is_allowed('Commenting_Comment', 'show') ) {
-            $view = $args['view'];
+            if(isset($args['view'])) {
+                $view = $args['view'];
+            } else {
+                $view = get_view();
+            }
+            
             $view->addHelperPath(COMMENTING_PLUGIN_DIR . '/helpers', 'Commenting_View_Helper_');
             $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
             $comments = $view->getComments($options);
@@ -126,12 +131,12 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     
     public function hookPublicItemsShow($args)
     {
-        $this->showComments($args);
+        $this::showComments($args);
     }
 
     public function hookPublicCollectionsShow($args)
     {
-        $this->showComments($args);
+        $this::showComments($args);
     }
 
     public function hookConfig($args)
