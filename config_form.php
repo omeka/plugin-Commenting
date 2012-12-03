@@ -9,7 +9,7 @@
             <label>Use Threaded Comments?</label>    
         </div>    
         <div class="inputs four columns omega">
-            <p class="explanation">If checked, replies will be displayed indented below the first comment.</p>
+            <p class="explanation">If checked, replies will be displayed indented below the comment.</p>
             <div class="input-block">        
             <?php echo $view->formCheckbox('commenting_threaded', null,
                 array('checked'=> (bool) get_option('commenting_threaded') ? 'checked' : ''
@@ -25,7 +25,7 @@
             <label>Text for comments label</label>
         </div>
         <div class='inputs four columns omega'>
-            <p class='explanation'>A label instead of "Comments" to use.</p>
+            <p class='explanation'>A label instead of "Comments" to use. Leave empty to use 'Comments'.</p>
             <div class='input-block'>
                 <?php echo $view->formText('commenting_comments_label', get_option('commenting_comments_label')); ?>
             </div>        
