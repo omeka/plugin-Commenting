@@ -103,7 +103,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
                 $response['status'] = 'fail';
                 $response['errors'][] = array('id'=>$comment->id);
                 $response['message'] = $e->getMessage();
-                _log($e->getMessage());
+                _log($e);
             }
         }
         $this->_helper->json($response);

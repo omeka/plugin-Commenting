@@ -92,12 +92,20 @@ span.unapproved {
 }
 
 span.ham {
-	background-image: url('../../../../../application/views/scripts/images/silk-icons/flag_green.png');		
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');		
 }
 
 span.spam {
-	background-image: url('../../../../../application/views/scripts/images/silk-icons/flag_red.png');		
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');		
 }
+	
+span.flagged {
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
+}	
+	
+span.not-flagged {
+	background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
+}	
 	
 span.action {
     color: #338899;
