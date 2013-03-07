@@ -2,8 +2,35 @@ var Commenting = {
 		
 	elements: [],
 	
+	flag: function() {
+        commentEl = jQuery(this).closest('div.comment');
+        id = commentEl.attr('id').substring(8);
+        Commenting.elements = [commentEl];
+        json = {'ids': [id], 'flagged': 1};
+        jQuery.post("updateFlagged", json, Commenting.flagResponseHandler);
+	},
+	
+	unflag: function() {
+        commentEl = jQuery(this).closest('div.comment');
+        id = commentEl.attr('id').substring(8);
+        Commenting.elements = [commentEl];
+        json = {'ids': [id], 'flagged': 0};
+        jQuery.post("updateFlagged", json, Commenting.flagResponseHandler);	    
+	},
+	
+	flagResponseHandler: function(response, textStatus, jqReq) {
+        if(response.status == 'ok') {
+            for(var i=0; i < Commenting.elements.length; i++) {
+                Commenting.elements[i].find('li.flagged').toggle();
+                Commenting.elements[i].find('li.not-flagged').toggle();
+            }
+        } else {
+            alert('Error trying to unapprove: ' + response.message);
+        }   	    
+	},
+	
 	approve: function() {
-		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
+	    commentEl = jQuery(this).closest('div.comment');
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'approved': 1};
@@ -11,117 +38,62 @@ var Commenting = {
 	},
 	
 	unapprove: function() {
-		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
+        commentEl = jQuery(this).closest('div.comment'); 
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'approved': 0};
-		jQuery.post("updateApproved", json, Commenting.unapproveResponseHandler);				
+		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);				
 	},
 	
-	approveResponseHandler: function(response, a, b) {
-		if(response.status == 'ok') {
-			for(var i=0; i < Commenting.elements.length; i++) {
-				var unapproveEl = jQuery(document.createElement('span'));
-				unapproveEl.text("Unapprove");
-				unapproveEl.addClass('unapprove');
-				unapproveEl.click(Commenting.unapprove);
-				approveEl = Commenting.elements[i].find('span.approve');
-				unapprovedEl = Commenting.elements[i].find('span.unapproved');
-				unapprovedEl.attr('class', 'approved');
-				unapprovedEl.text('Approved');
-				approveEl.replaceWith(unapproveEl);	
-			}
-		} else {
-			alert('Error trying to approve: ' + response.message);
-		}		
-	},
 	
-	unapproveResponseHandler: function(response, a, b) {
+	approveResponseHandler: function(response, textStatus, jqReq) {
 		if(response.status == 'ok') {
 			for(var i=0; i < Commenting.elements.length; i++) {
-				var approveEl = jQuery(document.createElement('span'));
-				approveEl.text("Approve");
-				approveEl.addClass('approve');
-				approveEl.click(Commenting.approve);
-				unapproveEl = Commenting.elements[i].find('span.unapprove');
-				approvedEl = Commenting.elements[i].find('span.approved');
-				approvedEl.attr('class', 'unapproved');
-				approvedEl.text('Not Approved');
-				unapproveEl.replaceWith(approveEl);	
+			    Commenting.elements[i].find('li.approved').toggle();
+			    Commenting.elements[i].find('li.unapproved').toggle();
 			}
 		} else {
 			alert('Error trying to unapprove: ' + response.message);
 		}		
 	},	
 	
-	deleteResponseHandler: function(response, a, b) {
+	deleteResponseHandler: function(response, textStatus, jqReq) {
 	    window.location.reload();	    
 	},
 	
 	batchDelete: function() {
-        ids = new Array();
-        Commenting.elements = [];
-        jQuery('input.batch-select-comment:checked').each(function() {
-            var target = jQuery(this.parentNode.parentNode);
-            ids[ids.length] = target.attr('id').substring(8);            
-        });
+	    var ids = Commenting.getCheckedCommentIds();
         json = {'ids': ids};
         jQuery.post("batchdelete", json, Commenting.deleteResponseHandler);
 	    
 	},
 
     batchFlag: function() {
-        ids = new Array();
-        Commenting.elements = [];
-        jQuery('input.batch-select-comment:checked').each(function() {
-            var target = jQuery(this.parentNode.parentNode);
-            ids[ids.length] = target.attr('id').substring(8);
-            Commenting.elements[Commenting.elements.length] = target;
-        });
+        var ids = Commenting.getCheckedCommentIds();
         json = {'ids': ids, 'flagged': 1};
         jQuery.post("updateFlagged", json, Commenting.flagResponseHandler);
     },
 
     batchUnflag: function() {
-        ids = new Array();
-        Commenting.elements = [];
-        jQuery('input.batch-select-comment:checked').each(function() {
-            var target = jQuery(this.parentNode.parentNode);
-            ids[ids.length] = target.attr('id').substring(8);
-            Commenting.elements[Commenting.elements.length] = target; 
-        });
+        var ids = Commenting.getCheckedCommentIds();
         json = {'ids': ids, 'flagged': 0};
-        jQuery.post("updateFlagged", json, Commenting.unflagResponseHandler);
+        jQuery.post("updateFlagged", json, Commenting.flagResponseHandler);
     },  
-	
-	
-	
-	batchApprove: function() {
-		ids = new Array();
-		Commenting.elements = [];
-		jQuery('input.batch-select-comment:checked').each(function() {
-			var target = jQuery(this.parentNode.parentNode);
-			ids[ids.length] = target.attr('id').substring(8);
-			Commenting.elements[Commenting.elements.length] = target;
-		});
+
+    batchApprove: function() {
+	    var ids = Commenting.getCheckedCommentIds();
 		json = {'ids': ids, 'approved': 1};
 		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
 	},
 
 	batchUnapprove: function() {
-		ids = new Array();
-		Commenting.elements = [];
-		jQuery('input.batch-select-comment:checked').each(function() {
-			var target = jQuery(this.parentNode.parentNode);
-			ids[ids.length] = target.attr('id').substring(8);
-			Commenting.elements[Commenting.elements.length] = target; 
-		});
+	    var ids = Commenting.getCheckedCommentIds();
 		json = {'ids': ids, 'approved': 0};
-		jQuery.post("updateApproved", json, Commenting.unapproveResponseHandler);
+		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
 	},	
 	
 	reportSpam: function() {
-		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
+        commentEl = jQuery(this).closest('div.comment');
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'spam': 1};
@@ -129,73 +101,36 @@ var Commenting = {
 	},
 	
 	reportHam: function() {
-		commentEl = jQuery(this.parentNode.parentNode.parentNode.parentNode); 
+        commentEl = jQuery(this).closest('div.comment');
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'spam': 0};
-		jQuery.post("updateSpam", json, Commenting.hamResponseHandler);		
+		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
 	},
 	
 	batchReportSpam: function() {
-		ids = new Array();
-		jQuery('input.batch-select-comment:checked').each(function() {
-			var target = jQuery(this.parentNode.parentNode);
-			ids[ids.length] = target.attr('id').substring(8);
-			Commenting.elements[Commenting.elements.length] = target;
-		});
+	    var ids = Commenting.getCheckedCommentIds();
 		json = {'ids': ids, 'spam': true};
 		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
 	},
 	
 	batchReportHam: function() {
-		ids = new Array();
-		jQuery('input.batch-select-comment:checked').each(function() {
-			var target = jQuery(this.parentNode.parentNode);
-			ids[ids.length] = target.attr('id').substring(8);
-			Commenting.elements[Commenting.elements.length] = target;
-		});
+	    var ids = Commenting.getCheckedCommentIds();
 		json = {'ids': ids, 'spam': false};
-		jQuery.post("updateSpam", json, Commenting.hamResponseHandler);		
+		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
 	},
 	
-	spamResponseHandler: function(response, a, b)
+	spamResponseHandler: function(response, textStatus, jqReq)
 	{
 		if(response.status == 'ok') {
-			for(var i=0; i < Commenting.elements.length; i++) {
-				var reportHamEl = jQuery(document.createElement('span'));
-				reportHamEl.text("Report Ham");
-				reportHamEl.addClass('report-ham');
-				reportHamEl.click(Commenting.reportHam);
-				reportSpamEl = Commenting.elements[i].find('span.report-spam');
-				hamEl = Commenting.elements[i].find('span.ham');
-				hamEl.attr('class', 'spam');
-				hamEl.text('Spam');
-				reportSpamEl.replaceWith(reportHamEl);	
-			}
-		} else {
-			alert('Error trying to submit spam: ' + response.message);
-		}		
-	},
-	
-	hamResponseHandler: function(response, a, b)
-	{
-		if(response.status == 'ok') {
-			for(var i=0; i < Commenting.elements.length; i++) {
-				var reportSpamEl = jQuery(document.createElement('span'));
-				reportSpamEl.text("Report Spam");
-				reportSpamEl.addClass('report-spam');
-				reportSpamEl.click(Commenting.reportSpam);
-				reportHamEl = Commenting.elements[i].find('span.report-ham');
-				spamEl = Commenting.elements[i].find('span.spam');
-				spamEl.attr('class', 'ham');
-				spamEl.text('Ham');
-				reportHamEl.replaceWith(reportSpamEl);	
-			}
+            for(var i=0; i < Commenting.elements.length; i++) {
+                Commenting.elements[i].find('li.spam').toggle();
+                Commenting.elements[i].find('li.ham').toggle();
+            }
 		} else {
 			alert('Error trying to submit ham: ' + response.message);
 		}				
 	},
-	
 	
 	toggleSelected: function() {
 		if(jQuery(this).is(':checked')) {
@@ -235,7 +170,18 @@ var Commenting = {
 	batchUnselect: function() {
 		jQuery('input.batch-select-comment').removeAttr('checked');
 		this.toggleActive();
-	}		
+	},	
+	
+	getCheckedCommentIds: function() {
+	    var ids = new Array();
+        Commenting.elements = [];
+        jQuery('input.batch-select-comment:checked').each(function() {
+            var commentEl = jQuery(this).closest('div.comment');
+            ids[ids.length] = commentEl.attr('id').substring(8);
+            Commenting.elements[Commenting.elements.length] = commentEl;
+        });
+        return ids;
+	}
 }
 
 jQuery(document).ready(function() {

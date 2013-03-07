@@ -3,24 +3,15 @@
     <div class='commenting-admin four columns alpha'>
         <input class='batch-select-comment' type='checkbox' />
         <ul class='comment-admin-menu'>
-        <?php if ($comment->approved): ?>
-            <li><span class='status approved'>Approved</span><span class='unapprove action'>Unapprove</span></li>
-        <?php else: ?>
-            <li><span class='status unapproved'>Not Approved</span><span class='approve action'>Approve</span></li>
-        <?php endif;?>
-        <?php if(get_option('commenting_wpapi_key') != ''): ?>
-            <?php if($comment->is_spam): ?>
-                <li><span class='status spam'>Spam</span><span class='report-ham action'>Report Ham</span></li>
-            <?php else: ?>
-                <li><span class='status ham'>Ham</span><span class='report-spam action'>Report Spam</span></li>
-            <?php endif; ?>
-        
-        <?php endif;?>
-            <?php if($comment->flagged): ?>
-            <li><span class='status flagged'>Flagged</span><span class='unflag action'>Unflag</span></li>
-            <?php else: ?>
-            <li><span class='status not-flagged'>Not Flagged</span><span class='flag action'>Flag Inappropriate</span></li>
+            <li class='approved' <?php echo $comment->approved ? "" : "style='display:none'"; ?>><span class='status approved'>Approved</span><span class='unapprove action'>Unapprove</span></li>
+            <li class='unapproved' <?php echo $comment->approved ? "style='display:none'" : "";  ?>><span class='status unapproved'>Not Approved</span><span class='approve action'>Approve</span></li>
+            <?php if(get_option('commenting_wpapi_key') != ''): ?>
+                <li class='spam' <?php echo $comment->is_spam ? "" : "style='display:none'"; ?>><span class='status spam'>Spam</span><span class='report-ham action'>Report Ham</span></li>
+                <li class='ham' <?php echo $comment->is_spam ? "style='display:none'" : "";  ?>><span class='status ham'>Ham</span><span class='report-spam action'>Report Spam</span></li>
+            
             <?php endif;?>
+            <li class='flagged' <?php echo $comment->flagged ? "" : "style='display:none'"; ?>><span class='status flagged'>Flagged</span><span class='unflag action'>Unflag</span></li>
+            <li class='not-flagged' <?php echo $comment->flagged ? "style='display:none'" : "";  ?>><span class='status not-flagged'>Not Flagged</span><span class='flag action'>Flag Inappropriate</span></li>
             <li><a href='<?php echo $comment->getAbsoluteUrl(false); ?>'>View Page</a></li>
             <li class='comment-author'>
                 <?php 
