@@ -1,5 +1,7 @@
 <?php
 
+define('COMMENTING_PLUGIN_DIR', PLUGIN_DIR . '/Commenting');
+
 class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 {
     protected $_hooks = array(
@@ -48,7 +50,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $db->query($sql);
         set_option('commenting_comment_roles', serialize(array('super')));
         set_option('commenting_moderate_roles', serialize(array('super')));
-        set_option('commenting_noapp_comment_roles', serialize(array('super')));
+        set_option('commenting_reqapp_comment_roles', serialize(array()));
         set_option('commenting_view_roles', serialize(array('super')));
 
     }
@@ -107,7 +109,6 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     public static function showComments($args)
     {    
-        
         if( (get_option('commenting_allow_public') == 1) 
                 || (get_option('commenting_allow_public_view') == 1) 
                 || is_allowed('Commenting_Comment', 'show') ) {
