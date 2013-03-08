@@ -1,4 +1,11 @@
+a#batch-delete, a#batch-approve, a#batch-unapprove, a#batch-report-spam, a#batch-report-ham, a#batch-flag, a#batch-unflag {
+	padding: 3px 5px;
+}
 
+li.delete {
+	float:left;
+	margin-right: 5px;
+}
 
 form#comment-form {
 	clear:both;	
@@ -15,10 +22,7 @@ div.comment {
 	margin-bottom: 6px;
 	clear: both;
 	min-height: 120px;
-	
 }
-
-
 
 div.comment-author {
 	float: left;	
@@ -88,7 +92,6 @@ span.approved {
 
 span.unapproved {	
 	background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
-
 }
 
 span.ham {
@@ -107,7 +110,7 @@ span.not-flagged {
 	background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
 }	
 	
-span.action {
+.action {
     color: #338899;
     cursor: pointer;
-}	
+}

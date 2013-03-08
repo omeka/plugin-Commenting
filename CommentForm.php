@@ -54,7 +54,7 @@ class Commenting_CommentForm extends Omeka_Form
                   'id'=>'comment-form-body',
                   'required'=>true,
                   'filters'=> array(
-                      array('StripTags', array('p', 'em', 'strong', 'a','ul','ol','li')),
+                      array('StripTags', array('allowTags' => array('p', 'em', 'strong', 'a','ul','ol','li'))),
                   ),
                 )
             );

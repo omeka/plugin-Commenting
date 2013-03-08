@@ -1,5 +1,4 @@
 <div id="comment-<?php echo $comment->id; ?>" class='comment'>
-
     <div class='commenting-admin four columns alpha'>
         <input class='batch-select-comment' type='checkbox' />
         <ul class='comment-admin-menu'>
@@ -12,7 +11,8 @@
             <?php endif;?>
             <li class='flagged' <?php echo $comment->flagged ? "" : "style='display:none'"; ?>><span class='status flagged'>Flagged Inappropriate</span><span class='unflag action'>Unflag</span></li>
             <li class='not-flagged' <?php echo $comment->flagged ? "style='display:none'" : "";  ?>><span class='status not-flagged'>Not Flagged</span><span class='flag action'>Flag Inappropriate</span></li>
-            <li><a href='<?php echo $comment->getAbsoluteUrl(false); ?>'>View Page</a></li>
+            <li class='delete'><a id='delete' class='action' href='<?php echo record_url($comment, 'delete-confirm'); ?>'>Delete</a></li>
+            <li class='view'><a href='<?php echo record_url($comment, 'show'); ?>'>View Page</a></li>
             <li class='comment-author'>
                 <?php 
                     if(!empty($comment->author_name)) {

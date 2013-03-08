@@ -1,5 +1,4 @@
 var Commenting = {
-		
         
     handleReply: function(event) {        
         Commenting.moveForm(event);    
@@ -74,7 +73,7 @@ Commenting.wysiwyg = function (params) {
         fix_content_duplication: false,
         fix_list_elements: true,
         valid_child_elements: "ul[li],ol[li]",
-        theme_advanced_buttons1: "bold,italic,underline,link",
+        theme_advanced_buttons1: "bold,italic,link,bullist,numlist",
         theme_advanced_buttons2: "",
         theme_advanced_buttons3: "",
         theme_advanced_toolbar_align: "left"
@@ -91,13 +90,18 @@ Commenting.wysiwyg = function (params) {
     tinyMCE.init(initParams);
 };
 
-
-
 jQuery(document).ready(function() {	
 	jQuery('.comment-reply').click(Commenting.handleReply);
 	jQuery('.comment-flag').click(Commenting.flag);
 	jQuery('.comment-unflag').click(Commenting.unflag);
-	Commenting.wysiwyg();
+	var commentingWysiwyg = {
+	        valid_child_elements: "ul[li],ol[li]",
+	        theme_advanced_buttons1: "bold,italic,underline,link,bullist,numlist,|,code",
+	        theme_advanced_buttons2: "",
+	        theme_advanced_buttons3: "",
+	        theme_advanced_toolbar_align: "left"
+	    };	        
+	Commenting.wysiwyg(commentingWysiwyg);
 });
 		
 		

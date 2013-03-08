@@ -98,22 +98,22 @@ class Comment extends Omeka_Record_AbstractRecord
             $this->addError('body', "Can't leave an empty comment!");
         }
     }
-        
-    public function getAbsoluteUrl($includeHash = true) 
-    {
-        $uri = PUBLIC_BASE_URL . $this->path;
-        
-        if($includeHash) {
-            $uri .= "#comment-" . $this->id;
-        }
-        return $uri;        
-    }
-    /*
-     * @TODO: make the path stored reflect the real url better. right now, it misses the first part of the route
-     */
+  
     public function getRecordUrl($action)
     {
-        return $this->getAbsoluteUrl(false);
+        switch($action) {
+            case 'show':
+                return $this->path . "#comment-" . $this->id;
+                break;
+                
+            default:
+                //sadly, I made the plugin name, and so the controller name, different 
+                //because of the extant, but not maintained, Comments plugin
+                //return parent::getRecordUrl($action);
+                return url("commenting/comment/$action/id/{$this->id}");
+                return array('controller' => 'commenting', 'action' => $action, 'id' => $this->id);
+        }
+        
     }    
     
 }
