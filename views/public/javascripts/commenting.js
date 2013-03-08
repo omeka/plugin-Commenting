@@ -16,40 +16,33 @@ var Commenting = {
 		commentId = Commenting.getCommentId(event.target);
 		jQuery('#parent-id').val(commentId);
 		tinyMCE.execCommand('mceAddControl', false, 'comment-form-body');
-		
 	},
 	
 	flag: function(event) {
 	    var commentId = Commenting.getCommentId(event.target);
 	    var json = {'id': commentId }; 
 	    jQuery.post(Commenting.pluginRoot + "flag", json, Commenting.flagResponseHandler);
-	    
 	},
 
     unflag: function(event) {
         var commentId = Commenting.getCommentId(event.target);
         var json = {'id': commentId }; 
         jQuery.post(Commenting.pluginRoot + "unflag", json, Commenting.flagResponseHandler);
-        
     },	
 	
 	flagResponseHandler: function(response, status, jqxhr) {
 	    var comment = jQuery('#comment-' + response.id);
 	    if(response.action == 'flagged') {
 	        comment.find('div.comment-body').addClass('comment-flagged');
-	        comment.find('span.comment-flag').hide();
-	        comment.find('span.comment-unflag').show();
-
+	        comment.find('p.comment-flag').hide();
+	        comment.find('p.comment-unflag').show();
 	    }
 	    
-	    if(response.action == 'unflagged') {	       
+	    if(response.action == 'unflagged') {
 	        comment.find('div.comment-body').removeClass('comment-flagged');
-	        //remove the flag span
-	        comment.find('span.comment-flag').show();	        
-	        comment.find('span.comment-unflag').hide();
-
+	        comment.find('p.comment-flag').show();	        
+	        comment.find('p.comment-unflag').hide();
 	    }
-	    
 	},
 	
 	getCommentId: function(el) {
