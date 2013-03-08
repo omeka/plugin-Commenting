@@ -187,6 +187,8 @@ var Commenting = {
 jQuery(document).ready(function() {
 	jQuery('.approve').click(Commenting.approve);
 	jQuery('.unapprove').click(Commenting.unapprove);
+	jQuery('.flag').click(Commenting.flag);
+	jQuery('.unflag').click(Commenting.unflag);
 	jQuery('#batch-select').click(Commenting.toggleSelected);
 	jQuery('.report-ham').click(Commenting.reportHam);
 	jQuery('.report-spam').click(Commenting.reportSpam);

@@ -33,7 +33,7 @@ div.comment {
 
 div.comment-author {
 	float: left;	
-	margin: 6px;
+	margin: 0 6px;
 	width: 80px;
 }
 
@@ -64,8 +64,8 @@ div.comment-body p {
 	float: right;
 }
 
-.comment-author-name {
-	
+p.comment-author-name {
+	margin: 0;	
 }
 
 div.success {

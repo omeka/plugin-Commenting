@@ -10,7 +10,7 @@
                 <li class='ham' <?php echo $comment->is_spam ? "style='display:none'" : "";  ?>><span class='status ham'>Ham</span><span class='report-spam action'>Report Spam</span></li>
             
             <?php endif;?>
-            <li class='flagged' <?php echo $comment->flagged ? "" : "style='display:none'"; ?>><span class='status flagged'>Flagged</span><span class='unflag action'>Unflag</span></li>
+            <li class='flagged' <?php echo $comment->flagged ? "" : "style='display:none'"; ?>><span class='status flagged'>Flagged Inappropriate</span><span class='unflag action'>Unflag</span></li>
             <li class='not-flagged' <?php echo $comment->flagged ? "style='display:none'" : "";  ?>><span class='status not-flagged'>Not Flagged</span><span class='flag action'>Flag Inappropriate</span></li>
             <li><a href='<?php echo $comment->getAbsoluteUrl(false); ?>'>View Page</a></li>
             <li class='comment-author'>
@@ -28,9 +28,7 @@
                 ?>            
             <a href='mailto:<?php echo $comment->author_email; ?>'><?php echo $comment->author_email; ?></a>
             </li>
-            
         </ul>
-        
     </div>
 
     <div class='comment-body three columns omega'><?php echo $comment->body; ?></div>
