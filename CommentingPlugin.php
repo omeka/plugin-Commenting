@@ -41,7 +41,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
               `user_id` int(11) DEFAULT NULL,
               `parent_comment_id` int(11) DEFAULT NULL,
               `approved` tinyint(1) NOT NULL DEFAULT '0',
-              `flagged` tinyint(1) DEFAULT '0',
+              `flagged` tinyint(1) NOT NULL DEFAULT '0',
               `is_spam` tinyint(1) NOT NULL DEFAULT '0',
               PRIMARY KEY (`id`),
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
@@ -80,7 +80,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             
             case '1.1':
                 $db = $this->_db;
-                $sql = "ALTER TABLE `comments` ADD `flagged` BOOLEAN AFTER `approved` ";
+                $sql = "ALTER TABLE `comments` ADD `flagged` BOOLEAN NOT NULL AFTER `approved` ";
                 $db->query($sql);
                 break;
                 

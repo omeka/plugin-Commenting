@@ -103,7 +103,10 @@ class Comment extends Omeka_Record_AbstractRecord
     {
         switch($action) {
             case 'show':
-                return $this->path . "#comment-" . $this->id;
+                set_theme_base_url('public');
+                $url = url($this->path) . "#comment-" . $this->id;
+                revert_theme_base_url();
+                return $url;
                 break;
                 
             default:
@@ -111,9 +114,6 @@ class Comment extends Omeka_Record_AbstractRecord
                 //because of the extant, but not maintained, Comments plugin
                 //return parent::getRecordUrl($action);
                 return url("commenting/comment/$action/id/{$this->id}");
-                return array('controller' => 'commenting', 'action' => $action, 'id' => $this->id);
         }
-        
     }    
-    
 }

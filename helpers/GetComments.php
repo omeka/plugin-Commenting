@@ -85,6 +85,11 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
         if(isset($options['approved'])) {
             $searchParams['approved'] = $options['approved'];
         }
+        
+        if(!is_allowed('Commenting_Comment', 'updateapproved')) {
+            $searchParams['flagged'] = 0;
+        }
+        
         $select = $commentTable->getSelectForFindBy($searchParams);
         if(isset($options['order'])) {
             $select->order("ORDER BY added " . $options['order']);
