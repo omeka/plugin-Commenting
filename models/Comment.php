@@ -73,10 +73,12 @@ class Comment extends Omeka_Record_AbstractRecord
 
     public function getAkismetData()
     {
+        $serverUrlHelper = new Zend_View_Helper_ServerUrl;
+        $permalink = $serverUrlHelper->serverUrl() . $this->path;
         $data = array(
             'user_ip' => $this->ip,
             'user_agent' => $this->user_agent,
-            'permalink' => $this->getAbsoluteUrl(),
+            'permalink' => $permalink,
             'comment_type' => 'comment',
             'comment_author_email' => $this->author_email,
             'comment_content' => $this->body
@@ -99,7 +101,7 @@ class Comment extends Omeka_Record_AbstractRecord
         }
     }
   
-    public function getRecordUrl($action)
+    public function getRecordUrl($action = 'show')
     {
         switch($action) {
             case 'show':

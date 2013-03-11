@@ -24,14 +24,12 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
 
     public function batchdeleteAction()
     {
-        //debug('yep. deleting!');
         $ids = $_POST['ids'];
         foreach($ids as $id) {
             $record = $this->_helper->db->findById($id);
             $record->delete();
         }
         $response = array('status'=>'ok');
-        //debug(print_r($response, true));
         $this->_helper->json($response);
     }
     
@@ -47,6 +45,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         );
 
         $comment = new Comment();
+        $comment->flagged = 0;
         $form = $this->getForm();
         $valid = $form->isValid($this->getRequest()->getPost());
         if(!$valid) {
