@@ -167,7 +167,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $commentRoles = unserialize(get_option('commenting_comment_roles'));        
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
-
+        $acl->allow(null, 'Commenting_Comment', array('flag'));
         if($viewRoles !== false) {
             foreach($viewRoles as $role) {
                 //check that all the roles exist, in case a plugin-added role has been removed (e.g. GuestUser)
