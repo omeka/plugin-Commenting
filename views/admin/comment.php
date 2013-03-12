@@ -5,8 +5,8 @@
             <li class='approved' <?php echo $comment->approved ? "" : "style='display:none'"; ?>><span class='status approved'>Approved</span><span class='unapprove action'>Unapprove</span></li>
             <li class='unapproved' <?php echo $comment->approved ? "style='display:none'" : "";  ?>><span class='status unapproved'>Not Approved</span><span class='approve action'>Approve</span></li>
             <?php if(get_option('commenting_wpapi_key') != ''): ?>
-                <li class='spam' <?php echo $comment->is_spam ? "" : "style='display:none'"; ?>><span class='status spam'>Spam</span><span class='report-ham action'>Report Ham</span></li>
-                <li class='ham' <?php echo $comment->is_spam ? "style='display:none'" : "";  ?>><span class='status ham'>Ham</span><span class='report-spam action'>Report Spam</span></li>
+                <li class='spam' <?php echo $comment->is_spam ? "" : "style='display:none'"; ?>><span class='status spam'>Spam</span><span class='report-ham action'>Report Not Spam</span></li>
+                <li class='ham' <?php echo $comment->is_spam ? "style='display:none'" : "";  ?>><span class='status ham'>Not Spam</span><span class='report-spam action'>Report Spam</span></li>
             
             <?php endif;?>
             <li class='flagged' <?php echo $comment->flagged ? "" : "style='display:none'"; ?>><span class='status flagged'>Flagged Inappropriate</span><span class='unflag action'>Unflag</span></li>
