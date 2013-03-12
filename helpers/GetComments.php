@@ -88,7 +88,7 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
         
         if(!is_allowed('Commenting_Comment', 'updateapproved')) {
             $searchParams['flagged'] = 0;
-            $searchParams['spam'] = 0;
+            $searchParams['is_spam'] = 0;
         }
         
         $select = $commentTable->getSelectForFindBy($searchParams);

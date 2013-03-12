@@ -86,7 +86,6 @@ Commenting.wysiwyg = function (params) {
             initParams[attribute] = params[attribute];
         }
     }
-
     tinyMCE.init(initParams);
 };
 
