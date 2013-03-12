@@ -10,12 +10,9 @@ form#comment-form input, form#comment-form textarea {
     line-height: 1em;
 }
 
-textarea#comment-form-body {
-    width: 60%;    
-}
 
-div.comments {
-	
+div#comment-main-container {
+	width: 60%;
 }
 
 div.comment-children {
