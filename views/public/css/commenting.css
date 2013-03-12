@@ -1,4 +1,22 @@
 
+/* desperate attempts to prevent crazy padding across themes */
+div#comments-container div {
+	padding: 2px !important;
+	margin: 2px !important;
+}
+
+div#comments-container label {
+	padding: 2px !important;
+	margin: 2px !important;
+}
+
+div#comments-container div.comment-body {
+	margin-left: 100px !important;
+	
+}
+
+/* end desperation */
+
 form#comment-form {
 	clear:both;
 	line-height: 1em;	
@@ -10,9 +28,8 @@ form#comment-form input, form#comment-form textarea {
     line-height: 1em;
 }
 
-
 div#comment-main-container {
-	width: 60%;
+	max-width: 550px;
 }
 
 div.comment-children {
