@@ -1,5 +1,6 @@
 a#batch-delete, a#batch-approve, a#batch-unapprove, a#batch-report-spam, a#batch-report-ham, a#batch-flag, a#batch-unflag {
-	padding: 3px 5px;
+	padding: 3px 2px;
+	margin: 0 0 20px;
 }
 
 li.delete {
@@ -48,7 +49,8 @@ div.comment-body p {
 div#commenting-batch-actions {
 	font-size: 1.2em;
 	line-height: 1em;
-	float: left;		
+	float: left;
+	margin-right: 5px;	
 }
 
 div#commenting-batch-actions a.disabled {

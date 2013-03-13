@@ -7,11 +7,13 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'primary'));
 ?>
 <div id='primary'>
 <div class="pagination"><?php echo pagination_links(); ?></div>
-    <?php echo flash(); ?>
-    <?php if(!Omeka_Captcha::isConfigured()): ?>
-    <p class="alert">You have not entered your <a href="http://recaptcha.net/">reCAPTCHA</a> API keys under <a href="<?php echo url('security#recaptcha_public_key'); ?>">security settings</a>. We recommend adding these keys, or the commenting form will be vulnerable to spam.</p>
-    <?php endif; ?>
-    
+
+
+<?php echo flash(); ?>
+<?php if(!Omeka_Captcha::isConfigured()): ?>
+<p class="alert">You have not entered your <a href="http://recaptcha.net/">reCAPTCHA</a> API keys under <a href="<?php echo url('security#recaptcha_public_key'); ?>">security settings</a>. We recommend adding these keys, or the commenting form will be vulnerable to spam.</p>
+<?php endif; ?>
+
     
     
     
