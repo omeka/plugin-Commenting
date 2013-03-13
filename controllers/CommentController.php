@@ -49,11 +49,10 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $form = $this->getForm();
         $valid = $form->isValid($this->getRequest()->getPost());
         if(!$valid) {
-            $destination .= "#comments-flash";
+            $destination .= "#comment-form";
             $commentSession = new Zend_Session_Namespace('commenting');
             $commentSession->post = serialize($_POST);
-
-            $this->redirect->gotoUrl($destination);
+            $this->_helper->redirector->gotoUrl($destination);
         }
         
         $role = current_user()->role;
