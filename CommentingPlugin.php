@@ -14,6 +14,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         'config_form',
         'config',
         'define_acl',
+        'after_delete_record',
         'upgrade'
     );
 
@@ -55,8 +56,10 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     }
 
-    public function hookUpgrade($old, $new)
+    public function hookUpgrade($args)
     {
+        $old = $args['old'];
+        $new = $args['new'];
         switch($old) {
             case '1.0' :
                 if(!get_option('commenting_comment_roles')) {
@@ -85,6 +88,13 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
                 break;
                 
         }
+        
+        if($new == '2.0') {
+            $sql = "ALTER TABLE `comments` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
+            $db->query($sql);
+            delete_option('commenting_noapp_comment_roles');
+            set_option('commenting_reqapp_comment_roles', serialize(array()));
+        }
     }
 
     public function hookUninstall()
@@ -105,6 +115,16 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     public function hookAdminHead()
     {
         queue_css_file('commenting');
+    }
+    
+    public function hookAfterDeleteRecord($args)
+    {
+        $record = $args['record'];
+        $type = get_class($record);
+        $comments = get_db()->getTable('Comment')->findBy(array('record_type'=>$type, 'record_id'=>$record->id));
+        foreach($comments as $comment) {
+            $comment->delete();
+        }
     }
 
     public static function showComments($args)
