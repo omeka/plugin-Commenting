@@ -16,6 +16,15 @@ div.comments {
 	
 }
 
+div.comment-target {
+	margin: 0;
+	padding: 0;
+}
+
+div.comment-target p {
+	margin: 0;
+	padding; 0;
+}
 
 div.comment {
 	margin-left: 12px;
