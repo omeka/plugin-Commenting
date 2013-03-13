@@ -34,8 +34,8 @@ div#comment-main-container {
 	max-width: 550px;
 }
 
-div.comment-children {
-    margin-left: 18px;
+div#comments-container div.comment-children {
+    margin-left: 18px !important;
 }
 
 div.comment {
@@ -45,6 +45,7 @@ div.comment {
 	clear: both;
 	min-height: 80px;
 	width: 60%;
+	min-width: 400px;
 }
 
 div.comment-author {
