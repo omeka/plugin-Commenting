@@ -29,7 +29,7 @@ class Commenting_CommentForm extends Omeka_Form
                 'label'=>'Website',
             );
         $emailOptions = array(
-                'label'=>'Email',
+                'label'=>'Email (required)',
                 'required'=>true,
                 'validators' => array(
                     array('validator' => 'EmailAddress'
@@ -39,14 +39,13 @@ class Commenting_CommentForm extends Omeka_Form
         $nameOptions =  array('label'=>'Your name');
 
         if($user) {
-            $urlOptions['value'] = WEB_ROOT;
             $emailOptions['value'] = $user->email;
             $nameOptions['value'] = $user->name;
             $this->addElement('text', 'user_id', array('value'=>$user->id,  'hidden'=>true));
         }
+        $this->addElement('text', 'author_name', $nameOptions);
         $this->addElement('text', 'author_url', $urlOptions);
         $this->addElement('text', 'author_email', $emailOptions);
-        $this->addElement('text', 'author_name', $nameOptions);
         $this->addElement('textarea', 'body',
             array('label'=>'Comment',
                   'description'=>"Allowed tags: &lt;p&gt;, &lt;a&gt;, &lt;em&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;",
