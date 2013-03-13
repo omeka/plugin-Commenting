@@ -12,7 +12,9 @@ div#comments-container label {
 
 div#comments-container div.comment-body {
 	margin-left: 100px !important;
-	
+	margin-top: 12px !important;
+	min-height: 60px;
+	padding: 6px;		
 }
 
 /* end desperation */
@@ -48,15 +50,7 @@ div.comment {
 div.comment-author {
 	float: left;	
 	margin: 0 6px;
-	width: 80px;
-}
-
-div.comment-body {
-	margin-left: 100px;
-	border: 1px solid grey;
-	border-radius: 15px;
-	min-height: 60px;
-	padding: 6px;	
+	width: 100px;
 }
 
 .comment-flag , .comment-unflag {

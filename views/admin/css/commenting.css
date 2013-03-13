@@ -31,8 +31,6 @@ div.comment-author {
 }
 
 div.comment-body {	
-	border: 1px solid grey;
-	border-radius: 15px;
 	min-height: 60px;
 }
 
