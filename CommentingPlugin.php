@@ -127,7 +127,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         }
     }
 
-    public static function showComments($args)
+    public static function showComments($args = array())
     {    
         echo "<div id='comments-container'>";
         if( (get_option('commenting_allow_public') == 1) 
@@ -141,7 +141,8 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             
             $view->addHelperPath(COMMENTING_PLUGIN_DIR . '/helpers', 'Commenting_View_Helper_');
             $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
-            $comments = $view->getComments($options);
+            
+            $comments = isset($args['comments']) ? $args['comments'] : $view->getComments($options);
             echo $view->partial('comments.php', array('comments'=>$comments, 'threaded'=>$options['threaded']));
         }
         
@@ -236,6 +237,5 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $types['Comment'] = __('Comments');
         return $types;
-        
     }
 }
