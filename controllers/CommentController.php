@@ -45,6 +45,9 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         );
 
         $comment = new Comment();
+        if($user = current_user()) {
+            $comment->user_id = $user->id;
+        }
         $comment->flagged = 0;
         $form = $this->getForm();
         $valid = $form->isValid($this->getRequest()->getPost());

@@ -41,7 +41,6 @@ class Commenting_CommentForm extends Omeka_Form
         if($user) {
             $emailOptions['value'] = $user->email;
             $nameOptions['value'] = $user->name;
-            $this->addElement('text', 'user_id', array('value'=>$user->id,  'hidden'=>true));
         }
         $this->addElement('text', 'author_name', $nameOptions);
         $this->addElement('text', 'author_url', $urlOptions);

@@ -30,8 +30,6 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
             $id = $params['id'];
         }
         return $id;        
-        
-        
     }
     
     private function _getRecordType($params)
