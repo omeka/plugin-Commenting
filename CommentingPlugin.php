@@ -210,9 +210,11 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             foreach($moderateRoles as $role) {
                 if($acl->hasRole($role)) {
                     $acl->allow($role, 'Commenting_Comment', array(
-                                'updateapproved',
-                                'updatespam',
+                                'update-approved',
+                                'update-spam',
+                                'update-flagged',
                                 'batch-delete',
+                                'browse',
                                 'delete'
                                 ));
                 }

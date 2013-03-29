@@ -17,7 +17,7 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'primary'));
     
     
     
-<?php if(is_allowed('Commenting_Comment', 'updateapproved') ) : //updateapproved is standing in for all moderation options?>
+<?php if(is_allowed('Commenting_Comment', 'update-approved') ) : //updateapproved is standing in for all moderation options?>
 <div id='commenting-batch-actions'>
 <a class="small blue button disabled" id="batch-delete" >Delete</a>
 <a class="small blue button disabled" id="batch-approve" >Approve</a>

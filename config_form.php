@@ -68,7 +68,7 @@
             <label>User roles that can moderate comments</label>    
         </div>    
         <div class="inputs four columns omega">
-            <p class="explanation">The user roles that are allowed to view comments.</p>
+            <p class="explanation">The user roles that are allowed to moderate comments.</p>
             <div class="input-block">        
                 <?php
                     $moderateRoles = unserialize(get_option('commenting_moderate_roles'));

@@ -22,7 +22,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         parent::browseAction();
     }
 
-    public function batchdeleteAction()
+    public function batchDeleteAction()
     {
         $ids = $_POST['ids'];
         foreach($ids as $id) {
@@ -78,7 +78,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $this->_helper->redirector->gotoUrl($destination);
     }
 
-    public function updatespamAction()
+    public function updateSpamAction()
     {
         $commentIds = $_POST['ids'];
         $spam = $_POST['spam'];
@@ -110,7 +110,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $this->_helper->json($response);
     }
 
-    public function updateapprovedAction()
+    public function updateApprovedAction()
     {
         $wordPressAPIKey = get_option('commenting_wpapi_key');
         $commentIds = $_POST['ids'];
@@ -151,7 +151,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
     }
 
 
-    public function updateflaggedAction()
+    public function updateFlaggedAction()
     {
         $commentIds = $_POST['ids'];
         $flagged = $_POST['flagged'];

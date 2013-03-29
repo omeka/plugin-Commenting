@@ -7,7 +7,7 @@ var Commenting = {
         id = commentEl.attr('id').substring(8);
         Commenting.elements = [commentEl];
         json = {'ids': [id], 'flagged': 1};
-        jQuery.post("updateFlagged", json, Commenting.flagResponseHandler);
+        jQuery.post("update-flagged", json, Commenting.flagResponseHandler);
 	},
 	
 	unflag: function() {
@@ -15,7 +15,7 @@ var Commenting = {
         id = commentEl.attr('id').substring(8);
         Commenting.elements = [commentEl];
         json = {'ids': [id], 'flagged': 0};
-        jQuery.post("updateFlagged", json, Commenting.flagResponseHandler);	    
+        jQuery.post("update-flagged", json, Commenting.flagResponseHandler);	    
 	},
 	
 	flagResponseHandler: function(response, textStatus, jqReq) {
@@ -34,7 +34,7 @@ var Commenting = {
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'approved': 1};
-		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
+		jQuery.post("update-approved", json, Commenting.approveResponseHandler);
 	},
 	
 	unapprove: function() {
@@ -42,7 +42,7 @@ var Commenting = {
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'approved': 0};
-		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);				
+		jQuery.post("update-approved", json, Commenting.approveResponseHandler);				
 	},
 	
 	
@@ -64,32 +64,32 @@ var Commenting = {
 	batchDelete: function() {
 	    var ids = Commenting.getCheckedCommentIds();
         json = {'ids': ids};
-        jQuery.post("batchdelete", json, Commenting.deleteResponseHandler);
+        jQuery.post("batch-delete", json, Commenting.deleteResponseHandler);
 	    
 	},
 
     batchFlag: function() {
         var ids = Commenting.getCheckedCommentIds();
         json = {'ids': ids, 'flagged': 1};
-        jQuery.post("updateFlagged", json, Commenting.flagResponseHandler);
+        jQuery.post("update-flagged", json, Commenting.flagResponseHandler);
     },
 
     batchUnflag: function() {
         var ids = Commenting.getCheckedCommentIds();
         json = {'ids': ids, 'flagged': 0};
-        jQuery.post("updateFlagged", json, Commenting.flagResponseHandler);
+        jQuery.post("update-flagged", json, Commenting.flagResponseHandler);
     },  
 
     batchApprove: function() {
 	    var ids = Commenting.getCheckedCommentIds();
 		json = {'ids': ids, 'approved': 1};
-		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
+		jQuery.post("update-approved", json, Commenting.approveResponseHandler);
 	},
 
 	batchUnapprove: function() {
 	    var ids = Commenting.getCheckedCommentIds();
 		json = {'ids': ids, 'approved': 0};
-		jQuery.post("updateApproved", json, Commenting.approveResponseHandler);
+		jQuery.post("update-approved", json, Commenting.approveResponseHandler);
 	},	
 	
 	reportSpam: function() {
@@ -97,7 +97,7 @@ var Commenting = {
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'spam': 1};
-		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
+		jQuery.post("update-spam", json, Commenting.spamResponseHandler);		
 	},
 	
 	reportHam: function() {
@@ -105,19 +105,19 @@ var Commenting = {
 		id = commentEl.attr('id').substring(8);
 		Commenting.elements = [commentEl];
 		json = {'ids': [id], 'spam': 0};
-		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
+		jQuery.post("update-spam", json, Commenting.spamResponseHandler);		
 	},
 	
 	batchReportSpam: function() {
 	    var ids = Commenting.getCheckedCommentIds();
 		json = {'ids': ids, 'spam': true};
-		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
+		jQuery.post("update-spam", json, Commenting.spamResponseHandler);		
 	},
 	
 	batchReportHam: function() {
 	    var ids = Commenting.getCheckedCommentIds();
 		json = {'ids': ids, 'spam': false};
-		jQuery.post("updateSpam", json, Commenting.spamResponseHandler);		
+		jQuery.post("update-spam", json, Commenting.spamResponseHandler);		
 	},
 	
 	spamResponseHandler: function(response, textStatus, jqReq)
@@ -149,6 +149,8 @@ var Commenting = {
 	        jQuery('#batch-unapprove').unbind('click');
 	        jQuery('#batch-report-spam').unbind('click');
 	        jQuery('#batch-report-ham').unbind('click');
+	        jQuery('#batch-flag').unbind('click');
+	        jQuery('#batch-unflag').unbind('click');
 	        jQuery('#commenting-batch-actions > a').addClass('disabled');	        
 	    } else {
 	        jQuery('#batch-delete').click(Commenting.batchDelete);
@@ -156,6 +158,8 @@ var Commenting = {
 	        jQuery('#batch-unapprove').click(Commenting.batchUnapprove);
 	        jQuery('#batch-report-spam').click(Commenting.batchReportSpam);
 	        jQuery('#batch-report-ham').click(Commenting.batchReportHam);
+            jQuery('#batch-flag').click(Commenting.batchFlag);
+            jQuery('#batch-unflag').click(Commenting.batchUnflag);	        
 	        jQuery('#commenting-batch-actions > a').removeClass('disabled');	        
 	    }
 	    

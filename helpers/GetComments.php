@@ -84,7 +84,7 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
             $searchParams['approved'] = $options['approved'];
         }
         
-        if(!is_allowed('Commenting_Comment', 'updateapproved')) {
+        if(!is_allowed('Commenting_Comment', 'update-approved')) {
             $searchParams['flagged'] = 0;
             $searchParams['is_spam'] = 0;
         }
@@ -94,7 +94,5 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
             $select->order("ORDER BY added " . $options['order']);
         }
         return $commentTable->fetchObjects($select);        
-        
-        
     }
 }
