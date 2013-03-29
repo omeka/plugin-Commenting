@@ -73,6 +73,7 @@
                 <?php
                     $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
                     $userRoles = get_user_roles();
+                    unset($userRoles['super']);
                     echo '<ul>';
             
                     foreach($userRoles as $role=>$label) {

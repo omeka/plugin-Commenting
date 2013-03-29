@@ -49,10 +49,10 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ";
         $db->query($sql);
-        set_option('commenting_comment_roles', serialize(array('super')));
-        set_option('commenting_moderate_roles', serialize(array('super')));
+        set_option('commenting_comment_roles', serialize(array()));
+        set_option('commenting_moderate_roles', serialize(array()));
         set_option('commenting_reqapp_comment_roles', serialize(array()));
-        set_option('commenting_view_roles', serialize(array('super')));
+        set_option('commenting_view_roles', serialize(array()));
 
     }
 
