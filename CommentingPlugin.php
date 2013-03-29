@@ -197,13 +197,13 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             foreach($viewRoles as $role) {
                 //check that all the roles exist, in case a plugin-added role has been removed (e.g. GuestUser)
                 if($acl->hasRole($role)) {
-                    $acl->allow($role, 'Commenting_Comment', array('show'));
+                    $acl->allow($role, 'Commenting_Comment', 'show');
                 }
             }
 
             foreach($commentRoles as $role) {
                 if($acl->hasRole($role)) {
-                    $acl->allow($role, 'Commenting_Comment', array('add'));
+                    $acl->allow($role, 'Commenting_Comment', 'add');
                 }
             }
 
@@ -228,7 +228,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function filterAdminNavigationMain($tabs)
     {
-        if(is_allowed('Commenting_Comment', 'updateapproved') || is_allowed('Commenting_Comment', 'updatespam')) {
+        if(is_allowed('Commenting_Comment', 'update-approved') ) {
             $tabs[] = array('uri'=> url('commenting/comment/browse'), 'label'=>'Comments' );
         }
 
