@@ -118,10 +118,10 @@
     
     <div class="field">
         <div class="three columns alpha">
-            <label>User roles that require moderation before publishing. If the role is allowed to moderate comments, that will override the setting here.</label>    
+            <label>User roles that require moderation before publishing.</label>    
         </div>    
         <div class="inputs four columns omega">
-            <p class="explanation"></p>
+            <p class="explanation"> If the role is allowed to moderate comments, that will override the setting here.</p>
             <div class="input-block">        
                 <?php
                     $reqAppCommentRoles = unserialize(get_option('commenting_reqapp_comment_roles'));
