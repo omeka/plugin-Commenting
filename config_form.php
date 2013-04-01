@@ -3,7 +3,6 @@
 </script>
 
 <?php $view = get_view(); ?>
-
     <div class="field">
         <div class="three columns alpha">
             <label>Use Threaded Comments?</label>    
@@ -31,7 +30,6 @@
             </div>        
         </div>
     </div>    
-
     
     <div class="field">
         <div class="three columns alpha">
@@ -52,45 +50,42 @@
     <div class="three columns alpha">
         <label>Require moderation for all public comments?</label>
     </div>
-    <div class='inputs four columns alpha'>
+    <div class='inputs four columns omega'>
         <p class='explanation'>If unchecked, comments will appear immediately.</p>
         <div class="input-block">
             <?php echo $view->formCheckbox('commenting_require_public_moderation', null, 
                             array('checked'=> (bool) get_option('commenting_require_public_moderation') ? 'checked' : '',
                             )); ?>
         </div>
-        
     </div>
 </div>    
     
-    <div class="field" id='moderate-options'>
-        <div class="three columns alpha">
-            <label>User roles that can moderate comments</label>    
-        </div>    
-        <div class="inputs four columns omega">
-            <p class="explanation">The user roles that are allowed to moderate comments.</p>
-            <div class="input-block">        
-                <?php
-                    $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
-                    $userRoles = get_user_roles();
-                    unset($userRoles['super']);
-                    echo '<ul>';
-            
-                    foreach($userRoles as $role=>$label) {
-                        echo '<li>';
-                        echo $view->formCheckbox('commenting_moderate_roles[]', $role,
-                            array('checked'=> in_array($role, $moderateRoles) ? 'checked' : '')
-                            );
-                        echo $label;
-                        echo '</li>';
-            
-                    }
-                    echo '</ul>';
-                ?>
-                            
-            </div>
+<div class="field" id='moderate-options'>
+    <div class="three columns alpha">
+        <label>User roles that can moderate comments</label>    
+    </div>    
+    <div class="inputs four columns omega">
+        <p class="explanation">The user roles that are allowed to moderate comments.</p>
+        <div class="input-block">        
+            <?php
+                $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
+                $userRoles = get_user_roles();
+                unset($userRoles['super']);
+                echo '<ul>';
+        
+                foreach($userRoles as $role=>$label) {
+                    echo '<li>';
+                    echo $view->formCheckbox('commenting_moderate_roles[]', $role,
+                        array('checked'=> in_array($role, $moderateRoles) ? 'checked' : '')
+                        );
+                    echo $label;
+                    echo '</li>';
+                }
+                echo '</ul>';
+            ?>
         </div>
     </div>
+</div>
 
 
 <div id='non-public-options'>
@@ -117,23 +112,20 @@
                     }
                     echo '</ul>';
                 ?>
-                            
             </div>
         </div>
     </div>
     
     <div class="field">
         <div class="three columns alpha">
-            <label>User roles that require moderation before publishing</label>    
+            <label>User roles that require moderation before publishing. If the role is allowed to moderate comments, that will override the setting here.</label>    
         </div>    
         <div class="inputs four columns omega">
             <p class="explanation"></p>
             <div class="input-block">        
                 <?php
                     $reqAppCommentRoles = unserialize(get_option('commenting_reqapp_comment_roles'));
-            
                     echo '<ul>';
-            
                     foreach($userRoles as $role=>$label) {
                         echo '<li>';
                         echo $view->formCheckbox('commenting_reqapp_comment_roles[]', $role,
@@ -145,13 +137,9 @@
                     }
                     echo '</ul>';
                 ?>
-                            
             </div>
         </div>
     </div>
-    
-
-
 
     <div class="field">
         <div class="three columns alpha">
@@ -164,12 +152,9 @@
                     array('checked'=> (bool) get_option('commenting_allow_public_view') ? 'checked' : '',
                     )
                 ); ?>
-                        
             </div>
         </div>
     </div>
-    
-
 </div>
 
     <div class="field view-options">
@@ -191,16 +176,12 @@
                             );
                         echo $label;
                         echo '</li>';
-            
                     }
                     echo '<ul>';
-            
                 ?>
-                            
             </div>
         </div>
     </div>
-
     
     <div class="field">
         <div class="three columns alpha">
@@ -208,13 +189,10 @@
         </div>    
         <div class="inputs four columns omega">
             <p class='explanation'>This can also be set in the Security Settings.</p>
-        
             <div class="input-block">        
             <?php echo $view->formText('recaptcha_public_key', get_option('recaptcha_public_key'),
                 array('size'=>45)
-            
                 ); ?>
-                            
             </div>
         </div>
     </div>
@@ -228,9 +206,7 @@
             <div class="input-block">        
             <?php echo $view->formText('recaptcha_private_key', get_option('recaptcha_private_key'),
                 array('size'=>45)
-            
                 ); ?>
-                            
             </div>
         </div>
     </div>
