@@ -2,7 +2,7 @@
 queue_css_file('commenting');
 queue_js_file('commenting');
 $pageTitle = __('Comments') . ' ' . __('(%s total)', $total_results);
-echo head(array('title' => $pageTitle, 'bodyclass' => 'primary'));
+echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
 
 ?>
 <div id='primary'>
