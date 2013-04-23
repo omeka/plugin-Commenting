@@ -24,7 +24,7 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
 <a class="small blue button disabled" id="batch-unapprove" >Unapprove</a>
 <?php if(get_option('commenting_wpapi_key') != ''): ?>
 <a class="small blue button disabled" id="batch-report-spam" onclick="Commenting.batchReportSpam()">Report Spam</a>
-<a class="small blue button disabled" id="batch-report-ham" onclick="Commenting.batchReportHam()">Report Ham</a>
+<a class="small blue button disabled" id="batch-report-ham" onclick="Commenting.batchReportHam()">Report Not Spam</a>
 <?php endif; ?>
 <a class="small blue button disabled" id="batch-flag" >Flag</a>
 <a class="small blue button disabled" id="batch-unflag" >Unflag</a>

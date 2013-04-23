@@ -5,20 +5,16 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
     
     private function _getRecordId($params)
     {
-        
+//@TODO: update exhibit-builder handling for 2.0        
         if(isset($params['module'])) {
             switch($params['module']) {
                 case 'exhibit-builder':
                     //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                     //to dig up the record_id and model
-                    if(!empty($params['page_slug'])) {
-                        $page = exhibit_builder_get_current_page();
-                        $id = $page->id;
+                    if(isset($this->exhibit_page)) {
+                        $id = $this->exhibit_page->id;
                     } else if(!empty($params['item_id'])) {
                         $id = $params['item_id'];
-                    } else {
-                        $section = exhibit_builder_get_current_section();
-                        $id = $section->id;
                     }
                     break;
         

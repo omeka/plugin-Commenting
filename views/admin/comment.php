@@ -1,12 +1,39 @@
 <?php 
 $record = get_db()->getTable($comment->record_type)->find($comment->record_id);
-$label = metadata($record, array('Dublin Core', 'Title'));
+// try hard to dig up a likely label from the metadata or properties
+try {
+    $label = metadata($record, array('Dublin Core', 'Title'));
+} catch(BadMethodCallException $e) {
+    
+} 
+
 if(empty($label)) {
-    $label = metadata($record, 'name');
+    try {
+        $label = metadata($record, 'name');
+    } catch(InvalidArgumentException $e) {
+        
+    }
 }
 
 if(empty($label)) {
-    $label = __('Untitled');
+    try {
+        $label = metadata($record, 'title');
+    } catch(InvalidArgumentException $e) {
+
+    }
+}
+
+if(empty($label)) {
+    try {
+        $label = metadata($record, 'label');
+    } catch(InvalidArgumentException $e) {
+
+    }
+}
+
+//sad trombone. couldn't find a label!
+if(empty($label)) {
+    $label = __('[Untitled]');
 }
 ?>
 
