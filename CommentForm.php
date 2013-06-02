@@ -15,7 +15,7 @@ class Commenting_CommentForm extends Omeka_Form
         if(!$user && get_option('recaptcha_public_key') && get_option('recaptcha_private_key')) {
             $this->addElement('captcha', 'captcha',  array(
                 'class' => 'hidden',
-                'label' => "Please verify you're a human",
+                'label' => __("Please verify you're a human"),
                 'captcha' => array(
                     'captcha' => 'ReCaptcha',
                     'pubkey' => get_option('recaptcha_public_key'),
@@ -26,17 +26,17 @@ class Commenting_CommentForm extends Omeka_Form
         }
 
         $urlOptions = array(
-                'label'=>'Website',
+                'label'=>__('Website'),
             );
         $emailOptions = array(
-                'label'=>'Email (required)',
+                'label'=>__('Email (required)'),
                 'required'=>true,
                 'validators' => array(
                     array('validator' => 'EmailAddress'
                     )
                 )
             );
-        $nameOptions =  array('label'=>'Your name');
+        $nameOptions =  array('label'=> __('Your name'));
 
         if($user) {
             $emailOptions['value'] = $user->email;
@@ -46,8 +46,8 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('text', 'author_url', $urlOptions);
         $this->addElement('text', 'author_email', $emailOptions);
         $this->addElement('textarea', 'body',
-            array('label'=>'Comment',
-                  'description'=>"Allowed tags: &lt;p&gt;, &lt;a&gt;, &lt;em&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;",
+            array('label'=>__('Comment'),
+                  'description'=> __("Allowed tags:") . " &lt;p&gt;, &lt;a&gt;, &lt;em&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;",
                  // 'rows' => 10,
                   'id'=>'comment-form-body',
                   'required'=>true,

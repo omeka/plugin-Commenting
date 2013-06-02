@@ -15,13 +15,22 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         'config',
         'define_acl',
         'after_delete_record',
-        'upgrade'
+        'upgrade',
+        'initialize'
     );
 
     protected $_filters = array(
         'admin_navigation_main',
         'search_record_types'
     );
+    
+    /**
+     * Add the translations.
+     */
+    public function hookInitialize()
+    {
+        add_translation_source(dirname(__FILE__) . '/languages');
+    }    
     
     public function hookInstall()
     {
@@ -229,7 +238,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     public function filterAdminNavigationMain($tabs)
     {
         if(is_allowed('Commenting_Comment', 'update-approved') ) {
-            $tabs[] = array('uri'=> url('commenting/comment/browse'), 'label'=>'Comments' );
+            $tabs[] = array('uri'=> url('commenting/comment/browse'), 'label'=>__('Comments') );
         }
 
         return $tabs;

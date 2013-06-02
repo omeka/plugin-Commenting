@@ -51,24 +51,24 @@ if(empty($label)) {
                             $authorText = "<a href='{$comment->author_url}'>{$comment->author_name}</a>";
                         }
                     } else {
-                        $authorText = "Anonymous";
+                        $authorText = __('Anonymous');
                     }   
                     echo $authorText;
                 ?>            
             </span>
-            on <?php echo get_class($record);?> <a target='_blank' href='<?php echo record_url($comment, 'show'); ?>'><?php echo $label; ?></a>
+            <?php echo __('on'); ?> <?php echo get_class($record);?> <a target='_blank' href='<?php echo record_url($comment, 'show'); ?>'><?php echo $label; ?></a>
             </li>
         
-            <li class='approved' <?php echo $comment->approved ? "" : "style='display:none'"; ?>><span class='status approved'>Approved</span><span class='unapprove action'>Unapprove</span></li>
-            <li class='unapproved' <?php echo $comment->approved ? "style='display:none'" : "";  ?>><span class='status unapproved'>Not Approved</span><span class='approve action'>Approve</span></li>
+            <li class='approved' <?php echo $comment->approved ? "" : "style='display:none'"; ?>><span class='status approved'><?php echo __("Approved"); ?></span><span class='unapprove action'><?php echo __("Unapprove"); ?></span></li>
+            <li class='unapproved' <?php echo $comment->approved ? "style='display:none'" : "";  ?>><span class='status unapproved'><?php echo __("Not Approved"); ?></span><span class='approve action'><?php echo __("Approve"); ?></span></li>
             <?php if(get_option('commenting_wpapi_key') != ''): ?>
-                <li class='spam' <?php echo $comment->is_spam ? "" : "style='display:none'"; ?>><span class='status spam'>Spam</span><span class='report-ham action'>Report Not Spam</span></li>
-                <li class='ham' <?php echo $comment->is_spam ? "style='display:none'" : "";  ?>><span class='status ham'>Not Spam</span><span class='report-spam action'>Report Spam</span></li>
+                <li class='spam' <?php echo $comment->is_spam ? "" : "style='display:none'"; ?>><span class='status spam'><?php echo __("Spam"); ?></span><span class='report-ham action'><?php echo __("Report Not Spam"); ?></span></li>
+                <li class='ham' <?php echo $comment->is_spam ? "style='display:none'" : "";  ?>><span class='status ham'><?php echo __("Not Spam"); ?></span><span class='report-spam action'><?php echo __("Report Spam"); ?></span></li>
             
             <?php endif;?>
-            <li class='flagged' <?php echo $comment->flagged ? "" : "style='display:none'"; ?>><span class='status flagged'>Flagged Inappropriate</span><span class='unflag action'>Unflag</span></li>
-            <li class='not-flagged' <?php echo $comment->flagged ? "style='display:none'" : "";  ?>><span class='status not-flagged'>Not Flagged</span><span class='flag action'>Flag Inappropriate</span></li>
-            <li class='delete'><a id='delete' class='action' href='<?php echo record_url($comment, 'delete-confirm'); ?>'>Delete</a></li>
+            <li class='flagged' <?php echo $comment->flagged ? "" : "style='display:none'"; ?>><span class='status flagged'><?php echo __("Flagged Inappropriate"); ?></span><span class='unflag action'><?php echo __("Unflag"); ?></span></li>
+            <li class='not-flagged' <?php echo $comment->flagged ? "style='display:none'" : "";  ?>><span class='status not-flagged'><?php echo __("Not Flagged"); ?></span><span class='flag action'><?php echo __("Flag Inappropriate"); ?></span></li>
+            <li class='delete'><a id='delete' class='action' href='<?php echo record_url($comment, 'delete-confirm'); ?>'><?php echo __("Delete"); ?></a></li>
         </ul>
     </div>
     

@@ -11,7 +11,7 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
 
 <?php echo flash(); ?>
 <?php if(!Omeka_Captcha::isConfigured()): ?>
-<p class="alert">You have not entered your <a href="http://recaptcha.net/">reCAPTCHA</a> API keys under <a href="<?php echo url('security#recaptcha_public_key'); ?>">security settings</a>. We recommend adding these keys, or the commenting form will be vulnerable to spam.</p>
+<p class="alert"><?php echo __("You have not entered your %s API keys under %s. We recommend adding these keys, or the commenting form will be vulnerable to spam.", '<a href="http://recaptcha.net/">reCAPTCHA</a>', "<a href='" . url('security#recaptcha_public_key') . "'>" . __('security settings') . "</a>");?></p>
 <?php endif; ?>
 
     
@@ -19,20 +19,20 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
     
 <?php if(is_allowed('Commenting_Comment', 'update-approved') ) : //updateapproved is standing in for all moderation options?>
 <div id='commenting-batch-actions'>
-<a class="small blue button disabled" id="batch-delete" >Delete</a>
-<a class="small blue button disabled" id="batch-approve" >Approve</a>
-<a class="small blue button disabled" id="batch-unapprove" >Unapprove</a>
+<a class="small blue button disabled" id="batch-delete" ><?php echo __("Delete"); ?></a>
+<a class="small blue button disabled" id="batch-approve" ><?php echo __("Approve"); ?></a>
+<a class="small blue button disabled" id="batch-unapprove" ><?php echo __("Unapprove"); ?></a>
 <?php if(get_option('commenting_wpapi_key') != ''): ?>
-<a class="small blue button disabled" id="batch-report-spam" onclick="Commenting.batchReportSpam()">Report Spam</a>
-<a class="small blue button disabled" id="batch-report-ham" onclick="Commenting.batchReportHam()">Report Not Spam</a>
+<a class="small blue button disabled" id="batch-report-spam" onclick="Commenting.batchReportSpam()"><?php echo __("Report Spam"); ?></a>
+<a class="small blue button disabled" id="batch-report-ham" onclick="Commenting.batchReportHam()"><?php echo __("Report Not Spam"); ?></a>
 <?php endif; ?>
-<a class="small blue button disabled" id="batch-flag" >Flag</a>
-<a class="small blue button disabled" id="batch-unflag" >Unflag</a>
+<a class="small blue button disabled" id="batch-flag" ><?php echo __("Flag"); ?></a>
+<a class="small blue button disabled" id="batch-unflag" ><?php echo __("Unflag"); ?></a>
 </div>
 <?php endif; ?>
 <?php echo common('quick-filters'); ?>
 <div style="clear: both">
-    <input id='batch-select' type='checkbox' /> Select All
+    <input id='batch-select' type='checkbox' /> <?php echo __("Select All"); ?>
 </div>
 <?php 
     foreach($comments as $comment) {
