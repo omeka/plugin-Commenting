@@ -18,11 +18,20 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
                 'body' => $comment->body,
                 'author_name' => $comment->author_name,
                 'author_url' => $comment->author_url,
-                'parent_comment_id' => $comment->parent_comment_id ? $comment->parent_comment_id : null,
                 'approved' => (bool) $comment->approved,
                 'flagged' => (bool) $comment->flagged,
                 'is_spam' => (bool) $comment->is_spam                
                 );
+        
+        if($comment->parent_comment_id) {
+            $representation['parent_comment'] = array(
+                    'id' => $comment->parent_comment_id,
+                    'url' => self::getResourceUrl("/comments/{$comment->parent_comment_id}")
+                    );
+        } else {
+            $representation['parent_comment'] = null;
+        }
+        
         $typeResource = Inflector::tableize($comment->record_type);
         $representation['record_url'] = array(
                 'id' => $comment->record_id,

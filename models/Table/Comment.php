@@ -7,9 +7,11 @@ class Table_Comment extends Omeka_Db_Table
     {
         $select = parent::getSelect();
         $request = Zend_Controller_Front::getInstance()->getRequest();
-        //only show approved comments to api
+        //only show approved comments to api without a proper key
         if($request->getControllerName() == 'api') {
-            $select->where('approved = ?', 1);
+            if(!is_allowed('Commenting_Comment', 'update-approved')) {
+                $select->where('approved = ?', 1);
+            }
         }
         return $select;
     }    
