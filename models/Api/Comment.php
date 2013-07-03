@@ -25,6 +25,14 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
                 'type' => $comment->record_type,                
                 'url' => self::getResourceUrl("/$typeResource/{$comment->record_id}")
                 );
+        if($comment->user_id) {
+            $representation['user'] = array(
+                    'id' => $comment->user_id,
+                    'url' => self::getResourceUrl("/users/{$comment->user_id}")
+                    );
+        } else {
+            $representation['user'] = null;
+        }
         return $representation;
     }
     
