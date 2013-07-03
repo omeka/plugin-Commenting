@@ -5,11 +5,15 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
     // Get the REST representation of a record.
     public function getRepresentation(Omeka_Record_AbstractRecord $comment)
     {
+
         $representation = array(
                 'id' => $comment->id,
                 'url' => self::getResourceUrl("/comments/{$comment->id}"),
                 'record_id' => $comment->record_id,
                 'record_type' => $comment->record_type,
+                'path' => $comment->path,
+                'ip' => $comment->ip,
+                'user_agent' => $comment->user_agent,
                 'added' => self::getDate($comment->added),
                 'body' => $comment->body,
                 'author_name' => $comment->author_name,
@@ -33,6 +37,13 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
         } else {
             $representation['user'] = null;
         }
+        
+        $user = current_user();
+        if($user && is_allowed('Commenting_Comment', 'update-approved')) {
+            $representation['author_email'] = $comment->author_email;
+        }
+        
+        
         return $representation;
     }
     
