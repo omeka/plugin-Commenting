@@ -21,7 +21,10 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     protected $_filters = array(
         'admin_navigation_main',
-        'search_record_types'
+        'search_record_types',
+        'api_resources',
+        'api_extend_items',
+        'api_extend_collections'          
     );
     
     /**
@@ -31,6 +34,15 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     {
         add_translation_source(dirname(__FILE__) . '/languages');
     }    
+
+    public function setUp()
+    {
+        
+        if(plugin_is_active('SimplePages')) {
+            $this->_filters[] = 'api_extend_simple_pages';
+        }
+        parent::setUp();
+    }
     
     public function hookInstall()
     {
@@ -248,5 +260,51 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $types['Comment'] = __('Comments');
         return $types;
+    }
+    
+    public function filterApiResources($apiResources)
+    {
+        $apiResources['comments'] = array(
+                'record_type' => 'Comment',
+                'actions' => array('get', 'index'),
+                'index_params' => array('record')
+        );
+        return $apiResources;        
+    }
+    
+    public function filterApiExtendItems($extend, $args)
+    {
+        return $this->_filterApiExtendRecords($extend, $args);
+    }
+    
+    public function filterApiExtendCollections($extend, $args)
+    {
+        return $this->_filterApiExtendRecords($extend, $args);
+    }
+
+    public function filterApiExtendSimplePages($extend, $args)
+    {
+        return $this->_filterApiExtendRecords($extend, $args);
+    }    
+    
+    private function _filterApiExtendRecords($extend, $args)
+    {
+        $record = $args['record'];
+        $recordClass = get_class($record);
+        $extend['comments'] = array(
+                'count' => $this->_countComments($record),
+                'url' => Omeka_Record_Api_AbstractRecordAdapter::getResourceUrl("/comments?record=$recordClass,{$record->id}"),
+                );
+        
+        return $extend;        
+    }
+    
+    private function _countComments($record)
+    {
+        $params = array(
+                'record_type' => get_class($record),
+                'record_id' => $record->id
+                );
+        return get_db()->getTable('Comment')->count($params);
     }
 }
