@@ -5,7 +5,6 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
     // Get the REST representation of a record.
     public function getRepresentation(Omeka_Record_AbstractRecord $comment)
     {
-
         $representation = array(
                 'id' => $comment->id,
                 'url' => self::getResourceUrl("/comments/{$comment->id}"),
@@ -26,6 +25,7 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
         if($comment->parent_comment_id) {
             $representation['parent_comment'] = array(
                     'id' => $comment->parent_comment_id,
+                    'resource' => 'comments',
                     'url' => self::getResourceUrl("/comments/{$comment->parent_comment_id}")
                     );
         } else {

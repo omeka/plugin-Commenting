@@ -267,7 +267,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $apiResources['comments'] = array(
                 'record_type' => 'Comment',
                 'actions' => array('get', 'index'),
-                'index_params' => array('record')
+                'index_params' => array('record_type', 'record_id')
         );
         return $apiResources;        
     }
@@ -294,7 +294,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $extend['comments'] = array(
                 'count' => $this->_countComments($record),
                 'resource' => 'comments',
-                'url' => Omeka_Record_Api_AbstractRecordAdapter::getResourceUrl("/comments?record=$recordClass,{$record->id}"),
+                'url' => Omeka_Record_Api_AbstractRecordAdapter::getResourceUrl("/comments?record_type=$recordClass&record_id={$record->id}"),
                 );
         
         return $extend;        
