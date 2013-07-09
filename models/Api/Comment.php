@@ -35,7 +35,7 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
         $typeResource = Inflector::tableize($comment->record_type);
         $representation['record_url'] = array(
                 'id' => $comment->record_id,
-                'type' => $comment->record_type,                
+                'resource' => $typeResource,
                 'url' => self::getResourceUrl("/$typeResource/{$comment->record_id}")
                 );
         if($comment->user_id) {

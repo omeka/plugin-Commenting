@@ -293,6 +293,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $recordClass = get_class($record);
         $extend['comments'] = array(
                 'count' => $this->_countComments($record),
+                'resource' => 'comments',
                 'url' => Omeka_Record_Api_AbstractRecordAdapter::getResourceUrl("/comments?record=$recordClass,{$record->id}"),
                 );
         
