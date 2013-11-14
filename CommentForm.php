@@ -48,7 +48,6 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('textarea', 'body',
             array('label'=>__('Comment'),
                   'description'=> __("Allowed tags:") . " &lt;p&gt;, &lt;a&gt;, &lt;em&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;",
-                 // 'rows' => 10,
                   'id'=>'comment-form-body',
                   'required'=>true,
                   'filters'=> array(
@@ -63,16 +62,16 @@ class Commenting_CommentForm extends Omeka_Form
         $record_id = $this->_getRecordId($params);
         $record_type = $this->_getRecordType($params);
 
-        $this->addElement('text', 'record_id', array('value'=>$record_id, 
+        $this->addElement('hidden', 'record_id', array('value'=>$record_id, 
                                                     'hidden'=>true, 
                                                     'class' => 'hidden',
                                                     'decorators'=>array('ViewHelper') ));
-        $this->addElement('text', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
+        $this->addElement('hidden', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
         if(isset($params['module'])) {
-            $this->addElement('text', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
+            $this->addElement('hidden', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
         }
-        $this->addElement('text', 'record_type', array('value'=>$record_type, 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
-        $this->addElement('text', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
+        $this->addElement('hidden', 'record_type', array('value'=>$record_type, 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
+        $this->addElement('hidden', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
         fire_plugin_hook('commenting_form', array('comment_form' => $this) );
         $this->addElement('submit', 'submit', array('label'=>__('Submit')));
     }
