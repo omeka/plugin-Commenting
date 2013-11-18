@@ -79,20 +79,18 @@ class Commenting_CommentForm extends Omeka_Form
     
     private function _getRecordId($params)
     {
-    
         if(isset($params['module'])) {
             switch($params['module']) {
                 case 'exhibit-builder':
                     //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                     //to dig up the record_id and model
-                    if(!empty($params['page_slug'])) {
-                        $page = exhibit_builder_get_current_page();
+                    if(!empty($params['page_slug_1'])) {
+                        $page = get_current_record('exhibit_page', false);
                         $id = $page->id;
                     } else if(!empty($params['item_id'])) {
                         $id = $params['item_id'];
                     } else {
-                        $section = exhibit_builder_get_current_section();
-                        $id = $section->id;
+//todo: check the ifs for an exhibit showing an item
                     }
                     break;
     
@@ -115,14 +113,13 @@ class Commenting_CommentForm extends Omeka_Form
                 case 'exhibit-builder':
                     //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                     //to dig up the record_id and model
-                    if(!empty($params['page_slug'])) {
-                        $page = exhibit_builder_get_current_page();
+                    if(!empty($params['page_slug_1'])) {
+                        $page = get_current_record('exhibit_page', false);
                         $model = 'ExhibitPage';
                     } else if(!empty($params['item_id'])) {
                         $model = 'Item';
                     } else {
-                        $section = exhibit_builder_get_current_section();
-                        $model = 'ExhibitSection';
+//TODO: check for other possibilities
                     }
                     break;
     
