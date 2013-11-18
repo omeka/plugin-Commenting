@@ -117,5 +117,13 @@ class Comment extends Omeka_Record_AbstractRecord
                 //return parent::getRecordUrl($action);
                 return url("commenting/comment/$action/id/{$this->id}");
         }
-    }    
+    }
+
+    public function setArray($data)
+    {
+        if(empty($data['parent_comment_id'])) {
+            $data['parent_comment_id'] = null;
+        }
+        parent::setArray($data);
+    }
 }

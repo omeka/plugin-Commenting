@@ -82,49 +82,38 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $db = $this->_db;
         $old = $args['old_version'];
         $new = $args['new_version'];
-        switch($old) {
-            case '1.0' :
-                if(!get_option('commenting_comment_roles')) {
-                    $commentRoles = array('super');
-                    set_option('commenting_comment_roles', serialize($commentRoles));
-                }
 
-                if(!get_option('commenting_moderate_roles')) {
-                    $moderateRoles = array('super');
-                    set_option('commenting_moderate_roles', serialize($moderateRoles));
-                }
-
-                if(!get_option('commenting_noapp_comment_roles')) {
-                    set_option('commenting_noapp_comment_roles', serialize(array()));
-                }
-
-                if(!get_option('commenting_view_roles')) {
-                    set_option('commenting_view_roles', serialize(array()));
-                }
-            break;
+        if(version_compare($old, '1.0', '<')) {
+            if(!get_option('commenting_comment_roles')) {
+                $commentRoles = array('super');
+                set_option('commenting_comment_roles', serialize($commentRoles));
+            }
             
-            case '1.1':
-                $db = $this->_db;
-                $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL AFTER `approved` ";
-                $db->query($sql);
-                break;
-                
+            if(!get_option('commenting_moderate_roles')) {
+                $moderateRoles = array('super');
+                set_option('commenting_moderate_roles', serialize($moderateRoles));
+            }
+            
+            if(!get_option('commenting_noapp_comment_roles')) {
+                set_option('commenting_noapp_comment_roles', serialize(array()));
+            }
+            
+            if(!get_option('commenting_view_roles')) {
+                set_option('commenting_view_roles', serialize(array()));
+            }            
         }
         
-        if($new == '2.0') {
-            $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
-            $db->query($sql);
+        if(version_compare($old, '2.1-rc', '<')) {
             delete_option('commenting_noapp_comment_roles');
             set_option('commenting_reqapp_comment_roles', serialize(array()));
-        }
-        
-        //fix botched upgrade from pre 1.1 to 2.0
-        if(version_compare($old, '1.1', "<") && version_compare($new, '2.0', '>')) {
-            debug('update try');
-            $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
+            if($old == '1.1') {
+                $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
+            } else {
+                $sql = "ALTER TABLE `omeka_comments` CHANGE `flagged` `flagged` TINYINT( 1 ) NOT NULL DEFAULT '0'";
+            }
+            
             $db->query($sql);            
         }
-        
     }
 
     public function hookUninstall()
