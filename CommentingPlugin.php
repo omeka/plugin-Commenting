@@ -79,8 +79,9 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function hookUpgrade($args)
     {
-        $old = $args['old'];
-        $new = $args['new'];
+        $db = $this->_db;
+        $old = $args['old_version'];
+        $new = $args['new_version'];
         switch($old) {
             case '1.0' :
                 if(!get_option('commenting_comment_roles')) {
@@ -104,18 +105,26 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             
             case '1.1':
                 $db = $this->_db;
-                $sql = "ALTER TABLE `comments` ADD `flagged` BOOLEAN NOT NULL AFTER `approved` ";
+                $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL AFTER `approved` ";
                 $db->query($sql);
                 break;
                 
         }
         
         if($new == '2.0') {
-            $sql = "ALTER TABLE `comments` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
+            $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
             $db->query($sql);
             delete_option('commenting_noapp_comment_roles');
             set_option('commenting_reqapp_comment_roles', serialize(array()));
         }
+        
+        //fix botched upgrade from pre 1.1 to 2.0
+        if(version_compare($old, '1.1', "<") && version_compare($new, '2.0', '>')) {
+            debug('update try');
+            $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
+            $db->query($sql);            
+        }
+        
     }
 
     public function hookUninstall()
