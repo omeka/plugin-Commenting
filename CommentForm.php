@@ -50,9 +50,14 @@ class Commenting_CommentForm extends Omeka_Form
                   'description'=> __("Allowed tags:") . " &lt;p&gt;, &lt;a&gt;, &lt;em&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;",
                   'id'=>'comment-form-body',
                   'required'=>true,
+
                   'filters'=> array(
-                      array('StripTags', array('allowTags' => array('p', 'em', 'strong', 'a','ul','ol','li'))),
-                  ),
+                      array('StripTags', 
+                              array('allowTags' => array('p', 'span', 'em', 'strong', 'a','ul','ol','li'),
+                                    'allowAttribs' => array('style', 'href')        
+                                     ),
+                              ),
+                      ),
                 )
             );
         

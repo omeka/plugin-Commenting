@@ -18,8 +18,8 @@
     ?>
 </div>
 <div class='comment-body <?php if($comment->flagged):?>comment-flagged<?php endif;?> '><?php echo $comment->body; ?></div>
-<p class='comment-flag' <?php if($comment->flagged): ?> style='display:none;'<?php endif;?> ><?php echo __("Flag inappropriate"); ?></p>
 <?php if(is_allowed('Commenting_Comment', 'unflag')): ?>
+<p class='comment-flag' <?php if($comment->flagged): ?> style='display:none;'<?php endif;?> ><?php echo __("Flag inappropriate"); ?></p>
 <p class='comment-unflag' <?php if(!$comment->flagged): ?>style='display:none;'<?php endif;?> ><?php __("Unflag inappropriate"); ?></p>
 <?php endif; ?>
 <p class='comment-reply'><?php echo __("Reply"); ?></p>
