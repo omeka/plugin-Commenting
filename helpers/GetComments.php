@@ -5,7 +5,6 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
     
     private function _getRecordId($params)
     {
-//@TODO: update exhibit-builder handling for 2.0  
         if(isset($params['module'])) {
             switch($params['module']) {
                 case 'exhibit-builder':
@@ -77,7 +76,7 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
         }
         
         if(!is_allowed('Commenting_Comment', 'update-approved')) {
-            $searchParams['flagged'] = null;
+            $searchParams['flagged'] = 0;
             $searchParams['is_spam'] = 0;
         }
         
