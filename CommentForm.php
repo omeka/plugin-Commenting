@@ -61,6 +61,25 @@ class Commenting_CommentForm extends Omeka_Form
                 )
             );
 
+        // The legal agreement is checked by default for logged users.
+        if (get_option('commenting_legal_text')) {
+            $this->addElement('checkbox', 'commenting_legal_text', array(
+                'label' => get_option('commenting_legal_text'),
+                'value' => (boolean) $user,
+                'required' => true,
+                'uncheckedValue'=> '',
+                'checkedValue' => 'checked',
+                'validators' => array(
+                    array('notEmpty', true, array(
+                        'messages' => array(
+                            'isEmpty'=> __('You must agree to the terms and conditions.'),
+                        ),
+                    )),
+                ),
+                'decorators' => array('ViewHelper', 'Errors', array('label', array('escape' => false))),
+            ));
+        }
+
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $params = $request->getParams();
 
