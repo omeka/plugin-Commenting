@@ -41,6 +41,9 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         if(plugin_is_active('SimplePages')) {
             $this->_filters[] = 'api_extend_simple_pages';
         }
+        if(plugin_is_active('ExhibitBuilder')) {
+            $this->_filters[] = 'api_extend_exhibit_pages';
+        }
         parent::setUp();
     }
 
@@ -281,6 +284,11 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     }
 
     public function filterApiExtendSimplePages($extend, $args)
+    {
+        return $this->_filterApiExtendRecords($extend, $args);
+    }
+
+    public function filterApiExtendExhibitPages($extend, $args)
     {
         return $this->_filterApiExtendRecords($extend, $args);
     }
