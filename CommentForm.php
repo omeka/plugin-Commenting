@@ -52,36 +52,33 @@ class Commenting_CommentForm extends Omeka_Form
                   'required'=>true,
 
                   'filters'=> array(
-                      array('StripTags', 
+                      array('StripTags',
                               array('allowTags' => array('p', 'span', 'em', 'strong', 'a','ul','ol','li'),
-                                    'allowAttribs' => array('style', 'href')        
+                                    'allowAttribs' => array('style', 'href')
                                      ),
                               ),
                       ),
                 )
             );
-        
+
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $params = $request->getParams();
-        
+
         $record_id = $this->_getRecordId($params);
         $record_type = $this->_getRecordType($params);
 
-        $this->addElement('hidden', 'record_id', array('value'=>$record_id, 
-                                                    'hidden'=>true, 
-                                                    'class' => 'hidden',
-                                                    'decorators'=>array('ViewHelper') ));
-        $this->addElement('hidden', 'path', array('value'=>  $request->getPathInfo(), 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
+        $this->addElement('hidden', 'record_id', array('value'=>$record_id, 'decorators'=>array('ViewHelper') ));
+        $this->addElement('hidden', 'path', array('value'=>  $request->getPathInfo(), 'decorators'=>array('ViewHelper')));
         if(isset($params['module'])) {
-            $this->addElement('hidden', 'module', array('value'=>$params['module'], 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
+            $this->addElement('hidden', 'module', array('value'=>$params['module'], 'decorators'=>array('ViewHelper')));
         }
-        $this->addElement('hidden', 'record_type', array('value'=>$record_type, 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
-        $this->addElement('hidden', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'hidden'=>true, 'class' => 'hidden', 'decorators'=>array('ViewHelper')));
+        $this->addElement('hidden', 'record_type', array('value'=>$record_type, 'decorators'=>array('ViewHelper')));
+        $this->addElement('hidden', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'decorators'=>array('ViewHelper')));
         fire_plugin_hook('commenting_form', array('comment_form' => $this) );
         $this->addElement('submit', 'submit', array('label'=>__('Submit')));
     }
-    
-    
+
+
     private function _getRecordId($params)
     {
         if(isset($params['module'])) {
@@ -98,7 +95,7 @@ class Commenting_CommentForm extends Omeka_Form
 //todo: check the ifs for an exhibit showing an item
                     }
                     break;
-    
+
                 default:
                     $id = $params['id'];
                     break;
@@ -107,10 +104,10 @@ class Commenting_CommentForm extends Omeka_Form
             $id = $params['id'];
         }
         return $id;
-    
-    
+
+
     }
-    
+
     private function _getRecordType($params)
     {
         if(isset($params['module'])) {
@@ -127,7 +124,7 @@ class Commenting_CommentForm extends Omeka_Form
 //TODO: check for other possibilities
                     }
                     break;
-    
+
                 default:
                     $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
                     break;
@@ -136,6 +133,6 @@ class Commenting_CommentForm extends Omeka_Form
             $model = ucfirst(Inflector::singularize($params['controller']));
         }
         return $model;
-    }    
-    
+    }
+
 }
