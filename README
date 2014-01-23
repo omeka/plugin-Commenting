@@ -37,35 +37,7 @@ record types from modules (e.g. SimplePages or ExhibitBuilder), you will have to
 to the appropriate place in the plugin's public view script:
 
 ```php
-<?php commenting_echo_comments(); ?>
-<?php commenting_echo_comment_form(); ?>
-```
-
-For example, to show comments on exhibit sections and pages, the file /plugins/ExhibitBuilder/views/public/exhibits/show.php
-could look like:
-
-```php
-<?php head(array('title' => html_escape(exhibit('title') . ' : '. exhibit_page('title')), 'bodyid'=>'exhibit','bodyclass'=>'show')); ?>
-<div id="primary">
-	<h1><?php echo link_to_exhibit(); ?></h1>
-
-    <div id="nav-container">
-    	<?php echo exhibit_builder_section_nav();?>
-    	<?php echo exhibit_builder_page_nav();?>
-    </div>
-
-	<h2><?php echo exhibit_page('title'); ?></h2>
-	
-	<?php exhibit_builder_render_exhibit_page(); ?>
-	
-	<div id="exhibit-page-navigation">
-	   	<?php echo exhibit_builder_link_to_previous_exhibit_page(); ?>
-    	<?php echo exhibit_builder_link_to_next_exhibit_page(); ?>
-	</div>
-	<?php commenting_echo_comments(); ?>
-	<?php commenting_echo_comment_form(); ?>
-</div>
-<?php foot(); ?>
+<?php CommentingPlugin::showComments(); ?>
 ```
 
 Keep in mind that updating themes or plugins will clobber your addition of the commenting functions.
