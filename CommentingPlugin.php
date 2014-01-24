@@ -106,15 +106,19 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             }
         }
 
-        if(version_compare($old, '2.1-rc', '<')) {
+        if (version_compare($old, '2.0', '<')) {
+
+        }
+
+        if(version_compare($old, '2.0', '<')) {
+            $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
+            $db->query($sql);
+        }
+
+        if(version_compare($old, '2.1', '<')) {
             delete_option('commenting_noapp_comment_roles');
             set_option('commenting_reqapp_comment_roles', serialize(array()));
-            if($old == '1.1') {
-                $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
-            } else {
-                $sql = "ALTER TABLE `$db->Comment` CHANGE `flagged` `flagged` TINYINT( 1 ) NOT NULL DEFAULT '0'";
-            }
-
+            $sql = "ALTER TABLE `$db->Comment` CHANGE `flagged` `flagged` TINYINT( 1 ) NOT NULL DEFAULT '0'";
             $db->query($sql);
         }
     }
