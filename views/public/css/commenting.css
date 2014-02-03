@@ -3,6 +3,7 @@
 div#comments-container div {
 	padding: 2px !important;
 	margin: 2px !important;
+	clear: both;
 }
 
 div#comments-container label {
