@@ -1,0 +1,238 @@
+# Translation for the Commenting plugin for Omeka.
+# Copyright (C) 2011 Roy Rosenzweig Center for History and New Media
+# This file is distributed under the same license as the Omeka package.
+# 
+# Translators:
+# a_squat <info@lswebagency.it>, 2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Omeka\n"
+"Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
+"POT-Creation-Date: 2012-01-09 21:49-0500\n"
+"PO-Revision-Date: 2014-01-29 15:30+0000\n"
+"Last-Translator: a_squat <info@lswebagency.it>\n"
+"Language-Team: Italian (http://www.transifex.com/projects/p/omeka/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: CommentForm.php:18
+msgid "Please verify you're a human"
+msgstr "Per favore verifica che sei un umano."
+
+#: CommentForm.php:29
+msgid "Website"
+msgstr "Sito web"
+
+#: CommentForm.php:32
+msgid "Email (required)"
+msgstr "Email (obbligatorio)"
+
+#: CommentForm.php:39
+msgid "Your name"
+msgstr ""
+
+#: CommentForm.php:50
+msgid "Allowed tags:"
+msgstr "Tags consentiti:"
+
+#: CommentingPlugin.php:241 CommentingPlugin.php:249
+#: views/admin/comment/browse.php:4 views/public/comments.php:4
+msgid "Comments"
+msgstr "Commenti"
+
+#: config_form.php:8
+msgid "Use Threaded Comments?"
+msgstr ""
+
+#: config_form.php:11
+msgid "If checked, replies will be displayed indented below the comment."
+msgstr "Se selezionato, le risposte saranno pubblicate con rientro sotto il commento."
+
+#: config_form.php:24
+msgid "Text for comments label"
+msgstr "Testo per etichetta commenti"
+
+#: config_form.php:27
+msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
+msgstr "Etichetta da utilizzare invece di 'Commenti'. Lasciare vuoto se si desidera usare 'Commenti'."
+
+#: config_form.php:36
+msgid "Allow public commenting?"
+msgstr "Consentire al pubblico di commentare?"
+
+#: config_form.php:39
+msgid ""
+"Allows everyone, including non-registered users to comment. Using this "
+"without Akismet is strongly discouraged."
+msgstr ""
+
+#: config_form.php:51
+msgid "Require moderation for all public comments?"
+msgstr "Moderazione richiesta per commenti del pubblico?"
+
+#: config_form.php:54
+msgid "If unchecked, comments will appear immediately."
+msgstr "Se non selezionato, i commenti verranno pubblicati immediatamente."
+
+#: config_form.php:65
+msgid "User roles that can moderate comments"
+msgstr "Categorie di utente che possono moderare commenti"
+
+#: config_form.php:68
+msgid "The user roles that are allowed to moderate comments."
+msgstr "Categorie utenti a cui e' permesso di moderare commenti."
+
+#: config_form.php:94
+msgid "User roles that can comment"
+msgstr "Categoria utente che possono commentare"
+
+#: config_form.php:97
+msgid "Select the roles that can leave comments"
+msgstr "Seleziona ruoli che possono lasciare commenti"
+
+#: config_form.php:121
+msgid "User roles that require moderation before publishing."
+msgstr "Categorie utenti che richiedono moderazione prima della pubblicazione."
+
+#: config_form.php:124
+msgid ""
+"If the role is allowed to moderate comments, that will override the setting "
+"here."
+msgstr "Se la categoria utente e' abilitata a moderare commenti cio' sovrascrivera' quanto impostato qui."
+
+#: config_form.php:146
+msgid "Allow public to view comments?"
+msgstr "Consentire al pubblico di visualizzare commenti?"
+
+#: config_form.php:162
+msgid "User roles that can view comments"
+msgstr "Categorie utenti che possono vedere commenti"
+
+#: config_form.php:191 config_form.php:205
+msgid "This can also be set in the Security Settings."
+msgstr "Questo puo' essere configurato nelle Impostazioni Sicurezza."
+
+#: config_form.php:217
+msgid "WordPress API key for Akismet"
+msgstr "Chiavi API WordPress per Akismet"
+
+#: controllers/CommentController.php:65
+msgid "Your comment is awaiting moderation"
+msgstr "Il tuo commento e' in attesa di moderazione"
+
+#: controllers/CommentController.php:202
+#, php-format
+msgid "A comment on %s has been flagged as inappropriate"
+msgstr ""
+
+#: controllers/CommentController.php:203
+#, php-format
+msgid "The comment %s has been flagged as inappropriate."
+msgstr "Il commento %s e' stato segnalato come inappropriato."
+
+#: controllers/CommentController.php:204
+msgid "here"
+msgstr "qui"
+
+#: controllers/CommentController.php:204
+#, php-format
+msgid "You can manage the comment %s"
+msgstr "Puoi gestire il commento %s"
+
+#: views/admin/comment.php:54 views/public/comment.php:10
+msgid "Anonymous"
+msgstr "Anonimo"
+
+#: views/admin/comment.php:59
+msgid "on"
+msgstr "su"
+
+#: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
+msgid "Approved"
+msgstr "Approvato"
+
+#: views/admin/comment.php:62 views/admin/comment/browse.php:24
+msgid "Unapprove"
+msgstr "Disapprova"
+
+#: views/admin/comment.php:63
+msgid "Not Approved"
+msgstr "Non Approvato"
+
+#: views/admin/comment.php:63 views/admin/comment/browse.php:23
+msgid "Approve"
+msgstr "Approva"
+
+#: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
+msgid "Spam"
+msgstr "Spam"
+
+#: views/admin/comment.php:65 views/admin/comment/browse.php:27
+msgid "Report Not Spam"
+msgstr "Segnala Non Spam"
+
+#: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
+msgid "Not Spam"
+msgstr "Non Spam"
+
+#: views/admin/comment.php:66 views/admin/comment/browse.php:26
+msgid "Report Spam"
+msgstr "Segnala Spam"
+
+#: views/admin/comment.php:69
+msgid "Flagged Inappropriate"
+msgstr ""
+
+#: views/admin/comment.php:69 views/admin/comment/browse.php:30
+msgid "Unflag"
+msgstr ""
+
+#: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
+msgid "Not Flagged"
+msgstr "Non Segnalato"
+
+#: views/admin/comment.php:70
+msgid "Flag Inappropriate"
+msgstr "Segnala come inappropriato"
+
+#: views/admin/comment/browse.php:14
+msgid "security settings"
+msgstr "impostazioni sicurezza"
+
+#: views/admin/comment/browse.php:14
+#, php-format
+msgid ""
+"You have not entered your %s API keys under %s. We recommend adding these "
+"keys, or the commenting form will be vulnerable to spam."
+msgstr ""
+
+#: views/admin/comment/browse.php:29
+msgid "Flag"
+msgstr "Segnala"
+
+#: views/admin/comment/browse.php:35
+msgid "Select All"
+msgstr "Seleziona tutto"
+
+#: views/admin/common/quick-filters.php:7
+msgid "Needs Approval"
+msgstr "Richiede approvazione"
+
+#: views/admin/common/quick-filters.php:10
+msgid "Flagged"
+msgstr "Segnalato"
+
+#: views/public/comment.php:21
+msgid "Flag inappropriate"
+msgstr "Segnala come inappropriato"
+
+#: views/public/comment.php:23
+msgid "Unflag inappropriate"
+msgstr ""
+
+#: views/public/comment.php:25
+msgid "Reply"
+msgstr "Rispondi"

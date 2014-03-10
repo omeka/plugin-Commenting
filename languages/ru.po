@@ -1,0 +1,238 @@
+# Translation for the Commenting plugin for Omeka.
+# Copyright (C) 2011 Roy Rosenzweig Center for History and New Media
+# This file is distributed under the same license as the Omeka package.
+# 
+# Translators:
+# Shvar <Shvar@rsl.ru>, 2013-2014
+msgid ""
+msgstr ""
+"Project-Id-Version: Omeka\n"
+"Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
+"POT-Creation-Date: 2012-01-09 21:49-0500\n"
+"PO-Revision-Date: 2014-02-12 08:24+0000\n"
+"Last-Translator: Shvar <Shvar@rsl.ru>\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/omeka/language/ru/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: CommentForm.php:18
+msgid "Please verify you're a human"
+msgstr "Пожалуйста, подтвердите, что вы человек"
+
+#: CommentForm.php:29
+msgid "Website"
+msgstr "Сайт"
+
+#: CommentForm.php:32
+msgid "Email (required)"
+msgstr "Электронная почта (обязательное поле)"
+
+#: CommentForm.php:39
+msgid "Your name"
+msgstr "Введите Ваше имя"
+
+#: CommentForm.php:50
+msgid "Allowed tags:"
+msgstr "Разрешённые метки:"
+
+#: CommentingPlugin.php:241 CommentingPlugin.php:249
+#: views/admin/comment/browse.php:4 views/public/comments.php:4
+msgid "Comments"
+msgstr "Комментарии"
+
+#: config_form.php:8
+msgid "Use Threaded Comments?"
+msgstr "Использовать ветви комментариев?"
+
+#: config_form.php:11
+msgid "If checked, replies will be displayed indented below the comment."
+msgstr "Если отмечено, то ответы будут показаны ниже комментария со сдвигом вправо."
+
+#: config_form.php:24
+msgid "Text for comments label"
+msgstr "Текст для ярлыка \"Комментарии\""
+
+#: config_form.php:27
+msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
+msgstr "Ярлык, используемый вместо \"Комментарии\". Оставьте пустым, чтобы использовать \"Комментарии\"."
+
+#: config_form.php:36
+msgid "Allow public commenting?"
+msgstr "Разрешить открытое комментирование?"
+
+#: config_form.php:39
+msgid ""
+"Allows everyone, including non-registered users to comment. Using this "
+"without Akismet is strongly discouraged."
+msgstr "Позволяет комментировать всем, включая незарегистрированных пользователей. Использование этой опции без использования Aksimet (службы фильтрации спама) настоятельно не рекомендуется."
+
+#: config_form.php:51
+msgid "Require moderation for all public comments?"
+msgstr "Требуется ли модерация для всех открытых комментариев?"
+
+#: config_form.php:54
+msgid "If unchecked, comments will appear immediately."
+msgstr "Если галочка не проставлена, то комментарии появятся незамедлительно."
+
+#: config_form.php:65
+msgid "User roles that can moderate comments"
+msgstr "Роли пользователей, которые могут модерировать комментарии"
+
+#: config_form.php:68
+msgid "The user roles that are allowed to moderate comments."
+msgstr "Роли пользователей, которым разрешено модерировать комментарии"
+
+#: config_form.php:94
+msgid "User roles that can comment"
+msgstr "Роли пользователей, которые могут оставлять комментарии"
+
+#: config_form.php:97
+msgid "Select the roles that can leave comments"
+msgstr "Выберете пользовательские роли, которые могут оставлять комментарии"
+
+#: config_form.php:121
+msgid "User roles that require moderation before publishing."
+msgstr "Пользовательские роли, которые требуют модерации прежде, чем они будут размещены."
+
+#: config_form.php:124
+msgid ""
+"If the role is allowed to moderate comments, that will override the setting "
+"here."
+msgstr "Если роль пользователя позволяет модерировать комментарии, это будет иметь приоритет перед данными здесь установками."
+
+#: config_form.php:146
+msgid "Allow public to view comments?"
+msgstr "Разрешить просмотр комментариев?"
+
+#: config_form.php:162
+msgid "User roles that can view comments"
+msgstr "Роли пользователей, которым разрешён просмотр комментариев"
+
+#: config_form.php:191 config_form.php:205
+msgid "This can also be set in the Security Settings."
+msgstr "Это может быть установлено в \"Настройках безопасности\"."
+
+#: config_form.php:217
+msgid "WordPress API key for Akismet"
+msgstr "Ключ API WordPress для \"Службы фильтрации спама\" (Akismet)"
+
+#: controllers/CommentController.php:65
+msgid "Your comment is awaiting moderation"
+msgstr "Ваш комментарий ожидает модерации"
+
+#: controllers/CommentController.php:202
+#, php-format
+msgid "A comment on %s has been flagged as inappropriate"
+msgstr "Комментарий %s помечен как несоответствующий"
+
+#: controllers/CommentController.php:203
+#, php-format
+msgid "The comment %s has been flagged as inappropriate."
+msgstr "Этот комментарий %s помечен как неподходящий."
+
+#: controllers/CommentController.php:204
+msgid "here"
+msgstr "здесь"
+
+#: controllers/CommentController.php:204
+#, php-format
+msgid "You can manage the comment %s"
+msgstr "Вы можете редактировать комментарий %s"
+
+#: views/admin/comment.php:54 views/public/comment.php:10
+msgid "Anonymous"
+msgstr "Анонимный"
+
+#: views/admin/comment.php:59
+msgid "on"
+msgstr "включено"
+
+#: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
+msgid "Approved"
+msgstr "Одобренный"
+
+#: views/admin/comment.php:62 views/admin/comment/browse.php:24
+msgid "Unapprove"
+msgstr "Не разрешать"
+
+#: views/admin/comment.php:63
+msgid "Not Approved"
+msgstr "Не одобренный"
+
+#: views/admin/comment.php:63 views/admin/comment/browse.php:23
+msgid "Approve"
+msgstr "Одобрить"
+
+#: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
+msgid "Spam"
+msgstr "Спам"
+
+#: views/admin/comment.php:65 views/admin/comment/browse.php:27
+msgid "Report Not Spam"
+msgstr "Подтверждено, что не спам"
+
+#: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
+msgid "Not Spam"
+msgstr "Не является спамом"
+
+#: views/admin/comment.php:66 views/admin/comment/browse.php:26
+msgid "Report Spam"
+msgstr "Это спам"
+
+#: views/admin/comment.php:69
+msgid "Flagged Inappropriate"
+msgstr "Пометить как несоответствующий"
+
+#: views/admin/comment.php:69 views/admin/comment/browse.php:30
+msgid "Unflag"
+msgstr "Снять пометку"
+
+#: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
+msgid "Not Flagged"
+msgstr "Не отмеченный"
+
+#: views/admin/comment.php:70
+msgid "Flag Inappropriate"
+msgstr "Пометьте как несоответствующий"
+
+#: views/admin/comment/browse.php:14
+msgid "security settings"
+msgstr "Настройки безопасности"
+
+#: views/admin/comment/browse.php:14
+#, php-format
+msgid ""
+"You have not entered your %s API keys under %s. We recommend adding these "
+"keys, or the commenting form will be vulnerable to spam."
+msgstr "Вы не ввели свои %s ключи API под %s. Мы рекомендуем добавить эти ключи, иначе форма для введения комментариев может быть уязвима для спама."
+
+#: views/admin/comment/browse.php:29
+msgid "Flag"
+msgstr "Пометить"
+
+#: views/admin/comment/browse.php:35
+msgid "Select All"
+msgstr "Выбрать всё"
+
+#: views/admin/common/quick-filters.php:7
+msgid "Needs Approval"
+msgstr "Нуждается в одобрении"
+
+#: views/admin/common/quick-filters.php:10
+msgid "Flagged"
+msgstr "Отмеченный"
+
+#: views/public/comment.php:21
+msgid "Flag inappropriate"
+msgstr "Отмечен как неподходящий"
+
+#: views/public/comment.php:23
+msgid "Unflag inappropriate"
+msgstr "Снята пометка как неподходящего"
+
+#: views/public/comment.php:25
+msgid "Reply"
+msgstr "Отзыв"
