@@ -106,10 +106,6 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             }
         }
 
-        if (version_compare($old, '2.0', '<')) {
-
-        }
-
         if(version_compare($old, '2.0', '<')) {
             $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
             $db->query($sql);
