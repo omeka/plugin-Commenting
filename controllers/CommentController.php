@@ -195,7 +195,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
     
     private function emailFlagged($comment)
     {
-        $mail = new Zend_Mail();
+        $mail = new Zend_Mail('UTF-8');
         $mail->addHeader('X-Mailer', 'PHP/' . phpversion());
         $mail->setFrom(get_option('administrator_email'), get_option('site_title'));
         $mail->addTo(get_option('commenting_flag_email'));
