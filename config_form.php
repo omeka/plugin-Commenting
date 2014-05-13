@@ -183,33 +183,9 @@
         </div>
     </div>
     
-    <div class="field">
-        <div class="three columns alpha">
-            <label><?php echo __("ReCaptcha Public Key"); ?></label>    
-        </div>    
-        <div class="inputs four columns omega">
-            <p class='explanation'><?php echo __("This can also be set in the Security Settings."); ?></p>
-            <div class="input-block">        
-            <?php echo $view->formText('recaptcha_public_key', get_option('recaptcha_public_key'),
-                array('size'=>45)
-                ); ?>
-            </div>
-        </div>
-    </div>
-    
-    <div class="field">
-        <div class="three columns alpha">
-            <label><?php echo __("ReCaptcha Private Key"); ?></label>    
-        </div>    
-        <div class="inputs four columns omega">
-            <p class='explanation'><?php echo __("This can also be set in the Security Settings."); ?></p>
-            <div class="input-block">        
-            <?php echo $view->formText('recaptcha_private_key', get_option('recaptcha_private_key'),
-                array('size'=>45)
-                ); ?>
-            </div>
-        </div>
-    </div>
+<?php if(!Omeka_Captcha::isConfigured()): ?>
+<p class="alert"><?php echo __("You have not entered your %s API keys under %s. We recommend adding these keys, or the commenting form will be vulnerable to spam.", '<a href="http://recaptcha.net/">reCAPTCHA</a>', "<a href='" . url('security#recaptcha_public_key') . "'>" . __('security settings') . "</a>");?></p>
+<?php endif; ?>
 
 
 <div class="field">
