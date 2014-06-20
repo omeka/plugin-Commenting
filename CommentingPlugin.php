@@ -179,12 +179,12 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function hookPublicItemsShow($args)
     {
-        $this::showComments($args);
+        self::showComments($args);
     }
 
     public function hookPublicCollectionsShow($args)
     {
-        $this::showComments($args);
+        self::showComments($args);
     }
 
     public function hookConfig($args)
