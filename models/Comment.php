@@ -31,9 +31,9 @@ class Comment extends Omeka_Record_AbstractRecord
     {
         // A record's search text is public by default, but there are times
         // when this is not desired, e.g. when an item is marked as
-        // private. Make a check to see if the record is public or private.
+        // private. @todo: Make a check to see if the record is public or private.
         
-        if ($this->approved || $this->is_spam) {
+        if (!$this->approved || $this->is_spam) {
             // Setting the search text to private makes it invisible to
             // most users.
             $this->setSearchTextPrivate();
