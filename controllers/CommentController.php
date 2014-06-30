@@ -61,6 +61,10 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $role = current_user()->role;
         $reqAppCommentRoles = unserialize(get_option('commenting_reqapp_comment_roles'));
         $requiresApproval = in_array($role, $reqAppCommentRoles);
+        //via Daniel Lind -- https://groups.google.com/forum/#!topic/omeka-dev/j-tOSAVdxqU
+        $reqAppPublicComment = (bool) get_option('commenting_require_public_moderation');
+        $requiresApproval = $requiresApproval || (!is_object(current_user()) && $reqAppPublicComment);
+        //end Daniel Lind contribution        
         if($requiresApproval) {
             $this->_helper->flashMessenger(__("Your comment is awaiting moderation"), 'success');
         }
