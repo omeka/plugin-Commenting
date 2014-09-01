@@ -13,7 +13,7 @@
     <p class='comment-author-name'><?php echo $authorText?></p>
     <?php
         $hash = md5(strtolower(trim($comment->author_email)));
-        $url = "http://www.gravatar.com/avatar/$hash";
+        $url = "https://secure.gravatar.com/avatar/$hash";
         echo "<img class='gravatar' src='$url' />";
     ?>
 </div>
