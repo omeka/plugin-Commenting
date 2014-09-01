@@ -1,9 +1,20 @@
 <?php
+/**
+ * CommentingPlugin class
+ *
+ * @copyright Copyright 2011-2013 Roy Rosenzweig Center for History and New Media
+ * @license http://www.gnu.org/licenses/gpl-3.0.txt GNU GPLv3
+ * @package Commenting
+ */
 
-define('COMMENTING_PLUGIN_DIR', PLUGIN_DIR . '/Commenting');
-
+/**
+ * Commenting plugin.
+ */
 class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 {
+    /**
+     * @var array Hooks for the plugin.
+     */
     protected $_hooks = array(
         'install',
         'uninstall',
@@ -19,6 +30,9 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         'initialize'
     );
 
+    /**
+     * @var array Filters for the plugin.
+     */
     protected $_filters = array(
         'admin_navigation_main',
         'search_record_types',
@@ -54,6 +68,9 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         parent::setUp();
     }
 
+    /**
+     * Install the plugin.
+     */
     public function hookInstall()
     {
         $db = $this->_db;
@@ -140,6 +157,8 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $db = get_db();
         $sql = "DROP TABLE IF EXISTS `$db->Comment`";
         $db->query($sql);
+
+        $this->_uninstallOptions();
     }
 
     public function hookPublicHead()
@@ -177,11 +196,13 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
                 $view = get_view();
             }
 
-            $view->addHelperPath(COMMENTING_PLUGIN_DIR . '/helpers', 'Commenting_View_Helper_');
             $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
 
             $comments = isset($args['comments']) ? $args['comments'] : $view->getComments($options);
-            echo $view->partial('comments.php', array('comments'=>$comments, 'threaded'=>$options['threaded']));
+            echo $view->partial('common/comments.php', array(
+                'comments' => $comments,
+                'threaded' => $options['threaded'],
+            ));
         }
 
         if( (get_option('commenting_allow_public') == 1)
@@ -220,7 +241,9 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function hookConfigForm()
     {
-        include COMMENTING_PLUGIN_DIR . '/config_form.php';
+        echo get_view()->partial(
+            'plugins/commenting-config-form.php'
+        );
     }
 
     public function hookDefineAcl($args)

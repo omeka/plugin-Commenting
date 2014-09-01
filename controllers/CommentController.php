@@ -4,7 +4,9 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
 {
     protected $_browseRecordsPerPage = 10;
 
-
+    /**
+     * Controller-wide initialization. Sets the underlying model to use.
+     */
     public function init()
     {
         $this->_helper->db->setDefaultModelName('Comment');    
@@ -49,7 +51,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
             $comment->user_id = $user->id;
         }
         $comment->flagged = 0;
-        $form = $this->getForm();
+        $form = $this->_getForm();
         $valid = $form->isValid($this->getRequest()->getPost());
         if(!$valid) {
             $destination .= "#comment-form";
@@ -178,7 +180,8 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $this->_helper->json($response);
     }
     
-    public function flagAction() {
+    public function flagAction()
+    {
         $commentId = $_POST['id'];
         $comment = $this->_helper->db->getTable('Comment')->find($commentId);
         $comment->flagged = true;
@@ -188,7 +191,8 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $this->_helper->json($response);
     }
     
-    public function unflagAction() {
+    public function unflagAction()
+    {
         $commentId = $_POST['id'];
         $comment = $this->_helper->db->getTable('Comment')->find($commentId);
         $comment->flagged = 0;
@@ -215,12 +219,10 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         }
     
     }
-        
 
-    private function getForm()
+    private function _getForm()
     {
-        require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
-        return new Commenting_CommentForm();
+        require_once dirname(dirname(__FILE__)) . '/forms/CommentForm.php';
+        return new Commenting_CommentForm;
     }
-
 }
