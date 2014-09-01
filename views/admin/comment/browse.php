@@ -14,9 +14,6 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
 <p class="alert"><?php echo __("You have not entered your %s API keys under %s. We recommend adding these keys, or the commenting form will be vulnerable to spam.", '<a href="http://recaptcha.net/">reCAPTCHA</a>', "<a href='" . url('security#recaptcha_public_key') . "'>" . __('security settings') . "</a>");?></p>
 <?php endif; ?>
 
-    
-    
-    
 <?php if(is_allowed('Commenting_Comment', 'update-approved') ) : //updateapproved is standing in for all moderation options?>
 <div id='commenting-batch-actions'>
 <a class="small blue button disabled" id="batch-delete" ><?php echo __("Delete"); ?></a>
@@ -34,10 +31,10 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
 <div style="clear: both">
     <input id='batch-select' type='checkbox' /> <?php echo __("Select All"); ?>
 </div>
-<?php 
+<?php
     foreach($comments as $comment) {
         echo $this->partial('comment.php', array('comment' => $comment));
-    }    
+    }
 ?>
 
 </div>

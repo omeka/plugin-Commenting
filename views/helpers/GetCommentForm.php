@@ -1,10 +1,8 @@
 <?php
-
 class Commenting_View_Helper_GetCommentForm extends Zend_View_Helper_Abstract
 {
-    
     public function getCommentForm()
-    {        
+    {
         if( (get_option('commenting_allow_public') == 1) || is_allowed('Commenting_Comment', 'add') ) {
             require_once dirname(dirname(dirname(__FILE__))) . '/forms/CommentForm.php';
             $commentSession = new Zend_Session_Namespace('commenting');
@@ -14,6 +12,6 @@ class Commenting_View_Helper_GetCommentForm extends Zend_View_Helper_Abstract
             }
             unset($commentSession->post);
             return $form;
-        }                
+        }
     }
 }
