@@ -6,7 +6,7 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
     public function getRepresentation(Omeka_Record_AbstractRecord $comment)
     {
         $user = current_user();
-        if($user->role == 'admin' || $user->role == 'super') {
+        if ($user->role == 'admin' || $user->role == 'super') {
             $allowAll = true;
         } else {
             $allowAll = false;
@@ -24,14 +24,14 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
             'approved' => (bool) $comment->approved,
         );
 
-        if($allowAll) {
+        if ($allowAll) {
             $representation['ip'] = $comment->ip;
             $representation['user_agent'] = $comment->user_agent;
             $representation['flagged'] = $comment->flagged;
             $representation['is_spam'] = $comment->is_spam;
         }
 
-        if($comment->parent_comment_id) {
+        if ($comment->parent_comment_id) {
             $representation['parent_comment'] = array(
                 'id' => $comment->parent_comment_id,
                 'resource' => 'comments',
@@ -47,7 +47,7 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
             'resource' => $typeResource,
             'url' => self::getResourceUrl("/$typeResource/{$comment->record_id}"),
         );
-        if($comment->user_id) {
+        if ($comment->user_id) {
             $representation['user'] = array(
                 'id' => $comment->user_id,
                 'url' => self::getResourceUrl("/users/{$comment->user_id}"),
@@ -56,7 +56,7 @@ class Api_Comment extends Omeka_Record_Api_AbstractRecordAdapter implements Zend
             $representation['user'] = null;
         }
 
-        if($user && is_allowed('Commenting_Comment', 'update-approved')) {
+        if ($user && is_allowed('Commenting_Comment', 'update-approved')) {
             $representation['author_email'] = $comment->author_email;
         }
         return $representation;

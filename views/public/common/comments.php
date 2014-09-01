@@ -9,10 +9,10 @@
     <div id='comments-flash'><?php echo $flash; ?></div>
     <?php endif; ?>
     <?php echo fire_plugin_hook('commenting_prepend_to_comments', array('comments' => $comments)); ?>
-    <?php if($threaded) :?>
+    <?php if ($threaded) :?>
         <?php echo $this->partial('common/threaded-comments.php', array('comments' => $comments, 'parent_id' => null)); ?>
     <?php else: ?>
-        <?php foreach($comments as $comment): ?>
+        <?php foreach ($comments as $comment): ?>
         <div id="comment-<?php echo $comment->id; ?>" class='comment'>
             <?php echo $this->partial('common/comment.php', array('comment' => $comment)); ?>
         </div>

@@ -55,7 +55,7 @@ class Comment extends Omeka_Record_AbstractRecord
     public function checkSpam()
     {
         $wordPressAPIKey = get_option('commenting_wpapi_key');
-        if(!empty($wordPressAPIKey)) {
+        if (!empty($wordPressAPIKey)) {
             $ak = new Zend_Service_Akismet($wordPressAPIKey, WEB_ROOT );
             $data = $this->getAkismetData();
             try {
@@ -81,11 +81,11 @@ class Comment extends Omeka_Record_AbstractRecord
             'comment_author_email' => $this->author_email,
             'comment_content' => $this->body,
         );
-        if($this->author_url) {
+        if ($this->author_url) {
             $data['comment_author_url'] = $this->author_url;
         }
 
-        if($this->author_name) {
+        if ($this->author_name) {
             $data['comment_author_name'] = $this->author_name;
         }
         return $data;
@@ -93,7 +93,7 @@ class Comment extends Omeka_Record_AbstractRecord
 
     protected function _validate()
     {
-        if(trim(strip_tags($this->body)) == '' ) {
+        if (trim(strip_tags($this->body)) == '' ) {
             $this->addError('body', "Can't leave an empty comment!");
         }
     }
@@ -118,7 +118,7 @@ class Comment extends Omeka_Record_AbstractRecord
 
     public function setArray($data)
     {
-        if(empty($data['parent_comment_id'])) {
+        if (empty($data['parent_comment_id'])) {
             $data['parent_comment_id'] = null;
         }
         parent::setArray($data);

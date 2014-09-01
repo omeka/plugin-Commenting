@@ -9,7 +9,7 @@ class Commenting_CommentForm extends Omeka_Form
         $user = current_user();
 
         //assume registered users are trusted and don't make them play recaptcha
-        if(!$user && get_option('recaptcha_public_key') && get_option('recaptcha_private_key')) {
+        if (!$user && get_option('recaptcha_public_key') && get_option('recaptcha_private_key')) {
             $this->addElement('captcha', 'captcha',  array(
                 'class' => 'hidden',
                 'label' => __("Please verify you're a human"),
@@ -18,25 +18,25 @@ class Commenting_CommentForm extends Omeka_Form
                     'pubkey' => get_option('recaptcha_public_key'),
                     'privkey' => get_option('recaptcha_private_key'),
                     'ssl' => true, //make the connection secure so IE8 doesn't complain. if works, should branch around http: vs https:
-                )
+                ),
             ));
         }
 
         $urlOptions = array(
-            'label'=>__('Website'),
+            'label' => __('Website'),
         );
         $emailOptions = array(
-            'label'=>__('Email (required)'),
-            'required'=>true,
+            'label' => __('Email (required)'),
+            'required' => true,
             'validators' => array(
                 array(
                     'validator' => 'EmailAddress',
-                )
-            )
+                ),
+            ),
         );
-        $nameOptions =  array('label'=> __('Your name'));
+        $nameOptions = array('label' => __('Your name'));
 
-        if($user) {
+        if ($user) {
             $emailOptions['value'] = $user->email;
             $nameOptions['value'] = $user->name;
         }
@@ -44,11 +44,11 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('text', 'author_url', $urlOptions);
         $this->addElement('text', 'author_email', $emailOptions);
         $this->addElement('textarea', 'body', array(
-            'label'=>__('Comment'),
-            'description'=> __("Allowed tags:") . " &lt;p&gt;, &lt;a&gt;, &lt;em&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;",
-            'id'=>'comment-form-body',
-            'required'=>true,
-            'filters'=> array(
+            'label' => __('Comment'),
+            'description' => __("Allowed tags:") . " &lt;p&gt;, &lt;a&gt;, &lt;em&gt;, &lt;strong&gt;, &lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;",
+            'id' => 'comment-form-body',
+            'required' => true,
+            'filters' => array(
                 array(
                     'StripTags',
                     array(
@@ -65,12 +65,12 @@ class Commenting_CommentForm extends Omeka_Form
                 'label' => get_option('commenting_legal_text'),
                 'value' => (boolean) $user,
                 'required' => true,
-                'uncheckedValue'=> '',
+                'uncheckedValue' => '',
                 'checkedValue' => 'checked',
                 'validators' => array(
                     array('notEmpty', true, array(
                         'messages' => array(
-                            'isEmpty'=> __('You must agree to the terms and conditions.'),
+                            'isEmpty' => __('You must agree to the terms and conditions.'),
                         ),
                     )),
                 ),
@@ -84,29 +84,29 @@ class Commenting_CommentForm extends Omeka_Form
         $record_id = $this->_getRecordId($params);
         $record_type = $this->_getRecordType($params);
 
-        $this->addElement('hidden', 'record_id', array('value'=>$record_id, 'decorators'=>array('ViewHelper') ));
-        $this->addElement('hidden', 'path', array('value'=>  $request->getPathInfo(), 'decorators'=>array('ViewHelper')));
-        if(isset($params['module'])) {
-            $this->addElement('hidden', 'module', array('value'=>$params['module'], 'decorators'=>array('ViewHelper')));
+        $this->addElement('hidden', 'record_id', array('value' => $record_id, 'decorators' => array('ViewHelper')));
+        $this->addElement('hidden', 'path', array('value' => $request->getPathInfo(), 'decorators' => array('ViewHelper')));
+        if (isset($params['module'])) {
+            $this->addElement('hidden', 'module', array('value' => $params['module'], 'decorators' => array('ViewHelper')));
         }
-        $this->addElement('hidden', 'record_type', array('value'=>$record_type, 'decorators'=>array('ViewHelper')));
-        $this->addElement('hidden', 'parent_comment_id', array('id'=>'parent-id', 'value'=>null, 'decorators'=>array('ViewHelper')));
-        fire_plugin_hook('commenting_form', array('comment_form' => $this) );
-        $this->addElement('submit', 'submit', array('label'=>__('Submit')));
+        $this->addElement('hidden', 'record_type', array('value' => $record_type, 'decorators' => array('ViewHelper')));
+        $this->addElement('hidden', 'parent_comment_id', array('id' => 'parent-id', 'value' => null, 'decorators' => array('ViewHelper')));
+        fire_plugin_hook('commenting_form', array('comment_form' => $this));
+        $this->addElement('submit', 'submit', array('label' => __('Submit')));
     }
 
 
     private function _getRecordId($params)
     {
-        if(isset($params['module'])) {
+        if (isset($params['module'])) {
             switch($params['module']) {
                 case 'exhibit-builder':
                     //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                     //to dig up the record_id and model
-                    if(!empty($params['page_slug_1'])) {
+                    if (!empty($params['page_slug_1'])) {
                         $page = get_current_record('exhibit_page', false);
                         $id = $page->id;
-                    } else if(!empty($params['item_id'])) {
+                    } elseif (!empty($params['item_id'])) {
                         $id = $params['item_id'];
                     } else {
 //todo: check the ifs for an exhibit showing an item
@@ -127,15 +127,15 @@ class Commenting_CommentForm extends Omeka_Form
 
     private function _getRecordType($params)
     {
-        if(isset($params['module'])) {
+        if (isset($params['module'])) {
             switch($params['module']) {
                 case 'exhibit-builder':
                     //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                     //to dig up the record_id and model
-                    if(!empty($params['page_slug_1'])) {
+                    if (!empty($params['page_slug_1'])) {
                         $page = get_current_record('exhibit_page', false);
                         $model = 'ExhibitPage';
-                    } else if(!empty($params['item_id'])) {
+                    } elseif (!empty($params['item_id'])) {
                         $model = 'Item';
                     } else {
 //TODO: check for other possibilities

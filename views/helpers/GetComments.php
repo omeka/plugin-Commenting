@@ -7,11 +7,11 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $params = $request->getParams();
 
-        if(!$record_id) {
+        if (!$record_id) {
             $record_id = $this->_getRecordId($params);
         }
 
-        if(!$record_type) {
+        if (!$record_type) {
             $record_type = $this->_getRecordType($params);
         }
 
@@ -21,17 +21,17 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
                 'record_type' => $record_type,
                 'record_id' => $record_id,
         );
-        if(isset($options['approved'])) {
+        if (isset($options['approved'])) {
             $searchParams['approved'] = $options['approved'];
         }
 
-        if(!is_allowed('Commenting_Comment', 'update-approved')) {
+        if (!is_allowed('Commenting_Comment', 'update-approved')) {
             $searchParams['flagged'] = 0;
             $searchParams['is_spam'] = 0;
         }
 
         $select = $commentTable->getSelectForFindBy($searchParams);
-        if(isset($options['order'])) {
+        if (isset($options['order'])) {
             $select->order("ORDER BY added " . $options['order']);
         }
         return $commentTable->fetchObjects($select);
@@ -39,12 +39,12 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
 
     private function _getRecordId($params)
     {
-        if(isset($params['module'])) {
+        if (isset($params['module'])) {
             switch($params['module']) {
                 case 'exhibit-builder':
                     //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                     //to dig up the record_id and model
-                    if(isset($this->view->exhibit_page)) {
+                    if (isset($this->view->exhibit_page)) {
                         $id = $this->view->exhibit_page->id;
                     } else {
                         $id = $params['item_id'];
@@ -63,12 +63,12 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
 
     private function _getRecordType($params)
     {
-        if(isset($params['module'])) {
+        if (isset($params['module'])) {
             switch($params['module']) {
                 case 'exhibit-builder':
                     //ExhibitBuilder uses slugs in the params, so need to negotiate around those
                     //to dig up the record_id and model
-                    if(!empty($params['page_slug_1'])) {
+                    if (!empty($params['page_slug_1'])) {
                         $model = 'ExhibitPage';
                     } else {
                         $model = 'Item';

@@ -17,7 +17,7 @@ jQuery(window).load(function () {
             <p class="explanation"><?php echo __("If checked, replies will be displayed indented below the comment."); ?></p>
             <div class="input-block">
             <?php echo $view->formCheckbox('commenting_threaded', null, array(
-                'checked'=> (bool) get_option('commenting_threaded') ? 'checked' : '',
+                'checked' => (bool) get_option('commenting_threaded') ? 'checked' : '',
             )); ?>
             </div>
         </div>
@@ -66,7 +66,7 @@ jQuery(window).load(function () {
                 <p class="explanation"><?php echo __("Allows everyone, including non-registered users to comment. Using this without Akismet is strongly discouraged."); ?></p>
             <div class="input-block">
                 <?php echo $view->formCheckbox('commenting_allow_public', null, array(
-                    'checked'=> (bool) get_option('commenting_allow_public') ? 'checked' : '',
+                    'checked' => (bool) get_option('commenting_allow_public') ? 'checked' : '',
                 )); ?>
             </div>
         </div>
@@ -80,7 +80,7 @@ jQuery(window).load(function () {
         <p class='explanation'><?php echo __("If unchecked, comments will appear immediately."); ?></p>
         <div class="input-block">
             <?php echo $view->formCheckbox('commenting_require_public_moderation', null, array(
-                'checked'=> (bool) get_option('commenting_require_public_moderation') ? 'checked' : '',
+                'checked' => (bool) get_option('commenting_require_public_moderation') ? 'checked' : '',
             )); ?>
         </div>
     </div>
@@ -98,10 +98,10 @@ jQuery(window).load(function () {
                 $userRoles = get_user_roles();
                 unset($userRoles['super']);
                 echo '<ul>';
-                foreach($userRoles as $role=>$label) {
+                foreach ($userRoles as $role => $label) {
                     echo '<li>';
                     echo $view->formCheckbox('commenting_moderate_roles[]', $role, array(
-                        'checked'=> in_array($role, $moderateRoles) ? 'checked' : '',
+                        'checked' => in_array($role, $moderateRoles) ? 'checked' : '',
                     ));
                     echo $label;
                     echo '</li>';
@@ -124,10 +124,10 @@ jQuery(window).load(function () {
                 <?php
                     $commentRoles = unserialize(get_option('commenting_comment_roles'));
                     echo '<ul>';
-                    foreach($userRoles as $role=>$label) {
+                    foreach ($userRoles as $role => $label) {
                         echo '<li>';
                         echo $view->formCheckbox('commenting_comment_roles[]', $role, array(
-                            'checked'=> in_array($role, $commentRoles) ? 'checked' : '',
+                            'checked' => in_array($role, $commentRoles) ? 'checked' : '',
                         ));
                         echo $label;
                         echo '</li>';
@@ -148,10 +148,10 @@ jQuery(window).load(function () {
                 <?php
                     $reqAppCommentRoles = unserialize(get_option('commenting_reqapp_comment_roles'));
                     echo '<ul>';
-                    foreach($userRoles as $role=>$label) {
+                    foreach ($userRoles as $role => $label) {
                         echo '<li>';
                         echo $view->formCheckbox('commenting_reqapp_comment_roles[]', $role, array(
-                            'checked'=> in_array($role, $reqAppCommentRoles) ? 'checked' : '',
+                            'checked' => in_array($role, $reqAppCommentRoles) ? 'checked' : '',
                         ));
                         echo $label;
                         echo '</li>';
@@ -170,7 +170,7 @@ jQuery(window).load(function () {
             <p class="explanation"></p>
             <div class="input-block">
                 <?php echo $view->formCheckbox('commenting_allow_public_view', null, array(
-                    'checked'=> (bool) get_option('commenting_allow_public_view') ? 'checked' : '',
+                    'checked' => (bool) get_option('commenting_allow_public_view') ? 'checked' : '',
                 )); ?>
             </div>
         </div>
@@ -185,14 +185,14 @@ jQuery(window).load(function () {
             <div class="input-block">
                 <?php
                     $viewRoles = unserialize(get_option('commenting_view_roles'));
-                    if(!$viewRoles) {
+                    if (!$viewRoles) {
                         $viewRoles = array();
                     }
                     echo '<ul>';
-                    foreach($userRoles as $role=>$label) {
+                    foreach ($userRoles as $role=> $label) {
                         echo '<li>';
                         echo $view->formCheckbox('commenting_view_roles[]', $role, array(
-                            'checked'=> in_array($role, $viewRoles) ? 'checked' : '',
+                            'checked' => in_array($role, $viewRoles) ? 'checked' : '',
                         ));
                         echo $label;
                         echo '</li>';
@@ -203,7 +203,7 @@ jQuery(window).load(function () {
         </div>
     </div>
 
-<?php if(!Omeka_Captcha::isConfigured()): ?>
+<?php if (!Omeka_Captcha::isConfigured()): ?>
 <p class="alert"><?php echo __("You have not entered your %s API keys under %s. We recommend adding these keys, or the commenting form will be vulnerable to spam.", '<a href="http://recaptcha.net/">reCAPTCHA</a>', "<a href='" . url('security#recaptcha_public_key') . "'>" . __('security settings') . "</a>");?></p>
 <?php endif; ?>
 
@@ -216,7 +216,7 @@ jQuery(window).load(function () {
         <p class="explanation"></p>
         <div class="input-block">
             <?php echo $view->formText('commenting_wpapi_key', get_option('commenting_wpapi_key'),
-                array('size'=> 45)
+                array('size' => 45)
             );?>
         </div>
     </div>

@@ -7,7 +7,7 @@ try {
 
 }
 
-if(empty($label)) {
+if (empty($label)) {
     try {
         $label = metadata($record, 'name');
     } catch(InvalidArgumentException $e) {
@@ -15,7 +15,7 @@ if(empty($label)) {
     }
 }
 
-if(empty($label)) {
+if (empty($label)) {
     try {
         $label = metadata($record, 'title');
     } catch(InvalidArgumentException $e) {
@@ -23,7 +23,7 @@ if(empty($label)) {
     }
 }
 
-if(empty($label)) {
+if (empty($label)) {
     try {
         $label = metadata($record, 'label');
     } catch(InvalidArgumentException $e) {
@@ -32,7 +32,7 @@ if(empty($label)) {
 }
 
 //sad trombone. couldn't find a label!
-if(empty($label)) {
+if (empty($label)) {
     $label = __('[Untitled]');
 }
 ?>
@@ -44,8 +44,8 @@ if(empty($label)) {
             <li class='comment-target'>
             <span class='comment-author'>
                 <?php
-                    if(!empty($comment->author_name)) {
-                        if(empty($comment->author_url)) {
+                    if (!empty($comment->author_name)) {
+                        if (empty($comment->author_url)) {
                             $authorText = $comment->author_name;
                         } else {
                             $authorText = "<a href='{$comment->author_url}'>{$comment->author_name}</a>";
@@ -61,7 +61,7 @@ if(empty($label)) {
 
             <li class='approved' <?php echo $comment->approved ? "" : "style='display:none'"; ?>><span class='status approved'><?php echo __("Approved"); ?></span><span class='unapprove action'><?php echo __("Unapprove"); ?></span></li>
             <li class='unapproved' <?php echo $comment->approved ? "style='display:none'" : "";  ?>><span class='status unapproved'><?php echo __("Not Approved"); ?></span><span class='approve action'><?php echo __("Approve"); ?></span></li>
-            <?php if(get_option('commenting_wpapi_key') != ''): ?>
+            <?php if (get_option('commenting_wpapi_key') != ''): ?>
                 <li class='spam' <?php echo $comment->is_spam ? "" : "style='display:none'"; ?>><span class='status spam'><?php echo __("Spam"); ?></span><span class='report-ham action'><?php echo __("Report Not Spam"); ?></span></li>
                 <li class='ham' <?php echo $comment->is_spam ? "style='display:none'" : "";  ?>><span class='status ham'><?php echo __("Not Spam"); ?></span><span class='report-spam action'><?php echo __("Report Spam"); ?></span></li>
 

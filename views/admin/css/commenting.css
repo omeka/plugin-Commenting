@@ -1,10 +1,16 @@
-a#batch-delete, a#batch-approve, a#batch-unapprove, a#batch-report-spam, a#batch-report-ham, a#batch-flag, a#batch-unflag {
+a#batch-delete,
+a#batch-approve,
+a#batch-unapprove,
+a#batch-report-spam,
+a#batch-report-ham,
+a#batch-flag,
+a#batch-unflag {
     padding: 3px 2px;
     margin: 0 0 20px;
 }
 
 li.delete {
-    float:left;
+    float: left;
     margin-right: 5px;
 }
 

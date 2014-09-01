@@ -30,13 +30,13 @@ var Commenting = {
 
     flagResponseHandler: function(response, status, jqxhr) {
         var comment = jQuery('#comment-' + response.id);
-        if(response.action == 'flagged') {
+        if (response.action == 'flagged') {
             comment.find('div.comment-body').addClass('comment-flagged');
             comment.find('p.comment-flag').hide();
             comment.find('p.comment-unflag').show();
         }
 
-        if(response.action == 'unflagged') {
+        if (response.action == 'unflagged') {
             comment.find('div.comment-body').removeClass('comment-flagged');
             comment.find('p.comment-flag').show();
             comment.find('p.comment-unflag').hide();
@@ -57,11 +57,11 @@ var Commenting = {
  * defaults.
  */
 
-if(typeof Omeka == 'undefined' ) {
+if (typeof Omeka == 'undefined' ) {
     Omeka = {};
 }
 
-if(typeof Omeka.wysiwyg == 'undefined') {
+if (typeof Omeka.wysiwyg == 'undefined') {
     Omeka.wysiwyg = function (params) {
         // Default parameters
         initParams = {

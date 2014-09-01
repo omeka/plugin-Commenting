@@ -24,7 +24,8 @@ form#comment-form {
     line-height: 1em;
 }
 
-form#comment-form input, form#comment-form textarea {
+form#comment-form input,
+form#comment-form textarea {
     height: inherit;
     font-size: 14px;
     line-height: 1em;
@@ -54,8 +55,9 @@ div.comment-author {
     width: 100px;
 }
 
-.comment-flag , .comment-unflag {
-    float:left;
+.comment-flag, 
+.comment-unflag {
+    float: left;
     cursor: pointer;
 }
 
@@ -84,7 +86,8 @@ input.hidden {
     display:none;
 }
 
-span.comment-flag, span.comment-unflag {
+span.comment-flag,
+span.comment-unflag {
     padding-left: 6px;
     cursor: pointer;
 }

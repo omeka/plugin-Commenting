@@ -71,10 +71,10 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     public function setUp()
     {
 
-        if(plugin_is_active('SimplePages')) {
+        if (plugin_is_active('SimplePages')) {
             $this->_filters[] = 'api_extend_simple_pages';
         }
-        if(plugin_is_active('ExhibitBuilder')) {
+        if (plugin_is_active('ExhibitBuilder')) {
             $this->_filters[] = 'api_extend_exhibit_pages';
         }
         parent::setUp();
@@ -130,32 +130,32 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $old = $args['old_version'];
         $new = $args['new_version'];
 
-        if(version_compare($old, '1.0', '<')) {
-            if(!get_option('commenting_comment_roles')) {
+        if (version_compare($old, '1.0', '<')) {
+            if (!get_option('commenting_comment_roles')) {
                 $commentRoles = array('super');
                 set_option('commenting_comment_roles', serialize($commentRoles));
             }
 
-            if(!get_option('commenting_moderate_roles')) {
+            if (!get_option('commenting_moderate_roles')) {
                 $moderateRoles = array('super');
                 set_option('commenting_moderate_roles', serialize($moderateRoles));
             }
 
-            if(!get_option('commenting_noapp_comment_roles')) {
+            if (!get_option('commenting_noapp_comment_roles')) {
                 set_option('commenting_noapp_comment_roles', serialize(array()));
             }
 
-            if(!get_option('commenting_view_roles')) {
+            if (!get_option('commenting_view_roles')) {
                 set_option('commenting_view_roles', serialize(array()));
             }
         }
 
-        if(version_compare($old, '2.0', '<')) {
+        if (version_compare($old, '2.0', '<')) {
             $sql = "ALTER TABLE `$db->Comment` ADD `flagged` BOOLEAN NOT NULL DEFAULT '0' AFTER `approved` ";
             $db->query($sql);
         }
 
-        if(version_compare($old, '2.1', '<')) {
+        if (version_compare($old, '2.1', '<')) {
             delete_option('commenting_noapp_comment_roles');
             set_option('commenting_reqapp_comment_roles', serialize(array()));
             $sql = "ALTER TABLE `$db->Comment` CHANGE `flagged` `flagged` TINYINT( 1 ) NOT NULL DEFAULT '0'";
@@ -192,8 +192,8 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $record = $args['record'];
         $type = get_class($record);
-        $comments = get_db()->getTable('Comment')->findBy(array('record_type'=>$type, 'record_id'=>$record->id));
-        foreach($comments as $comment) {
+        $comments = get_db()->getTable('Comment')->findBy(array('record_type' => $type, 'record_id' => $record->id));
+        foreach ($comments as $comment) {
             $comment->delete();
         }
     }
@@ -205,7 +205,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $view = isset($args['view']) ? $args['view'] : get_view();
         echo "<div id='comments-container'>";
-        if( (get_option('commenting_allow_public') == 1)
+        if ((get_option('commenting_allow_public') == 1)
                 || (get_option('commenting_allow_public_view') == 1)
                 || is_allowed('Commenting_Comment', 'show')
             ) {
@@ -221,8 +221,8 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             ));
         }
 
-        if( (get_option('commenting_allow_public') == 1)
-                || is_allowed('Commenting_Comment', 'add') ) {
+        if ((get_option('commenting_allow_public') == 1)
+                || is_allowed('Commenting_Comment', 'add')) {
             echo "<div id='comment-main-container'>";
             echo $view->getCommentForm();
             echo "</div>";
@@ -273,22 +273,22 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $moderateRoles = unserialize(get_option('commenting_moderate_roles'));
         $viewRoles = unserialize(get_option('commenting_view_roles'));
         $acl->allow(null, 'Commenting_Comment', array('flag'));
-        if($viewRoles !== false) {
-            foreach($viewRoles as $role) {
+        if ($viewRoles !== false) {
+            foreach ($viewRoles as $role) {
                 //check that all the roles exist, in case a plugin-added role has been removed (e.g. GuestUser)
-                if($acl->hasRole($role)) {
+                if ($acl->hasRole($role)) {
                     $acl->allow($role, 'Commenting_Comment', 'show');
                 }
             }
 
-            foreach($commentRoles as $role) {
-                if($acl->hasRole($role)) {
+            foreach ($commentRoles as $role) {
+                if ($acl->hasRole($role)) {
                     $acl->allow($role, 'Commenting_Comment', 'add');
                 }
             }
 
-            foreach($moderateRoles as $role) {
-                if($acl->hasRole($role)) {
+            foreach ($moderateRoles as $role) {
+                if ($acl->hasRole($role)) {
                     $acl->allow($role, 'Commenting_Comment', array(
                         'update-approved',
                         'update-spam',
@@ -300,7 +300,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
                 }
             }
 
-            if(get_option('commenting_allow_public')) {
+            if (get_option('commenting_allow_public')) {
                 $acl->allow(null, 'Commenting_Comment', array('show', 'add'));
             }
         }
@@ -308,8 +308,8 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     public function filterAdminNavigationMain($tabs)
     {
-        if(is_allowed('Commenting_Comment', 'update-approved') ) {
-            $tabs[] = array('uri'=> url('commenting/comment/browse'), 'label'=>__('Comments') );
+        if (is_allowed('Commenting_Comment', 'update-approved')) {
+            $tabs[] = array('uri' => url('commenting/comment/browse'), 'label' => __('Comments'));
         }
 
         return $tabs;

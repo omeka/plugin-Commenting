@@ -19,7 +19,7 @@ var Commenting = {
     },
 
     flagResponseHandler: function(response, textStatus, jqReq) {
-        if(response.status == 'ok') {
+        if (response.status == 'ok') {
             for(var i=0; i < Commenting.elements.length; i++) {
                 Commenting.elements[i].find('li.flagged').toggle();
                 Commenting.elements[i].find('li.not-flagged').toggle();
@@ -47,7 +47,7 @@ var Commenting = {
 
 
     approveResponseHandler: function(response, textStatus, jqReq) {
-        if(response.status == 'ok') {
+        if (response.status == 'ok') {
             for(var i=0; i < Commenting.elements.length; i++) {
                 Commenting.elements[i].find('li.approved').toggle();
                 Commenting.elements[i].find('li.unapproved').toggle();
@@ -121,7 +121,7 @@ var Commenting = {
     },
 
     spamResponseHandler: function(response, textStatus, jqReq) {
-        if(response.status == 'ok') {
+        if (response.status == 'ok') {
             for(var i=0; i < Commenting.elements.length; i++) {
                 Commenting.elements[i].find('li.spam').toggle();
                 Commenting.elements[i].find('li.ham').toggle();
@@ -132,7 +132,7 @@ var Commenting = {
     },
 
     toggleSelected: function() {
-        if(jQuery(this).is(':checked')) {
+        if (jQuery(this).is(':checked')) {
             Commenting.batchSelect();
         } else {
             Commenting.batchUnselect();
@@ -142,7 +142,7 @@ var Commenting = {
     toggleActive: function() {
         //toggle whether the bulk actions should be active
         //check all in checkboxes, if any are checked, must be active
-        if(jQuery('.batch-select-comment:checked').length == 0) {
+        if (jQuery('.batch-select-comment:checked').length == 0) {
             jQuery('#batch-delete').unbind('click');
             jQuery('#batch-approve').unbind('click');
             jQuery('#batch-unapprove').unbind('click');
