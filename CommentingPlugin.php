@@ -70,7 +70,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
               `is_spam` tinyint(1) NOT NULL DEFAULT '0',
               PRIMARY KEY (`id`),
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
-            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ";
         $db->query($sql);
         set_option('commenting_comment_roles', serialize(array()));
