@@ -9,6 +9,45 @@ jQuery(window).load(function () {
 </script>
 <?php js_tag('commenting-config-form'); ?>
 <?php $view = get_view(); ?>
+<div class="field">
+    <div class="three columns alpha">
+        <label><?php echo __("Pages where to add comments"); ?></label>
+    </div>
+    <div class="inputs four columns omega">
+        <p class="explanation"><?php echo __('The type of pages where commenting is enabled.'
+        . ' Note that you need to add the hook "commenting_comments" in corresponding pages of your theme too.'); ?></p>
+        <div class="input-block">
+            <?php
+                $commentingPages = unserialize(get_option('commenting_pages'));
+
+                $pages = array(
+                    'collections/show' => __('Collections'),
+                    'items/show' => __('Items'),
+                    'files/show' => __('Files'),
+                );
+                if (plugin_is_active('SimplePages')) {
+                    $pages['page/show'] = __('Simple pages');
+                }
+                if (plugin_is_active('ExhibitBuilder')) {
+                    $pages['exhibits/summary'] = __('Exhibits summary');
+                    $pages['exhibits/show'] = __('Exhibits pages');
+                }
+
+                echo '<ul>';
+                foreach ($pages as $page => $label) {
+                    echo '<li>';
+                    echo $view->formCheckbox('commenting_pages[]', $page, array(
+                        'checked' => in_array($page, $commentingPages) ? 'checked' : '',
+                    ));
+                    echo $label;
+                    echo '</li>';
+                }
+                echo '</ul>';
+            ?>
+        </div>
+    </div>
+</div>
+
     <div class="field">
         <div class="three columns alpha">
             <label><?php echo __("Use Threaded Comments?"); ?></label>

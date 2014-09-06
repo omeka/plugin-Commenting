@@ -1,6 +1,23 @@
 <?php
 class Commenting_CommentForm extends Omeka_Form
 {
+    protected $_record;
+
+    /**
+     * Constructor
+     *
+     * Registers form view helper as decorator
+     *
+     * @param mixed $options
+     * @return void
+     */
+    public function __construct($record = null)
+    {
+        $this->_record = $record;
+
+        parent::__construct();
+    }
+
     public function init()
     {
         parent::init();
@@ -19,6 +36,7 @@ class Commenting_CommentForm extends Omeka_Form
                     'privkey' => get_option('recaptcha_private_key'),
                     'ssl' => true, //make the connection secure so IE8 doesn't complain. if works, should branch around http: vs https:
                 ),
+                'decorators' => array(),
             ));
         }
 
@@ -95,50 +113,98 @@ class Commenting_CommentForm extends Omeka_Form
         $this->addElement('submit', 'submit', array('label' => __('Submit')));
     }
 
-
+    /**
+     * Helper to get record id from request params.
+     *
+     * @see plugins/Commenting/views/helpers/GetComments.php
+     *
+     * @todo To be merged.
+     */
     private function _getRecordId($params)
     {
+        if (!empty($this->_record)) {
+            return $this->_record->id;
+        }
+
+        if (isset($params['module'])
+                && $params['module'] == 'commenting'
+                && $params['controller'] == 'comment'
+                && $params['action'] == 'add'
+            ) {
+            return $params['record_id'];
+        }
+
+//@TODO: update exhibit-builder handling for 2.0
         if (isset($params['module'])) {
-            switch($params['module']) {
+            switch ($params['module']) {
                 case 'exhibit-builder':
-                    //ExhibitBuilder uses slugs in the params, so need to negotiate around those
-                    //to dig up the record_id and model
-                    if (!empty($params['page_slug_1'])) {
-                        $page = get_current_record('exhibit_page', false);
-                        $id = $page->id;
-                    } elseif (!empty($params['item_id'])) {
-                        $id = $params['item_id'];
-                    } else {
+                    $view = get_view();
+                    // ExhibitBuilder uses slugs in the params, so need to
+                    // negotiate around those to dig up the record_id and model.
+                    if (isset($view->exhibit) && isset($view->exhibit_pages)) {
+                        $id = $view->exhibit->id;
+                    }
+                    elseif (isset($view->exhibit_page)) {
+                        $id = $view->exhibit_page->id;
+                    }
 //todo: check the ifs for an exhibit showing an item
+                    elseif (isset($params['item_id'])) {
+                        $id = $params['item_id'];
+                    }
+                    else {
+                        $id = isset($params['id']) ? $params['id'] : null;
                     }
                     break;
 
                 default:
-                    $id = $params['id'];
+                    $id = isset($params['id']) ? $params['id'] : null;
                     break;
             }
-        } else {
+        }
+        // Default for collections, items and files.
+        else {
             $id = $params['id'];
         }
         return $id;
-
-
     }
 
+    /**
+     * Helper to get record type from request params.
+     *
+     * @see plugins/Commenting/views/helpers/GetComments.php
+     *
+     * @todo To be merged.
+     */
     private function _getRecordType($params)
     {
+        if (!empty($this->_record)) {
+            return get_class($this->_record);
+        }
+
+        if (isset($params['module'])
+                && $params['module'] == 'commenting'
+                && $params['controller'] == 'comment'
+                && $params['action'] == 'add'
+            ) {
+            return $params['record_type'];
+        }
+
+//@TODO: update exhibit-builder handling for 2.0
         if (isset($params['module'])) {
-            switch($params['module']) {
+            switch ($params['module']) {
                 case 'exhibit-builder':
-                    //ExhibitBuilder uses slugs in the params, so need to negotiate around those
-                    //to dig up the record_id and model
-                    if (!empty($params['page_slug_1'])) {
-                        $page = get_current_record('exhibit_page', false);
+                    $view = get_view();
+                    // ExhibitBuilder uses slugs in the params, so need to
+                    // negotiate around those to dig up the record_id and model.
+                    if (isset($view->exhibit) && isset($view->exhibit_pages)) {
+                        $model = 'Exhibit';
+                    }
+                    elseif (isset($view->exhibit_page)) {
                         $model = 'ExhibitPage';
-                    } elseif (!empty($params['item_id'])) {
+                    }
+// Todo: check the ifs for an exhibit showing an item.
+                    else {
                         $model = 'Item';
-                    } else {
-//TODO: check for other possibilities
                     }
                     break;
 
@@ -146,7 +212,9 @@ class Commenting_CommentForm extends Omeka_Form
                     $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
                     break;
             }
-        } else {
+        }
+        // Default for collections, items and files.
+        else {
             $model = ucfirst(Inflector::singularize($params['controller']));
         }
         return $model;

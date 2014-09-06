@@ -32,20 +32,88 @@ See USE CASES below for examples of configuration combinations
 DISPLAYING COMMENTS
 ===================
 
-Commenting will automatically add commenting options to Item and Collection show pages. To enable commenting on other
-record types from modules (e.g. SimplePages or ExhibitBuilder), you will have to add the following lines
+Commenting will automatically add commenting options to Item and Collection show
+pages via default public hooks:
+
+```php
+fire_plugin_hook('public_items_show', array('view' => $this, 'item' => $item));
+```php
+
+or
+
+```php
+fire_plugin_hook('public_collections_show', array('view' => $this, 'collection' => $collection));
+```
+
+For flexibility and to enable commenting on other record types from modules
+(e.g. SimplePages or ExhibitBuilder), you will have to add the following lines
 to the appropriate place in the plugin's public view script:
 
 ```php
-<?php CommentingPlugin::showComments(); ?>
+fire_plugin_hook('commenting_comments');
 ```
 
-Keep in mind that updating themes or plugins will clobber your addition of the commenting functions.
+or with options:
 
-The Commenting plugin knows how to work with SimplePages and ExhibitBuilder. Due to variability
-in how plugins store their data in the database, other record types and views supplied by other plugins 
-might or might not work out of the box. Please ask on the forums or dev list if you would like Commenting
-to work with other plugins. 
+```php
+fire_plugin_hook('commenting_comments', array(
+    'view' => $this,
+    'display' => array('comments', 'comment_form'),
+    'comments' => $comments,
+));
+```
+
+For example, to show comments on exhibit sections and pages, the file `/plugins/ExhibitBuilder/views/public/exhibits/show.php`
+could look like:
+
+```php
+<?php
+echo head(array(
+    'title' => metadata('exhibit_page', 'title') . ' &middot; ' . metadata('exhibit', 'title'),
+    'bodyclass' => 'exhibits show'));
+?>
+
+<nav id="exhibit-pages">
+    <?php echo exhibit_builder_page_nav(); ?>
+</nav>
+
+<h1><span class="exhibit-page"><?php echo metadata('exhibit_page', 'title'); ?></h1>
+
+<nav id="exhibit-child-pages">
+    <?php echo exhibit_builder_child_page_nav(); ?>
+</nav>
+
+<?php exhibit_builder_render_exhibit_page(); ?>
+
+<?php fire_plugin_hook('commenting_comments'); ?>
+
+<div id="exhibit-page-navigation">
+    <?php if ($prevLink = exhibit_builder_link_to_previous_page()): ?>
+    <div id="exhibit-nav-prev">
+        <?php echo $prevLink; ?>
+    </div>
+    <?php endif; ?>
+    <?php if ($nextLink = exhibit_builder_link_to_next_page()): ?>
+    <div id="exhibit-nav-next">
+        <?php echo $nextLink; ?>
+    </div>
+    <?php endif; ?>
+    <div id="exhibit-nav-up">
+        <?php echo exhibit_builder_page_trail(); ?>
+    </div>
+</div>
+
+<?php echo foot(); ?>
+```
+
+Keep in mind that updating themes or plugins will clobber your addition of the
+commenting functions.
+
+The Commenting plugin knows how to work with SimplePages and ExhibitBuilder. Due
+to variability in how plugins store their data in the database, other record
+types and views supplied by other plugins might or might not work out of the
+box. Please ask on the forums or dev list if you would like Commenting to work
+with other plugins.
 
 
 USE CASES

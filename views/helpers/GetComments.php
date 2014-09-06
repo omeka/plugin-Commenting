@@ -2,17 +2,18 @@
 
 class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
 {
-    public function getComments($options = array(), $record_id = null, $record_type = null)
+    public function getComments($options = array(), $record = null)
     {
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $params = $request->getParams();
 
-        if (!$record_id) {
-            $record_id = $this->_getRecordId($params);
+        if ($record) {
+            $record_type = get_class($record);
+            $record_id = $record->id;
         }
-
-        if (!$record_type) {
+        else {
             $record_type = $this->_getRecordType($params);
+            $record_id = $this->_getRecordId($params);
         }
 
         $db = get_db();
@@ -37,40 +38,87 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
         return $commentTable->fetchObjects($select);
     }
 
+    /**
+     * Helper to get record id from request params.
+     *
+     * @see plugins/Commenting/forms/CommentForm.php
+     *
+     * @todo To be merged.
+     */
     private function _getRecordId($params)
     {
+        if (isset($params['module'])
+                && $params['module'] == 'commenting'
+                && $params['controller'] == 'comment'
+                && $params['action'] == 'add'
+            ) {
+            return $params['record_id'];
+        }
+
         if (isset($params['module'])) {
-            switch($params['module']) {
+            switch ($params['module']) {
                 case 'exhibit-builder':
-                    //ExhibitBuilder uses slugs in the params, so need to negotiate around those
-                    //to dig up the record_id and model
-                    if (isset($this->view->exhibit_page)) {
-                        $id = $this->view->exhibit_page->id;
-                    } else {
+                    $view = get_view();
+                    // ExhibitBuilder uses slugs in the params, so need to
+                    // negotiate around those to dig up the record_id and model.
+                    if (isset($view->exhibit) && isset($view->exhibit_pages)) {
+                        $id = $view->exhibit->id;
+                    }
+                    elseif (isset($view->exhibit_page)) {
+                        $id = $view->exhibit_page->id;
+                    }
+//todo: check the ifs for an exhibit showing an item
+                    elseif (isset($params['item_id'])) {
                         $id = $params['item_id'];
+                    }
+                    else {
+                        $id = isset($params['id']) ? $params['id'] : null;
                     }
                     break;
 
                 default:
-                    $id = $params['id'];
+                    $id = isset($params['id']) ? $params['id'] : null;
                     break;
             }
-        } else {
+        }
+        // Default for collections, items and files.
+        else {
             $id = $params['id'];
         }
         return $id;
     }
 
+    /**
+     * Helper to get record type from request params.
+     *
+     * @see plugins/Commenting/forms/CommentForm.php
+     *
+     * @todo To be merged.
+     */
     private function _getRecordType($params)
     {
+        if (isset($params['module'])
+                && $params['module'] == 'commenting'
+                && $params['controller'] == 'comment'
+                && $params['action'] == 'add'
+            ) {
+            return $params['record_type'];
+        }
+
         if (isset($params['module'])) {
-            switch($params['module']) {
+            switch ($params['module']) {
                 case 'exhibit-builder':
-                    //ExhibitBuilder uses slugs in the params, so need to negotiate around those
-                    //to dig up the record_id and model
-                    if (!empty($params['page_slug_1'])) {
+                    $view = get_view();
+                    // ExhibitBuilder uses slugs in the params, so need to
+                    // negotiate around those to dig up the record_id and model.
+                    if (isset($view->exhibit) && isset($view->exhibit_pages)) {
+                        $model = 'Exhibit';
+                    }
+                    elseif (isset($view->exhibit_page)) {
                         $model = 'ExhibitPage';
-                    } else {
+                    }
+// Todo: check the ifs for an exhibit showing an item.
+                    else {
                         $model = 'Item';
                     }
                     break;
@@ -79,7 +127,9 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
                     $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
                     break;
             }
-        } else {
+        }
+        // Default for collections, items and files.
+        else {
             $model = ucfirst(Inflector::singularize($params['controller']));
         }
         return $model;

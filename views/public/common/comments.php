@@ -9,6 +9,9 @@
     <div id='comments-flash'><?php echo $flash; ?></div>
     <?php endif; ?>
     <?php echo fire_plugin_hook('commenting_prepend_to_comments', array('comments' => $comments)); ?>
+    <?php if (empty($comments)): ?>
+    <p><?php echo __('No comment yet! Be the first to add one!'); ?></p>
+    <?php endif; ?>
     <?php if ($threaded) :?>
         <?php echo $this->partial('common/threaded-comments.php', array('comments' => $comments, 'parent_id' => null)); ?>
     <?php else: ?>

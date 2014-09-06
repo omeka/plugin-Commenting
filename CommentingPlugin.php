@@ -26,6 +26,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         'admin_head',
         'public_items_show',
         'public_collections_show',
+        'commenting_comments',
         'after_delete_record',
         'define_acl',
     );
@@ -46,6 +47,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
      */
     protected $_options = array(
         // serialize(array()) = 'a:0:{}'.
+        'commenting_pages' => 'a:2:{i:0;s:16:"collections/show";i:1;s:10:"items/show";}',
         'commenting_comment_roles' => 'a:0:{}',
         'commenting_moderate_roles' => 'a:0:{}',
         'commenting_reqapp_comment_roles' => 'a:0:{}',
@@ -158,6 +160,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         if (version_compare($old, '2.1', '<')) {
             delete_option('commenting_noapp_comment_roles');
             set_option('commenting_reqapp_comment_roles', serialize(array()));
+            set_option('commenting_pages', $this->_options('commenting_pages'));
             $sql = "ALTER TABLE `$db->Comment` CHANGE `flagged` `flagged` TINYINT( 1 ) NOT NULL DEFAULT '0'";
             $db->query($sql);
         }
@@ -175,17 +178,38 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         $this->_uninstallOptions();
     }
 
-    public function hookPublicHead()
+    public function hookPublicHead($args)
     {
-        queue_css_file('commenting');
-        queue_js_file('commenting');
-        queue_js_file('tiny_mce', 'javascripts/vendor/tiny_mce');
-        queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/commenting/comment/'");
+        if ($this->_isCommentingEnabled()) {
+            queue_css_file('commenting');
+            queue_js_file('commenting');
+            queue_js_file('tiny_mce', 'javascripts/vendor/tiny_mce');
+            queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/commenting/comment/'");
+        }
     }
 
-    public function hookAdminHead()
+    public function hookAdminHead($args)
     {
-        queue_css_file('commenting');
+        if ($this->_isCommentingEnabled()) {
+            queue_css_file('commenting');
+        }
+    }
+
+    /**
+     * Helper to determine if comments are enabled on current page or not.
+     */
+    private function _isCommentingEnabled()
+    {
+        static $isEnabled = null;
+        if (is_null($isEnabled)) {
+            $request = Zend_Controller_Front::getInstance()->getRequest();
+            $controller = $request->getControllerName();
+            $action = $request->getActionName();
+            $pages = get_option('commenting_pages');
+            $pages = empty($pages) ? array() : unserialize($pages);
+            $isEnabled = in_array($controller . '/' . $action, $pages);
+        }
+        return $isEnabled;
     }
 
     public function hookAfterDeleteRecord($args)
@@ -201,43 +225,63 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     /**
      * Helper to append comments and comment form to a page.
      */
-    public static function showComments($args = array())
+    protected function _showComments($args = array())
     {
         $view = isset($args['view']) ? $args['view'] : get_view();
-        echo "<div id='comments-container'>";
-        if ((get_option('commenting_allow_public') == 1)
-                || (get_option('commenting_allow_public_view') == 1)
-                || is_allowed('Commenting_Comment', 'show')
-            ) {
-            $options = array(
-                'threaded' => get_option('commenting_threaded'),
-                'approved' => true,
-            );
+        // This option allows to display comments and comment form separately.
+        $display = isset($args['display']) ? array($args['display']) : array('comments', 'comment_form');
+        $record = isset($args['record']) ? $args['record'] : null;
 
-            $comments = isset($args['comments']) ? $args['comments'] : $view->getComments($options);
-            echo $view->partial('common/comments.php', array(
-                'comments' => $comments,
-                'threaded' => $options['threaded'],
-            ));
+        $html = '<div id="comments-container">';
+
+        if (in_array('comments', $display)) {
+            if ((get_option('commenting_allow_public') == 1)
+                    || (get_option('commenting_allow_public_view') == 1)
+                    || is_allowed('Commenting_Comment', 'show')
+                ) {
+                $options = array(
+                    'threaded' => get_option('commenting_threaded'),
+                    'approved' => true,
+                );
+                $comments = isset($args['comments']) ? $args['comments'] : $view->getComments($options, $record);
+                $html .= $view->partial('common/comments.php', array(
+                    'comments' => $comments,
+                    'threaded' => $options['threaded'],
+                ));
+             }
         }
 
-        if ((get_option('commenting_allow_public') == 1)
-                || is_allowed('Commenting_Comment', 'add')) {
-            echo "<div id='comment-main-container'>";
-            echo $view->getCommentForm();
-            echo "</div>";
+        if (in_array('comment_form', $display)) {
+            if ((get_option('commenting_allow_public') == 1)
+                    || is_allowed('Commenting_Comment', 'add')
+                ) {
+                $html .= '<div id="comment-main-container">';
+                $html .= $view->getCommentForm($record);
+                $html .= '</div>';
+            }
         }
-        echo "</div>";
+
+        $html .= '</div>';
+        echo $html;
     }
 
     public function hookPublicItemsShow($args)
     {
-        self::showComments($args);
+        $this->_showComments($args);
     }
 
     public function hookPublicCollectionsShow($args)
     {
-        self::showComments($args);
+        $this->_showComments($args);
+    }
+
+    /**
+     * This hook can be used in place of view helpers GetComments() and
+     * GetCommentForm().
+     */
+    public function hookCommentingComments($args)
+    {
+        $this->_showComments($args);
     }
 
     public function hookConfigForm()
@@ -251,6 +295,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $post = $args['post'];
         foreach (array(
+                'commenting_pages',
                 'commenting_comment_roles',
                 'commenting_moderate_roles',
                 'commenting_view_roles',
@@ -368,7 +413,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     {
         $params = array(
             'record_type' => get_class($record),
-            'record_id' => $record->id
+            'record_id' => $record->id,
         );
         return get_db()->getTable('Comment')->count($params);
     }
