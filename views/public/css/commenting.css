@@ -1,38 +1,38 @@
-
 /* desperate attempts to prevent crazy padding across themes */
 div#comments-container div {
-	padding: 2px !important;
-	margin: 2px !important;
-	clear: both;
+    padding: 2px !important;
+    margin: 2px !important;
+    clear: both;
 }
 
 div#comments-container label {
-	padding: 2px !important;
-	margin: 2px !important;
+    padding: 2px !important;
+    margin: 2px !important;
 }
 
 div#comments-container div.comment-body {
-	margin-left: 100px !important;
-	margin-top: 12px !important;
-	min-height: 60px;
-	padding: 6px;		
+    margin-left: 100px !important;
+    margin-top: 12px !important;
+    min-height: 60px;
+    padding: 6px;
 }
 
 /* end desperation */
 
 form#comment-form {
-	clear:both;
-	line-height: 1em;	
+    clear:both;
+    line-height: 1em;
 }
 
-form#comment-form input, form#comment-form textarea {
+form#comment-form input,
+form#comment-form textarea {
     height: inherit;
     font-size: 14px;
     line-height: 1em;
 }
 
 div#comment-main-container {
-	max-width: 550px;
+    max-width: 550px;
 }
 
 div#comments-container div.comment-children {
@@ -40,42 +40,42 @@ div#comments-container div.comment-children {
 }
 
 div.comment {
-	margin-left: 12px;
-	margin-top: 3px;
-	margin-bottom: 6px;
-	clear: both;
-	min-height: 80px;
-	width: 60%;
-	min-width: 400px;
+    margin-left: 12px;
+    margin-top: 3px;
+    margin-bottom: 6px;
+    clear: both;
+    min-height: 80px;
+    width: 60%;
+    min-width: 400px;
 }
 
 div.comment-author {
-	float: left;	
-	margin: 0 6px;
-	width: 100px;
+    float: left;
+    margin: 0 6px;
+    width: 100px;
 }
 
-.comment-flag , .comment-unflag {
-    float:left;
+.comment-flag, 
+.comment-unflag {
+    float: left;
     cursor: pointer;
 }
 
 div.comment-flagged {
-    background-color: pink;
+    background-color: #F09999;
 }
 
-
 div.comment-body p {
-	font-size: 1em;	
+    font-size: 1em;
 }
 
 .comment-reply {
-	cursor: pointer;	
-	float: right;
+    cursor: pointer;
+    float: right;
 }
 
 p.comment-author-name {
-	margin: 0;	
+    margin: 0;
 }
 
 div.success {
@@ -83,16 +83,16 @@ div.success {
 }
 
 input.hidden {
-	display:none;		
+    display:none;
 }
 
-span.comment-flag, span.comment-unflag {
+span.comment-flag,
+span.comment-unflag {
     padding-left: 6px;
     cursor: pointer;
 }
 
 a.mceButton {
-	overflow: inherit;
-	
-}
+    overflow: inherit;
 
+}
