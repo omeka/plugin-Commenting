@@ -28,6 +28,13 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     );
 
     /**
+     * @var array Options and their default values.
+     */
+    protected $_options = array(
+        'commenting_legal_text' => '',
+    );
+
+    /**
      * Add the translations.
      */
     public function hookInitialize()
@@ -78,6 +85,15 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         set_option('commenting_reqapp_comment_roles', serialize(array()));
         set_option('commenting_view_roles', serialize(array()));
 
+        $html = '<p>';
+        $html .= __('I agree with %s terms of use %s and I accept to free my contribution under the licence %s CC BY-SA %s.',
+            '<a href="#" target="_blank">', '</a>',
+            '<a href="https://creativecommons.org/licenses/by-sa/3.0/" target="_blank">', '</a>'
+        );
+        $html .= '</p>';
+        $this->_options['commenting_legal_text'] = $html;
+
+        $this->_installOptions();
     }
 
     public function hookUpgrade($args)

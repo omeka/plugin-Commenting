@@ -1,3 +1,12 @@
+<?php echo js_tag('vendor/tiny_mce/tiny_mce'); ?>
+<script type="text/javascript">
+jQuery(window).load(function () {
+  Omeka.wysiwyg({
+    mode: 'specific_textareas',
+    editor_selector: 'html-editor'
+  });
+});
+</script>
 <script type='text/javascript'>
 <?php include('config_form.js'); ?>
 </script>
@@ -30,7 +39,30 @@
             </div>        
         </div>
     </div>    
-    
+
+    <div class='field'>
+        <div class="two columns alpha">
+            <label><?php echo __('Legal agreement'); ?></label>
+        </div>
+        <div class='inputs five columns omega'>
+            <div class='input-block'>
+                <?php echo $view->formTextarea(
+                    'commenting_legal_text',
+                    get_option('commenting_legal_text'),
+                    array(
+                        'rows' => 5,
+                        'cols' => 60,
+                        'class' => array('textinput', 'html-editor')
+                     )
+                ); ?>
+                <p class="explanation">
+                    <?php echo __('This text will be shown beside the legal checkbox.'
+                        . " Let empty if you don't want to use a legal agreement."); ?>
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="field">
         <div class="three columns alpha">
             <label><?php echo __("Allow public commenting?"); ?></label>    
