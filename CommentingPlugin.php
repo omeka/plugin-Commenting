@@ -160,7 +160,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         if (version_compare($old, '2.1', '<')) {
             delete_option('commenting_noapp_comment_roles');
             set_option('commenting_reqapp_comment_roles', serialize(array()));
-            set_option('commenting_pages', $this->_options('commenting_pages'));
+            set_option('commenting_pages', $this->_options['commenting_pages']);
             $sql = "ALTER TABLE `$db->Comment` CHANGE `flagged` `flagged` TINYINT( 1 ) NOT NULL DEFAULT '0'";
             $db->query($sql);
         }
@@ -171,7 +171,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookUninstall()
     {
-        $db = get_db();
+        $db = $this->_db;
         $sql = "DROP TABLE IF EXISTS `$db->Comment`";
         $db->query($sql);
 
