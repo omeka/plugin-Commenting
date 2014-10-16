@@ -293,11 +293,6 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         return $this->_filterApiExtendRecords($extend, $args);
     }
 
-    protected function _initializeMixins()
-    {
-        $this->_mixins[] = new Mixin_Timestamp($this, 'added', null);
-    }
-
     private function _filterApiExtendRecords($extend, $args)
     {
         $record = $args['record'];

@@ -25,8 +25,9 @@ class Comment extends Omeka_Record_AbstractRecord
     {
         // Add the search mixin.
         $this->_mixins[] = new Mixin_Search($this);
+        $this->_mixins[] = new Mixin_Timestamp($this, 'added', null);
     }    
-    
+
     protected function afterSave($args)
     {
         // A record's search text is public by default, but there are times
@@ -126,4 +127,5 @@ class Comment extends Omeka_Record_AbstractRecord
         }
         parent::setArray($data);
     }
+
 }
