@@ -1,24 +1,9 @@
-
-/* desperate attempts to prevent crazy padding across themes */
-#comment-main-container div {
-	padding: 2px !important;
-	margin: 2px !important;
-	clear: both;
+#comments-container .comment-body {
+    margin-left: 100px !important;
+    margin-top: 12px !important;
+    min-height: 60px;
+    padding: 6px;
 }
-
-div#comments-container label {
-	padding: 2px !important;
-	margin: 2px !important;
-}
-
-div#comments-container div.comment-body {
-	margin-left: 100px !important;
-	margin-top: 12px !important;
-	min-height: 60px;
-	padding: 6px;		
-}
-
-/* end desperation */
 
 form#comment-form {
 	clear:both;
