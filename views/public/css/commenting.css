@@ -1,6 +1,6 @@
 
 /* desperate attempts to prevent crazy padding across themes */
-div#comments-container div {
+#comment-main-container div {
 	padding: 2px !important;
 	margin: 2px !important;
 	clear: both;
@@ -22,17 +22,13 @@ div#comments-container div.comment-body {
 
 form#comment-form {
 	clear:both;
-	line-height: 1em;	
+	line-height: 1em;
+    max-width: 500px;
 }
 
-form#comment-form input, form#comment-form textarea {
-    height: inherit;
-    font-size: 14px;
-    line-height: 1em;
-}
-
-div#comment-main-container {
-	max-width: 550px;
+#comment-form #submit {
+    clear: both;
+    display: block;
 }
 
 div#comments-container div.comment-children {

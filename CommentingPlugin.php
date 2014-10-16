@@ -152,6 +152,7 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     public static function showComments($args = array())
     {
         echo "<div id='comments-container'>";
+        echo "<div id='comment-main-container'>";
         if( (get_option('commenting_allow_public') == 1)
                 || (get_option('commenting_allow_public_view') == 1)
                 || is_allowed('Commenting_Comment', 'show') ) {
@@ -167,12 +168,11 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
             $comments = isset($args['comments']) ? $args['comments'] : $view->getComments($options);
             echo $view->partial('comments.php', array('comments'=>$comments, 'threaded'=>$options['threaded']));
         }
+        echo "</div>";
 
         if( (get_option('commenting_allow_public') == 1)
                 || is_allowed('Commenting_Comment', 'add') ) {
-            echo "<div id='comment-main-container'>";
             echo $view->getCommentForm();
-            echo "</div>";
         }
         echo "</div>";
     }
