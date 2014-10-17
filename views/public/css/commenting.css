@@ -5,15 +5,40 @@
     padding: 6px;
 }
 
-form#comment-form {
-	clear:both;
-	line-height: 1em;
+#comment-form {
+    clear:both;
+    line-height: 1em;
     max-width: 500px;
+    padding-top: 1em;
 }
 
 #comment-form #submit {
     clear: both;
     display: block;
+}
+
+.commenting-field {
+    margin-bottom: 1em;
+}
+
+.commenting-explanation {
+    margin: 1em 0;
+}
+
+.commenting-field label, .commenting-field input {
+    display: inline-block !important;
+    vertical-align: middle;
+}
+
+.commenting-field label {
+    width: 40%;
+    font-weight: bold;
+    margin: 0;
+}
+
+.commenting-field input[type="text"] {
+    width: 58%;
+    margin: 0;
 }
 
 div#comments-container div.comment-children {
@@ -61,10 +86,6 @@ p.comment-author-name {
 
 div.success {
     font-size: 1.8em;
-}
-
-input.hidden {
-	display:none;		
 }
 
 span.comment-flag, span.comment-unflag {

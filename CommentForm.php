@@ -11,20 +11,6 @@ class Commenting_CommentForm extends Omeka_Form
         $this->setAttrib('id', 'comment-form');
         $user = current_user();
 
-        //assume registered users are trusted and don't make them play recaptcha
-        if(!$user && get_option('recaptcha_public_key') && get_option('recaptcha_private_key')) {
-            $this->addElement('captcha', 'captcha',  array(
-                'label' => __("Please verify you're a human"),
-                'captcha' => array(
-                    'captcha' => 'ReCaptcha',
-                    'pubkey' => get_option('recaptcha_public_key'),
-                    'privkey' => get_option('recaptcha_private_key'),
-                    'ssl' => true //make the connection secure so IE8 doesn't complain. if works, should branch around http: vs https:
-                )
-            ));
-            $this->getElement('captcha')->removeDecorator('ViewHelper');
-        }
-
         $urlOptions = array(
                 'label'=>__('Website'),
             );
@@ -60,6 +46,20 @@ class Commenting_CommentForm extends Omeka_Form
                       ),
                 )
             );
+
+        //assume registered users are trusted and don't make them play recaptcha
+        if(!$user && get_option('recaptcha_public_key') && get_option('recaptcha_private_key')) {
+            $this->addElement('captcha', 'captcha',  array(
+                'label' => __("Please verify you're a human"),
+                'captcha' => array(
+                    'captcha' => 'ReCaptcha',
+                    'pubkey' => get_option('recaptcha_public_key'),
+                    'privkey' => get_option('recaptcha_private_key'),
+                    'ssl' => true //make the connection secure so IE8 doesn't complain. if works, should branch around http: vs https:
+                )
+            ));
+            $this->getElement('captcha')->removeDecorator('ViewHelper');
+        }
 
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $params = $request->getParams();
@@ -135,4 +135,18 @@ class Commenting_CommentForm extends Omeka_Form
         return $model;
     }
 
+    /**
+     * Override wrapper classes for simplicity and to guarantee unique
+     * selectors for applying cross-theme styles.
+     */
+    public function getDefaultElementDecorators()
+    {
+        return array(
+            array('Description', array('tag' => 'p', 'class' => 'commenting-explanation', 'escape'=>false)),
+            'ViewHelper',
+            array('Errors', array('class' => 'error')),
+            'Label',
+            array(array('FieldTag' => 'HtmlTag'), array('tag' => 'div', 'class' => 'commenting-field'))
+        );
+    }
 }
