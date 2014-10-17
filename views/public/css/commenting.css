@@ -36,6 +36,10 @@
     margin: 0;
 }
 
+.commenting-field label[for="captcha"] {
+    width: 100%;
+}
+
 .commenting-field input[type="text"] {
     width: 58%;
     margin: 0;
