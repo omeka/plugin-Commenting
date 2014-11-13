@@ -56,7 +56,7 @@ if(empty($label)) {
                     echo $authorText;
                 ?>            
             </span>
-            <?php echo __('on'); ?> <?php echo get_class($record);?> <a target='_blank' href='<?php echo record_url($comment, 'show'); ?>'><?php echo $label; ?></a>
+            <?php echo __('on'); ?> <?php echo __(get_class($record)); ?> <a target='_blank' href='<?php echo record_url($comment, 'show'); ?>'><?php echo $label; ?></a>
             </li>
         
             <li class='approved' <?php echo $comment->approved ? "" : "style='display:none'"; ?>><span class='status approved'><?php echo __("Approved"); ?></span><span class='unapprove action'><?php echo __("Unapprove"); ?></span></li>
