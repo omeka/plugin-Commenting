@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# a_squat <info@lswebagency.it>, 2014
+# Alfio Squatrito <info@lswebagency.it>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-01-29 15:30+0000\n"
-"Last-Translator: a_squat <info@lswebagency.it>\n"
+"PO-Revision-Date: 2014-12-03 17:53+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Italian (http://www.transifex.com/projects/p/omeka/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: CommentForm.php:18
-msgid "Please verify you're a human"
-msgstr "Per favore verifica che sei un umano."
-
-#: CommentForm.php:29
+#: CommentForm.php:15
 msgid "Website"
 msgstr "Sito web"
 
-#: CommentForm.php:32
+#: CommentForm.php:18
 msgid "Email (required)"
 msgstr "Email (obbligatorio)"
 
-#: CommentForm.php:39
+#: CommentForm.php:25
 msgid "Your name"
 msgstr ""
 
-#: CommentForm.php:50
+#: CommentForm.php:36
 msgid "Allowed tags:"
 msgstr "Tags consentiti:"
 
-#: CommentingPlugin.php:241 CommentingPlugin.php:249
+#: CommentForm.php:53
+msgid "Please verify you're a human"
+msgstr "Per favore verifica che sei un umano."
+
+#: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "Commenti"
@@ -111,33 +111,40 @@ msgstr "Consentire al pubblico di visualizzare commenti?"
 msgid "User roles that can view comments"
 msgstr "Categorie utenti che possono vedere commenti"
 
-#: config_form.php:191 config_form.php:205
-msgid "This can also be set in the Security Settings."
-msgstr "Questo puo' essere configurato nelle Impostazioni Sicurezza."
+#: config_form.php:187 views/admin/comment/browse.php:14
+msgid "security settings"
+msgstr "impostazioni sicurezza"
 
-#: config_form.php:217
+#: config_form.php:187 views/admin/comment/browse.php:14
+#, php-format
+msgid ""
+"You have not entered your %s API keys under %s. We recommend adding these "
+"keys, or the commenting form will be vulnerable to spam."
+msgstr ""
+
+#: config_form.php:193
 msgid "WordPress API key for Akismet"
 msgstr "Chiavi API WordPress per Akismet"
 
-#: controllers/CommentController.php:65
+#: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
 msgstr "Il tuo commento e' in attesa di moderazione"
 
-#: controllers/CommentController.php:202
+#: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr ""
 
-#: controllers/CommentController.php:203
+#: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "Il commento %s e' stato segnalato come inappropriato."
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 msgid "here"
 msgstr "qui"
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "Puoi gestire il commento %s"
@@ -198,17 +205,6 @@ msgstr "Non Segnalato"
 msgid "Flag Inappropriate"
 msgstr "Segnala come inappropriato"
 
-#: views/admin/comment/browse.php:14
-msgid "security settings"
-msgstr "impostazioni sicurezza"
-
-#: views/admin/comment/browse.php:14
-#, php-format
-msgid ""
-"You have not entered your %s API keys under %s. We recommend adding these "
-"keys, or the commenting form will be vulnerable to spam."
-msgstr ""
-
 #: views/admin/comment/browse.php:29
 msgid "Flag"
 msgstr "Segnala"
@@ -225,7 +221,7 @@ msgstr "Richiede approvazione"
 msgid "Flagged"
 msgstr "Segnalato"
 
-#: views/public/comment.php:21
+#: views/public/comment.php:22
 msgid "Flag inappropriate"
 msgstr "Segnala come inappropriato"
 

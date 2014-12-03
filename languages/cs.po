@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Jan Černý <cernyhonza@gmail.com>, 2013
-# m23 <black23@gmail.com>, 2013
+# Jiří Vírava <appukonrad@gmail.com>, 2014
+# MICHAL D. <black23@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2013-09-06 12:55+0000\n"
-"Last-Translator: m23 <black23@gmail.com>\n"
+"PO-Revision-Date: 2014-12-03 17:53+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Czech (http://www.transifex.com/projects/p/omeka/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,30 +20,30 @@ msgstr ""
 "Language: cs\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: CommentForm.php:18
-msgid "Please verify you're a human"
-msgstr "Dokažte, že jste člověk"
-
-#: CommentForm.php:29
+#: CommentForm.php:15
 msgid "Website"
 msgstr "Webová stránka"
 
-#: CommentForm.php:32
+#: CommentForm.php:18
 msgid "Email (required)"
 msgstr "Email (vyžadován)"
 
-#: CommentForm.php:39
+#: CommentForm.php:25
 msgid "Your name"
 msgstr "Vaše jméno"
 
-#: CommentForm.php:50
+#: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr ""
+msgstr "Povolené značky:"
 
-#: CommentingPlugin.php:241 CommentingPlugin.php:249
+#: CommentForm.php:53
+msgid "Please verify you're a human"
+msgstr "Dokažte, že jste člověk"
+
+#: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr ""
+msgstr "Komentáře"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
@@ -62,7 +63,7 @@ msgstr ""
 
 #: config_form.php:36
 msgid "Allow public commenting?"
-msgstr ""
+msgstr "Povolit veřejné komentování?"
 
 #: config_form.php:39
 msgid ""
@@ -72,7 +73,7 @@ msgstr ""
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr ""
+msgstr "Požadovat moderování všech připomínek veřejnosti?"
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
@@ -80,7 +81,7 @@ msgstr ""
 
 #: config_form.php:65
 msgid "User roles that can moderate comments"
-msgstr ""
+msgstr "Uživatelské role, které můžou moderovat komentáře"
 
 #: config_form.php:68
 msgid "The user roles that are allowed to moderate comments."
@@ -112,33 +113,40 @@ msgstr ""
 msgid "User roles that can view comments"
 msgstr ""
 
-#: config_form.php:191 config_form.php:205
-msgid "This can also be set in the Security Settings."
+#: config_form.php:187 views/admin/comment/browse.php:14
+msgid "security settings"
+msgstr "nastavení zabezpečení"
+
+#: config_form.php:187 views/admin/comment/browse.php:14
+#, php-format
+msgid ""
+"You have not entered your %s API keys under %s. We recommend adding these "
+"keys, or the commenting form will be vulnerable to spam."
 msgstr ""
 
-#: config_form.php:217
+#: config_form.php:193
 msgid "WordPress API key for Akismet"
 msgstr ""
 
-#: controllers/CommentController.php:65
+#: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
 msgstr ""
 
-#: controllers/CommentController.php:202
+#: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr ""
 
-#: controllers/CommentController.php:203
+#: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr ""
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 msgid "here"
 msgstr ""
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
 msgstr ""
@@ -169,11 +177,11 @@ msgstr ""
 
 #: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
 msgid "Spam"
-msgstr ""
+msgstr "Spam"
 
 #: views/admin/comment.php:65 views/admin/comment/browse.php:27
 msgid "Report Not Spam"
-msgstr ""
+msgstr "Nahlásit že zpráva není spam"
 
 #: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
 msgid "Not Spam"
@@ -185,29 +193,18 @@ msgstr "Nahlásit spam"
 
 #: views/admin/comment.php:69
 msgid "Flagged Inappropriate"
-msgstr ""
+msgstr "Označeno jako nevhodné"
 
 #: views/admin/comment.php:69 views/admin/comment/browse.php:30
 msgid "Unflag"
-msgstr ""
+msgstr "Odstranit označení"
 
 #: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
-msgstr ""
+msgstr "Není označeno"
 
 #: views/admin/comment.php:70
 msgid "Flag Inappropriate"
-msgstr ""
-
-#: views/admin/comment/browse.php:14
-msgid "security settings"
-msgstr ""
-
-#: views/admin/comment/browse.php:14
-#, php-format
-msgid ""
-"You have not entered your %s API keys under %s. We recommend adding these "
-"keys, or the commenting form will be vulnerable to spam."
 msgstr ""
 
 #: views/admin/comment/browse.php:29
@@ -226,7 +223,7 @@ msgstr ""
 msgid "Flagged"
 msgstr ""
 
-#: views/public/comment.php:21
+#: views/public/comment.php:22
 msgid "Flag inappropriate"
 msgstr ""
 

@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Iwe E.C. Muiser <e.c.muiser@utwente.nl>, 2013
+# Iwe Muiser <e.c.muiser@utwente.nl>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2013-09-16 13:46+0000\n"
-"Last-Translator: Iwe E.C. Muiser <e.c.muiser@utwente.nl>\n"
+"PO-Revision-Date: 2014-12-03 17:53+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/omeka/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Language: nl_NL\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: CommentForm.php:18
-msgid "Please verify you're a human"
-msgstr "Bevestig dat u een mens bent a.u.b."
-
-#: CommentForm.php:29
+#: CommentForm.php:15
 msgid "Website"
 msgstr "Website"
 
-#: CommentForm.php:32
+#: CommentForm.php:18
 msgid "Email (required)"
 msgstr "E-mail (verplicht)"
 
-#: CommentForm.php:39
+#: CommentForm.php:25
 msgid "Your name"
 msgstr "Uw naam"
 
-#: CommentForm.php:50
+#: CommentForm.php:36
 msgid "Allowed tags:"
 msgstr "Toegestane tags:"
 
-#: CommentingPlugin.php:241 CommentingPlugin.php:249
+#: CommentForm.php:53
+msgid "Please verify you're a human"
+msgstr "Bevestig dat u een mens bent a.u.b."
+
+#: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "Opmerkingen"
@@ -111,33 +111,40 @@ msgstr "Sta het publiek toe om opmerkingen te bekijken?"
 msgid "User roles that can view comments"
 msgstr "Gebruikersrollen die opmerkingen mogen bekijken"
 
-#: config_form.php:191 config_form.php:205
-msgid "This can also be set in the Security Settings."
-msgstr "Dit kan ook in de beveiligingsinstellingen worden ingesteld."
+#: config_form.php:187 views/admin/comment/browse.php:14
+msgid "security settings"
+msgstr "beveiligingsinstellingen"
 
-#: config_form.php:217
+#: config_form.php:187 views/admin/comment/browse.php:14
+#, php-format
+msgid ""
+"You have not entered your %s API keys under %s. We recommend adding these "
+"keys, or the commenting form will be vulnerable to spam."
+msgstr "U hebt uw %s API sleutels onder %s niet ingevoerd. Wij raden aan deze sleutels toe te voegen, of het reactieformulier zal gevoelig zijn voor spam."
+
+#: config_form.php:193
 msgid "WordPress API key for Akismet"
 msgstr "WordPress API sleutel (key) voor Akismet"
 
-#: controllers/CommentController.php:65
+#: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
 msgstr "Uw commentaar moet eerst worden goedgekeurd"
 
-#: controllers/CommentController.php:202
+#: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "Een commentaar op %s is gemarkeerd als ongepast"
 
-#: controllers/CommentController.php:203
+#: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "De opmerking %s is gemarkeerd als ongepast."
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 msgid "here"
 msgstr "hier"
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "U kan de opmerking %s beheren"
@@ -198,17 +205,6 @@ msgstr "Niet gemarkeerd"
 msgid "Flag Inappropriate"
 msgstr "Markeer als ongepast"
 
-#: views/admin/comment/browse.php:14
-msgid "security settings"
-msgstr "beveiligingsinstellingen"
-
-#: views/admin/comment/browse.php:14
-#, php-format
-msgid ""
-"You have not entered your %s API keys under %s. We recommend adding these "
-"keys, or the commenting form will be vulnerable to spam."
-msgstr "U hebt uw %s API sleutels onder %s niet ingevoerd. Wij raden aan deze sleutels toe te voegen, of het reactieformulier zal gevoelig zijn voor spam."
-
 #: views/admin/comment/browse.php:29
 msgid "Flag"
 msgstr "Markeren"
@@ -225,7 +221,7 @@ msgstr "Heeft goedkeuring nodig"
 msgid "Flagged"
 msgstr "Gemarkeerd"
 
-#: views/public/comment.php:21
+#: views/public/comment.php:22
 msgid "Flag inappropriate"
 msgstr "Markeer als ongepast"
 

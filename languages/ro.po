@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2013-11-27 09:58+0000\n"
-"Last-Translator: Nicolaie Constantinescu <kosson@gmail.com>\n"
+"PO-Revision-Date: 2014-12-03 17:53+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Romanian (http://www.transifex.com/projects/p/omeka/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Language: ro\n"
 "Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?2:1));\n"
 
-#: CommentForm.php:18
-msgid "Please verify you're a human"
-msgstr "Ești om sau automat?"
-
-#: CommentForm.php:29
+#: CommentForm.php:15
 msgid "Website"
 msgstr "Site"
 
-#: CommentForm.php:32
+#: CommentForm.php:18
 msgid "Email (required)"
 msgstr "Adresă de email (necesară)"
 
-#: CommentForm.php:39
+#: CommentForm.php:25
 msgid "Your name"
 msgstr "Numele"
 
-#: CommentForm.php:50
+#: CommentForm.php:36
 msgid "Allowed tags:"
 msgstr "Etichete de cod html permise:"
 
-#: CommentingPlugin.php:241 CommentingPlugin.php:249
+#: CommentForm.php:53
+msgid "Please verify you're a human"
+msgstr "Ești om sau automat?"
+
+#: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "Comentarii"
@@ -111,33 +111,40 @@ msgstr "Permiți publicului să vadă comentariile?"
 msgid "User roles that can view comments"
 msgstr "Rolurile cărora le este permis să vadă comentariile"
 
-#: config_form.php:191 config_form.php:205
-msgid "This can also be set in the Security Settings."
-msgstr "Acest lucru poate fi setat și din Setările de Securitate."
+#: config_form.php:187 views/admin/comment/browse.php:14
+msgid "security settings"
+msgstr "setări de securitate"
 
-#: config_form.php:217
+#: config_form.php:187 views/admin/comment/browse.php:14
+#, php-format
+msgid ""
+"You have not entered your %s API keys under %s. We recommend adding these "
+"keys, or the commenting form will be vulnerable to spam."
+msgstr "Dacă nu ai introdus cheile API %s de la %s. Este recomandată adăugarea acestor chei altfel, formularul pentru introducerea comentariilor va fi vulnerabil contra spamului."
+
+#: config_form.php:193
 msgid "WordPress API key for Akismet"
 msgstr "Cheie API WordPress pentru Akismet"
 
-#: controllers/CommentController.php:65
+#: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
 msgstr "Comentariul tău a intrat în așteptare pentru a fi moderat"
 
-#: controllers/CommentController.php:202
+#: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "Un comentariu la %s a fost etichetat ca inoportun"
 
-#: controllers/CommentController.php:203
+#: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "Comentariul de la %s a fost etichetat ca inoportun"
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 msgid "here"
 msgstr "aici"
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "Poți gestiona comentariul %s"
@@ -198,17 +205,6 @@ msgstr "Nemarcat"
 msgid "Flag Inappropriate"
 msgstr "Marchează ca neadecvat"
 
-#: views/admin/comment/browse.php:14
-msgid "security settings"
-msgstr "setări de securitate"
-
-#: views/admin/comment/browse.php:14
-#, php-format
-msgid ""
-"You have not entered your %s API keys under %s. We recommend adding these "
-"keys, or the commenting form will be vulnerable to spam."
-msgstr "Dacă nu ai introdus cheile API %s de la %s. Este recomandată adăugarea acestor chei altfel, formularul pentru introducerea comentariilor va fi vulnerabil contra spamului."
-
 #: views/admin/comment/browse.php:29
 msgid "Flag"
 msgstr "Marcaj"
@@ -225,7 +221,7 @@ msgstr "Are nevoie de acord"
 msgid "Flagged"
 msgstr "Marcat"
 
-#: views/public/comment.php:21
+#: views/public/comment.php:22
 msgid "Flag inappropriate"
 msgstr "Marchează cele neadecvate"
 

@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# rubenalcaraz <rubenalcarazmartinez@gmail.com>, 2013
-# sergimontes <sergi.blanes@gmail.com>, 2013
+# Rubén Alcaraz Martínez <rubenalcarazmartinez@gmail.com>, 2013-2014
+# Sergi Montes <sergi.blanes@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2013-09-05 09:09+0000\n"
-"Last-Translator: sergimontes <sergi.blanes@gmail.com>\n"
+"PO-Revision-Date: 2014-12-03 17:53+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/projects/p/omeka/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,34 +19,34 @@ msgstr ""
 "Language: ca_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: CommentForm.php:18
-msgid "Please verify you're a human"
-msgstr "Verifica que ets un ésser humà"
-
-#: CommentForm.php:29
+#: CommentForm.php:15
 msgid "Website"
 msgstr "Lloc web"
 
-#: CommentForm.php:32
+#: CommentForm.php:18
 msgid "Email (required)"
-msgstr "Email (obligatori)"
+msgstr "Correu electrònic (obligatori)"
 
-#: CommentForm.php:39
+#: CommentForm.php:25
 msgid "Your name"
 msgstr "Nom"
 
-#: CommentForm.php:50
+#: CommentForm.php:36
 msgid "Allowed tags:"
 msgstr "Etiquetes permeses:"
 
-#: CommentingPlugin.php:241 CommentingPlugin.php:249
+#: CommentForm.php:53
+msgid "Please verify you're a human"
+msgstr "Verifiqueu que sou un ésser humà"
+
+#: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "Comentaris"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "Utilitzar comentaris niats?"
+msgstr "Voleu utilitzar comentaris niats?"
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
@@ -58,7 +58,7 @@ msgstr "Text per a l'etiqueta comentaris"
 
 #: config_form.php:27
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
-msgstr "Utilizar una etiqueta en comptes de 'Comentaris'. Deixar en blanc per utilitzar 'Comentaris'."
+msgstr "Utilitzeu una etiqueta en comptes de 'Comentaris'. Deixar en blanc per utilitzar 'Comentaris'."
 
 #: config_form.php:36
 msgid "Allow public commenting?"
@@ -68,11 +68,11 @@ msgstr "Voleu permetre comentar als visitants?"
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
-msgstr "Permetre a tothom, incloent als usuaris no registrats, fer comentaris. Fes servir aquesta opció sense instal·lar Akismet està totalment desaconsellat."
+msgstr "Permetre a tothom, incloent als usuaris no registrats, fer comentaris. Fer servir aquesta opció sense instal·lar Akismet està totalment desaconsellat."
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr "Exigir moderació per a tots els comentaris dels visitants?"
+msgstr "Voleu exigir moderació per a tots els comentaris dels visitants?"
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
@@ -106,42 +106,49 @@ msgstr "Si la funció per moderar comentaris es troba activada, la podeu desacti
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
-msgstr "Permetre als visitants veure els comentaris?"
+msgstr "Voleu permetre als visitants veure els comentaris?"
 
 #: config_form.php:162
 msgid "User roles that can view comments"
 msgstr "Perfils d'usuari que poden veure els comentaris"
 
-#: config_form.php:191 config_form.php:205
-msgid "This can also be set in the Security Settings."
-msgstr "També es pot ajustar en la Configuració de seguretat."
+#: config_form.php:187 views/admin/comment/browse.php:14
+msgid "security settings"
+msgstr "paràmetres de seguretat"
 
-#: config_form.php:217
+#: config_form.php:187 views/admin/comment/browse.php:14
+#, php-format
+msgid ""
+"You have not entered your %s API keys under %s. We recommend adding these "
+"keys, or the commenting form will be vulnerable to spam."
+msgstr "No heu ingressat la clau %s API sota %s. Es recomana l'addició d'aquesta clau, o el formulari de comentaris pot rebre correus brossa."
+
+#: config_form.php:193
 msgid "WordPress API key for Akismet"
-msgstr "Clau API de WordPress per Akismet"
+msgstr "Clau de l'API d' Akismet de WordPress "
 
-#: controllers/CommentController.php:65
+#: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr "El teu comentari s'ha enviat i està pendent de moderació"
+msgstr "El vostre comentari s'ha enviat i està pendent de moderació"
 
-#: controllers/CommentController.php:202
+#: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "Un comentari a %s s'ha marcat com a inapropiat"
 
-#: controllers/CommentController.php:203
+#: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "El comentari %s s'ha marcat com a inapropiat"
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 msgid "here"
 msgstr "aquí"
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
-msgstr "Gestionar el comentari %s"
+msgstr "Gestioneu el comentari %s"
 
 #: views/admin/comment.php:54 views/public/comment.php:10
 msgid "Anonymous"
@@ -173,7 +180,7 @@ msgstr "Brossa"
 
 #: views/admin/comment.php:65 views/admin/comment/browse.php:27
 msgid "Report Not Spam"
-msgstr "No marcar com a brossa"
+msgstr "No el marqueu com a brossa"
 
 #: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
 msgid "Not Spam"
@@ -199,17 +206,6 @@ msgstr "No marcat"
 msgid "Flag Inappropriate"
 msgstr "Marca com inapropiat"
 
-#: views/admin/comment/browse.php:14
-msgid "security settings"
-msgstr "configuració de seguretat"
-
-#: views/admin/comment/browse.php:14
-#, php-format
-msgid ""
-"You have not entered your %s API keys under %s. We recommend adding these "
-"keys, or the commenting form will be vulnerable to spam."
-msgstr "No heu ingressat la clau %s API sota %s. Es recomana l'addició d'aquesta clau, o el formulari de comentaris pot rebre correus brossa."
-
 #: views/admin/comment/browse.php:29
 msgid "Flag"
 msgstr "Marca"
@@ -226,7 +222,7 @@ msgstr "Requereix aprovació"
 msgid "Flagged"
 msgstr "Marcat"
 
-#: views/public/comment.php:21
+#: views/public/comment.php:22
 msgid "Flag inappropriate"
 msgstr "Marca com inapropiat"
 

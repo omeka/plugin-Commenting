@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# yenny <yennylin1234@gmail.com>, 2014
+# yennylin <yennylin1234@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-01-11 23:21+0000\n"
-"Last-Translator: yenny <yennylin1234@gmail.com>\n"
+"PO-Revision-Date: 2014-12-03 17:53+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/projects/p/omeka/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Language: zh_TW\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: CommentForm.php:18
-msgid "Please verify you're a human"
-msgstr "請證明你是一個人"
-
-#: CommentForm.php:29
+#: CommentForm.php:15
 msgid "Website"
 msgstr "網站"
 
-#: CommentForm.php:32
+#: CommentForm.php:18
 msgid "Email (required)"
 msgstr "電子郵件（必須）"
 
-#: CommentForm.php:39
+#: CommentForm.php:25
 msgid "Your name"
 msgstr "你的姓名"
 
-#: CommentForm.php:50
+#: CommentForm.php:36
 msgid "Allowed tags:"
 msgstr "允許的標籤："
 
-#: CommentingPlugin.php:241 CommentingPlugin.php:249
+#: CommentForm.php:53
+msgid "Please verify you're a human"
+msgstr "請證明你是一個人"
+
+#: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "評論"
@@ -111,33 +111,40 @@ msgstr "允許公開觀看評論？"
 msgid "User roles that can view comments"
 msgstr "可以觀看評論的用戶角色"
 
-#: config_form.php:191 config_form.php:205
-msgid "This can also be set in the Security Settings."
-msgstr "這也可以在安全設定中設置。"
+#: config_form.php:187 views/admin/comment/browse.php:14
+msgid "security settings"
+msgstr "安全設定"
 
-#: config_form.php:217
+#: config_form.php:187 views/admin/comment/browse.php:14
+#, php-format
+msgid ""
+"You have not entered your %s API keys under %s. We recommend adding these "
+"keys, or the commenting form will be vulnerable to spam."
+msgstr "你尚未在 %s 之下輸入你的 %s API金鑰。我們建議增加這些金鑰，否則評論表單將容易被垃圾信攻擊。"
+
+#: config_form.php:193
 msgid "WordPress API key for Akismet"
 msgstr "Akismet的WordPress API 金鑰"
 
-#: controllers/CommentController.php:65
+#: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
 msgstr "你的評論停留在暫不公布"
 
-#: controllers/CommentController.php:202
+#: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "在 %s 的評論被標註為不適當的"
 
-#: controllers/CommentController.php:203
+#: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "這個評論 %s 被標註為不適當的。"
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 msgid "here"
 msgstr "這裡"
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "你可以管理評論 %s"
@@ -198,17 +205,6 @@ msgstr "無標註"
 msgid "Flag Inappropriate"
 msgstr "標註不適當的"
 
-#: views/admin/comment/browse.php:14
-msgid "security settings"
-msgstr "安全設定"
-
-#: views/admin/comment/browse.php:14
-#, php-format
-msgid ""
-"You have not entered your %s API keys under %s. We recommend adding these "
-"keys, or the commenting form will be vulnerable to spam."
-msgstr "你尚未在 %s 之下輸入你的 %s API金鑰。我們建議增加這些金鑰，否則評論表單將容易被垃圾信攻擊。"
-
 #: views/admin/comment/browse.php:29
 msgid "Flag"
 msgstr "標註"
@@ -225,7 +221,7 @@ msgstr "需要核准"
 msgid "Flagged"
 msgstr "已標註"
 
-#: views/public/comment.php:21
+#: views/public/comment.php:22
 msgid "Flag inappropriate"
 msgstr "標註不適當"
 

@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Matti Lassila <matti.lassila@gmail.com>, 2013
+# Matti Lassila <matti.lassila@gmail.com>, 2013-2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2013-10-13 18:50+0000\n"
-"Last-Translator: Matti Lassila <matti.lassila@gmail.com>\n"
+"PO-Revision-Date: 2014-12-03 17:53+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Finnish (Finland) (http://www.transifex.com/projects/p/omeka/language/fi_FI/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Language: fi_FI\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: CommentForm.php:18
-msgid "Please verify you're a human"
-msgstr "Roskapostituksen esto"
-
-#: CommentForm.php:29
+#: CommentForm.php:15
 msgid "Website"
 msgstr "Verkkosivu"
 
-#: CommentForm.php:32
+#: CommentForm.php:18
 msgid "Email (required)"
 msgstr "Sähköposti (vaaditaan)"
 
-#: CommentForm.php:39
+#: CommentForm.php:25
 msgid "Your name"
 msgstr "Nimi"
 
-#: CommentForm.php:50
+#: CommentForm.php:36
 msgid "Allowed tags:"
 msgstr "Sallitut HTML-elementit:"
 
-#: CommentingPlugin.php:241 CommentingPlugin.php:249
+#: CommentForm.php:53
+msgid "Please verify you're a human"
+msgstr "Roskapostituksen esto"
+
+#: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "Kommentit"
@@ -111,33 +111,40 @@ msgstr "Näytä kommentit julkisesti"
 msgid "User roles that can view comments"
 msgstr "Käyttäjäroolit jotka voivat lukea kommentteja"
 
-#: config_form.php:191 config_form.php:205
-msgid "This can also be set in the Security Settings."
-msgstr "Asetuksen voi tehdä myös Omekan turvallisuusasetuksissa."
+#: config_form.php:187 views/admin/comment/browse.php:14
+msgid "security settings"
+msgstr "turvallisuusasetuksissa"
 
-#: config_form.php:217
+#: config_form.php:187 views/admin/comment/browse.php:14
+#, php-format
+msgid ""
+"You have not entered your %s API keys under %s. We recommend adding these "
+"keys, or the commenting form will be vulnerable to spam."
+msgstr "Et ole ottanut käyttöön %s API-avaimia %s. Roskaviestisuodatuksen käyttö on suositeltavaa; muussa tapauksessa kommentointimahdollisuus houkuttaa roskapostittajia."
+
+#: config_form.php:193
 msgid "WordPress API key for Akismet"
 msgstr "WordPress API-avain Akismet-palvelua varten"
 
-#: controllers/CommentController.php:65
+#: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
 msgstr "Kommenttisi on tarkistettavana"
 
-#: controllers/CommentController.php:202
+#: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "Kommenttisi %s sivustolla on todettu sopimattomaksi"
 
-#: controllers/CommentController.php:203
+#: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "Kommentti %s on todettu sopimattomaksi."
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 msgid "here"
 msgstr "kommentteja"
 
-#: controllers/CommentController.php:204
+#: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "Moderoi %s"
@@ -148,7 +155,7 @@ msgstr "Anonyymi"
 
 #: views/admin/comment.php:59
 msgid "on"
-msgstr ""
+msgstr "kirjoitti"
 
 #: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
 msgid "Approved"
@@ -198,17 +205,6 @@ msgstr "Merkitsemätön"
 msgid "Flag Inappropriate"
 msgstr "Merkitse sopimattomaksi"
 
-#: views/admin/comment/browse.php:14
-msgid "security settings"
-msgstr "turvallisuusasetuksissa"
-
-#: views/admin/comment/browse.php:14
-#, php-format
-msgid ""
-"You have not entered your %s API keys under %s. We recommend adding these "
-"keys, or the commenting form will be vulnerable to spam."
-msgstr "Et ole ottanut käyttöön %s API-avaimia %s. Roskaviestisuodatuksen käyttö on suositeltavaa; muussa tapauksessa kommentointimahdollisuus houkuttaa roskapostittajia."
-
 #: views/admin/comment/browse.php:29
 msgid "Flag"
 msgstr "Merkitse"
@@ -225,7 +221,7 @@ msgstr "Odottaa hyväksyntää"
 msgid "Flagged"
 msgstr "Merkitty"
 
-#: views/public/comment.php:21
+#: views/public/comment.php:22
 msgid "Flag inappropriate"
 msgstr "Merkitse sopimattomaksi"
 

@@ -3,9 +3,7 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Julien Sicot <julien.sicot@gmail.com>, 2013
-# Stéphane Loret Sdj <stephane.loret@univ-nantes.fr>, 2014
-# symac <wikitipiac@laposte.net>, 2014
+# iteau <songphan@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
@@ -13,224 +11,224 @@ msgstr ""
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
 "PO-Revision-Date: 2014-12-03 17:53+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: French (http://www.transifex.com/projects/p/omeka/language/fr/)\n"
+"Language-Team: Thai (http://www.transifex.com/projects/p/omeka/language/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: th\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr "Site web"
+msgstr "เว็บไซต์"
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "Courriel (obligatoire)"
+msgstr "อีเมล (จำเป็น)"
 
 #: CommentForm.php:25
 msgid "Your name"
-msgstr "Votre nom"
+msgstr "ชื่อของคุณ"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "Tags autorisés :"
+msgstr "ป้ายกำกับที่ได้รับอนุญาต:"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "Merci de confirmer que vous n'êtes pas un robot"
+msgstr "กรุณายืนยันว่าคุณคือมนุษย์"
 
 #: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr "Commentaires"
+msgstr "ข้อคิดเห็น"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "Utiliser les commentaires en filet ?"
+msgstr "แบ่งข้อคิดเห็นตามหัวข้อ?"
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
-msgstr "Si coché, les réponses seront affichées indentées sous le commentaire. "
+msgstr ""
 
 #: config_form.php:24
 msgid "Text for comments label"
-msgstr "Texte pour le label du commentaire."
+msgstr ""
 
 #: config_form.php:27
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
-msgstr "Un label à utiliser à la place de \"Commentaires\". Laisser vide pour utiliser \"Commentaires\"."
+msgstr ""
 
 #: config_form.php:36
 msgid "Allow public commenting?"
-msgstr "Autoriser les commentaires publics ?"
+msgstr ""
 
 #: config_form.php:39
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
-msgstr "Autoriser tout le monde, même les personnes non enregistrées, à commenter. Utiliser ceci sans Akismet n'est pas recommandé. "
+msgstr ""
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr "Exiger la modération de tous les commentaires publics ?"
+msgstr ""
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
-msgstr "Si décoché, les commentaires apparaîtront immédiatement. "
+msgstr ""
 
 #: config_form.php:65
 msgid "User roles that can moderate comments"
-msgstr "Rôles utilisateur pouvant modérer les commentaires"
+msgstr ""
 
 #: config_form.php:68
 msgid "The user roles that are allowed to moderate comments."
-msgstr "Rôles utilisateur autorisés à modérer les commentaires."
+msgstr ""
 
 #: config_form.php:94
 msgid "User roles that can comment"
-msgstr "Rôles utilisateur pouvant commenter"
+msgstr ""
 
 #: config_form.php:97
 msgid "Select the roles that can leave comments"
-msgstr "Sélectionner les rôles utilisateur autorisés à laisser des commentaires"
+msgstr ""
 
 #: config_form.php:121
 msgid "User roles that require moderation before publishing."
-msgstr "Rôles utilisateur pour lesquels la modération est nécessaire avant publication."
+msgstr ""
 
 #: config_form.php:124
 msgid ""
 "If the role is allowed to moderate comments, that will override the setting "
 "here."
-msgstr "Si le rôle est autorisé à modérer les commentaires, ceci remplacera cette configuration."
+msgstr ""
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
-msgstr "Autoriser les utilisateurs à voir les commentaires ?"
+msgstr ""
 
 #: config_form.php:162
 msgid "User roles that can view comments"
-msgstr "Rôles utilisateur autorisés à voir des commentaires"
+msgstr ""
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 msgid "security settings"
-msgstr "Paramètres de sécurité"
+msgstr ""
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 #, php-format
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
-msgstr "Vous n'avez pas saisi vos clés d'API pour %s sous %s. Nous vous recommandons d'ajouter ces clés ou bien le formulaire de commentaire sera vulnérable au spam."
+msgstr ""
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"
-msgstr "Clé API Wordpress pour Akismet"
+msgstr ""
 
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr "Votre commentaire est en attente de modération"
+msgstr ""
 
 #: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
-msgstr "Un commentaire %s a été marqué comme inapproprié."
+msgstr ""
 
 #: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
-msgstr "Le commentaire %s a été marqué comme inapproprié."
+msgstr ""
 
 #: controllers/CommentController.php:208
 msgid "here"
-msgstr "ici"
+msgstr ""
 
 #: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
-msgstr "Vous pouvez gérer le commentaire %s"
+msgstr ""
 
 #: views/admin/comment.php:54 views/public/comment.php:10
 msgid "Anonymous"
-msgstr "Anonyme"
+msgstr ""
 
 #: views/admin/comment.php:59
 msgid "on"
-msgstr "sur"
+msgstr ""
 
 #: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
 msgid "Approved"
-msgstr "Approuvé"
+msgstr ""
 
 #: views/admin/comment.php:62 views/admin/comment/browse.php:24
 msgid "Unapprove"
-msgstr "Désapprouvé"
+msgstr ""
 
 #: views/admin/comment.php:63
 msgid "Not Approved"
-msgstr "Non approuvé"
+msgstr ""
 
 #: views/admin/comment.php:63 views/admin/comment/browse.php:23
 msgid "Approve"
-msgstr "Approuver"
+msgstr ""
 
 #: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
 msgid "Spam"
-msgstr "Spam"
+msgstr ""
 
 #: views/admin/comment.php:65 views/admin/comment/browse.php:27
 msgid "Report Not Spam"
-msgstr "Marquer comme non spam"
+msgstr ""
 
 #: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
 msgid "Not Spam"
-msgstr "Non spam"
+msgstr ""
 
 #: views/admin/comment.php:66 views/admin/comment/browse.php:26
 msgid "Report Spam"
-msgstr "Marquer comme spam"
+msgstr ""
 
 #: views/admin/comment.php:69
 msgid "Flagged Inappropriate"
-msgstr "Marqué comme inapproprié "
+msgstr ""
 
 #: views/admin/comment.php:69 views/admin/comment/browse.php:30
 msgid "Unflag"
-msgstr "Démarquer"
+msgstr ""
 
 #: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
-msgstr "Non marqué"
+msgstr ""
 
 #: views/admin/comment.php:70
 msgid "Flag Inappropriate"
-msgstr "Marquer comme inapproprié "
+msgstr ""
 
 #: views/admin/comment/browse.php:29
 msgid "Flag"
-msgstr "Signalement"
+msgstr ""
 
 #: views/admin/comment/browse.php:35
 msgid "Select All"
-msgstr "Tout sélectionner"
+msgstr ""
 
 #: views/admin/common/quick-filters.php:7
 msgid "Needs Approval"
-msgstr "En attente de modération"
+msgstr ""
 
 #: views/admin/common/quick-filters.php:10
 msgid "Flagged"
-msgstr "Marqué"
+msgstr ""
 
 #: views/public/comment.php:22
 msgid "Flag inappropriate"
-msgstr "Marquer comme inapproprié "
+msgstr ""
 
 #: views/public/comment.php:23
 msgid "Unflag inappropriate"
-msgstr "Signaler comme correct"
+msgstr ""
 
 #: views/public/comment.php:25
 msgid "Reply"
-msgstr "Répondre"
+msgstr ""
