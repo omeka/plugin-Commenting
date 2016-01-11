@@ -184,7 +184,7 @@
     </div>
     
 <?php if(!Omeka_Captcha::isConfigured()): ?>
-<p class="alert"><?php echo __("You have not entered your %s API keys under %s. We recommend adding these keys, or the commenting form will be vulnerable to spam.", '<a href="http://recaptcha.net/">reCAPTCHA</a>', "<a href='" . url('security#recaptcha_public_key') . "'>" . __('security settings') . "</a>");?></p>
+<p class="alert"><?php echo __("You have not entered your %s API keys under %s. We recommend adding these keys, or the commenting form will be vulnerable to spam.", '<a href="http://recaptcha.net/">reCAPTCHA</a>', "<a href='" . url('settings/edit-security#recaptcha_public_key') . "'>" . __('security settings') . "</a>");?></p>
 <?php endif; ?>
 
 
