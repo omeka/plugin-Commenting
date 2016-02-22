@@ -80,7 +80,7 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
             $searchParams['is_spam'] = 0;
         }
         
-        $select = $commentTable->getSelectForFindBy($searchParams);
+        $select = $commentTable->getSelectForFindBy($searchParams = array());
         if(isset($options['order'])) {
             $select->order("ORDER BY added " . $options['order']);
         }
