@@ -151,18 +151,13 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
 
     public static function showComments($args = array())
     {
+        $view = get_view();
+        $view->addHelperPath(COMMENTING_PLUGIN_DIR . '/helpers', 'Commenting_View_Helper_');
         echo "<div id='comments-container'>";
         echo "<div id='comment-main-container'>";
         if( (get_option('commenting_allow_public') == 1)
                 || (get_option('commenting_allow_public_view') == 1)
                 || is_allowed('Commenting_Comment', 'show') ) {
-            if(isset($args['view'])) {
-                $view = $args['view'];
-            } else {
-                $view = get_view();
-            }
-
-            $view->addHelperPath(COMMENTING_PLUGIN_DIR . '/helpers', 'Commenting_View_Helper_');
             $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
 
             $comments = isset($args['comments']) ? $args['comments'] : $view->getComments($options);
