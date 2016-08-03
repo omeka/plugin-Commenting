@@ -3,15 +3,16 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
+# Brian Cho <briancho@ezuserguide.com>, 2015
 # Iwe Muiser <e.c.muiser@utwente.nl>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-12-03 17:53+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Dutch (Netherlands) (http://www.transifex.com/projects/p/omeka/language/nl_NL/)\n"
+"PO-Revision-Date: 2015-10-08 16:10+0000\n"
+"Last-Translator: Brian Cho <briancho@ezuserguide.com>\n"
+"Language-Team: Dutch (Netherlands) (http://www.transifex.com/omeka/omeka/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +37,7 @@ msgstr "Toegestane tags:"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "Bevestig dat u een mens bent a.u.b."
+msgstr "Bevestig dat u een mens bent"
 
 #: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
@@ -45,19 +46,19 @@ msgstr "Opmerkingen"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "Gebruik gegroepeerde reacties?"
+msgstr "Gegroepeerde reacties gebruiken?"
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
-msgstr "Wanneer aangevinkt zullen de reacties ingesprongen worden weergegeven onder de opmerking."
+msgstr "Als dit is aangevinkt, zullen de reacties ingesprongen worden weergegeven onder de opmerking."
 
 #: config_form.php:24
 msgid "Text for comments label"
-msgstr "Tekst voor het label voor reacties"
+msgstr "Tekst voor het label van reacties"
 
 #: config_form.php:27
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
-msgstr "Je kan een label in plaats van 'Reacties' gebruiken. Om 'Reacties' te gebruiken, laat je het leeg."
+msgstr "Je kan een label in plaats van 'Reacties' gebruiken. Om 'Reacties' te gebruiken, laat u het leeg."
 
 #: config_form.php:36
 msgid "Allow public commenting?"
@@ -120,11 +121,11 @@ msgstr "beveiligingsinstellingen"
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
-msgstr "U hebt uw %s API sleutels onder %s niet ingevoerd. Wij raden aan deze sleutels toe te voegen, of het reactieformulier zal gevoelig zijn voor spam."
+msgstr "U hebt uw %s API-sleutels onder %s niet ingevoerd. Wij raden aan deze sleutels toe te voegen want anders zal het reactieformulier gevoelig zijn voor spam."
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"
-msgstr "WordPress API sleutel (key) voor Akismet"
+msgstr "WordPress API-sleutel (key) voor Akismet"
 
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
@@ -215,7 +216,7 @@ msgstr "Alles selecteren"
 
 #: views/admin/common/quick-filters.php:7
 msgid "Needs Approval"
-msgstr "Heeft goedkeuring nodig"
+msgstr "Moet nog worden goedgekeurd"
 
 #: views/admin/common/quick-filters.php:10
 msgid "Flagged"

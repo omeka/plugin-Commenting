@@ -3,57 +3,58 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# iteau <songphan@gmail.com>, 2014
+# baatarsuren <mgllibrary@gmail.com>, 2016
+# Khaidav T. <khaidaw@yahoo.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-12-03 17:53+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Thai (http://www.transifex.com/omeka/omeka/language/th/)\n"
+"PO-Revision-Date: 2016-04-08 04:05+0000\n"
+"Last-Translator: Khaidav T. <khaidaw@yahoo.com>\n"
+"Language-Team: Mongolian (http://www.transifex.com/omeka/omeka/language/mn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: th\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: mn\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr "เว็บไซต์"
+msgstr "Вебсайт"
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "อีเมล (จำเป็น)"
+msgstr "Имайл (шаардлагатай)"
 
 #: CommentForm.php:25
 msgid "Your name"
-msgstr "ชื่อของคุณ"
+msgstr "Таны нэр"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "ป้ายกำกับที่ได้รับอนุญาต:"
+msgstr "Тагуудыг зөвшөөрөх"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "กรุณายืนยันว่าคุณคือมนุษย์"
+msgstr "Хэрэв та машин биш бол баталгаажуулалт хийнэ үү."
 
 #: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr "ข้อคิดเห็น"
+msgstr "Сэтгэгдэл"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "แบ่งข้อคิดเห็นตามหัวข้อ?"
+msgstr "Холбоотой сэтгэгдлийг хэрэглэх"
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
-msgstr ""
+msgstr "Хэрэв тэмдэглэсэн бол, бичсэн хариу нь сэтгэгдлийн доор харагдах болно."
 
 #: config_form.php:24
 msgid "Text for comments label"
-msgstr ""
+msgstr "Сэтгэгдлийн хаягийн текст"
 
 #: config_form.php:27
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
@@ -61,7 +62,7 @@ msgstr ""
 
 #: config_form.php:36
 msgid "Allow public commenting?"
-msgstr ""
+msgstr "Сэтгэгдлийг олон нийтэд нээлттэй болгох уу?"
 
 #: config_form.php:39
 msgid ""
@@ -71,31 +72,31 @@ msgstr ""
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr ""
+msgstr "Нийтийн сэтгэгдэлд тохиргоо хийх шаардлагатай юу?"
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
-msgstr ""
+msgstr "Хэрэв шалгаагүй бол сэтгэгдэл нэн даруй гарч ирнэ."
 
 #: config_form.php:65
 msgid "User roles that can moderate comments"
-msgstr ""
+msgstr "Сэтгэгдэлд засвар хийх боломжтой хэрэглэгчийн эрх"
 
 #: config_form.php:68
 msgid "The user roles that are allowed to moderate comments."
-msgstr ""
+msgstr "Энэ эрхтэй хэрэглэгчид сэтгэгдэлд засвар хийх боломжтой."
 
 #: config_form.php:94
 msgid "User roles that can comment"
-msgstr ""
+msgstr "Сэтгэгдэл бичих эрхтэй хэрэглэгчийн эрх"
 
 #: config_form.php:97
 msgid "Select the roles that can leave comments"
-msgstr ""
+msgstr "Сэтгэгдэл үлдээх боломжтой хэрэглэгчийн эрхийг сонгох"
 
 #: config_form.php:121
 msgid "User roles that require moderation before publishing."
-msgstr ""
+msgstr "Нийтлэхээс өмнө шалгах шаардлагатай хэрэглэгчийн эрх"
 
 #: config_form.php:124
 msgid ""
@@ -105,15 +106,15 @@ msgstr ""
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
-msgstr ""
+msgstr "Сэтгэгдлийн нийтэд харуулах уу?"
 
 #: config_form.php:162
 msgid "User roles that can view comments"
-msgstr ""
+msgstr "Сэтгэгдлийг харж чадах хэрэглэгчийн эрхүүд."
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 msgid "security settings"
-msgstr ""
+msgstr "Хамгаалалтын тохиргоо"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 #, php-format
@@ -124,111 +125,111 @@ msgstr ""
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"
-msgstr ""
+msgstr "Акисметэд зориулсан WordPress API key"
 
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr ""
+msgstr "Таны сэтгэгдэл хүлээгдэж байна"
 
 #: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
-msgstr ""
+msgstr " %s гэсэн зүй бус дарцагаар тэмдэглэгдсэн сэтгэгдэл"
 
 #: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
-msgstr ""
+msgstr "%s сэтгэгдэл зүй бус гэсэн дарцагаар тэмдэглэгдсэн байна."
 
 #: controllers/CommentController.php:208
 msgid "here"
-msgstr ""
+msgstr "энд"
 
 #: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
-msgstr ""
+msgstr " %s сэтгэгдлийг та удирдаж болно"
 
 #: views/admin/comment.php:54 views/public/comment.php:10
 msgid "Anonymous"
-msgstr ""
+msgstr "Тодорхой нэргүй"
 
 #: views/admin/comment.php:59
 msgid "on"
-msgstr ""
+msgstr "дээр"
 
 #: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
 msgid "Approved"
-msgstr ""
+msgstr "Зөвшөөрөгдсөн"
 
 #: views/admin/comment.php:62 views/admin/comment/browse.php:24
 msgid "Unapprove"
-msgstr ""
+msgstr "Зөвшөөрлийг арилгах"
 
 #: views/admin/comment.php:63
 msgid "Not Approved"
-msgstr ""
+msgstr "Зөвшөөрөгдөөгүй"
 
 #: views/admin/comment.php:63 views/admin/comment/browse.php:23
 msgid "Approve"
-msgstr ""
+msgstr "Зөвшөөрөх"
 
 #: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
 msgid "Spam"
-msgstr ""
+msgstr "Спам"
 
 #: views/admin/comment.php:65 views/admin/comment/browse.php:27
 msgid "Report Not Spam"
-msgstr ""
+msgstr "Спамгүй тайлан"
 
 #: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
 msgid "Not Spam"
-msgstr ""
+msgstr "Спамгүй"
 
 #: views/admin/comment.php:66 views/admin/comment/browse.php:26
 msgid "Report Spam"
-msgstr ""
+msgstr "Спамын тайлан"
 
 #: views/admin/comment.php:69
 msgid "Flagged Inappropriate"
-msgstr ""
+msgstr "Зохисгүй гэж дарцагаар тэмдэглэгдсэн"
 
 #: views/admin/comment.php:69 views/admin/comment/browse.php:30
 msgid "Unflag"
-msgstr ""
+msgstr "Дарцагийг арилгах"
 
 #: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
-msgstr ""
+msgstr "Дарцагаар тэмдэглэгдээгүй"
 
 #: views/admin/comment.php:70
 msgid "Flag Inappropriate"
-msgstr ""
+msgstr "Зохисгүй гэх дарцаг"
 
 #: views/admin/comment/browse.php:29
 msgid "Flag"
-msgstr ""
+msgstr "Дарцаг"
 
 #: views/admin/comment/browse.php:35
 msgid "Select All"
-msgstr ""
+msgstr "Бүгдийг сонгох"
 
 #: views/admin/common/quick-filters.php:7
 msgid "Needs Approval"
-msgstr ""
+msgstr "Дэмжих хэрэгтэй"
 
 #: views/admin/common/quick-filters.php:10
 msgid "Flagged"
-msgstr ""
+msgstr "Дарцагаар тэмдэглэгдсэн"
 
 #: views/public/comment.php:22
 msgid "Flag inappropriate"
-msgstr ""
+msgstr "Зохисгүй гэх дарцаг"
 
 #: views/public/comment.php:23
 msgid "Unflag inappropriate"
-msgstr ""
+msgstr "Зохисгүй гэсэн дарцагийг арилгах"
 
 #: views/public/comment.php:25
 msgid "Reply"
-msgstr ""
+msgstr "Хариу бичих"

@@ -3,232 +3,232 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# iteau <songphan@gmail.com>, 2014
+# Rivo Zängov <eraser@eraser.ee>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-12-03 17:53+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Thai (http://www.transifex.com/omeka/omeka/language/th/)\n"
+"PO-Revision-Date: 2015-08-14 13:21+0000\n"
+"Last-Translator: Rivo Zängov <eraser@eraser.ee>\n"
+"Language-Team: Estonian (http://www.transifex.com/omeka/omeka/language/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: th\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: et\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr "เว็บไซต์"
+msgstr "Veebisait"
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "อีเมล (จำเป็น)"
+msgstr "E-post (nõutud)"
 
 #: CommentForm.php:25
 msgid "Your name"
-msgstr "ชื่อของคุณ"
+msgstr "Sinu nimi"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "ป้ายกำกับที่ได้รับอนุญาต:"
+msgstr "Lubatud sildid:"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "กรุณายืนยันว่าคุณคือมนุษย์"
+msgstr "Palun kinnita, et sa oled inimene"
 
 #: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr "ข้อคิดเห็น"
+msgstr "Kommentaarid"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "แบ่งข้อคิดเห็นตามหัวข้อ?"
+msgstr "Kasutada puuvaadet?"
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
-msgstr ""
+msgstr "Kui see valik on märgitud, siis näidatakse kommentaarile tulnud vastuseid väikese nihkega."
 
 #: config_form.php:24
 msgid "Text for comments label"
-msgstr ""
+msgstr "Kommentaaride sildi tekst"
 
 #: config_form.php:27
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
-msgstr ""
+msgstr "Silt, mida kasutatakse sõna 'Kommentaarid' asemel. Jäta tühjaks, kui soovid kasutada sõna 'Kommentaarid'."
 
 #: config_form.php:36
 msgid "Allow public commenting?"
-msgstr ""
+msgstr "Lubada avalik kommenteerimine?"
 
 #: config_form.php:39
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
-msgstr ""
+msgstr "Lubab kõigil, kaasa arvatud registreerumata kasutajatel kommentaare lisada. Selle kasutamine ilma Akismetita pole soovitatav."
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr ""
+msgstr "Kas nõuda kõigi avalike kommentaaride ülevaatamist?"
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
-msgstr ""
+msgstr "Kui see valik on märkimata, siis ilmuvad kommentaarid kohe lehele."
 
 #: config_form.php:65
 msgid "User roles that can moderate comments"
-msgstr ""
+msgstr "Kasutajarollid, kes võivad kommentaare muuta"
 
 #: config_form.php:68
 msgid "The user roles that are allowed to moderate comments."
-msgstr ""
+msgstr "Kasutajarollid, kes võivad kommentaare muuta."
 
 #: config_form.php:94
 msgid "User roles that can comment"
-msgstr ""
+msgstr "Kasutajarollid, kes võivad kommenteerida"
 
 #: config_form.php:97
 msgid "Select the roles that can leave comments"
-msgstr ""
+msgstr "Vali rollid, kellel on kommenteerimise õigus"
 
 #: config_form.php:121
 msgid "User roles that require moderation before publishing."
-msgstr ""
+msgstr "Kasutajarollid, kelle kommentaarid on vaja enne avaldamist üle vaadata."
 
 #: config_form.php:124
 msgid ""
 "If the role is allowed to moderate comments, that will override the setting "
 "here."
-msgstr ""
+msgstr "Kui kasutajarollil on muutmise õigus, siis see kirjutab siinse valiku üle."
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
-msgstr ""
+msgstr "Luba kommentaaride avalikku vaatamist?"
 
 #: config_form.php:162
 msgid "User roles that can view comments"
-msgstr ""
+msgstr "Kasutajarollid, kes võivad kommentaare näha"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 msgid "security settings"
-msgstr ""
+msgstr "turvaseaded"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 #, php-format
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
-msgstr ""
+msgstr "Sa pole sisestanud oma %s API võtit %s. Me soovitame need võtmed lisada või kommentaarid võivad olla haavatavad rämpsposti poolt."
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"
-msgstr ""
+msgstr "WordPress API võti Akismeti jaoks"
 
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr ""
+msgstr "Sinu kommentaar ootab ülevaatamist"
 
 #: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
-msgstr ""
+msgstr "Kommentaar %s on märgitud kohatuks"
 
 #: controllers/CommentController.php:207
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
-msgstr ""
+msgstr "Kommentaar %s on märgitud kohatuks."
 
 #: controllers/CommentController.php:208
 msgid "here"
-msgstr ""
+msgstr "siin"
 
 #: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
-msgstr ""
+msgstr "Sa saad kommentaare hallata %s"
 
 #: views/admin/comment.php:54 views/public/comment.php:10
 msgid "Anonymous"
-msgstr ""
+msgstr "Anonüümne"
 
 #: views/admin/comment.php:59
 msgid "on"
-msgstr ""
+msgstr "aeg"
 
 #: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
 msgid "Approved"
-msgstr ""
+msgstr "Heaks kiidetud"
 
 #: views/admin/comment.php:62 views/admin/comment/browse.php:24
 msgid "Unapprove"
-msgstr ""
+msgstr "Ära kiida heaks"
 
 #: views/admin/comment.php:63
 msgid "Not Approved"
-msgstr ""
+msgstr "Pole heaks kiidetud"
 
 #: views/admin/comment.php:63 views/admin/comment/browse.php:23
 msgid "Approve"
-msgstr ""
+msgstr "Kiida heaks"
 
 #: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
 msgid "Spam"
-msgstr ""
+msgstr "Rämpspost"
 
 #: views/admin/comment.php:65 views/admin/comment/browse.php:27
 msgid "Report Not Spam"
-msgstr ""
+msgstr "Pole rämpspost"
 
 #: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
 msgid "Not Spam"
-msgstr ""
+msgstr "Pole rämpspost"
 
 #: views/admin/comment.php:66 views/admin/comment/browse.php:26
 msgid "Report Spam"
-msgstr ""
+msgstr "On rämpspost"
 
 #: views/admin/comment.php:69
 msgid "Flagged Inappropriate"
-msgstr ""
+msgstr "Märgitud kohatuks"
 
 #: views/admin/comment.php:69 views/admin/comment/browse.php:30
 msgid "Unflag"
-msgstr ""
+msgstr "Eemalda märgistus"
 
 #: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
-msgstr ""
+msgstr "Pole märgistatud"
 
 #: views/admin/comment.php:70
 msgid "Flag Inappropriate"
-msgstr ""
+msgstr "Märgista kohatuks"
 
 #: views/admin/comment/browse.php:29
 msgid "Flag"
-msgstr ""
+msgstr "Märgista"
 
 #: views/admin/comment/browse.php:35
 msgid "Select All"
-msgstr ""
+msgstr "Vali kõik"
 
 #: views/admin/common/quick-filters.php:7
 msgid "Needs Approval"
-msgstr ""
+msgstr "Vajab heakskiitu"
 
 #: views/admin/common/quick-filters.php:10
 msgid "Flagged"
-msgstr ""
+msgstr "Märgistatud"
 
 #: views/public/comment.php:22
 msgid "Flag inappropriate"
-msgstr ""
+msgstr "Märgista kohatuks"
 
 #: views/public/comment.php:23
 msgid "Unflag inappropriate"
-msgstr ""
+msgstr "Eemalda kohatuks märkmine"
 
 #: views/public/comment.php:25
 msgid "Reply"
-msgstr ""
+msgstr "Vasta"

@@ -3,49 +3,49 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# iteau <songphan@gmail.com>, 2014
+# Peter Krantz <peter.krantz@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-12-03 17:53+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Thai (http://www.transifex.com/omeka/omeka/language/th/)\n"
+"PO-Revision-Date: 2015-03-01 16:06+0000\n"
+"Last-Translator: Peter Krantz <peter.krantz@gmail.com>\n"
+"Language-Team: Swedish (Sweden) (http://www.transifex.com/omeka/omeka/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: th\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: sv_SE\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr "เว็บไซต์"
+msgstr "Webbplats"
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "อีเมล (จำเป็น)"
+msgstr "E-post (obligatoriskt)"
 
 #: CommentForm.php:25
 msgid "Your name"
-msgstr "ชื่อของคุณ"
+msgstr "Ditt namn"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "ป้ายกำกับที่ได้รับอนุญาต:"
+msgstr "Tillåtna taggar:"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "กรุณายืนยันว่าคุณคือมนุษย์"
+msgstr "Vänligen visa att du är en människa"
 
 #: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr "ข้อคิดเห็น"
+msgstr "Kommentarer"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "แบ่งข้อคิดเห็นตามหัวข้อ?"
+msgstr ""
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."

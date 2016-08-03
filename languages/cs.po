@@ -4,16 +4,16 @@
 # 
 # Translators:
 # Jan Černý <cernyhonza@gmail.com>, 2013
-# Jiří Vírava <appukonrad@gmail.com>, 2014
+# Jiří Vírava <appukonrad@gmail.com>, 2014-2015
 # MICHAL D. <black23@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-12-03 17:53+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Czech (http://www.transifex.com/projects/p/omeka/language/cs/)\n"
+"PO-Revision-Date: 2015-05-07 10:14+0000\n"
+"Last-Translator: Jiří Vírava <appukonrad@gmail.com>\n"
+"Language-Team: Czech (http://www.transifex.com/omeka/omeka/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -107,7 +107,7 @@ msgstr ""
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
-msgstr ""
+msgstr "Povolit veřejnosti zobrazit komentáře?"
 
 #: config_form.php:162
 msgid "User roles that can view comments"
@@ -126,11 +126,11 @@ msgstr ""
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"
-msgstr ""
+msgstr "Klíč WordPress API pro Akismet"
 
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr ""
+msgstr "Váš komentář čeká na moderování"
 
 #: controllers/CommentController.php:206
 #, php-format
@@ -144,7 +144,7 @@ msgstr ""
 
 #: controllers/CommentController.php:208
 msgid "here"
-msgstr ""
+msgstr "zde"
 
 #: controllers/CommentController.php:208
 #, php-format
@@ -161,19 +161,19 @@ msgstr ""
 
 #: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
 msgid "Approved"
-msgstr ""
+msgstr "Schváleno"
 
 #: views/admin/comment.php:62 views/admin/comment/browse.php:24
 msgid "Unapprove"
-msgstr ""
+msgstr "Neschválit"
 
 #: views/admin/comment.php:63
 msgid "Not Approved"
-msgstr ""
+msgstr "Neschváleno"
 
 #: views/admin/comment.php:63 views/admin/comment/browse.php:23
 msgid "Approve"
-msgstr ""
+msgstr "Schválit"
 
 #: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
 msgid "Spam"
@@ -205,11 +205,11 @@ msgstr "Není označeno"
 
 #: views/admin/comment.php:70
 msgid "Flag Inappropriate"
-msgstr ""
+msgstr "Označit jako nevhodné"
 
 #: views/admin/comment/browse.php:29
 msgid "Flag"
-msgstr ""
+msgstr "Označit"
 
 #: views/admin/comment/browse.php:35
 msgid "Select All"
@@ -217,11 +217,11 @@ msgstr "Vybrat vše"
 
 #: views/admin/common/quick-filters.php:7
 msgid "Needs Approval"
-msgstr ""
+msgstr "Potřebuje schválení"
 
 #: views/admin/common/quick-filters.php:10
 msgid "Flagged"
-msgstr ""
+msgstr "Označeno"
 
 #: views/public/comment.php:22
 msgid "Flag inappropriate"

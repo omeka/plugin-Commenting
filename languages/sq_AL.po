@@ -3,15 +3,15 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Ardit Dani <ardit.dani@gmail.com>, 2014
+# Ardit Dani <ardit.dani@gmail.com>, 2014,2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-12-03 17:53+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Albanian (Albania) (http://www.transifex.com/projects/p/omeka/language/sq_AL/)\n"
+"PO-Revision-Date: 2016-04-08 11:56+0000\n"
+"Last-Translator: Ardit Dani <ardit.dani@gmail.com>\n"
+"Language-Team: Albanian (Albania) (http://www.transifex.com/omeka/omeka/language/sq_AL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -142,12 +142,12 @@ msgstr ""
 
 #: controllers/CommentController.php:208
 msgid "here"
-msgstr ""
+msgstr "këtu"
 
 #: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
-msgstr ""
+msgstr "Ju mund të menaxhoni komentet %s"
 
 #: views/admin/comment.php:54 views/public/comment.php:10
 msgid "Anonymous"
@@ -155,7 +155,7 @@ msgstr ""
 
 #: views/admin/comment.php:59
 msgid "on"
-msgstr ""
+msgstr "në"
 
 #: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
 msgid "Approved"

@@ -3,49 +3,49 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# iteau <songphan@gmail.com>, 2014
+# Konstantina Elma <konstantinaelma@hotmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-12-03 17:53+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Thai (http://www.transifex.com/omeka/omeka/language/th/)\n"
+"PO-Revision-Date: 2015-03-05 11:12+0000\n"
+"Last-Translator: Konstantina Elma <konstantinaelma@hotmail.com>\n"
+"Language-Team: Greek (Greece) (http://www.transifex.com/omeka/omeka/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: th\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: el_GR\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr "เว็บไซต์"
+msgstr ""
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "อีเมล (จำเป็น)"
+msgstr ""
 
 #: CommentForm.php:25
 msgid "Your name"
-msgstr "ชื่อของคุณ"
+msgstr "Το όνομα σας"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "ป้ายกำกับที่ได้รับอนุญาต:"
+msgstr "Επιτρεπόμενες ετικέτες"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "กรุณายืนยันว่าคุณคือมนุษย์"
+msgstr "Παρακαλώ επιβεβαιώστε ότι είστε άνθρωπος"
 
 #: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr "ข้อคิดเห็น"
+msgstr "Σχόλια"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "แบ่งข้อคิดเห็นตามหัวข้อ?"
+msgstr ""
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
@@ -61,7 +61,7 @@ msgstr ""
 
 #: config_form.php:36
 msgid "Allow public commenting?"
-msgstr ""
+msgstr "Να επιτρέπεται ο δημόσιος σχολιασμός?"
 
 #: config_form.php:39
 msgid ""
@@ -71,7 +71,7 @@ msgstr ""
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr ""
+msgstr "Να απαιτείται επανέλεγχος για όλα τα δημόσια σχόλια?"
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
@@ -105,7 +105,7 @@ msgstr ""
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
-msgstr ""
+msgstr "Να επιτρέπεται στο κοινό να βλέπει σχόλια?"
 
 #: config_form.php:162
 msgid "User roles that can view comments"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 msgid "security settings"
-msgstr ""
+msgstr "Ρυθμίσεις Ασφαλείας"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 #, php-format
@@ -128,12 +128,12 @@ msgstr ""
 
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr ""
+msgstr "Το σχόλιο σας περιμένει έγκριση "
 
 #: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
-msgstr ""
+msgstr "Ένα σχόλιο στο %s έχει μαρκαριστεί ως ακατάλληλο "
 
 #: controllers/CommentController.php:207
 #, php-format
@@ -142,12 +142,12 @@ msgstr ""
 
 #: controllers/CommentController.php:208
 msgid "here"
-msgstr ""
+msgstr "Εδώ "
 
 #: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
-msgstr ""
+msgstr "Μπορείτε να διαχειριστείτε το σχόλιο %s"
 
 #: views/admin/comment.php:54 views/public/comment.php:10
 msgid "Anonymous"
@@ -207,19 +207,19 @@ msgstr ""
 
 #: views/admin/comment/browse.php:29
 msgid "Flag"
-msgstr ""
+msgstr "Μαρκάρισμα"
 
 #: views/admin/comment/browse.php:35
 msgid "Select All"
-msgstr ""
+msgstr "Επιλογή όλων"
 
 #: views/admin/common/quick-filters.php:7
 msgid "Needs Approval"
-msgstr ""
+msgstr "Χρειάζεται έγκριση"
 
 #: views/admin/common/quick-filters.php:10
 msgid "Flagged"
-msgstr ""
+msgstr "Μαρκαρισμένο"
 
 #: views/public/comment.php:22
 msgid "Flag inappropriate"
@@ -231,4 +231,4 @@ msgstr ""
 
 #: views/public/comment.php:25
 msgid "Reply"
-msgstr ""
+msgstr "Απάντηση"

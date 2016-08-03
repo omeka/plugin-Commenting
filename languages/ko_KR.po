@@ -3,49 +3,48 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# iteau <songphan@gmail.com>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-12-03 17:53+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Thai (http://www.transifex.com/omeka/omeka/language/th/)\n"
+"PO-Revision-Date: 2014-12-18 08:25+0000\n"
+"Last-Translator: Seung-il, Lee <silee0523@gmail.com>\n"
+"Language-Team: Korean (Korea) (http://www.transifex.com/omeka/omeka/language/ko_KR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: th\n"
+"Language: ko_KR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr "เว็บไซต์"
+msgstr "홈페이지"
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "อีเมล (จำเป็น)"
+msgstr "이메일주소(필수)"
 
 #: CommentForm.php:25
 msgid "Your name"
-msgstr "ชื่อของคุณ"
+msgstr "이름 또는 닉네임"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "ป้ายกำกับที่ได้รับอนุญาต:"
+msgstr "허용 태그 : "
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "กรุณายืนยันว่าคุณคือมนุษย์"
+msgstr "아래의 글자 또는 숫자를 Type the text 입력란에 보이는 대로 입력해 주십시오"
 
 #: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr "ข้อคิดเห็น"
+msgstr "코멘트"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "แบ่งข้อคิดเห็นตามหัวข้อ?"
+msgstr ""
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
@@ -231,4 +230,4 @@ msgstr ""
 
 #: views/public/comment.php:25
 msgid "Reply"
-msgstr ""
+msgstr "답변하기"

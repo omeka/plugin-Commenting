@@ -3,49 +3,51 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# iteau <songphan@gmail.com>, 2014
+# Sylwia Kucharska <sylvia@wroclaw.home.pl>, 2016
+# Tomasz Sopylo <tomasz@sopylo.pl>, 2015
+# vortage <vortage@o2.pl>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2014-12-03 17:53+0000\n"
-"Last-Translator: John Flatness <john@zerocrates.org>\n"
-"Language-Team: Thai (http://www.transifex.com/omeka/omeka/language/th/)\n"
+"PO-Revision-Date: 2016-05-24 19:29+0000\n"
+"Last-Translator: Sylwia Kucharska <sylvia@wroclaw.home.pl>\n"
+"Language-Team: Polish (http://www.transifex.com/omeka/omeka/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: th\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr "เว็บไซต์"
+msgstr "Strona internetowa"
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "อีเมล (จำเป็น)"
+msgstr "Email (wymagany)"
 
 #: CommentForm.php:25
 msgid "Your name"
-msgstr "ชื่อของคุณ"
+msgstr "Twoje imię"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "ป้ายกำกับที่ได้รับอนุญาต:"
+msgstr "Dozwolone tagi:"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "กรุณายืนยันว่าคุณคือมนุษย์"
+msgstr "Proszę zweryfikować, że jesteś człowiekiem"
 
 #: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr "ข้อคิดเห็น"
+msgstr "Komentarze"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "แบ่งข้อคิดเห็นตามหัวข้อ?"
+msgstr ""
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
@@ -61,7 +63,7 @@ msgstr ""
 
 #: config_form.php:36
 msgid "Allow public commenting?"
-msgstr ""
+msgstr "Czy pozwolić na dodawanie publicznych komentarzy?"
 
 #: config_form.php:39
 msgid ""
@@ -71,7 +73,7 @@ msgstr ""
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr ""
+msgstr "Czy wymagana jest moderacja wszystkich publicznych komentarzy?"
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
@@ -79,15 +81,15 @@ msgstr ""
 
 #: config_form.php:65
 msgid "User roles that can moderate comments"
-msgstr ""
+msgstr "Użytkownik upoważniony do moderowania komentarzy."
 
 #: config_form.php:68
 msgid "The user roles that are allowed to moderate comments."
-msgstr ""
+msgstr "Użytkownicy upoważnieni do moderowania komentarzy,"
 
 #: config_form.php:94
 msgid "User roles that can comment"
-msgstr ""
+msgstr "Użytkownik upoważniony do komentowania."
 
 #: config_form.php:97
 msgid "Select the roles that can leave comments"
@@ -113,7 +115,7 @@ msgstr ""
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 msgid "security settings"
-msgstr ""
+msgstr "ustawienia ochrony"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 #, php-format
@@ -128,7 +130,7 @@ msgstr ""
 
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr ""
+msgstr "Twój komentarz czeka na moderację."
 
 #: controllers/CommentController.php:206
 #, php-format
@@ -142,7 +144,7 @@ msgstr ""
 
 #: controllers/CommentController.php:208
 msgid "here"
-msgstr ""
+msgstr "tutaj"
 
 #: controllers/CommentController.php:208
 #, php-format
@@ -155,11 +157,11 @@ msgstr ""
 
 #: views/admin/comment.php:59
 msgid "on"
-msgstr ""
+msgstr "na temat"
 
 #: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
 msgid "Approved"
-msgstr ""
+msgstr "Zaakceptowany"
 
 #: views/admin/comment.php:62 views/admin/comment/browse.php:24
 msgid "Unapprove"
