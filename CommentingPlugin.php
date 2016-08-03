@@ -152,7 +152,6 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
     public static function showComments($args = array())
     {
         $view = get_view();
-        $view->addHelperPath(COMMENTING_PLUGIN_DIR . '/helpers', 'Commenting_View_Helper_');
         echo "<div id='comments-container'>";
         echo "<div id='comment-main-container'>";
         if( (get_option('commenting_allow_public') == 1)
