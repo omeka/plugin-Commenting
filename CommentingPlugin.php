@@ -83,6 +83,8 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
               KEY `record_id` (`record_id`,`user_id`,`parent_comment_id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
         ";
+        
+        $db->query($sql);
         set_option('commenting_comment_roles', serialize(array()));
         set_option('commenting_moderate_roles', serialize(array()));
         set_option('commenting_reqapp_comment_roles', serialize(array()));
