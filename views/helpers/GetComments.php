@@ -53,7 +53,6 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
     
     public function getComments($options = array(), $record_id = null, $record_type = null) 
     {
-            
         $request = Zend_Controller_Front::getInstance()->getRequest();
         $params = $request->getParams();
             
@@ -79,8 +78,7 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
             $searchParams['flagged'] = 0;
             $searchParams['is_spam'] = 0;
         }
-        
-        $select = $commentTable->getSelectForFindBy($searchParams = array());
+        $select = $commentTable->getSelectForFindBy($searchParams);
         if(isset($options['order'])) {
             $select->order("ORDER BY added " . $options['order']);
         }

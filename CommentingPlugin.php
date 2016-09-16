@@ -170,7 +170,6 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
                 || (get_option('commenting_allow_public_view') == 1)
                 || is_allowed('Commenting_Comment', 'show') ) {
             $options = array('threaded'=> get_option('commenting_threaded'), 'approved'=>true);
-
             $comments = isset($args['comments']) ? $args['comments'] : $view->getComments($options);
             echo $view->partial('comments.php', array('comments'=>$comments, 'threaded'=>$options['threaded']));
         }
