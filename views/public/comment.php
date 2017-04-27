@@ -22,4 +22,7 @@
 <p class='comment-flag' <?php if($comment->flagged): ?> style='display:none;'<?php endif;?> ><?php echo __("Flag inappropriate"); ?></p>
 <p class='comment-unflag' <?php if(!$comment->flagged): ?>style='display:none;'<?php endif;?> ><?php echo __("Unflag inappropriate"); ?></p>
 <?php endif; ?>
+
+<?php if (is_allowed('Commenting_Comment', 'add') || get_option('commenting_allow_public') == 1): ?>
 <p class='comment-reply'><?php echo __("Reply"); ?></p>
+<?php endif; ?>
