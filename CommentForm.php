@@ -51,12 +51,7 @@ class Commenting_CommentForm extends Omeka_Form
         if(!$user && get_option('recaptcha_public_key') && get_option('recaptcha_private_key')) {
             $this->addElement('captcha', 'captcha',  array(
                 'label' => __("Please verify you're a human"),
-                'captcha' => array(
-                    'captcha' => 'ReCaptcha',
-                    'pubkey' => get_option('recaptcha_public_key'),
-                    'privkey' => get_option('recaptcha_private_key'),
-                    'ssl' => true //make the connection secure so IE8 doesn't complain. if works, should branch around http: vs https:
-                )
+                'captcha' => Omeka_Captcha::getCaptcha()
             ));
             $this->getElement('captcha')->removeDecorator('ViewHelper');
         }
