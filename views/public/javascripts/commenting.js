@@ -10,11 +10,11 @@ var Commenting = {
 
     moveForm: function(event) {
         //first make tinyMCE go away so it is safe to move around in the DOM
-        tinyMCE.execCommand('mceRemoveControl', false, 'comment-form-body');
+        tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, 'comment-form-body');
         jQuery('#comment-form').insertAfter(event.target);
         commentId = Commenting.getCommentId(event.target);
         jQuery('#parent-id').val(commentId);
-        tinyMCE.execCommand('mceAddControl', false, 'comment-form-body');
+        tinyMCE.EditorManager.execCommand('mceAddEditor', false, 'comment-form-body');
     },
 
     flag: function(event) {
@@ -95,11 +95,5 @@ jQuery(document).ready(function() {
     jQuery('.comment-reply').click(Commenting.handleReply);
     jQuery('.comment-flag').click(Commenting.flag);
     jQuery('.comment-unflag').click(Commenting.unflag);
-    var commentingWysiwyg = {
-            elements: 'comment-form-body',
-            mode: 'exact',
-            valid_child_elements: "ul[li],ol[li]",
-            theme_advanced_buttons1: "bold,italic,underline,link,bullist,numlist,|,code",
-        };
-    Omeka.wysiwyg(commentingWysiwyg);
+    tinyMCE.EditorManager.execCommand('mceAddEditor', true, 'comment-form-body');
 });
