@@ -80,7 +80,7 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
         }
         $select = $commentTable->getSelectForFindBy($searchParams);
         if(isset($options['order'])) {
-            $select->order("ORDER BY added " . $options['order']);
+            $select->order("added " . $options['order']);
         }
         return $commentTable->fetchObjects($select);        
     }
