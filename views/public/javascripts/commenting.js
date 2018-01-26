@@ -71,7 +71,7 @@ if(typeof Omeka.wysiwyg == 'undefined') {
             add_unload_trigger: false
         };
 
-        tinyMCE.init($.extend(initParams, params));
+        tinyMCE.init(jQuery.extend(initParams, params));
     };
 }
 
@@ -79,6 +79,6 @@ jQuery(document).ready(function() {
     jQuery('.comment-reply').click(Commenting.handleReply);
     jQuery('.comment-flag').click(Commenting.flag);
     jQuery('.comment-unflag').click(Commenting.unflag);
-    //Omeka.wysiwyg();
+    Omeka.wysiwyg();
     tinyMCE.EditorManager.execCommand('mceAddEditor', true, 'comment-form-body');
 });
