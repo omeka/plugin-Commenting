@@ -49,15 +49,6 @@ var Commenting = {
     }
 };
 
-/**
- * Add the TinyMCE WYSIWYG editor to a page.
- * Default is to add to all textareas.
- * Modified from the admin-side global.js Omeka.wysiwyg
- *
- * @param {Object} [params] Parameters to pass to TinyMCE, these override the
- * defaults.
- */
-
 if(typeof Omeka == 'undefined' ) {
     Omeka = {};
 }
@@ -66,34 +57,28 @@ if(typeof Omeka.wysiwyg == 'undefined') {
     Omeka.wysiwyg = function (params) {
         // Default parameters
         initParams = {
-                convert_urls: false,
-                mode: "textareas", // All textareas
-                theme: "advanced",
-                theme_advanced_toolbar_location: "top",
-                theme_advanced_statusbar_location: "none",
-                theme_advanced_toolbar_align: "left",
-                theme_advanced_buttons1: "bold,italic,underline,|,justifyleft,justifycenter,justifyright,|,bullist,numlist,|,link,formatselect,code",
-                theme_advanced_buttons2: "",
-                theme_advanced_buttons3: "",
-                plugins: "paste,inlinepopups,media",
-                media_strict: false,
-                width: "100%"
-            };
+            convert_urls: false,
+            selector: "#comment-form-body",
+            //selector: "textarea",
+            menubar: false,
+            statusbar: false,
+            toolbar_items_size: "small",
+            toolbar: "bold italic underline | alignleft aligncenter alignright | bullist numlist | link formatselect code",
+            plugins: "lists,link,code,paste,media,autoresize",
+            autoresize_max_height: 500,
+            entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm",
+            verify_html: false,
+            add_unload_trigger: false
+        };
 
-        // Overwrite default params with user-passed ones.
-        for (var attribute in params) {
-            // Account for annoying scripts that mess with prototypes.
-            if (params.hasOwnProperty(attribute)) {
-                initParams[attribute] = params[attribute];
-            }
-        }
-        tinyMCE.init(initParams);
+        tinyMCE.init($.extend(initParams, params));
     };
 }
 
-jQuery(document).ready(function() {    
+jQuery(document).ready(function() {
     jQuery('.comment-reply').click(Commenting.handleReply);
     jQuery('.comment-flag').click(Commenting.flag);
     jQuery('.comment-unflag').click(Commenting.unflag);
+    //Omeka.wysiwyg();
     tinyMCE.EditorManager.execCommand('mceAddEditor', true, 'comment-form-body');
 });
