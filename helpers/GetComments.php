@@ -24,7 +24,7 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
         } else {
             $id = $params['id'];
         }
-        return $id;        
+        return $id;
     }
     
     private function _getRecordType($params)
@@ -48,7 +48,7 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
         } else {
             $model = ucfirst(Inflector::singularize($params['controller']));
         }
-        return $model;        
+        return $model;
     }
     
     public function getComments($options = array(), $record_id = null, $record_type = null) 
@@ -80,10 +80,10 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
             $searchParams['is_spam'] = 0;
         }
         
-        $select = $commentTable->getSelectForFindBy($searchParams = array());
+        $select = $commentTable->getSelectForFindBy($searchParams);
         if(isset($options['order'])) {
-            $select->order("ORDER BY added " . $options['order']);
+            $select->order("added ". $options['order']);
         }
-        return $commentTable->fetchObjects($select);        
+        return $commentTable->fetchObjects($select);
     }
 }
