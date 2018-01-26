@@ -201,3 +201,15 @@
         </div>
     </div>
 </div>
+
+<div class="field">
+    <div class="three columns alpha">
+        <label><?php echo __('New Comment Notification Emails'); ?></label>
+    </div>
+    <div class="inputs four columns omega">
+        <p class="explanation"><?php echo __('An email message will be sent to each address here whenever a new comment is contributed (one email per line). Leave blank if you do not want anyone to be alerted of comments by email.'); ?></p>
+        <div class="input-block">
+            <?php echo $view->formTextarea('new_comment_notification_recipients', get_option('new_comment_notification_recipients'), array('rows'=> 5)); ?>
+        </div>
+    </div>
+</div>
