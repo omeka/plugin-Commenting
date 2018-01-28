@@ -59,7 +59,6 @@ if(typeof Omeka.wysiwyg == 'undefined') {
         initParams = {
             convert_urls: false,
             selector: "#comment-form-body",
-            //selector: "textarea",
             menubar: false,
             statusbar: false,
             toolbar_items_size: "small",
@@ -80,5 +79,4 @@ jQuery(document).ready(function() {
     jQuery('.comment-flag').click(Commenting.flag);
     jQuery('.comment-unflag').click(Commenting.unflag);
     Omeka.wysiwyg();
-    tinyMCE.EditorManager.execCommand('mceAddEditor', true, 'comment-form-body');
 });
