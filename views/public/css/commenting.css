@@ -12,6 +12,15 @@
     padding-top: 1em;
 }
 
+#comment-form .mce-tinymce button {
+        background: none;
+        margin: 0;
+}
+
+#comment-form .mce-tinymce [aria-haspopup="true"]:after {
+        content: none;
+}
+
 #comment-form #submit {
     clear: both;
     display: block;
