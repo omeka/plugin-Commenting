@@ -5,6 +5,11 @@
     padding: 6px;
 }
 
+#comments-container .comment-author img.gravatar {
+    height: auto;
+    width: auto;
+}
+
 #comment-form {
     clear:both;
     line-height: 1em;
