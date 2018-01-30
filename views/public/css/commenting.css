@@ -15,6 +15,7 @@
 #comment-form .mce-tinymce button {
         background: none;
         margin: 0;
+        text-transform: none;
 }
 
 #comment-form .mce-tinymce [aria-haspopup="true"]:after {
