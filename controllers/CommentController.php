@@ -78,6 +78,9 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $comment->setArray($data);
         $comment->checkSpam();
         $comment->save();
+
+        $this->sendEmailNotifications($comment);
+
         $destination .= "#comment-" . $comment->id;
         $this->_helper->redirector->gotoUrl($destination);
     }
@@ -215,7 +218,20 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         }
     
     }
-        
+
+    private function sendEmailNotifications(Comment $comment)
+    {
+        $recipients = get_option('new_comment_notification_recipients');
+        if (strlen($recipients)) {
+            // run the whole stuff in background, we don't want delay our visitors
+            Zend_Registry::get('bootstrap')->getResource('jobs')
+                ->sendLongRunning('Job_CommentNotification', [
+                    'id' => $comment->id,
+                    'recipients' => (array) explode("\n", $recipients),
+                    'webRoot' => rtrim(WEB_ROOT, '/'), // needed for correct URLs from background job to admin/public page
+            ]);
+        }
+    }
 
     private function getForm()
     {

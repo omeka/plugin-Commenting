@@ -202,6 +202,13 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
                 ($key == 'commenting_reqapp_comment_roles')
             ) {
                 $value = serialize($value);
+            } elseif ($key == 'new_comment_notification_recipients') {
+                // sanitize list of emails
+                $emails = array_map('trim', (array) explode("\n", $value));
+                $emails = array_filter($emails, function($val) {
+                    return filter_var($val, FILTER_VALIDATE_EMAIL);
+                });
+                $value = implode("\n", $emails);
             }
             set_option($key, $value);
         }
