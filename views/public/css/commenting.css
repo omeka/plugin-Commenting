@@ -1,8 +1,13 @@
 #comments-container .comment-body {
     margin-left: 100px !important;
     margin-top: 12px !important;
-    min-height: 60px;
+    min-height: 110px;
     padding: 6px;
+}
+
+#comments-container .comment-author img.gravatar {
+    height: auto;
+    width: auto;
 }
 
 #comment-form {
@@ -10,6 +15,16 @@
     line-height: 1em;
     max-width: 500px;
     padding-top: 1em;
+}
+
+#comment-form .mce-tinymce button {
+        background: none;
+        margin: 0;
+        text-transform: none;
+}
+
+#comment-form .mce-tinymce [aria-haspopup="true"]:after {
+        content: none;
 }
 
 #comment-form #submit {
