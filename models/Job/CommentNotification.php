@@ -112,7 +112,7 @@ class Job_CommentNotification extends Omeka_Job_AbstractJob
     {
         $author = '';
         if (!empty($record->author_name)) {
-            $author = html_escape($record->author_name);
+            $author = htmlspecialchars($record->author_name, ENT_QUOTES, 'UTF-8');
         } else {
             $author = __('Anonymous');
         }
