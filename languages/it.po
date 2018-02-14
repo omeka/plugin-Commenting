@@ -4,14 +4,15 @@
 # 
 # Translators:
 # Alfio Squatrito <info@lswebagency.it>, 2014
+# armando serra <armando.serra@gmail.com>, 2017
 # Guybrush88 <erpizzo@alice.it>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2015-03-17 16:49+0000\n"
-"Last-Translator: Guybrush88 <erpizzo@alice.it>\n"
+"PO-Revision-Date: 2017-11-19 17:36+0000\n"
+"Last-Translator: armando serra <armando.serra@gmail.com>\n"
 "Language-Team: Italian (http://www.transifex.com/omeka/omeka/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -37,7 +38,7 @@ msgstr "Tags consentiti:"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "Per favore verifica che sei un umano."
+msgstr "Per favore dimostra che sei un umano."
 
 #: CommentingPlugin.php:254 CommentingPlugin.php:262
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
@@ -46,7 +47,7 @@ msgstr "Commenti"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr ""
+msgstr "Vuoi utilizzare commenti collegati (threads)?"
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
@@ -68,7 +69,7 @@ msgstr "Consentire al pubblico di commentare?"
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
-msgstr ""
+msgstr "Consenti a tutti di commentare, incluso utenti non registrati. E' fortemente sconsigliato di procedere in questo modo senza utilizzare Akismet."
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
@@ -88,11 +89,11 @@ msgstr "Categorie utenti a cui e' permesso di moderare commenti."
 
 #: config_form.php:94
 msgid "User roles that can comment"
-msgstr "Categoria utente che possono commentare"
+msgstr "Categorie utente che possono commentare"
 
 #: config_form.php:97
 msgid "Select the roles that can leave comments"
-msgstr "Seleziona ruoli che possono lasciare commenti"
+msgstr "Seleziona i ruoli che possono lasciare commenti"
 
 #: config_form.php:121
 msgid "User roles that require moderation before publishing."
@@ -102,7 +103,7 @@ msgstr "Categorie utenti che richiedono moderazione prima della pubblicazione."
 msgid ""
 "If the role is allowed to moderate comments, that will override the setting "
 "here."
-msgstr "Se la categoria utente e' abilitata a moderare commenti cio' sovrascrivera' quanto impostato qui."
+msgstr "Se la categoria utente e' abilitata a moderare commenti, non terrà conto di  quanto impostato qui."
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
@@ -121,7 +122,7 @@ msgstr "impostazioni sicurezza"
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
-msgstr ""
+msgstr "Non hai inserito le tue chiavi API %s in %s. Raccomandiamo di aggiungere queste chiavi, oppure il modulo di commento sarà soggetto a spam."
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"
@@ -134,7 +135,7 @@ msgstr "Il tuo commento e' in attesa di moderazione"
 #: controllers/CommentController.php:206
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
-msgstr ""
+msgstr "Un commento su %s è stato segnalato come inappropriato."
 
 #: controllers/CommentController.php:207
 #, php-format
@@ -192,11 +193,11 @@ msgstr "Segnala Spam"
 
 #: views/admin/comment.php:69
 msgid "Flagged Inappropriate"
-msgstr ""
+msgstr "Segnalato come Inappropriato."
 
 #: views/admin/comment.php:69 views/admin/comment/browse.php:30
 msgid "Unflag"
-msgstr ""
+msgstr "Non segnalare."
 
 #: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
@@ -228,7 +229,7 @@ msgstr "Segnala come inappropriato"
 
 #: views/public/comment.php:23
 msgid "Unflag inappropriate"
-msgstr ""
+msgstr "Eliminazione segnalazione inappropriata."
 
 #: views/public/comment.php:25
 msgid "Reply"

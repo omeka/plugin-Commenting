@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2016-04-08 04:05+0000\n"
+"PO-Revision-Date: 2017-09-23 21:47+0000\n"
 "Last-Translator: Khaidav T. <khaidaw@yahoo.com>\n"
 "Language-Team: Mongolian (http://www.transifex.com/omeka/omeka/language/mn/)\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr "Сэтгэгдлийн хаягийн текст"
 
 #: config_form.php:27
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
-msgstr ""
+msgstr "'Сэтгэгдэл' шошгыг оронд нь хэрэглэнэ.Талбарыг хоосон орхино."
 
 #: config_form.php:36
 msgid "Allow public commenting?"
@@ -68,7 +68,7 @@ msgstr "Сэтгэгдлийг олон нийтэд нээлттэй болго
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
-msgstr ""
+msgstr "Бүх хүмүүс сэтгэгдэл үлдээхийг зөвшөөрөх. "
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
@@ -102,7 +102,7 @@ msgstr "Нийтлэхээс өмнө шалгах шаардлагатай хэ
 msgid ""
 "If the role is allowed to moderate comments, that will override the setting "
 "here."
-msgstr ""
+msgstr "Хэрэв та сэтгэгдлийг засварлах эрхтэй бол, энд тохиргоог өөрчилж болно."
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
@@ -121,7 +121,7 @@ msgstr "Хамгаалалтын тохиргоо"
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
-msgstr ""
+msgstr "Таны %s API түлхүүр %s -д оруулаагүй байна. Сэтгэгдэл оруулахад эдгээр түлхүүр хэрэгтэй."
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"

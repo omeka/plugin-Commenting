@@ -4,14 +4,14 @@
 # 
 # Translators:
 # Jan Černý <cernyhonza@gmail.com>, 2013
-# Jiří Vírava <appukonrad@gmail.com>, 2014-2015
+# Jiří Vírava <appukonrad@gmail.com>, 2014-2015,2017
 # MICHAL D. <black23@gmail.com>, 2013
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2015-05-07 10:14+0000\n"
+"PO-Revision-Date: 2017-11-15 16:37+0000\n"
 "Last-Translator: Jiří Vírava <appukonrad@gmail.com>\n"
 "Language-Team: Czech (http://www.transifex.com/omeka/omeka/language/cs/)\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgstr "Povolit veřejné komentování?"
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
-msgstr ""
+msgstr "Umožňuje všem, včetně neregistrovaných uživatelů, komentovat. Použití bez Akismetu se důrazně nedoporučuje."
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
@@ -111,7 +111,7 @@ msgstr "Povolit veřejnosti zobrazit komentáře?"
 
 #: config_form.php:162
 msgid "User roles that can view comments"
-msgstr ""
+msgstr "Uživatelské role, které mohou zobrazit komentáře"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 msgid "security settings"
@@ -149,7 +149,7 @@ msgstr "zde"
 #: controllers/CommentController.php:208
 #, php-format
 msgid "You can manage the comment %s"
-msgstr ""
+msgstr "Můžete spravovat komentář %s"
 
 #: views/admin/comment.php:54 views/public/comment.php:10
 msgid "Anonymous"
@@ -225,11 +225,11 @@ msgstr "Označeno"
 
 #: views/public/comment.php:22
 msgid "Flag inappropriate"
-msgstr ""
+msgstr "Označit jako nevhodné"
 
 #: views/public/comment.php:23
 msgid "Unflag inappropriate"
-msgstr ""
+msgstr "Odstranit označení nevhodné"
 
 #: views/public/comment.php:25
 msgid "Reply"

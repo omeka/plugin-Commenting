@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Konstantina Elma <konstantinaelma@hotmail.com>, 2015
+# Γιάννης Κασκαμανίδης <kiolalis@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2015-03-05 11:12+0000\n"
-"Last-Translator: Konstantina Elma <konstantinaelma@hotmail.com>\n"
+"PO-Revision-Date: 2017-09-19 17:24+0000\n"
+"Last-Translator: Γιάννης Κασκαμανίδης <kiolalis@gmail.com>\n"
 "Language-Team: Greek (Greece) (http://www.transifex.com/omeka/omeka/language/el_GR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +21,7 @@ msgstr ""
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr ""
+msgstr "Ιστότοπος"
 
 #: CommentForm.php:18
 msgid "Email (required)"
