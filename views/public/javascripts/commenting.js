@@ -62,7 +62,7 @@ if(typeof Omeka.wysiwyg == 'undefined') {
             menubar: false,
             statusbar: false,
             toolbar_items_size: "small",
-            toolbar: "bold italic underline | alignleft aligncenter alignright | bullist numlist | link formatselect code",
+            toolbar: "bold italic | bullist numlist | link code",
             plugins: "lists,link,code,paste,media,autoresize",
             autoresize_max_height: 500,
             entities: "160,nbsp,173,shy,8194,ensp,8195,emsp,8201,thinsp,8204,zwnj,8205,zwj,8206,lrm,8207,rlm",

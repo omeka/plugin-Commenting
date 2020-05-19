@@ -37,13 +37,6 @@ class Commenting_CommentForm extends Omeka_Form
                   'id'=>'comment-form-body',
                   'rows' => 6,
                   'required'=>true,
-                  'filters'=> array(
-                      array('StripTags',
-                              array('allowTags' => array('p', 'span', 'em', 'strong', 'a','ul','ol','li'),
-                                    'allowAttribs' => array('style', 'href')
-                                     ),
-                              ),
-                      ),
                 )
             );
 

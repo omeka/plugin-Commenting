@@ -68,10 +68,11 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         if($requiresApproval) {
             $this->_helper->flashMessenger(__("Your comment is awaiting moderation"), 'success');
         }
+
+        $purifier = $this->_getHtmlPurifier();
         
-        //need getValue to run the filter
         $data = $_POST;
-        $data['body'] = $form->getElement('body')->getValue();
+        $data['body'] = $purifier->purify($form->getElement('body')->getValue());
         $data['ip'] = $_SERVER['REMOTE_ADDR'];
         $data['user_agent'] = $_SERVER['HTTP_USER_AGENT'];
         $data['approved'] = !$requiresApproval;
@@ -239,4 +240,12 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         return new Commenting_CommentForm();
     }
 
+    private function _getHtmlPurifier()
+    {
+        $config = HTMLPurifier_Config::createDefault();
+        $config->set('HTML.Allowed', 'a[href],p,em,strong,ul,ol,li');
+        $config->set('HTML.TidyLevel', 'none');
+        $config->set('HTML.Nofollow', true);
+        return new HTMLPurifier($config);
+    }
 }
