@@ -45,10 +45,12 @@ if(empty($label)) {
             <span class='comment-author'>
                 <?php 
                     if(!empty($comment->author_name)) {
+                        $author = html_escape($comment->author_name);
                         if(empty($comment->author_url)) {
-                            $authorText = $comment->author_name;
+                            $authorText = $author;
                         } else {
-                            $authorText = "<a href='{$comment->getAuthorUrl()}'>{$comment->author_name}</a>";
+                            $url = html_escape($comment->getAuthorUrl());
+                            $authorText = "<a href='{$url}'>{$author}</a>";
                         }
                     } else {
                         $authorText = __('Anonymous');
