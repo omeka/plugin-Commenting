@@ -4,7 +4,7 @@
             if(empty($comment->author_url)) {
                 $authorText = $comment->author_name;
             } else {
-                $authorText = "<a href='{$comment->getAuthorUrl()}'>{$comment->author_name}</a>";
+                $authorText = "<a href='{$comment->getAuthorUrl()}' rel='nofollow'>{$comment->author_name}</a>";
             }
         } else {
             $authorText = __("Anonymous");
