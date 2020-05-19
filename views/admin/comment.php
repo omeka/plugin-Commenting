@@ -48,7 +48,7 @@ if(empty($label)) {
                         if(empty($comment->author_url)) {
                             $authorText = $comment->author_name;
                         } else {
-                            $authorText = "<a href='{$comment->author_url}'>{$comment->author_name}</a>";
+                            $authorText = "<a href='{$comment->getAuthorUrl()}'>{$comment->author_name}</a>";
                         }
                     } else {
                         $authorText = __('Anonymous');

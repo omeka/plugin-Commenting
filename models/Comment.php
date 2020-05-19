@@ -128,4 +128,22 @@ class Comment extends Omeka_Record_AbstractRecord
         parent::setArray($data);
     }
 
+    /**
+     * Get the author URL.
+     *
+     * If the URL seems incomplete, forces an "http://" prefix onto it.
+     *
+     * @return string
+     */
+    public function getAuthorUrl()
+    {
+        $url = $this->author_url;
+        if (!$url) {
+            return $url;
+        }
+        if (!parse_url($url, PHP_URL_SCHEME)) {
+            return 'http://'. $url;
+        }
+        return $url;
+    }
 }
