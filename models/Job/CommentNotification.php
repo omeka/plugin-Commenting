@@ -1,7 +1,7 @@
 <?php
 /**
  * Job_CommentNotification class - handles email notifications for Comments
- * 
+ *
  * @package Commenting
  */
 
@@ -10,7 +10,7 @@ class Job_CommentNotification extends Omeka_Job_AbstractJob
     const QUEUE_NAME = 'CommentNotification';
 
     /**
-     * Performs the task 
+     * Performs the task
      */
     public function perform()
     {
@@ -49,10 +49,10 @@ class Job_CommentNotification extends Omeka_Job_AbstractJob
         $subject = __('[%s] - New comment on: %s', get_option('site_title'), $this->getTargetTitle($target));
         $body = "<p>"
             . __('New comment from %s', $this->getAuthor($record))
-            . "<blockquote>{$record->body}</blockquote>" 
+            . "<blockquote>{$record->body}</blockquote>"
             . "</p>";
-        $url = $this->_options['webRoot'] 
-            . '/admin/commenting/comment/browse?' 
+        $url = $this->_options['webRoot']
+            . '/admin/commenting/comment/browse?'
             . http_build_query(array('record_type' => $record->record_type, 'record_id' => $record->record_id))
             . '#comment-' . $record->id;
         $body .= "<p>" . __("You can manage the comment %s", '<a href="' . $url . '">' . __('here') . '</a>' ) . '</p>';
@@ -121,5 +121,4 @@ class Job_CommentNotification extends Omeka_Job_AbstractJob
         }
         return $author;
     }
-
 }
