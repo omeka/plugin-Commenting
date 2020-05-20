@@ -143,34 +143,17 @@ var Commenting = {
     toggleActive: function() {
         //toggle whether the bulk actions should be active
         //check all in checkboxes, if any are checked, must be active
-        if(jQuery('.batch-select-comment:checked').length == 0) {
-            jQuery('#batch-delete').unbind('click');
-            jQuery('#batch-approve').unbind('click');
-            jQuery('#batch-unapprove').unbind('click');
-            jQuery('#batch-report-spam').unbind('click');
-            jQuery('#batch-report-ham').unbind('click');
-            jQuery('#batch-flag').unbind('click');
-            jQuery('#batch-unflag').unbind('click');
-            jQuery('#commenting-batch-actions > a').addClass('disabled');
-        } else {
-            jQuery('#batch-delete').click(Commenting.batchDelete);
-            jQuery('#batch-approve').click(Commenting.batchApprove);
-            jQuery('#batch-unapprove').click(Commenting.batchUnapprove);
-            jQuery('#batch-report-spam').click(Commenting.batchReportSpam);
-            jQuery('#batch-report-ham').click(Commenting.batchReportHam);
-            jQuery('#batch-flag').click(Commenting.batchFlag);
-            jQuery('#batch-unflag').click(Commenting.batchUnflag);
-            jQuery('#commenting-batch-actions > a').removeClass('disabled');
-        }
+        jQuery('#commenting-batch-actions button').prop('disabled',
+            jQuery('.batch-select-comment:checked').length == 0);
     },
 
     batchSelect: function() {
-        jQuery('input.batch-select-comment').attr('checked', 'checked');
+        jQuery('input.batch-select-comment').prop('checked', true);
         this.toggleActive();
     },
 
     batchUnselect: function() {
-        jQuery('input.batch-select-comment').removeAttr('checked');
+        jQuery('input.batch-select-comment').prop('checked', false);
         this.toggleActive();
     },
 
@@ -195,4 +178,12 @@ jQuery(document).ready(function() {
     jQuery('.report-ham').click(Commenting.reportHam);
     jQuery('.report-spam').click(Commenting.reportSpam);
     jQuery('.batch-select-comment').click(Commenting.toggleActive);
+
+    jQuery('#batch-delete').click(Commenting.batchDelete);
+    jQuery('#batch-approve').click(Commenting.batchApprove);
+    jQuery('#batch-unapprove').click(Commenting.batchUnapprove);
+    jQuery('#batch-report-spam').click(Commenting.batchReportSpam);
+    jQuery('#batch-report-ham').click(Commenting.batchReportHam);
+    jQuery('#batch-flag').click(Commenting.batchFlag);
+    jQuery('#batch-unflag').click(Commenting.batchUnflag);
 });

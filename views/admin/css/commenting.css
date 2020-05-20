@@ -1,10 +1,18 @@
-a#batch-delete, a#batch-approve, a#batch-unapprove, a#batch-report-spam, a#batch-report-ham, a#batch-flag, a#batch-unflag {
-    padding: 3px 2px;
-    margin: 0 0 20px;
+#commenting-batch-actions {
+    float: left;
+    margin: 0 5px 2em 0;
+}
+
+#commenting-batch-actions button {
+    margin: 0 1em 0 0;
+}
+
+button#batch-approve, button#batch-report-spam, button#batch-flag {
+    margin-right: 0;
 }
 
 li.delete {
-    float:left;
+    float: left;
     margin-right: 5px;
 }
 
@@ -12,22 +20,9 @@ form#comment-form {
     clear:both;
 }
 
-div.comment-target {
-    margin: 0;
-    padding: 0;
-}
-
-div.comment-target p {
-    margin: 0;
-    padding; 0;
-}
-
 div.comment {
-    margin-left: 12px;
-    margin-top: 3px;
-    margin-bottom: 6px;
-    clear: both;
-    min-height: 120px;
+    overflow: hidden;
+    margin: 2em 0;
 }
 
 div.comment-author {
@@ -36,32 +31,35 @@ div.comment-author {
     width: 80px;
 }
 
-div.comment-body {
-    min-height: 60px;
+.comment-author {
+    display: block;
+    font-weight: bold;
 }
 
-div.comment-flagged {
-    background-color: pink;
+.comment-info {
+    display: block;
+    font-size: 0.857em;
 }
 
-div.comment-body p {
-    font-size: 1em;
-}
-
-div#commenting-batch-actions {
-    font-size: 1.2em;
-    line-height: 1em;
+input[type="checkbox"].batch-select-comment {
     float: left;
-    margin-right: 5px;
+    margin-top: 1em;
 }
 
-div#commenting-batch-actions a.disabled {
-    opacity: 0.35;
-    cursor: not-allowed;
+div.comment-body {
+    margin-left: 2em;
+}
+
+div.comment-body :last-child {
+    margin-bottom: 0;
+}
+
+.comment-meta {
+    margin: 0 0 0 2em;
 }
 
 ul.comment-admin-menu {
-    padding-left: 20px;
+    padding-left: 0;
     margin-top: 0;
 }
 
@@ -71,48 +69,22 @@ ul.comment-admin-menu li {
     list-style: none;
 }
 
-ul.comment-admin-menu span {
+span.status {
+    padding-left: 20px;
+    margin-right: 3px;
     background-repeat: no-repeat;
 }
 
-input.batch-select-comment {
-    float: left;
-    position: relative;
-    left: -12px;
-}
-
-span.status {
-    position:relative;
-    left: -20px;
-    padding-left: 20px;
-    margin-right: 3px;
-}
-
-span.approved {
+span.approved, span.ham, span.not-flagged {
     background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
 }
 
-span.unapproved {
+span.unapproved, span.spam, span.flagged {
     background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
-}
-
-span.ham {
-    background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
-}
-
-span.spam {
-    background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
-}
-
-span.flagged {
-    background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
-}
-
-span.not-flagged {
-    background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
 }
 
 .action {
     color: #338899;
     cursor: pointer;
+    float: right;
 }

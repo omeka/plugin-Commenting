@@ -15,28 +15,31 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
 
     <?php if (is_allowed('Commenting_Comment', 'update-approved') ) : //updateapproved is standing in for all moderation options?>
     <div id='commenting-batch-actions'>
-        <a class="small blue button disabled" id="batch-delete" ><?php echo __("Delete"); ?></a>
-        <a class="small blue button disabled" id="batch-approve" ><?php echo __("Approve"); ?></a>
-        <a class="small blue button disabled" id="batch-unapprove" ><?php echo __("Unapprove"); ?></a>
+        <button class="red" type="button" id="batch-delete" disabled><?php echo __("Delete"); ?></button>
+        <button class="blue" type="button" id="batch-approve" disabled><?php echo __("Approve"); ?></button>
+        <button class="blue" type="button" id="batch-unapprove" disabled><?php echo __("Unapprove"); ?></button>
         <?php if (get_option('commenting_wpapi_key') != ''): ?>
-        <a class="small blue button disabled" id="batch-report-spam" onclick="Commenting.batchReportSpam()"><?php echo __("Report Spam"); ?></a>
-        <a class="small blue button disabled" id="batch-report-ham" onclick="Commenting.batchReportHam()"><?php echo __("Report Not Spam"); ?></a>
+        <button class="blue" type="button" id="batch-report-spam" disabled><?php echo __("Report Spam"); ?></button>
+        <button class="blue" type="button" id="batch-report-ham" disabled><?php echo __("Report Not Spam"); ?></button>
         <?php endif; ?>
-        <a class="small blue button disabled" id="batch-flag" ><?php echo __("Flag"); ?></a>
-        <a class="small blue button disabled" id="batch-unflag" ><?php echo __("Unflag"); ?></a>
+        <button class="blue" type="button" id="batch-flag" disabled><?php echo __("Flag"); ?></button>
+        <button class="blue" type="button" id="batch-unflag" disabled><?php echo __("Unflag"); ?></button>
     </div>
     <?php endif; ?>
 
     <?php echo common('quick-filters'); ?>
     <div style="clear: both">
-        <input id='batch-select' type='checkbox' /> <?php echo __("Select All"); ?>
+        <input id="batch-select" type="checkbox"> <label for="batch-select"><?php echo __("Select All"); ?></label>
     </div>
+
+    <table>
 
     <?php
     foreach ($comments as $comment) {
         echo $this->partial('comment.php', array('comment' => $comment));
     }
     ?>
+    </table>
 </div>
 
 <?php echo foot(); ?>
