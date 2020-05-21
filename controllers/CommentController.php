@@ -246,6 +246,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $config->set('HTML.Allowed', 'a[href],p,em,strong,ul,ol,li');
         $config->set('HTML.TidyLevel', 'none');
         $config->set('HTML.Nofollow', true);
+        $config->set('Cache.DefinitionImpl', null);
         return new HTMLPurifier($config);
     }
 }
