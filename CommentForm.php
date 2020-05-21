@@ -19,7 +19,7 @@ class Commenting_CommentForm extends Omeka_Form
                 array('validator' => 'EmailAddress')
             )
         );
-        $nameOptions = array('label '=> __('Your name'));
+        $nameOptions = array('label' => __('Your name'));
 
         if ($user) {
             $emailOptions['value'] = $user->email;
