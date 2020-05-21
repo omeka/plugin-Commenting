@@ -57,7 +57,8 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
             $this->_helper->redirector->gotoUrl($destination);
         }
 
-        $role = current_user()->role;
+        $user = current_user();
+        $role = $user ? $user->role : null;
         $reqAppCommentRoles = unserialize(get_option('commenting_reqapp_comment_roles'));
         $requiresApproval = in_array($role, $reqAppCommentRoles);
         //via Daniel Lind -- https://groups.google.com/forum/#!topic/omeka-dev/j-tOSAVdxqU
