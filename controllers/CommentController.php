@@ -239,6 +239,8 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
 
     private function _getHtmlPurifier()
     {
+        require_once 'htmlpurifier/HTMLPurifier.auto.php';
+
         $config = HTMLPurifier_Config::createDefault();
         $config->set('HTML.Allowed', 'a[href],p,em,strong,ul,ol,li');
         $config->set('HTML.TidyLevel', 'none');
