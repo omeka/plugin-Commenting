@@ -35,13 +35,6 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
     public function addAction()
     {
         $destination = $_POST['path'];
-        $module = isset($_POST['module']) ? Inflector::camelize($_POST['module']) : '';
-        $destArray = array(
-            'module' => $module,
-            'controller'=> strtolower(Inflector::pluralize($_POST['record_type'])),
-            'action' => 'show',
-            'id' => $_POST['record_id']
-        );
 
         $comment = new Comment();
         if($user = current_user()) {

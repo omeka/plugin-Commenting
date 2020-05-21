@@ -45,76 +45,12 @@ class Commenting_CommentForm extends Omeka_Form
             $this->getElement('captcha')->removeDecorator('ViewHelper');
         }
 
-        $request = Zend_Controller_Front::getInstance()->getRequest();
-        $params = $request->getParams();
-
-        $record_id = $this->_getRecordId($params);
-        $record_type = $this->_getRecordType($params);
-
-        $this->addElement('hidden', 'record_id', array('value' => $record_id, 'decorators' => array('ViewHelper') ));
-        $this->addElement('hidden', 'path', array('value' => $request->getPathInfo(), 'decorators' => array('ViewHelper')));
-        if(isset($params['module'])) {
-            $this->addElement('hidden', 'module', array('value' => $params['module'], 'decorators' => array('ViewHelper')));
-        }
-        $this->addElement('hidden', 'record_type', array('value' => $record_type, 'decorators' => array('ViewHelper')));
+        $this->addElement('hidden', 'record_id', array('decorators' => array('ViewHelper') ));
+        $this->addElement('hidden', 'path', array('decorators' => array('ViewHelper')));
+        $this->addElement('hidden', 'record_type', array('decorators' => array('ViewHelper')));
         $this->addElement('hidden', 'parent_comment_id', array('id' => 'parent-id', 'value' => null, 'decorators' => array('ViewHelper')));
         fire_plugin_hook('commenting_form', array('comment_form' => $this));
         $this->addElement('submit', 'submit', array('label' => __('Submit')));
-    }
-
-
-    private function _getRecordId($params)
-    {
-        if (isset($params['module'])) {
-            switch ($params['module']) {
-                case 'exhibit-builder':
-                    //ExhibitBuilder uses slugs in the params, so need to negotiate around those
-                    //to dig up the record_id and model
-                    if (!empty($params['page_slug_1'])) {
-                        $page = get_current_record('exhibit_page', false);
-                        $id = $page->id;
-                    } else if (!empty($params['item_id'])) {
-                        $id = $params['item_id'];
-                    } else {
-                        //todo: check the ifs for an exhibit showing an item
-                    }
-                    break;
-
-                default:
-                    $id = $params['id'];
-                    break;
-            }
-        } else {
-            $id = $params['id'];
-        }
-        return $id;
-    }
-
-    private function _getRecordType($params)
-    {
-        if (isset($params['module'])) {
-            switch ($params['module']) {
-                case 'exhibit-builder':
-                    //ExhibitBuilder uses slugs in the params, so need to negotiate around those
-                    //to dig up the record_id and model
-                    if (!empty($params['page_slug_1'])) {
-                        $page = get_current_record('exhibit_page', false);
-                        $model = 'ExhibitPage';
-                    } else if (!empty($params['item_id'])) {
-                        $model = 'Item';
-                    } else {
-                        //TODO: check for other possibilities
-                    }
-                    break;
-
-                default:
-                    $model = Inflector::camelize($params['module']) . ucfirst( $params['controller'] );
-                    break;
-            }
-        } else {
-            $model = ucfirst(Inflector::singularize($params['controller']));
-        }
-        return $model;
     }
 
     /**
