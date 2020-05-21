@@ -22,7 +22,9 @@ form#comment-form {
 
 div.comment {
     overflow: hidden;
-    margin: 2em 0;
+    margin: 1em 0;
+    padding-top: 1em;
+    border-top: 1px solid #DBDBDB;
 }
 
 div.comment-author {
