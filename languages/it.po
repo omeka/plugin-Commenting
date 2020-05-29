@@ -5,14 +5,15 @@
 # Translators:
 # Alfio Squatrito <info@lswebagency.it>, 2014
 # armando serra <armando.serra@gmail.com>, 2017
+# Daniele Binaghi, 2018
 # Guybrush88 <erpizzo@alice.it>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2017-11-19 17:36+0000\n"
-"Last-Translator: armando serra <armando.serra@gmail.com>\n"
+"PO-Revision-Date: 2018-08-02 16:23+0000\n"
+"Last-Translator: Daniele Binaghi\n"
 "Language-Team: Italian (http://www.transifex.com/omeka/omeka/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +27,7 @@ msgstr "Sito web"
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "Email (obbligatorio)"
+msgstr "E-mail (obbligatoria)"
 
 #: CommentForm.php:25
 msgid "Your name"
@@ -34,20 +35,20 @@ msgstr "Il tuo nome"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "Tags consentiti:"
+msgstr "Tag consentiti:"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "Per favore dimostra che sei un umano."
+msgstr "Per favore, dimostra di essere un umano"
 
-#: CommentingPlugin.php:254 CommentingPlugin.php:262
+#: CommentingPlugin.php:266 CommentingPlugin.php:274
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "Commenti"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "Vuoi utilizzare commenti collegati (threads)?"
+msgstr "Vuoi utilizzare commenti collegati?"
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
@@ -69,11 +70,11 @@ msgstr "Consentire al pubblico di commentare?"
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
-msgstr "Consenti a tutti di commentare, incluso utenti non registrati. E' fortemente sconsigliato di procedere in questo modo senza utilizzare Akismet."
+msgstr "Consenti a tutti di commentare, inclusi gli utenti non registrati. È fortemente sconsigliato di procedere in questo modo senza utilizzare Akismet."
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr "Moderazione richiesta per commenti del pubblico?"
+msgstr "Moderazione richiesta per i commenti pubblici?"
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
@@ -81,11 +82,11 @@ msgstr "Se non selezionato, i commenti verranno pubblicati immediatamente."
 
 #: config_form.php:65
 msgid "User roles that can moderate comments"
-msgstr "Categorie di utente che possono moderare commenti"
+msgstr "Categorie utente che possono moderare commenti"
 
 #: config_form.php:68
 msgid "The user roles that are allowed to moderate comments."
-msgstr "Categorie utenti a cui e' permesso di moderare commenti."
+msgstr "Categorie utente a cui è permesso di moderare i commenti."
 
 #: config_form.php:94
 msgid "User roles that can comment"
@@ -97,7 +98,7 @@ msgstr "Seleziona i ruoli che possono lasciare commenti"
 
 #: config_form.php:121
 msgid "User roles that require moderation before publishing."
-msgstr "Categorie utenti che richiedono moderazione prima della pubblicazione."
+msgstr "Categorie utente che richiedono moderazione prima della pubblicazione."
 
 #: config_form.php:124
 msgid ""
@@ -115,43 +116,65 @@ msgstr "Categorie utenti che possono vedere commenti"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 msgid "security settings"
-msgstr "impostazioni sicurezza"
+msgstr "impostazioni di sicurezza"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 #, php-format
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
-msgstr "Non hai inserito le tue chiavi API %s in %s. Raccomandiamo di aggiungere queste chiavi, oppure il modulo di commento sarà soggetto a spam."
+msgstr "Non hai inserito le tue chiavi API %s in %s. Raccomandiamo di aggiungere queste chiavi, oppure il modulo di commento sarà vulnerabile allo spam."
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"
 msgstr "Chiavi API WordPress per Akismet"
 
+#: config_form.php:207
+msgid "New Comment Notification Emails"
+msgstr "E-mail di notifica di nuovo commento"
+
+#: config_form.php:210
+msgid ""
+"An email message will be sent to each address here whenever a new comment is"
+" contributed (one email per line). Leave blank if you do not want anyone to "
+"be alerted of comments by email."
+msgstr "Un messaggio e-mail verrà inviato ad ogni indirizzo qui presente ogni volta che un nuovo commento sarà aggiunto (una e-mail per linea). Lasciare vuoto se non si vuole avvertire nessuno dei commenti per e-mail."
+
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr "Il tuo commento e' in attesa di moderazione"
+msgstr "Il tuo commento è in attesa di moderazione"
 
-#: controllers/CommentController.php:206
+#: controllers/CommentController.php:209
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "Un commento su %s è stato segnalato come inappropriato."
 
-#: controllers/CommentController.php:207
+#: controllers/CommentController.php:210
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
-msgstr "Il commento %s e' stato segnalato come inappropriato."
+msgstr "Il commento %s è stato segnalato come inappropriato."
 
-#: controllers/CommentController.php:208
+#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 msgid "here"
 msgstr "qui"
 
-#: controllers/CommentController.php:208
+#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "Puoi gestire il commento %s"
 
-#: views/admin/comment.php:54 views/public/comment.php:10
+#: models/Job/CommentNotification.php:49
+#, php-format
+msgid "[%s] - New comment on: %s"
+msgstr "[%s] - Nuovo commento su: %s"
+
+#: models/Job/CommentNotification.php:51
+#, php-format
+msgid "New comment from %s"
+msgstr "Nuovo commento da %s"
+
+#: models/Job/CommentNotification.php:117 views/admin/comment.php:54
+#: views/public/comment.php:10
 msgid "Anonymous"
 msgstr "Anonimo"
 
@@ -193,15 +216,15 @@ msgstr "Segnala Spam"
 
 #: views/admin/comment.php:69
 msgid "Flagged Inappropriate"
-msgstr "Segnalato come Inappropriato."
+msgstr "Segnalato come Inappropriato"
 
 #: views/admin/comment.php:69 views/admin/comment/browse.php:30
 msgid "Unflag"
-msgstr "Non segnalare."
+msgstr "Non segnalare"
 
 #: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
-msgstr "Non Segnalato"
+msgstr "Non segnalato"
 
 #: views/admin/comment.php:70
 msgid "Flag Inappropriate"
@@ -231,6 +254,6 @@ msgstr "Segnala come inappropriato"
 msgid "Unflag inappropriate"
 msgstr "Eliminazione segnalazione inappropriata."
 
-#: views/public/comment.php:25
+#: views/public/comment.php:27
 msgid "Reply"
 msgstr "Rispondi"

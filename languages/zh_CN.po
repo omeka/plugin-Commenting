@@ -3,256 +3,254 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Camilo Martinez <cmart@decolector.net>, 2018
-# Darío Hereñú, 2014
-# Francisco Gálvez Prada <iguannaweb@gmail.com>, 2013
+# Hong Zhang <zhangh@unlv.nevada.edu>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2018-07-06 22:18+0000\n"
-"Last-Translator: Camilo Martinez <cmart@decolector.net>\n"
-"Language-Team: Spanish (http://www.transifex.com/omeka/omeka/language/es/)\n"
+"PO-Revision-Date: 2018-03-01 15:09+0000\n"
+"Last-Translator: Hong Zhang <zhangh@unlv.nevada.edu>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/omeka/omeka/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr "Web"
+msgstr "网站"
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "Correo electrónico (obligatorio)"
+msgstr "电邮地址（必需）"
 
 #: CommentForm.php:25
 msgid "Your name"
-msgstr "Nombre"
+msgstr "您的名称"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "Etiquetas permitidas:"
+msgstr "允许标签："
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "Por favor, verifiquemos que eres humano."
+msgstr "请证实您是人类"
 
 #: CommentingPlugin.php:266 CommentingPlugin.php:274
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr "Comentarios"
+msgstr "评论"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "¿Usar comentarios anidados?"
+msgstr "使用同主题评论？"
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
-msgstr "Si marcas esta casilla, las respuestas se mostrarán debajo de cada comentario."
+msgstr "如果点选，回复将在评论下面缩进显示。"
 
 #: config_form.php:24
 msgid "Text for comments label"
-msgstr "Texto para la etiqueta de comentarios."
+msgstr "评论标签文本"
 
 #: config_form.php:27
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
-msgstr "Una etiqueta en vez de usar 'Comentarios'. Deje en blanco para usar 'Comentarios'."
+msgstr "用标签代替“评论”。要用“评论”的话，此处保留空白。"
 
 #: config_form.php:36
 msgid "Allow public commenting?"
-msgstr "Permitir comentarios públicos?"
+msgstr "允许公众评论？"
 
 #: config_form.php:39
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
-msgstr "Permite a todos, incluyendo a los usuarios no registrados a comentar. Permitiéndolo sin Akismet está totalmente desaconsejado."
+msgstr "允许每个人，包括未注册用户评论。强烈不鼓励在不使用Akismet时允许该功能。"
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr "Solicitar moderación de todos los comentarios del público?"
+msgstr "所有公共评论都需要仲裁吗？"
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
-msgstr "Si no está marcado, los comentarios aparecerán inmediatamente."
+msgstr "如未点选，评论将立刻显示。"
 
 #: config_form.php:65
 msgid "User roles that can moderate comments"
-msgstr "Roles de usuario que pueden moderar comentarios"
+msgstr "可以仲裁评论的用户角色"
 
 #: config_form.php:68
 msgid "The user roles that are allowed to moderate comments."
-msgstr "Los roles de usuario que pueden moderar comentarios."
+msgstr "允许仲裁评论的用户角色。"
 
 #: config_form.php:94
 msgid "User roles that can comment"
-msgstr "Roles de usuario que pueden comentar"
+msgstr "可以发表评论的用户角色"
 
 #: config_form.php:97
 msgid "Select the roles that can leave comments"
-msgstr "Seleccione los roles que pueden dejar comentarios"
+msgstr "选择可以发表评论的角色"
 
 #: config_form.php:121
 msgid "User roles that require moderation before publishing."
-msgstr "Roles de usuario que solicitan moderación antes de su publicación."
+msgstr "发布前需要仲裁的用户角色。"
 
 #: config_form.php:124
 msgid ""
 "If the role is allowed to moderate comments, that will override the setting "
 "here."
-msgstr "Si el rol le está permitido moderar comentarios, anulará esta configuración."
+msgstr "如角色被允许仲裁评论，那将优先于此处设置。"
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
-msgstr "Permitir al público ver los comentarios?"
+msgstr "允许公众查看评论？"
 
 #: config_form.php:162
 msgid "User roles that can view comments"
-msgstr "Roles de usuarios que pueden ver comentarios"
+msgstr "可查看评论的用户角色"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 msgid "security settings"
-msgstr "configuración de seguridad"
+msgstr "安全设置"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 #, php-format
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
-msgstr "No ha ingresado su %s clave API bajo %s. Recomendamos agregarlas o el formulario de comentarios será vulnerable al correo basura."
+msgstr "您尚未在%s输入您的%sAPI密钥。我们推荐添加这些密钥，否则评论表单会易于收到垃圾邮件。"
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"
-msgstr "WordPress API key for Akismet"
+msgstr "用于Akismet的WordPress API密钥"
 
 #: config_form.php:207
 msgid "New Comment Notification Emails"
-msgstr "Nuevos Mensajes de Notificación de Contribución"
+msgstr "新评论通知电邮"
 
 #: config_form.php:210
 msgid ""
 "An email message will be sent to each address here whenever a new comment is"
 " contributed (one email per line). Leave blank if you do not want anyone to "
 "be alerted of comments by email."
-msgstr "Un mensaje de correo electrónico será enviado a cada dirección cada vez que un nuevo elemento sea aportado (un email por línea) . Dejar en blanco si no desea que nadie sea notificado por correo electrónico sobre comentarios."
+msgstr "新评论被添加后，电邮会发送到这里的每一个地址（每行一个电邮地址）。如果你不希望有人收到关于评论的电邮提示，此处保持空白。"
 
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr "Su comentario está esperando moderación"
+msgstr "您的评论正在等待仲裁"
 
 #: controllers/CommentController.php:209
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
-msgstr "Un comentario en %s se ha marcado como inapropiado"
+msgstr "对%s的评论已被标记为不恰当。"
 
 #: controllers/CommentController.php:210
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
-msgstr "El comentario %s se ha maraco como inapropiado."
+msgstr "评论%s已被标记为不恰当。"
 
 #: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 msgid "here"
-msgstr "aquí"
+msgstr "这里"
 
 #: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 #, php-format
 msgid "You can manage the comment %s"
-msgstr "Puede administrar el comentario %s"
+msgstr "你可以管理评论%s"
 
 #: models/Job/CommentNotification.php:49
 #, php-format
 msgid "[%s] - New comment on: %s"
-msgstr "[%s] - Nuevo comentario en: %s"
+msgstr "【%s】- 新评论：%s"
 
 #: models/Job/CommentNotification.php:51
 #, php-format
 msgid "New comment from %s"
-msgstr "Nuevo comentario de %s"
+msgstr "%s的新评论"
 
 #: models/Job/CommentNotification.php:117 views/admin/comment.php:54
 #: views/public/comment.php:10
 msgid "Anonymous"
-msgstr "Anónimo"
+msgstr "匿名"
 
 #: views/admin/comment.php:59
 msgid "on"
-msgstr "en"
+msgstr "对"
 
 #: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
 msgid "Approved"
-msgstr "Aprobado"
+msgstr "已批准"
 
 #: views/admin/comment.php:62 views/admin/comment/browse.php:24
 msgid "Unapprove"
-msgstr "Desaprobado"
+msgstr "撤销批准"
 
 #: views/admin/comment.php:63
 msgid "Not Approved"
-msgstr "No aprobado"
+msgstr "未被批准"
 
 #: views/admin/comment.php:63 views/admin/comment/browse.php:23
 msgid "Approve"
-msgstr "Aprobar"
+msgstr "批准"
 
 #: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
 msgid "Spam"
-msgstr "Correo basura"
+msgstr "垃圾邮件"
 
 #: views/admin/comment.php:65 views/admin/comment/browse.php:27
 msgid "Report Not Spam"
-msgstr "Indicar como No correo basura"
+msgstr "报告为非垃圾邮件"
 
 #: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
 msgid "Not Spam"
-msgstr "No es correo basura"
+msgstr "非垃圾邮件"
 
 #: views/admin/comment.php:66 views/admin/comment/browse.php:26
 msgid "Report Spam"
-msgstr "Señalar como correo basura"
+msgstr "报告垃圾邮件"
 
 #: views/admin/comment.php:69
 msgid "Flagged Inappropriate"
-msgstr "Marcado como inapropiado"
+msgstr "标记为不恰当"
 
 #: views/admin/comment.php:69 views/admin/comment/browse.php:30
 msgid "Unflag"
-msgstr "Desmarcar"
+msgstr "取消标记"
 
 #: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
-msgstr "No marcado"
+msgstr "未标记"
 
 #: views/admin/comment.php:70
 msgid "Flag Inappropriate"
-msgstr "Marcar inapropiado"
+msgstr "标记不恰当的"
 
 #: views/admin/comment/browse.php:29
 msgid "Flag"
-msgstr "Marcar"
+msgstr "标记"
 
 #: views/admin/comment/browse.php:35
 msgid "Select All"
-msgstr "Seleccionar todo"
+msgstr "选择全部"
 
 #: views/admin/common/quick-filters.php:7
 msgid "Needs Approval"
-msgstr "Necesita aprobación"
+msgstr "需要批准"
 
 #: views/admin/common/quick-filters.php:10
 msgid "Flagged"
-msgstr "Marcado"
+msgstr "已标记"
 
 #: views/public/comment.php:22
 msgid "Flag inappropriate"
-msgstr "Marcado inapropiado"
+msgstr "标记不恰当的"
 
 #: views/public/comment.php:23
 msgid "Unflag inappropriate"
-msgstr "Desmarcar inapropiado"
+msgstr "取消不恰当的标记"
 
 #: views/public/comment.php:27
 msgid "Reply"
-msgstr "Responder"
+msgstr "回复"

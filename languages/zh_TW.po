@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2017-09-23 19:29+0000\n"
+"PO-Revision-Date: 2018-02-14 20:03+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Chinese (Taiwan) (http://www.transifex.com/omeka/omeka/language/zh_TW/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "允許的標籤："
 msgid "Please verify you're a human"
 msgstr "請證明你是一個人"
 
-#: CommentingPlugin.php:254 CommentingPlugin.php:262
+#: CommentingPlugin.php:266 CommentingPlugin.php:274
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "評論"
@@ -126,30 +126,52 @@ msgstr "你尚未在 %s 之下輸入你的 %s API金鑰。我們建議增加這�
 msgid "WordPress API key for Akismet"
 msgstr "Akismet的WordPress API 金鑰"
 
+#: config_form.php:207
+msgid "New Comment Notification Emails"
+msgstr ""
+
+#: config_form.php:210
+msgid ""
+"An email message will be sent to each address here whenever a new comment is"
+" contributed (one email per line). Leave blank if you do not want anyone to "
+"be alerted of comments by email."
+msgstr ""
+
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
 msgstr "你的評論停留在暫不公布"
 
-#: controllers/CommentController.php:206
+#: controllers/CommentController.php:209
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "在 %s 的評論被標註為不適當的"
 
-#: controllers/CommentController.php:207
+#: controllers/CommentController.php:210
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "這個評論 %s 被標註為不適當的。"
 
-#: controllers/CommentController.php:208
+#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 msgid "here"
 msgstr "這裡"
 
-#: controllers/CommentController.php:208
+#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "你可以管理評論 %s"
 
-#: views/admin/comment.php:54 views/public/comment.php:10
+#: models/Job/CommentNotification.php:49
+#, php-format
+msgid "[%s] - New comment on: %s"
+msgstr ""
+
+#: models/Job/CommentNotification.php:51
+#, php-format
+msgid "New comment from %s"
+msgstr ""
+
+#: models/Job/CommentNotification.php:117 views/admin/comment.php:54
+#: views/public/comment.php:10
 msgid "Anonymous"
 msgstr "匿名"
 
@@ -229,6 +251,6 @@ msgstr "標註不適當"
 msgid "Unflag inappropriate"
 msgstr "未標註不適當"
 
-#: views/public/comment.php:25
+#: views/public/comment.php:27
 msgid "Reply"
 msgstr "重複"

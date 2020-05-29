@@ -3,256 +3,255 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Camilo Martinez <cmart@decolector.net>, 2018
-# Darío Hereñú, 2014
-# Francisco Gálvez Prada <iguannaweb@gmail.com>, 2013
+# Adam Katona, 2018
+# Dora Nagy, 2019
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2018-07-06 22:18+0000\n"
-"Last-Translator: Camilo Martinez <cmart@decolector.net>\n"
-"Language-Team: Spanish (http://www.transifex.com/omeka/omeka/language/es/)\n"
+"PO-Revision-Date: 2019-01-22 08:07+0000\n"
+"Last-Translator: Dora Nagy\n"
+"Language-Team: Hungarian (Hungary) (http://www.transifex.com/omeka/omeka/language/hu_HU/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es\n"
+"Language: hu_HU\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: CommentForm.php:15
 msgid "Website"
-msgstr "Web"
+msgstr "Weboldal"
 
 #: CommentForm.php:18
 msgid "Email (required)"
-msgstr "Correo electrónico (obligatorio)"
+msgstr "Email (kötelező)"
 
 #: CommentForm.php:25
 msgid "Your name"
-msgstr "Nombre"
+msgstr "Az Ön neve"
 
 #: CommentForm.php:36
 msgid "Allowed tags:"
-msgstr "Etiquetas permitidas:"
+msgstr "Engedélyezett címkék:"
 
 #: CommentForm.php:53
 msgid "Please verify you're a human"
-msgstr "Por favor, verifiquemos que eres humano."
+msgstr "Kérem igazolja, hogy Ön emberi lény"
 
 #: CommentingPlugin.php:266 CommentingPlugin.php:274
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
-msgstr "Comentarios"
+msgstr "Hozzászólások"
 
 #: config_form.php:8
 msgid "Use Threaded Comments?"
-msgstr "¿Usar comentarios anidados?"
+msgstr ""
 
 #: config_form.php:11
 msgid "If checked, replies will be displayed indented below the comment."
-msgstr "Si marcas esta casilla, las respuestas se mostrarán debajo de cada comentario."
+msgstr "Ha be van jelölve, a válaszok a hozzászólás alatt jelennek meg"
 
 #: config_form.php:24
 msgid "Text for comments label"
-msgstr "Texto para la etiqueta de comentarios."
+msgstr "Hozzászólás felirat szövege"
 
 #: config_form.php:27
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
-msgstr "Una etiqueta en vez de usar 'Comentarios'. Deje en blanco para usar 'Comentarios'."
+msgstr "A felirat szövege az alapértelmezett 'Comments' helyett. Hagyja üresen ha szeretné, hogy a 'Comments' felirat maradjon. "
 
 #: config_form.php:36
 msgid "Allow public commenting?"
-msgstr "Permitir comentarios públicos?"
+msgstr "Engedélyezi a nyilvános hozzászólások írását?"
 
 #: config_form.php:39
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
-msgstr "Permite a todos, incluyendo a los usuarios no registrados a comentar. Permitiéndolo sin Akismet está totalmente desaconsejado."
+msgstr "Mindenki számára, még a nem regisztrált látogatók számára is engedélyezi a hozzászólást. Akismet plugin használata nélkül nem ajánlott ez a beállítás. "
 
 #: config_form.php:51
 msgid "Require moderation for all public comments?"
-msgstr "Solicitar moderación de todos los comentarios del público?"
+msgstr "Szükséges moderátori jóváhagyás a nyilvános hozzászólásokhoz?"
 
 #: config_form.php:54
 msgid "If unchecked, comments will appear immediately."
-msgstr "Si no está marcado, los comentarios aparecerán inmediatamente."
+msgstr "Ha nem jelöli be a hozzászólások azonnal megjelennek az oldalon. "
 
 #: config_form.php:65
 msgid "User roles that can moderate comments"
-msgstr "Roles de usuario que pueden moderar comentarios"
+msgstr "A hozzászólásokat moderáló felhasználó típusok"
 
 #: config_form.php:68
 msgid "The user roles that are allowed to moderate comments."
-msgstr "Los roles de usuario que pueden moderar comentarios."
+msgstr "Azok a felhasználó típusok, melyek moderálhatják a hozzászólásokat."
 
 #: config_form.php:94
 msgid "User roles that can comment"
-msgstr "Roles de usuario que pueden comentar"
+msgstr "Azok a felhasználó típusok, amelyek hozzászólhatnak"
 
 #: config_form.php:97
 msgid "Select the roles that can leave comments"
-msgstr "Seleccione los roles que pueden dejar comentarios"
+msgstr "Válassza ki azokat a felhasználó típusokat akik írhatnak hozzászólásokat"
 
 #: config_form.php:121
 msgid "User roles that require moderation before publishing."
-msgstr "Roles de usuario que solicitan moderación antes de su publicación."
+msgstr "Azok a felhasználó típusok akiknek moderátori jóváhagyás szükséges hozzászólásaik megjelenéséhez."
 
 #: config_form.php:124
 msgid ""
 "If the role is allowed to moderate comments, that will override the setting "
 "here."
-msgstr "Si el rol le está permitido moderar comentarios, anulará esta configuración."
+msgstr "Ha a felhasználó típusnak engedélyezve van a hozzászólások moderálása, ezt a beállítást itt tudja felülírni. "
 
 #: config_form.php:146
 msgid "Allow public to view comments?"
-msgstr "Permitir al público ver los comentarios?"
+msgstr "Engedélyezi, hogy a hozzászólások mindenki számára láthatóak legyenek?"
 
 #: config_form.php:162
 msgid "User roles that can view comments"
-msgstr "Roles de usuarios que pueden ver comentarios"
+msgstr "Azok a felhasználó típusok, amelyek láthatják a hozzászólásokat"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 msgid "security settings"
-msgstr "configuración de seguridad"
+msgstr "biztonsági beállítások"
 
 #: config_form.php:187 views/admin/comment/browse.php:14
 #, php-format
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
-msgstr "No ha ingresado su %s clave API bajo %s. Recomendamos agregarlas o el formulario de comentarios será vulnerable al correo basura."
+msgstr "Nem adta meg az %s API kulcsokat %s alatt. Javasoljuk, a kulcsok hozzáadását, különben a megjegyzési űrlap kiszolgáltatott lesz a levélszemetekkel szemben. "
 
 #: config_form.php:193
 msgid "WordPress API key for Akismet"
-msgstr "WordPress API key for Akismet"
+msgstr "WordPress API kulcs az Akismet pluginhoz"
 
 #: config_form.php:207
 msgid "New Comment Notification Emails"
-msgstr "Nuevos Mensajes de Notificación de Contribución"
+msgstr "Új hozzászólás értesítő email"
 
 #: config_form.php:210
 msgid ""
 "An email message will be sent to each address here whenever a new comment is"
 " contributed (one email per line). Leave blank if you do not want anyone to "
 "be alerted of comments by email."
-msgstr "Un mensaje de correo electrónico será enviado a cada dirección cada vez que un nuevo elemento sea aportado (un email por línea) . Dejar en blanco si no desea que nadie sea notificado por correo electrónico sobre comentarios."
+msgstr "Az itt megjelenített összes cím email értesítést kap, ha új hozzászólás érkezik (hozzászólásonként egy email). Hagyja üresen ha nem szeretné, hogy bárki email értesítés kapjon, ha új hozzászólás érkezik. "
 
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
-msgstr "Su comentario está esperando moderación"
+msgstr "Az Ön hozzászólása moderálásra vár"
 
 #: controllers/CommentController.php:209
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
-msgstr "Un comentario en %s se ha marcado como inapropiado"
+msgstr "A %s hozzászólás zavarónak lett jelölve. "
 
 #: controllers/CommentController.php:210
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
-msgstr "El comentario %s se ha maraco como inapropiado."
+msgstr "A %s hozzászólás zavarónak lett megjelölve."
 
 #: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 msgid "here"
-msgstr "aquí"
+msgstr "itt"
 
 #: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 #, php-format
 msgid "You can manage the comment %s"
-msgstr "Puede administrar el comentario %s"
+msgstr "A hozzászólásokat itt kezelheti: %s"
 
 #: models/Job/CommentNotification.php:49
 #, php-format
 msgid "[%s] - New comment on: %s"
-msgstr "[%s] - Nuevo comentario en: %s"
+msgstr "[%s] - Új hozzászólás érkezett: %s"
 
 #: models/Job/CommentNotification.php:51
 #, php-format
 msgid "New comment from %s"
-msgstr "Nuevo comentario de %s"
+msgstr "Új hozzászólás %s felhasználótól"
 
 #: models/Job/CommentNotification.php:117 views/admin/comment.php:54
 #: views/public/comment.php:10
 msgid "Anonymous"
-msgstr "Anónimo"
+msgstr "Névtelen"
 
 #: views/admin/comment.php:59
 msgid "on"
-msgstr "en"
+msgstr ""
 
 #: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
 msgid "Approved"
-msgstr "Aprobado"
+msgstr "Jóváhagyva"
 
 #: views/admin/comment.php:62 views/admin/comment/browse.php:24
 msgid "Unapprove"
-msgstr "Desaprobado"
+msgstr "Elutasítás"
 
 #: views/admin/comment.php:63
 msgid "Not Approved"
-msgstr "No aprobado"
+msgstr "Elutasítva"
 
 #: views/admin/comment.php:63 views/admin/comment/browse.php:23
 msgid "Approve"
-msgstr "Aprobar"
+msgstr "Jóváhagyás"
 
 #: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
 msgid "Spam"
-msgstr "Correo basura"
+msgstr "Spam"
 
 #: views/admin/comment.php:65 views/admin/comment/browse.php:27
 msgid "Report Not Spam"
-msgstr "Indicar como No correo basura"
+msgstr "Nem Spam bejelentése"
 
 #: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
 msgid "Not Spam"
-msgstr "No es correo basura"
+msgstr "Nem Spam"
 
 #: views/admin/comment.php:66 views/admin/comment/browse.php:26
 msgid "Report Spam"
-msgstr "Señalar como correo basura"
+msgstr "Spam jelentése"
 
 #: views/admin/comment.php:69
 msgid "Flagged Inappropriate"
-msgstr "Marcado como inapropiado"
+msgstr "Nem megfelelőnek jelölve"
 
 #: views/admin/comment.php:69 views/admin/comment/browse.php:30
 msgid "Unflag"
-msgstr "Desmarcar"
+msgstr "Jelölés eltávolítása"
 
 #: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
-msgstr "No marcado"
+msgstr "Jelöletlen"
 
 #: views/admin/comment.php:70
 msgid "Flag Inappropriate"
-msgstr "Marcar inapropiado"
+msgstr "Zavarónak jelölés"
 
 #: views/admin/comment/browse.php:29
 msgid "Flag"
-msgstr "Marcar"
+msgstr "Megjelölés"
 
 #: views/admin/comment/browse.php:35
 msgid "Select All"
-msgstr "Seleccionar todo"
+msgstr "Mindent kijelöl"
 
 #: views/admin/common/quick-filters.php:7
 msgid "Needs Approval"
-msgstr "Necesita aprobación"
+msgstr "Jóváhagyás szükséges"
 
 #: views/admin/common/quick-filters.php:10
 msgid "Flagged"
-msgstr "Marcado"
+msgstr "Megjelölt"
 
 #: views/public/comment.php:22
 msgid "Flag inappropriate"
-msgstr "Marcado inapropiado"
+msgstr "Zavarónak jelölés"
 
 #: views/public/comment.php:23
 msgid "Unflag inappropriate"
-msgstr "Desmarcar inapropiado"
+msgstr "Zavarónak jelölés visszavonása"
 
 #: views/public/comment.php:27
 msgid "Reply"
-msgstr "Responder"
+msgstr "Válasz"

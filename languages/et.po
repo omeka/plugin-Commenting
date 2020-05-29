@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the Omeka package.
 # 
 # Translators:
-# Rivo Zängov <eraser@eraser.ee>, 2015
+# Rivo Zängov <eraser@eraser.ee>, 2015,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2017-09-19 19:06+0000\n"
+"PO-Revision-Date: 2018-11-09 20:12+0000\n"
 "Last-Translator: Rivo Zängov <eraser@eraser.ee>\n"
 "Language-Team: Estonian (http://www.transifex.com/omeka/omeka/language/et/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Lubatud sildid:"
 msgid "Please verify you're a human"
 msgstr "Palun kinnita, et sa oled inimene"
 
-#: CommentingPlugin.php:254 CommentingPlugin.php:262
+#: CommentingPlugin.php:266 CommentingPlugin.php:274
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "Kommentaarid"
@@ -126,30 +126,52 @@ msgstr "Sa pole sisestanud oma %s API võtit %s. Me soovitame need võtmed lisad
 msgid "WordPress API key for Akismet"
 msgstr "WordPress API võti Akismeti jaoks"
 
+#: config_form.php:207
+msgid "New Comment Notification Emails"
+msgstr "Uutest kommentaaridest e-kirjaga teavitamine"
+
+#: config_form.php:210
+msgid ""
+"An email message will be sent to each address here whenever a new comment is"
+" contributed (one email per line). Leave blank if you do not want anyone to "
+"be alerted of comments by email."
+msgstr "Kui lisatakse uus kommentaar, siis saadetakse igale e-posti aadressile (üks e-posti aadress rea kohta) teavitus uue kommentaari kohta. Jäta tühjaks, kui sa ei soovi kedagi e-posti teel teavitada."
+
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
 msgstr "Sinu kommentaar ootab ülevaatamist"
 
-#: controllers/CommentController.php:206
+#: controllers/CommentController.php:209
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "Kommentaar %s on märgitud kohatuks"
 
-#: controllers/CommentController.php:207
+#: controllers/CommentController.php:210
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "Kommentaar %s on märgitud kohatuks."
 
-#: controllers/CommentController.php:208
+#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 msgid "here"
 msgstr "siin"
 
-#: controllers/CommentController.php:208
+#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "Sa saad kommentaare hallata %s"
 
-#: views/admin/comment.php:54 views/public/comment.php:10
+#: models/Job/CommentNotification.php:49
+#, php-format
+msgid "[%s] - New comment on: %s"
+msgstr "[%s] - Uus kommentaar: %s"
+
+#: models/Job/CommentNotification.php:51
+#, php-format
+msgid "New comment from %s"
+msgstr "Uus kommentaaride vorm %s"
+
+#: models/Job/CommentNotification.php:117 views/admin/comment.php:54
+#: views/public/comment.php:10
 msgid "Anonymous"
 msgstr "Anonüümne"
 
@@ -229,6 +251,6 @@ msgstr "Märgista kohatuks"
 msgid "Unflag inappropriate"
 msgstr "Eemalda kohatuks märkmine"
 
-#: views/public/comment.php:25
+#: views/public/comment.php:27
 msgid "Reply"
 msgstr "Vasta"

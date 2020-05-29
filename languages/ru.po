@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Omeka\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2017-09-19 22:03+0000\n"
+"PO-Revision-Date: 2018-02-14 20:03+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Russian (http://www.transifex.com/omeka/omeka/language/ru/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Разрешённые метки:"
 msgid "Please verify you're a human"
 msgstr "Пожалуйста, подтвердите, что вы человек"
 
-#: CommentingPlugin.php:254 CommentingPlugin.php:262
+#: CommentingPlugin.php:266 CommentingPlugin.php:274
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "Комментарии"
@@ -126,30 +126,52 @@ msgstr "Вы не ввели свои %s ключи API под %s. Мы реко
 msgid "WordPress API key for Akismet"
 msgstr "Ключ API WordPress для \"Службы фильтрации спама\" (Akismet)"
 
+#: config_form.php:207
+msgid "New Comment Notification Emails"
+msgstr ""
+
+#: config_form.php:210
+msgid ""
+"An email message will be sent to each address here whenever a new comment is"
+" contributed (one email per line). Leave blank if you do not want anyone to "
+"be alerted of comments by email."
+msgstr ""
+
 #: controllers/CommentController.php:69
 msgid "Your comment is awaiting moderation"
 msgstr "Ваш комментарий ожидает модерации"
 
-#: controllers/CommentController.php:206
+#: controllers/CommentController.php:209
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "Комментарий %s помечен как несоответствующий"
 
-#: controllers/CommentController.php:207
+#: controllers/CommentController.php:210
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "Этот комментарий %s помечен как неподходящий."
 
-#: controllers/CommentController.php:208
+#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 msgid "here"
 msgstr "здесь"
 
-#: controllers/CommentController.php:208
+#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "Вы можете редактировать комментарий %s"
 
-#: views/admin/comment.php:54 views/public/comment.php:10
+#: models/Job/CommentNotification.php:49
+#, php-format
+msgid "[%s] - New comment on: %s"
+msgstr ""
+
+#: models/Job/CommentNotification.php:51
+#, php-format
+msgid "New comment from %s"
+msgstr ""
+
+#: models/Job/CommentNotification.php:117 views/admin/comment.php:54
+#: views/public/comment.php:10
 msgid "Anonymous"
 msgstr "Анонимный"
 
@@ -229,6 +251,6 @@ msgstr "Отмечен как неподходящий"
 msgid "Unflag inappropriate"
 msgstr "Снята пометка как неподходящего"
 
-#: views/public/comment.php:25
+#: views/public/comment.php:27
 msgid "Reply"
 msgstr "Отзыв"
