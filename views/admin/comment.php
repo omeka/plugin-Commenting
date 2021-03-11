@@ -1,9 +1,21 @@
 <?php
-$record = get_db()->getTable($comment->record_type)->find($comment->record_id);
+try {
+    $record = get_db()->getTable($comment->record_type)->find($comment->record_id);
+} catch (Zend_Db_Statement_Mysqli_Exception $e) {
+    $record = null;
+}
+if ($record) {
+    $recordType = get_class($record);
+} else {
+    $recordType = '';
+    $label = __('Unknown Record');
+}
 // try hard to dig up a likely label from the metadata or properties
 try {
     $label = metadata($record, array('Dublin Core', 'Title'));
 } catch(BadMethodCallException $e) {
+
+} catch (InvalidArgumentException $e) {
 
 }
 
@@ -36,7 +48,7 @@ if(empty($label)) {
     $label = __('[Untitled]');
 }
 
-$recordLink = sprintf('%s <a target="_blank" href="%s">%s</a>', get_class($record), record_url($comment, 'show'), $label);
+$recordLink = sprintf('%s <a target="_blank" href="%s">%s</a>', $recordType, record_url($comment, 'show'), $label);
 
 if(!empty($comment->author_name)) {
     $author = html_escape($comment->author_name);
