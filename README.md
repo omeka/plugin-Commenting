@@ -32,7 +32,9 @@ record types from modules (e.g. SimplePages or ExhibitBuilder), you will have to
 to the appropriate place in the plugin's public view script:
 
 ```php
-<?php CommentingPlugin::showComments(); ?>
+<?php CommentingPlugin::showComments($simple_pages_page); ?>
+// or
+<?php CommentingPlugin::showComments($exhibit_page); ?>
 ```
 Keep in mind that updating themes or plugins will clobber your addition of the commenting functions.
 
