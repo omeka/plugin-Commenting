@@ -1,8 +1,3 @@
-#commenting-batch-actions {
-    float: left;
-    margin: 0 5px 2em 0;
-}
-
 #commenting-batch-actions button {
     margin: 0 1em 0 0;
 }
@@ -20,73 +15,41 @@ form#comment-form {
     clear:both;
 }
 
-div.comment {
-    overflow: hidden;
-    margin: 1em 0;
-    padding-top: 1em;
-    border-top: 1px solid #DBDBDB;
+.comment td {
+    vertical-align: top;
 }
 
-div.comment-author {
-    float: left;
-    margin: 6px;
-    width: 80px;
-}
-
-.comment-author {
-    display: block;
-    font-weight: bold;
-}
-
-.comment-info {
-    display: block;
-    font-size: 0.857em;
-}
-
-input[type="checkbox"].batch-select-comment {
-    float: left;
-    margin-top: 1em;
-}
-
-div.comment-body {
-    margin-left: 2em;
-}
-
-div.comment-body :last-child {
-    margin-bottom: 0;
-}
-
-.comment-meta {
-    margin: 0 0 0 2em;
-}
-
-ul.comment-admin-menu {
-    padding-left: 0;
+.comment td > p:first-child {
     margin-top: 0;
 }
 
-ul.comment-admin-menu li {
-    margin-bottom: .5em;
-    padding-left: 10px;
-    list-style: none;
-}
-
-span.status {
+.status {
     padding-left: 20px;
     margin-right: 3px;
     background-repeat: no-repeat;
 }
 
-span.approved, span.ham, span.not-flagged {
+.action-links span {
+    display: none;
+}
+
+.action span {
+    text-decoration: underline;
+}
+
+.flagged .flag-action .red,
+.spam .spam-action .red,
+.unapproved .approval-action .red,
+.unflagged .flag-action .green,
+.not-spam .spam-action .green,
+.approved .approval-action .green {
+    display: inline-block;
+}
+
+.status {
     background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
 }
 
-span.unapproved, span.spam, span.flagged {
+.status.alert {
     background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
-}
-
-.action {
-    color: #338899;
-    cursor: pointer;
-    float: right;
 }

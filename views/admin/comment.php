@@ -48,7 +48,7 @@ if(empty($label)) {
     $label = __('[Untitled]');
 }
 
-$recordLink = sprintf('%s <a target="_blank" href="%s">%s</a>', $recordType, record_url($comment, 'show'), $label);
+$recordLink = sprintf('<a target="_blank" href="%s">%s</a>', record_url($comment, 'show'), $label);
 
 if(!empty($comment->author_name)) {
     $author = html_escape($comment->author_name);
@@ -61,35 +61,64 @@ if(!empty($comment->author_name)) {
 } else {
     $authorText = __('Anonymous');
 }
+
+$isApproved = $comment->approved;
+$isSpam = $comment->is_spam;
+$isFlagged = $comment->flagged;
+
+$commentStatus = array();
+$commentStatus[] = ($isApproved) ? 'approved' : 'unapproved';
+$commentStatus[] = ($isFlagged) ? 'flagged' : 'unflagged';
+$commentStatus[] = ($isSpam) ? 'spam' : 'not-spam';
 ?>
 
-<div id="comment-<?php echo $comment->id; ?>" class='comment'>
-    <div class="seven columns alpha">
-        <div class='comment-header'>
-            <input class='batch-select-comment' type='checkbox'>
-            <p class="comment-meta">
-                <span class="comment-author"><?php echo $authorText; ?></span>
-                <span class="comment-info">
-                    <?php echo __('on %s at %s', $recordLink, format_date($comment->added, Zend_Date::DATETIME_MEDIUM)); ?>
-                </span>
-            </p>
-        </div>
-        <div class="comment-body">
-            <?php echo $comment->body; ?>
-        </div>
-    </div>
-
-    <div class="three columns omega">
-        <ul class='comment-admin-menu'>
-            <li class='approved' <?php echo $comment->approved ? "" : "style='display:none'"; ?>><span class='status approved'><?php echo __("Approved"); ?></span><span class='unapprove action'><?php echo __("Unapprove"); ?></span></li>
-            <li class='unapproved' <?php echo $comment->approved ? "style='display:none'" : "";  ?>><span class='status unapproved'><?php echo __("Not Approved"); ?></span><span class='approve action'><?php echo __("Approve"); ?></span></li>
+<tr id="comment-<?php echo $comment->id; ?>" class="comment <?php echo implode(' ', $commentStatus); ?>">
+    <td><input class='batch-select-comment' type='checkbox'></td>
+    <td>
+        <?php echo $comment->body; ?>
+        <ul class="action-links group">
+            <li class="approval-action status">
+                <span class="green"><?php echo __("Approved"); ?></span>
+                <span class="red"><?php echo __("Not Approved"); ?></span>
+            </li>
+            <li class="flag-action status">
+                <span class="red"><?php echo  __("Flagged Inappropriate"); ?></span>
+                <span class="green"><?php echo __("Not Flagged"); ?></span>
+            </li>
             <?php if(get_option('commenting_wpapi_key') != ''): ?>
-                <li class='spam' <?php echo $comment->is_spam ? "" : "style='display:none'"; ?>><span class='status spam'><?php echo __("Spam"); ?></span><span class='report-ham action'><?php echo __("Report Not Spam"); ?></span></li>
-                <li class='ham' <?php echo $comment->is_spam ? "style='display:none'" : "";  ?>><span class='status ham'><?php echo __("Not Spam"); ?></span><span class='report-spam action'><?php echo __("Report Spam"); ?></span></li>
-            <?php endif;?>
-            <li class='flagged' <?php echo $comment->flagged ? "" : "style='display:none'"; ?>><span class='status flagged'><?php echo __("Flagged Inappropriate"); ?></span><span class='unflag action'><?php echo __("Unflag"); ?></span></li>
-            <li class='not-flagged' <?php echo $comment->flagged ? "style='display:none'" : "";  ?>><span class='status not-flagged'><?php echo __("Not Flagged"); ?></span><span class='flag action'><?php echo __("Flag Inappropriate"); ?></span></li>
-            <li class='delete'><a id='delete' class='action' href='<?php echo record_url($comment, 'delete-confirm'); ?>'><?php echo __("Delete"); ?></a></li>
+            <li class="spam-action status">
+                <span class="red"><?php echo __("Spam"); ?></span>
+                <span class="green"><?php echo __("Not Spam"); ?></span>
+            </li>
+            <?php endif; ?>
         </ul>
-    </div>
-</div>
+        <ul class="action-links group">
+            <li>
+                <a class="approval-action action" href="#" data-action="approved">
+                    <span class="red"><?php echo __('Approve'); ?></span>
+                    <span class="green"><?php echo __('Unapprove'); ?></span>
+                </a>
+            </li>
+            <?php if(get_option('commenting_wpapi_key') != ''): ?>
+            <li>
+                <a class="spam-action action" href="#" data-action="spam">
+                    <span class="green"><?php echo __('Report Spam'); ?></span>
+                    <span class="red"><?php echo __('Report Not Spam'); ?></span>
+                </a>
+            </li>
+            <?php endif;?>
+            <li>
+                <a class="flag-action action" href="#" data-action="flagged">
+                    <span class="red"><?php echo __('Unflag Inappropriate'); ?></span>
+                    <span class="green"><?php echo __('Flag Inappropriate'); ?></span>
+                </a>
+            </li>
+            <li>
+                <a href='<?php echo record_url($comment, 'delete-confirm'); ?>'><?php echo __("Delete"); ?></a>
+            </li>
+        </ul>
+    </td>
+    <td><?php echo $authorText; ?></td>
+    <td><?php echo $recordLink; ?></td>
+    <td><?php echo format_date($comment->added, Zend_Date::DATETIME_MEDIUM); ?>
+</tr>
