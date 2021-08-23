@@ -17,9 +17,10 @@ form#comment-form {
 
 .comment td {
     vertical-align: top;
+    line-height: 1.5;
 }
 
-.comment td > p:first-child {
+.comment td p:first-child {
     margin-top: 0;
 }
 
@@ -52,4 +53,16 @@ form#comment-form {
 
 .status.alert {
     background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
+}
+
+.comment-body {
+    margin-bottom: .5rem;
+}
+
+.comment-body:not(.active) {
+    display: none;
+}
+
+.commenting.browse table th:nth-child(2) {
+    width: 60%;
 }

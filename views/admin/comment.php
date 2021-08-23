@@ -75,7 +75,14 @@ $commentStatus[] = ($isSpam) ? 'spam' : 'not-spam';
 <tr id="comment-<?php echo $comment->id; ?>" class="comment <?php echo implode(' ', $commentStatus); ?>">
     <td><input class="batch-select-comment" type="checkbox" name="comments[]" value="<?php echo $comment->id; ?>"></td>
     <td>
+        <div class="preview active comment-body">
+            <?php echo metadata($comment, 'body', array('no_escape' => true, 'snippet' => '100')); ?>
+            <a href="#" class="show-toggle"><?php echo __('Show all'); ?></a>
+        </div>
+        <div class="full comment-body">
         <?php echo $comment->body; ?>
+        <a href="#" class="show-toggle"><?php echo __('Show less'); ?></a>
+        </div>
         <ul class="action-links group">
             <li class="approval-action status">
                 <span class="green"><?php echo __("Approved"); ?></span>

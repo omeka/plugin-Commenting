@@ -60,6 +60,11 @@
             $('#commenting-batch-actions button').prop('disabled',
                 $('.batch-select-comment:checked').length == 0);
         },
+
+        toggleCommentBody: function() {
+            commentEl = $(this).closest('.comment');
+            commentEl.find('.comment-body').toggleClass('active');
+        },
         
         getCheckedCommentIds: function() {
             var ids = new Array();
@@ -77,6 +82,7 @@
 
         $('a.action').click(function(e) {e.preventDefault();});
         $('.approval-action, .flag-action, .spam-action').click(Commenting.actionToggle);
+        $('.show-toggle').click(Commenting.toggleCommentBody);
 
         $('#batch-all-checkbox').click(Commenting.toggleSelected);
         $('.batch-select-comment').click(Commenting.toggleActive);
