@@ -67,13 +67,13 @@ $isSpam = $comment->is_spam;
 $isFlagged = $comment->flagged;
 
 $commentStatus = array();
-$commentStatus[] = ($isApproved) ? 'approved' : 'unapproved';
-$commentStatus[] = ($isFlagged) ? 'flagged' : 'unflagged';
+$commentStatus[] = ($isApproved) ? 'approved' : 'not-approved';
+$commentStatus[] = ($isFlagged) ? 'flagged' : 'not-flagged';
 $commentStatus[] = ($isSpam) ? 'spam' : 'not-spam';
 ?>
 
 <tr id="comment-<?php echo $comment->id; ?>" class="comment <?php echo implode(' ', $commentStatus); ?>">
-    <td><input class='batch-select-comment' type='checkbox'></td>
+    <td><input class="batch-select-comment" type="checkbox"></td>
     <td>
         <?php echo $comment->body; ?>
         <ul class="action-links group">
@@ -85,7 +85,7 @@ $commentStatus[] = ($isSpam) ? 'spam' : 'not-spam';
                 <span class="red"><?php echo  __("Flagged Inappropriate"); ?></span>
                 <span class="green"><?php echo __("Not Flagged"); ?></span>
             </li>
-            <?php if(get_option('commenting_wpapi_key') != ''): ?>
+            <?php if ($wpApiKey): ?>
             <li class="spam-action status">
                 <span class="red"><?php echo __("Spam"); ?></span>
                 <span class="green"><?php echo __("Not Spam"); ?></span>
@@ -99,7 +99,7 @@ $commentStatus[] = ($isSpam) ? 'spam' : 'not-spam';
                     <span class="green"><?php echo __('Unapprove'); ?></span>
                 </a>
             </li>
-            <?php if(get_option('commenting_wpapi_key') != ''): ?>
+            <?php if ($wpApiKey): ?>
             <li>
                 <a class="spam-action action" href="#" data-action="spam">
                     <span class="green"><?php echo __('Report Spam'); ?></span>

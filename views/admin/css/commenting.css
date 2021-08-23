@@ -39,8 +39,8 @@ form#comment-form {
 
 .flagged .flag-action .red,
 .spam .spam-action .red,
-.unapproved .approval-action .red,
-.unflagged .flag-action .green,
+.not-approved .approval-action .red,
+.not-flagged .flag-action .green,
 .not-spam .spam-action .green,
 .approved .approval-action .green {
     display: inline-block;

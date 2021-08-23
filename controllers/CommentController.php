@@ -117,11 +117,15 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $commentIds = $_POST['ids'];
         $status = $_POST['approved'];
         $table = $this->_helper->db->getTable();
-        if(! $commentIds) {
+        if(!$commentIds) {
             return;
         }
         foreach($commentIds as $commentId) {
             $comment = $table->find($commentId);
+            if (!$comment) {
+                $response =  $commentId;
+                $this->_helper->json($response);
+            }
             $comment->approved = $status;
             //if approved, it isn't spam
             if( ($status == 1) && ($comment->is_spam == 1) ) {

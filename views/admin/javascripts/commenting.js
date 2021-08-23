@@ -5,20 +5,34 @@
         elements: [],
 
         statusClasses: {
-            'flagged': 'flagged unflagged',
-            'approved': 'approved unapproved',
+            'flagged': 'flagged not-flagged',
+            'approved': 'approved not-approved',
             'spam': 'spam not-spam'
         },
 
-        actionToggle: function() {            
-            commentEl = $(this).closest('.comment');
-            id = commentEl.attr('id').substring(8);
-            action = $(this).data('action');
-            status = (commentEl.hasClass(action)) ? 0 : 1;
-            Commenting.elements = [commentEl];
+        actionToggle: function() {
+            actionInput = $(this);
+            action = actionInput.data('action');
+
+            if (actionInput.hasClass('batch-action')) {
+                status = actionInput.data('status');
+                ids = Commenting.getCheckedCommentIds();
+                activeClass = (status == 1) ? action : 'not-' + action;
+                inactiveClass = (status == 0) ? action : 'not-' + action;
+                Commenting.elements.forEach(function(comment) {
+                    comment.addClass(activeClass).removeClass(inactiveClass);
+                });
+            } else {
+                commentEl = actionInput.closest('.comment');
+                status = (commentEl.hasClass(action)) ? 0 : 1;
+                ids = commentEl.attr('id').substring(8);
+                Commenting.elements = [commentEl];
+                activeClass = (status == 1) ? action : 'not-' + action;
+                inactiveClass = (status == 0) ? action : 'not-' + action;
+                commentEl.addClass(activeClass).removeClass(inactiveClass);
+            }
             
-            commentEl.toggleClass(Commenting.statusClasses[action]);
-            json = {'ids': [id], [action]: status};
+            json = {'ids': ids, [action]: status};
             $.post('update-' + action, json, Commenting.genericResponseHandler);
         },
 
@@ -26,6 +40,12 @@
             if (response.status !== 'ok') {
                 alert('Error performing action: ' + response.message);
             }  
+        },
+
+        manageClass: function(action, status) {
+            if (status == 1) {
+                return
+            }
         },
             
         deleteResponseHandler: function(response) {
@@ -37,30 +57,6 @@
             json = {'ids': ids};
             $.post("batch-delete", json, Commenting.deleteResponseHandler);
     
-        },
-    
-        batchFlag: function() {
-            var ids = Commenting.getCheckedCommentIds();
-            json = {'ids': ids, 'flagged': 1};
-            $.post("update-flagged", json, Commenting.flagResponseHandler);
-        },
-    
-        batchUnflag: function() {
-            var ids = Commenting.getCheckedCommentIds();
-            json = {'ids': ids, 'flagged': 0};
-            $.post("update-flagged", json, Commenting.flagResponseHandler);
-        },
-    
-        batchApprove: function() {
-            var ids = Commenting.getCheckedCommentIds();
-            json = {'ids': ids, 'approved': 1};
-            $.post("update-approved", json, Commenting.approveResponseHandler);
-        },
-    
-        batchUnapprove: function() {
-            var ids = Commenting.getCheckedCommentIds();
-            json = {'ids': ids, 'approved': 0};
-            $.post("update-approved", json, Commenting.approveResponseHandler);
         },
     
         reportSpam: function() {
@@ -104,35 +100,23 @@
         },
     
         toggleSelected: function() {
-            if($(this).is(':checked')) {
-                Commenting.batchSelect();
-            } else {
-                Commenting.batchUnselect();
-            }
+            var checked = $(this).is(':checked');
+            $('input.batch-select-comment').prop('checked', checked);
+            Commenting.toggleActive();
         },
     
         toggleActive: function() {
             //toggle whether the bulk actions should be active
-            //check all in checkboxes, if any are checked, must be active
+            //check all in checkboxes, if any are checked, must beactve
             $('#commenting-batch-actions button').prop('disabled',
                 $('.batch-select-comment:checked').length == 0);
         },
-    
-        batchSelect: function() {
-            $('input.batch-select-comment').prop('checked', true);
-            this.toggleActive();
-        },
-    
-        batchUnselect: function() {
-            $('input.batch-select-comment').prop('checked', false);
-            this.toggleActive();
-        },
-    
+        
         getCheckedCommentIds: function() {
             var ids = new Array();
             Commenting.elements = [];
-            $('input.batch-select-comment:checked').each(function() {
-                var commentEl = $(this).closest('div.comment');
+            $('.comment input.batch-select-comment:checked').each(function() {
+                var commentEl = $(this).closest('.comment');
                 ids[ids.length] = commentEl.attr('id').substring(8);
                 Commenting.elements[Commenting.elements.length] = commentEl;
             });
@@ -146,17 +130,12 @@
         $('.approval-action').click(Commenting.actionToggle);
         $('.flag-action').click(Commenting.actionToggle);
         $('.spam-action').click(Commenting.actionToggle);
-        
-        $('#batch-select').click(Commenting.toggleSelected);
+
+        $('#batch-all-checkbox').click(Commenting.toggleSelected);
         $('.batch-select-comment').click(Commenting.toggleActive);
     
-        $('#batch-delete').click(Commenting.batchDelete);
-        $('#batch-approve').click(Commenting.batchApprove);
-        $('#batch-unapprove').click(Commenting.batchUnapprove);
-        $('#batch-report-spam').click(Commenting.batchReportSpam);
-        $('#batch-report-ham').click(Commenting.batchReportHam);
-        $('#batch-flag').click(Commenting.batchFlag);
-        $('#batch-unflag').click(Commenting.batchUnflag);
+        $('.batch-action').click(Commenting.actionToggle);
+        //$('#batch-approve').click(Commenting.batchApprove);
     });
 })(jQuery);
 
