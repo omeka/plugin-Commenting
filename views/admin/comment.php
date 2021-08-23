@@ -73,7 +73,7 @@ $commentStatus[] = ($isSpam) ? 'spam' : 'not-spam';
 ?>
 
 <tr id="comment-<?php echo $comment->id; ?>" class="comment <?php echo implode(' ', $commentStatus); ?>">
-    <td><input class="batch-select-comment" type="checkbox"></td>
+    <td><input class="batch-select-comment" type="checkbox" name="comments[]" value="<?php echo $comment->id; ?>"></td>
     <td>
         <?php echo $comment->body; ?>
         <ul class="action-links group">
@@ -114,7 +114,7 @@ $commentStatus[] = ($isSpam) ? 'spam' : 'not-spam';
                 </a>
             </li>
             <li>
-                <a href='<?php echo record_url($comment, 'delete-confirm'); ?>'><?php echo __("Delete"); ?></a>
+                <a href='<?php echo record_url($comment, 'delete-confirm'); ?>' class="delete-confirm"><?php echo __("Delete"); ?></a>
             </li>
         </ul>
     </td>

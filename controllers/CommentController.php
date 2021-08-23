@@ -23,13 +23,20 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
 
     public function batchDeleteAction()
     {
-        $ids = $_POST['ids'];
+        $commentIds = $this->_getParam('comments');
+        $this->view->assign(compact('commentIds'));
+        $this->render('batch-delete');
+    }
+    
+    public function batchDeleteSubmitAction()
+    {
+        $ids = $_POST['comments'];
         foreach($ids as $id) {
             $record = $this->_helper->db->findById($id);
             $record->delete();
         }
-        $response = array('status'=>'ok');
-        $this->_helper->json($response);
+        $this->_helper->flashMessenger(__('Comments were successfully deleted.'), 'success');
+        $this->_helper->redirector('browse');
     }
 
     public function addAction()
@@ -233,6 +240,11 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
     {
         require_once(COMMENTING_PLUGIN_DIR . '/CommentForm.php');
         return new Commenting_CommentForm();
+    }
+
+    protected function _getDeleteConfirmMessage($comment)
+    {
+        return __('This will delete the selected comment(s).');
     }
 
     private function _getHtmlPurifier()

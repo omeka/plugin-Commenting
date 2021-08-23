@@ -48,57 +48,6 @@
             }
         },
             
-        deleteResponseHandler: function(response) {
-            window.location.reload();
-        },
-    
-        batchDelete: function() {
-            var ids = Commenting.getCheckedCommentIds();
-            json = {'ids': ids};
-            $.post("batch-delete", json, Commenting.deleteResponseHandler);
-    
-        },
-    
-        reportSpam: function() {
-            commentEl = $(this).closest('div.comment');
-            id = commentEl.attr('id').substring(8);
-            Commenting.elements = [commentEl];
-            json = {'ids': [id], 'spam': 1};
-            $.post("update-spam", json, Commenting.spamResponseHandler);
-        },
-    
-        reportHam: function() {
-            commentEl = $(this).closest('div.comment');
-            id = commentEl.attr('id').substring(8);
-            Commenting.elements = [commentEl];
-            json = {'ids': [id], 'spam': 0};
-            $.post("update-spam", json, Commenting.spamResponseHandler);
-        },
-    
-        batchReportSpam: function() {
-            var ids = Commenting.getCheckedCommentIds();
-            json = {'ids': ids, 'spam': true};
-            $.post("update-spam", json, Commenting.spamResponseHandler);
-        },
-    
-        batchReportHam: function() {
-            var ids = Commenting.getCheckedCommentIds();
-            json = {'ids': ids, 'spam': false};
-            $.post("update-spam", json, Commenting.spamResponseHandler);
-        },
-    
-        spamResponseHandler: function(response, textStatus, jqReq)
-        {
-            if(response.status == 'ok') {
-                for(var i=0; i < Commenting.elements.length; i++) {
-                    Commenting.elements[i].find('li.spam').toggle();
-                    Commenting.elements[i].find('li.ham').toggle();
-                }
-            } else {
-                alert('Error trying to submit ham: ' + response.message);
-            }
-        },
-    
         toggleSelected: function() {
             var checked = $(this).is(':checked');
             $('input.batch-select-comment').prop('checked', checked);
@@ -127,15 +76,12 @@
     $(document).ready(function() {
 
         $('a.action').click(function(e) {e.preventDefault();});
-        $('.approval-action').click(Commenting.actionToggle);
-        $('.flag-action').click(Commenting.actionToggle);
-        $('.spam-action').click(Commenting.actionToggle);
+        $('.approval-action, .flag-action, .spam-action').click(Commenting.actionToggle);
 
         $('#batch-all-checkbox').click(Commenting.toggleSelected);
         $('.batch-select-comment').click(Commenting.toggleActive);
     
         $('.batch-action').click(Commenting.actionToggle);
-        //$('#batch-approve').click(Commenting.batchApprove);
     });
 })(jQuery);
 
