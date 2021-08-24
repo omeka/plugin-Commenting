@@ -244,7 +244,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
 
     protected function _getDeleteConfirmMessage($comment)
     {
-        return __('This will delete the selected comment(s).');
+        return __('This will delete the selected comment.');
     }
 
     private function _getHtmlPurifier()
