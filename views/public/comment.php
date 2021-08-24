@@ -12,19 +12,23 @@
             $authorText = __("Anonymous");
         }
     ?>
-    <p class='comment-author-name'><?php echo $authorText?></p>
     <?php
         $hash = md5(strtolower(trim($comment->author_email)));
         $url = "//www.gravatar.com/avatar/$hash";
         echo "<img class='gravatar' src='$url' />";
     ?>
+    <p class='comment-author-name'><?php echo $authorText?></p>
 </div>
-<div class='comment-body <?php if($comment->flagged):?>comment-flagged<?php endif;?> '><?php echo $comment->body; ?></div>
-<?php if(is_allowed('Commenting_Comment', 'unflag')): ?>
-<p class='comment-flag' <?php if($comment->flagged): ?> style='display:none;'<?php endif;?> ><?php echo __("Flag inappropriate"); ?></p>
-<p class='comment-unflag' <?php if(!$comment->flagged): ?>style='display:none;'<?php endif;?> ><?php echo __("Unflag inappropriate"); ?></p>
-<?php endif; ?>
+<div class="comment-body"><?php echo $comment->body; ?></div>
+<div class="action-links">
+    <?php if(is_allowed('Commenting_Comment', 'unflag')): ?>
+    <a href="#" class="flag-action action">
+        <span class="green"><?php echo  __("Flag inappropriate"); ?></span>
+        <span class="red"><?php echo __("Unflag inappropriate"); ?></span>
+    </a>
+    <?php endif; ?>
 
-<?php if (is_allowed('Commenting_Comment', 'add') || get_option('commenting_allow_public') == 1): ?>
-<p class='comment-reply'><?php echo __("Reply"); ?></p>
-<?php endif; ?>
+    <?php if (is_allowed('Commenting_Comment', 'add') || get_option('commenting_allow_public') == 1): ?>
+    <a href="#" class='reply-action action'><?php echo __("Reply"); ?></a>
+    <?php endif; ?>
+</div>

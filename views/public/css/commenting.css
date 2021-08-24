@@ -1,7 +1,5 @@
 #comments-container .comment-body {
-    margin-left: 100px !important;
-    margin-top: 12px !important;
-    min-height: 110px;
+    margin-left: 100px;
     padding: 6px;
 }
 
@@ -13,7 +11,6 @@
 #comment-form {
     clear:both;
     line-height: 1em;
-    max-width: 500px;
     padding-top: 1em;
 }
 
@@ -29,7 +26,7 @@
 
 #comment-form #submit {
     clear: both;
-    display: block;
+    display: block; 
 }
 
 .commenting-field {
@@ -61,43 +58,36 @@
 }
 
 div#comments-container div.comment-children {
-    margin-left: 18px !important;
+    padding-left: 2rem;
+    clear: both;
+    border-left: 1px solid #ccc;
 }
 
 div.comment {
-	margin-left: 12px;
-	margin-top: 3px;
-	margin-bottom: 6px;
-	clear: both;
-	min-height: 80px;
-	width: 60%;
-	min-width: 400px;
+    padding: 1rem 1rem 0;
+    margin: 1rem 0 0;
+    clear: both;
+    overflow: hidden;
 }
 
 div.comment-author {
 	float: left;	
-	margin: 0 6px;
+	margin-right: 6px;
 	width: 100px;
 }
 
-.comment-flag , .comment-unflag {
-    float:left;
-    cursor: pointer;
-}
-
-div.comment-flagged {
+.comment.flagged > .comment-body {
     background-color: pink;
 }
 
-
-div.comment-body p {
-	font-size: 1em;	
-}
-
-.comment-reply {
-	cursor: pointer;	
+.action-links {
 	float: right;
+    margin-top: .5rem;
 }
+
+.action-links .action {
+    margin-left: 1rem;
+} 
 
 p.comment-author-name {
 	margin: 0;	
@@ -107,13 +97,16 @@ div.success {
     font-size: 1.8em;
 }
 
-span.comment-flag, span.comment-unflag {
-    padding-left: 6px;
-    cursor: pointer;
-}
-
 a.mceButton {
-	overflow: inherit;
-	
+	overflow: inherit;	
 }
 
+.flagged > .action-links .flag-action .green,
+.flag-action .red {
+    display: none;
+}
+
+.flagged > .action-links .flag-action .red,
+.flag-action .green {
+    display: inline-block;
+}

@@ -139,7 +139,6 @@ class CommentingPlugin extends Omeka_Plugin_AbstractPlugin
         queue_css_file('commenting');
         queue_js_file('commenting');
         queue_js_file('tinymce.min', 'javascripts/vendor/tinymce');
-        queue_js_string("Commenting.pluginRoot = '" . WEB_ROOT . "/commenting/comment/'");
     }
 
     public function hookAdminHead()

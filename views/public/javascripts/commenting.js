@@ -3,32 +3,28 @@
     var Commenting = {
     
         handleReply: function(event) {
-            Commenting.moveForm(event);
+            //first make tinyMCE go away so it is safe to move around in the DOM
+            event.preventDefault();
+            tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, 'comment-form-body');
+            var currentComment = $(event.target).closest('.comment');
+            $('#comment-form').appendTo(currentComment);
+            commentId = Commenting.getCommentId(currentComment);
+            console.log(commentId);
+            $('#parent-id').val(commentId);
+            tinyMCE.EditorManager.execCommand('mceAddEditor', false, 'comment-form-body');
         },
     
         finalizeMove: function() {
             $('#comment-form-body_parent').attr('style', '')
         },
     
-        moveForm: function(event) {
-            //first make tinyMCE go away so it is safe to move around in the DOM
-            tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, 'comment-form-body');
-            $('#comment-form').insertAfter(event.target);
-            commentId = Commenting.getCommentId(event.target);
-            $('#parent-id').val(commentId);
-            tinyMCE.EditorManager.execCommand('mceAddEditor', false, 'comment-form-body');
-        },
-    
         flagToggle: function(event) {
             event.preventDefault();
-            var commentRow = $(event.target).parents('.comment').first();
-            if (commentRow.hasClass('flagged')) {
-                var flagAction = 'unflag';
-            } else {
-                var flagAction = 'flag';
-            }
-            var commentId = Commenting.getCommentId(event.target);
+            var commentRow = $(event.target).closest('.comment');
+            commentRow.toggleClass('flagged');
+            var commentId = Commenting.getCommentId(commentRow);
             var json = {'id': commentId };
+            var flagAction = (commentRow.hasClass('flagged')) ? 'flag' : 'unflag';
             $.post(Commenting.pluginRoot + flagAction, json, Commenting.flagResponseHandler);
         },
 
@@ -42,7 +38,7 @@
         },
     
         getCommentId: function(el) {
-            return $(el).parents('.comment').attr('id').substring(8);
+            return el.attr('id').substring(8);
         },
     
         wysiwyg: function (params) {
@@ -66,9 +62,10 @@
     };
     
     $(document).ready(function() {
-        $('.comment-reply').click(Commenting.handleReply);
-        $('.flag-toggle').click(Commenting.flagToggle);
+        $("a.action").click(function(e) { e.preventDefault() });
+        $('.reply-action').click(Commenting.handleReply);
+        $('.flag-action').click(Commenting.flagToggle);
         Commenting.wysiwyg();
+        Commenting.pluginRoot = $('.comments').data('commentUrlBase');
     });
 })(jQuery);
-
