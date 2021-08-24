@@ -9,7 +9,7 @@ echo head(array(
 
 <form id="batch-edit-form" action="<?php echo html_escape(url('commenting/comment/batch-delete-submit')); ?>" method="post" accept-charset="utf-8">
     <section class="seven columns alpha">
-        <fieldset id="item-list" class="panel">
+        <fieldset id="comment-list" class="panel">
             <h2 class="two columns alpha"><?php echo __('Comments'); ?></h2>
             <div class="five columns omega">
                 <ul>
@@ -39,13 +39,6 @@ echo head(array(
             <input type="submit" class="big red button" value="<?php echo __('Delete Comments'); ?>">
         </div>
     </section>
-
-    <?php
-    $hash = new Zend_Form_Element_Hash('batch_edit_hash');
-    $hash->removeDecorator('Label');
-    $hash->removeDecorator('HtmlTag');
-    echo $hash;
-    ?>
 </form>
 
 </div>
