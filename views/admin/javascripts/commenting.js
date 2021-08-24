@@ -11,8 +11,10 @@
         },
 
         actionToggle: function() {
-            actionInput = $(this);
-            action = actionInput.data('action');
+            var actionInput = $(this);
+            var action = actionInput.data('action');
+            var ids = [];
+            var status, activeClass, inactiveClass;
 
             if (actionInput.hasClass('batch-action')) {
                 status = actionInput.data('status');
@@ -23,15 +25,14 @@
                     comment.addClass(activeClass).removeClass(inactiveClass);
                 });
             } else {
-                commentEl = actionInput.closest('.comment');
+                var commentEl = actionInput.closest('.comment');
                 status = (commentEl.hasClass(action)) ? 0 : 1;
-                ids = commentEl.attr('id').substring(8);
+                ids[0] = commentEl.attr('id').substring(8);
                 Commenting.elements = [commentEl];
                 activeClass = (status == 1) ? action : 'not-' + action;
                 inactiveClass = (status == 0) ? action : 'not-' + action;
                 commentEl.addClass(activeClass).removeClass(inactiveClass);
             }
-            
             json = {'ids': ids, [action]: status};
             $.post('update-' + action, json, Commenting.genericResponseHandler);
         },
@@ -80,14 +81,15 @@
     
     $(document).ready(function() {
 
-        $('a.action').click(function(e) {e.preventDefault();});
-        $('.approval-action, .flag-action, .spam-action').click(Commenting.actionToggle);
+        $('a.action').click(function(e) {e.preventDefault();}).click(Commenting.actionToggle);
         $('.show-toggle').click(Commenting.toggleCommentBody);
 
         $('#batch-all-checkbox').click(Commenting.toggleSelected);
         $('.batch-select-comment').click(Commenting.toggleActive);
     
         $('.batch-action').click(Commenting.actionToggle);
+
+        Omeka.quickFilter();
     });
 })(jQuery);
 

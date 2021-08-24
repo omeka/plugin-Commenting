@@ -157,7 +157,6 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
                     _log($e->getMessage());
                 }
             }
-
         }
         $this->_helper->json($response);
     }

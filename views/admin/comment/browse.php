@@ -4,6 +4,7 @@ queue_js_file('commenting');
 $pageTitle = __('Comments') . ' ' . __('(%s total)', $total_results);
 $wpApiKey = (get_option('commenting_wpapi_key') != '');
 echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
+$totalComments = total_records('Comment');
 ?>
 
 <div id='primary'>
@@ -12,11 +13,16 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
         <p class="flash alert"><?php echo __("You have not entered your %s API keys under %s. We recommend adding these keys, or the commenting form will be vulnerable to spam.", '<a href="https://www.google.com/recaptcha/about/">reCAPTCHA</a>', "<a href='" . url('security#fieldset-captcha') . "'>" . __('security settings') . "</a>");?></p>
     <?php endif; ?>
     <?php echo flash(); ?>
+
+    <?php echo $this->commentFilters(); ?>
     
+    <?php if ($totalComments !== 0): ?>
+    <?php echo common('quick-filters'); ?>
+    <?php endif; ?>
+
     <?php if (count($comments) > 0): ?>
     <div class="pagination"><?php echo pagination_links(); ?></div>
                 
-    <?php echo common('quick-filters'); ?>
 
     <form action="<?php echo html_escape(url('commenting/comment/batch-delete')); ?>" method="post" accept-charset="utf-8">
         <?php if (is_allowed('Commenting_Comment', 'update-approved') ) : //updateapproved is standing in for all moderation options?>
@@ -48,7 +54,13 @@ echo head(array('title' => $pageTitle, 'bodyclass' => 'commenting browse'));
         </table>
     </form>
     <?php else: ?>
-        <h2><?php echo __('You have no comments.'); ?></h2>
+        <p>
+        <?php if ($totalComments == 0): ?>
+            <?php echo __('You have no comments.'); ?>
+        <?php else: ?>
+            <?php echo __(plural('The query searched 1 comment and returned no results.', 'The query searched %s comments and returned no results.', $totalComments), $totalComments); ?>
+        <?php endif; ?>
+        </p>
     <?php endif; ?>
 </div>
 
