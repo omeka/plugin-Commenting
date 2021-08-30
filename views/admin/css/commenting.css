@@ -22,6 +22,7 @@ form#comment-form {
 
 .comment td p:first-child {
     margin-top: 0;
+}
 
 .action-links span {
     display: none;
@@ -40,12 +41,18 @@ form#comment-form {
     display: inline-block;
 }
 
-.comment .status {
-    background-image: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
+.comment .status span:before {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: .25rem;
 }
 
-.comment .status.alert {
-    background-image: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
+.comment .status .green:before {
+    content: url('../../../../../application/views/scripts/images/silk-icons/tick.png');
+}
+
+.comment .status .red:before {
+    content: url('../../../../../application/views/scripts/images/silk-icons/exclamation.png');
 }
 
 .comment-body {
