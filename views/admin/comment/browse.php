@@ -38,20 +38,22 @@ $totalComments = total_records('Comment');
             <button class="small" data-action="delete" type="submit" id="batch-delete" disabled><?php echo __("Delete"); ?></button>
             </div>
         <?php endif; ?>
-        <table>
-            <thead>
-                <th class="batch-edit-heading"><label for="batch-all-checkbox" class="sr-only"><?php echo __('Select all rows'); ?></label><input type="checkbox" name="batch-all-checkbox" id="batch-all-checkbox" class="batch-select-comment" title="<?php echo __('Select all rows'); ?>"></th>
-                <th><?php echo __('Comment'); ?></th>
-                <th><?php echo __('Author'); ?></th>
-                <th><?php echo __('Item'); ?></th>
-                <th><?php echo __('Date Created'); ?></th>
-            </thead>
-            <tbody>
-            <?php foreach ($comments as $comment): ?>
-                <?php echo $this->partial('comment.php', array('comment' => $comment, 'wpApiKey' => $wpApiKey)); ?>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <th class="batch-edit-heading"><label for="batch-all-checkbox" class="sr-only"><?php echo __('Select all rows'); ?></label><input type="checkbox" name="batch-all-checkbox" id="batch-all-checkbox" class="batch-select-comment" title="<?php echo __('Select all rows'); ?>"></th>
+                    <th><?php echo __('Comment'); ?></th>
+                    <th><?php echo __('Author'); ?></th>
+                    <th><?php echo __('Item'); ?></th>
+                    <th><?php echo __('Date Created'); ?></th>
+                </thead>
+                <tbody>
+                <?php foreach ($comments as $comment): ?>
+                    <?php echo $this->partial('comment.php', array('comment' => $comment, 'wpApiKey' => $wpApiKey)); ?>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
     </form>
     <?php else: ?>
         <p>
