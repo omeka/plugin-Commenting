@@ -30,11 +30,11 @@ $totalComments = total_records('Comment');
             <button class="small batch-action" data-action="approved" data-status="1" type="button" id="batch-approve" disabled><?php echo __("Approve"); ?></button>
             <button class="small batch-action" data-action="approved" data-status="0" type="button" id="batch-unapprove" disabled><?php echo __("Unapprove"); ?></button>
             <?php if ($wpApiKey): ?>
-                <button class="small batch-action" data-action="spam" data-status="0" type="button" id="batch-report-spam" disabled><?php echo __("Report Spam"); ?></button>
-                <button class="small batch-action" data-action="spam" data-status="1" type="button" id="batch-report-ham" disabled><?php echo __("Report Not Spam"); ?></button>
+                <button class="small batch-action" data-action="spam" data-status="1" type="button" id="batch-report-spam" disabled><?php echo __("Report Spam"); ?></button>
+                <button class="small batch-action" data-action="spam" data-status="0" type="button" id="batch-report-ham" disabled><?php echo __("Report Not Spam"); ?></button>
             <?php endif; ?>
-            <button class="small batch-action" data-action="flagged" data-status="0" type="button" id="batch-flag" disabled><?php echo __("Flag"); ?></button>
-            <button class="small batch-action" data-action="flagged" data-status="1" type="button" id="batch-unflag" disabled><?php echo __("Unflag"); ?></button>
+            <button class="small batch-action" data-action="flagged" data-status="1" type="button" id="batch-flag" disabled><?php echo __("Flag"); ?></button>
+            <button class="small batch-action" data-action="flagged" data-status="0" type="button" id="batch-unflag" disabled><?php echo __("Unflag"); ?></button>
             <button class="small" data-action="delete" type="submit" id="batch-delete" disabled><?php echo __("Delete"); ?></button>
             </div>
         <?php endif; ?>
