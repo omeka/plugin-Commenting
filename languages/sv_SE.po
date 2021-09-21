@@ -7,10 +7,10 @@
 # Peter Krantz <peter.krantz@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2018-02-14 20:03+0000\n"
+"PO-Revision-Date: 2020-05-29 16:03+0000\n"
 "Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Swedish (Sweden) (http://www.transifex.com/omeka/omeka/language/sv_SE/)\n"
 "MIME-Version: 1.0\n"
@@ -19,27 +19,27 @@ msgstr ""
 "Language: sv_SE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: CommentForm.php:15
+#: CommentForm.php:13
 msgid "Website"
 msgstr "Webbplats"
 
-#: CommentForm.php:18
+#: CommentForm.php:16
 msgid "Email (required)"
 msgstr "E-post (obligatoriskt)"
 
-#: CommentForm.php:25
+#: CommentForm.php:22
 msgid "Your name"
 msgstr "Ditt namn"
 
-#: CommentForm.php:36
+#: CommentForm.php:33
 msgid "Allowed tags:"
 msgstr "Tillåtna taggar:"
 
-#: CommentForm.php:53
+#: CommentForm.php:42
 msgid "Please verify you're a human"
 msgstr "Vänligen visa att du är en människa"
 
-#: CommentingPlugin.php:266 CommentingPlugin.php:274
+#: CommentingPlugin.php:264 CommentingPlugin.php:272
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "Kommentarer"
@@ -52,111 +52,111 @@ msgstr "Använd trådade kommentarer?"
 msgid "If checked, replies will be displayed indented below the comment."
 msgstr "Svar på en kommentar kommer att visas under denna kommentar."
 
-#: config_form.php:24
+#: config_form.php:22
 msgid "Text for comments label"
 msgstr "Alternativ titel"
 
-#: config_form.php:27
+#: config_form.php:25
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
 msgstr "Titel att använda istället för 'Kommentarer'. Lämna tom för att använda 'Kommentarer'."
 
-#: config_form.php:36
+#: config_form.php:34
 msgid "Allow public commenting?"
 msgstr "Tillåt publika kommentarer?"
 
-#: config_form.php:39
+#: config_form.php:37
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
 msgstr "Tillåt kommentarer från alla, inklusive icke-registrerade, användare.\nAtt tillåta detta utan att Akismet är aktiverat rekommenderas inte."
 
-#: config_form.php:51
+#: config_form.php:48
 msgid "Require moderation for all public comments?"
 msgstr "Kräv moderering av alla publika kommentarer?"
 
-#: config_form.php:54
+#: config_form.php:51
 msgid "If unchecked, comments will appear immediately."
 msgstr "Avmarkera för att visa kommentarer omedelbart."
 
-#: config_form.php:65
+#: config_form.php:62
 msgid "User roles that can moderate comments"
 msgstr "Användarroller som kan moderera kommentarer"
 
-#: config_form.php:68
+#: config_form.php:65
 msgid "The user roles that are allowed to moderate comments."
 msgstr "Användarroller som tillåts moderera kommentarer."
 
-#: config_form.php:94
+#: config_form.php:91
 msgid "User roles that can comment"
 msgstr "Användarroller som kan lämna kommentarer"
 
-#: config_form.php:97
+#: config_form.php:94
 msgid "Select the roles that can leave comments"
 msgstr "Välj de roller som skall kunna lämna kommentarer"
 
-#: config_form.php:121
+#: config_form.php:116
 msgid "User roles that require moderation before publishing."
 msgstr "Användarroller som kräver moderering innan publicering."
 
-#: config_form.php:124
+#: config_form.php:119
 msgid ""
 "If the role is allowed to moderate comments, that will override the setting "
 "here."
 msgstr "Om rollen tillåts moderera kommentarer kommer dessa inställningar att åsidosätta denna inställning."
 
-#: config_form.php:146
+#: config_form.php:141
 msgid "Allow public to view comments?"
 msgstr "Tillåt publika användare att se kommentarer?"
 
-#: config_form.php:162
+#: config_form.php:156
 msgid "User roles that can view comments"
 msgstr "Användarroller som kan se kommentarer"
 
-#: config_form.php:187 views/admin/comment/browse.php:14
+#: config_form.php:181 views/admin/comment/browse.php:13
 msgid "security settings"
 msgstr "Säkerhetsinställningar"
 
-#: config_form.php:187 views/admin/comment/browse.php:14
+#: config_form.php:181 views/admin/comment/browse.php:13
 #, php-format
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
 msgstr "Du har inte angett din %s API-nyckel under %s. Vi rekommenderar att du anger dessa nycklar annars kommer kommentarsformuläret vara sårbart för skräpkommentarer."
 
-#: config_form.php:193
+#: config_form.php:186
 msgid "WordPress API key for Akismet"
 msgstr "WordPress API-nyckel för Akismet"
 
-#: config_form.php:207
+#: config_form.php:200
 msgid "New Comment Notification Emails"
 msgstr ""
 
-#: config_form.php:210
+#: config_form.php:203
 msgid ""
 "An email message will be sent to each address here whenever a new comment is"
 " contributed (one email per line). Leave blank if you do not want anyone to "
 "be alerted of comments by email."
 msgstr ""
 
-#: controllers/CommentController.php:69
+#: controllers/CommentController.php:62
 msgid "Your comment is awaiting moderation"
 msgstr "Din kommentar väntar på att modereras"
 
-#: controllers/CommentController.php:209
+#: controllers/CommentController.php:202
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr "En kommentar på %s har flaggats som olämplig"
 
-#: controllers/CommentController.php:210
+#: controllers/CommentController.php:203
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr "Kommentaren %s har flaggats som olämplig."
 
-#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
+#: controllers/CommentController.php:204 models/Job/CommentNotification.php:58
 msgid "here"
 msgstr "här"
 
-#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
+#: controllers/CommentController.php:204 models/Job/CommentNotification.php:58
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "Du kan modererera kommentaren %s"
@@ -171,68 +171,69 @@ msgstr ""
 msgid "New comment from %s"
 msgstr ""
 
-#: models/Job/CommentNotification.php:117 views/admin/comment.php:54
-#: views/public/comment.php:10
+#: models/Job/CommentNotification.php:117 views/admin/comment.php:50
+#: views/public/comment.php:12
 msgid "Anonymous"
 msgstr "Anonym"
 
-#: views/admin/comment.php:59
-msgid "on"
-msgstr "på"
+#: views/admin/comment.php:61
+#, php-format
+msgid "on %s at %s"
+msgstr ""
 
-#: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
+#: views/admin/comment.php:72 views/admin/common/quick-filters.php:6
 msgid "Approved"
 msgstr "Godkänd"
 
-#: views/admin/comment.php:62 views/admin/comment/browse.php:24
+#: views/admin/comment.php:72 views/admin/comment/browse.php:20
 msgid "Unapprove"
 msgstr "Ta bort godkännande"
 
-#: views/admin/comment.php:63
+#: views/admin/comment.php:73
 msgid "Not Approved"
 msgstr "Ej godkänd"
 
-#: views/admin/comment.php:63 views/admin/comment/browse.php:23
+#: views/admin/comment.php:73 views/admin/comment/browse.php:19
 msgid "Approve"
 msgstr "Godkänn"
 
-#: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
+#: views/admin/comment.php:75 views/admin/common/quick-filters.php:8
 msgid "Spam"
 msgstr "Skräp"
 
-#: views/admin/comment.php:65 views/admin/comment/browse.php:27
+#: views/admin/comment.php:75 views/admin/comment/browse.php:23
 msgid "Report Not Spam"
 msgstr "Detta är inte skräp"
 
-#: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
+#: views/admin/comment.php:76 views/admin/common/quick-filters.php:9
 msgid "Not Spam"
 msgstr "Inte skräp"
 
-#: views/admin/comment.php:66 views/admin/comment/browse.php:26
+#: views/admin/comment.php:76 views/admin/comment/browse.php:22
 msgid "Report Spam"
 msgstr "Rapportera skräp"
 
-#: views/admin/comment.php:69
+#: views/admin/comment.php:78
 msgid "Flagged Inappropriate"
 msgstr "Flaggad som olämplig"
 
-#: views/admin/comment.php:69 views/admin/comment/browse.php:30
+#: views/admin/comment.php:78 views/admin/comment/browse.php:26
 msgid "Unflag"
 msgstr "Avflagga"
 
-#: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
+#: views/admin/comment.php:79 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
 msgstr "Inte flaggad"
 
-#: views/admin/comment.php:70
+#: views/admin/comment.php:79
 msgid "Flag Inappropriate"
 msgstr "Flagga som olämplig"
 
-#: views/admin/comment/browse.php:29
+#: views/admin/comment/browse.php:25
 msgid "Flag"
 msgstr "Flagga"
 
-#: views/admin/comment/browse.php:35
+#: views/admin/comment/browse.php:32
 msgid "Select All"
 msgstr "Välj alla"
 
@@ -244,14 +245,14 @@ msgstr "Kräver godkännande"
 msgid "Flagged"
 msgstr "Flaggad"
 
-#: views/public/comment.php:22
+#: views/public/comment.php:24
 msgid "Flag inappropriate"
 msgstr "Flagga olämplig"
 
-#: views/public/comment.php:23
+#: views/public/comment.php:25
 msgid "Unflag inappropriate"
 msgstr "Avflagga olämplig"
 
-#: views/public/comment.php:27
+#: views/public/comment.php:29
 msgid "Reply"
 msgstr "Svara"

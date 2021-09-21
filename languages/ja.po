@@ -7,11 +7,11 @@
 # Naosuke Okamoto, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Omeka\n"
+"Project-Id-Version: Omeka Classic\n"
 "Report-Msgid-Bugs-To: http://github.com/omeka/plugin-Commenting/issues\n"
 "POT-Creation-Date: 2012-01-09 21:49-0500\n"
-"PO-Revision-Date: 2019-01-13 08:11+0000\n"
-"Last-Translator: Naosuke Okamoto\n"
+"PO-Revision-Date: 2020-05-29 16:03+0000\n"
+"Last-Translator: John Flatness <john@zerocrates.org>\n"
 "Language-Team: Japanese (http://www.transifex.com/omeka/omeka/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,27 +19,27 @@ msgstr ""
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: CommentForm.php:15
+#: CommentForm.php:13
 msgid "Website"
 msgstr "Webサイト"
 
-#: CommentForm.php:18
+#: CommentForm.php:16
 msgid "Email (required)"
 msgstr "Eメール(必須)"
 
-#: CommentForm.php:25
+#: CommentForm.php:22
 msgid "Your name"
 msgstr "あなたの名前"
 
-#: CommentForm.php:36
+#: CommentForm.php:33
 msgid "Allowed tags:"
 msgstr "許可されるタグ："
 
-#: CommentForm.php:53
+#: CommentForm.php:42
 msgid "Please verify you're a human"
 msgstr "あなたが人間であることを確認してください"
 
-#: CommentingPlugin.php:266 CommentingPlugin.php:274
+#: CommentingPlugin.php:264 CommentingPlugin.php:272
 #: views/admin/comment/browse.php:4 views/public/comments.php:4
 msgid "Comments"
 msgstr "コメント"
@@ -52,111 +52,111 @@ msgstr "スレッド化したコメントを使用しますか？"
 msgid "If checked, replies will be displayed indented below the comment."
 msgstr "オンにすると、返信はコメントの下にインデント付きで表示します。"
 
-#: config_form.php:24
+#: config_form.php:22
 msgid "Text for comments label"
 msgstr "コメントラベルのテキスト"
 
-#: config_form.php:27
+#: config_form.php:25
 msgid "A label instead of 'Comments' to use. Leave empty to use 'Comments'."
 msgstr "「コメント」の代わりにラベルを使用します。 「コメント」を使用するには空のままにします。"
 
-#: config_form.php:36
+#: config_form.php:34
 msgid "Allow public commenting?"
 msgstr "コメント公開を許可しますか？"
 
-#: config_form.php:39
+#: config_form.php:37
 msgid ""
 "Allows everyone, including non-registered users to comment. Using this "
 "without Akismet is strongly discouraged."
 msgstr "登録していないユーザーを含め、誰もがコメントできるようにします。 これをAkismetなしで使用することはお勧めしません。"
 
-#: config_form.php:51
+#: config_form.php:48
 msgid "Require moderation for all public comments?"
 msgstr "すべての公開コメントに承認を必要としますか？"
 
-#: config_form.php:54
+#: config_form.php:51
 msgid "If unchecked, comments will appear immediately."
 msgstr "チェックを外すと、コメントがすぐに表示されます。"
 
-#: config_form.php:65
+#: config_form.php:62
 msgid "User roles that can moderate comments"
 msgstr "承認が必要なコメントを使うユーザーロール"
 
-#: config_form.php:68
+#: config_form.php:65
 msgid "The user roles that are allowed to moderate comments."
 msgstr "承認待ちコメントを許可するユーザロール"
 
-#: config_form.php:94
+#: config_form.php:91
 msgid "User roles that can comment"
 msgstr "コメントできるユーザーロール"
 
-#: config_form.php:97
+#: config_form.php:94
 msgid "Select the roles that can leave comments"
 msgstr "コメントを残すことができるロールを選択する"
 
-#: config_form.php:121
+#: config_form.php:116
 msgid "User roles that require moderation before publishing."
 msgstr "公開前に承認が必要なユーザーロール"
 
-#: config_form.php:124
+#: config_form.php:119
 msgid ""
 "If the role is allowed to moderate comments, that will override the setting "
 "here."
 msgstr "ロール（役割）がコメントを管理することが許可されている場合は、ここの設定が上書きされます。"
 
-#: config_form.php:146
+#: config_form.php:141
 msgid "Allow public to view comments?"
 msgstr "公開してコメントを表示できるようにしますか？"
 
-#: config_form.php:162
+#: config_form.php:156
 msgid "User roles that can view comments"
 msgstr "コメントを表示できるユーザーロール"
 
-#: config_form.php:187 views/admin/comment/browse.php:14
+#: config_form.php:181 views/admin/comment/browse.php:13
 msgid "security settings"
 msgstr "セキュリティ設定"
 
-#: config_form.php:187 views/admin/comment/browse.php:14
+#: config_form.php:181 views/admin/comment/browse.php:13
 #, php-format
 msgid ""
 "You have not entered your %s API keys under %s. We recommend adding these "
 "keys, or the commenting form will be vulnerable to spam."
 msgstr "%s の下に %s のAPIキーを入力していません。これらのキーを追加することをお勧めします。そうしないと、コメントフォームはスパムに脆弱になります。"
 
-#: config_form.php:193
+#: config_form.php:186
 msgid "WordPress API key for Akismet"
 msgstr "Akismet用のWordPress APIキー"
 
-#: config_form.php:207
+#: config_form.php:200
 msgid "New Comment Notification Emails"
 msgstr "新しいコメント通知メール"
 
-#: config_form.php:210
+#: config_form.php:203
 msgid ""
 "An email message will be sent to each address here whenever a new comment is"
 " contributed (one email per line). Leave blank if you do not want anyone to "
 "be alerted of comments by email."
 msgstr "新しいコメントが投稿されるたびに、各アドレスに電子メールメッセージが送信されます（1行に1メール）。 あなたが電子メールで誰かにコメントを知らせたくない場合は、空白のままにしておきます。"
 
-#: controllers/CommentController.php:69
+#: controllers/CommentController.php:62
 msgid "Your comment is awaiting moderation"
 msgstr "あなたのコメントは管理者の承認待ちです"
 
-#: controllers/CommentController.php:209
+#: controllers/CommentController.php:202
 #, php-format
 msgid "A comment on %s has been flagged as inappropriate"
 msgstr " %s のコメントは不適切と判断されました"
 
-#: controllers/CommentController.php:210
+#: controllers/CommentController.php:203
 #, php-format
 msgid "The comment %s has been flagged as inappropriate."
 msgstr " %s コメントは不適切と判断されました。"
 
-#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
+#: controllers/CommentController.php:204 models/Job/CommentNotification.php:58
 msgid "here"
 msgstr "ここ"
 
-#: controllers/CommentController.php:211 models/Job/CommentNotification.php:58
+#: controllers/CommentController.php:204 models/Job/CommentNotification.php:58
 #, php-format
 msgid "You can manage the comment %s"
 msgstr "あなたは %sコメントを管理することができます "
@@ -171,68 +171,69 @@ msgstr "[%s] - 新しいコメント： %s"
 msgid "New comment from %s"
 msgstr "%s の新しいコメント"
 
-#: models/Job/CommentNotification.php:117 views/admin/comment.php:54
-#: views/public/comment.php:10
+#: models/Job/CommentNotification.php:117 views/admin/comment.php:50
+#: views/public/comment.php:12
 msgid "Anonymous"
 msgstr "匿名"
 
-#: views/admin/comment.php:59
-msgid "on"
-msgstr "on"
+#: views/admin/comment.php:61
+#, php-format
+msgid "on %s at %s"
+msgstr ""
 
-#: views/admin/comment.php:62 views/admin/common/quick-filters.php:6
+#: views/admin/comment.php:72 views/admin/common/quick-filters.php:6
 msgid "Approved"
 msgstr "承認済み"
 
-#: views/admin/comment.php:62 views/admin/comment/browse.php:24
+#: views/admin/comment.php:72 views/admin/comment/browse.php:20
 msgid "Unapprove"
 msgstr "未承認"
 
-#: views/admin/comment.php:63
+#: views/admin/comment.php:73
 msgid "Not Approved"
 msgstr "否認"
 
-#: views/admin/comment.php:63 views/admin/comment/browse.php:23
+#: views/admin/comment.php:73 views/admin/comment/browse.php:19
 msgid "Approve"
 msgstr "承認"
 
-#: views/admin/comment.php:65 views/admin/common/quick-filters.php:8
+#: views/admin/comment.php:75 views/admin/common/quick-filters.php:8
 msgid "Spam"
 msgstr "スパム"
 
-#: views/admin/comment.php:65 views/admin/comment/browse.php:27
+#: views/admin/comment.php:75 views/admin/comment/browse.php:23
 msgid "Report Not Spam"
 msgstr "スパムではないと報告"
 
-#: views/admin/comment.php:66 views/admin/common/quick-filters.php:9
+#: views/admin/comment.php:76 views/admin/common/quick-filters.php:9
 msgid "Not Spam"
 msgstr "スパムではない"
 
-#: views/admin/comment.php:66 views/admin/comment/browse.php:26
+#: views/admin/comment.php:76 views/admin/comment/browse.php:22
 msgid "Report Spam"
 msgstr "スパムとして報告"
 
-#: views/admin/comment.php:69
+#: views/admin/comment.php:78
 msgid "Flagged Inappropriate"
 msgstr "不適切"
 
-#: views/admin/comment.php:69 views/admin/comment/browse.php:30
+#: views/admin/comment.php:78 views/admin/comment/browse.php:26
 msgid "Unflag"
 msgstr "フラグを解除する"
 
-#: views/admin/comment.php:70 views/admin/common/quick-filters.php:11
+#: views/admin/comment.php:79 views/admin/common/quick-filters.php:11
 msgid "Not Flagged"
 msgstr "フラグなし"
 
-#: views/admin/comment.php:70
+#: views/admin/comment.php:79
 msgid "Flag Inappropriate"
 msgstr "不適切フラグ"
 
-#: views/admin/comment/browse.php:29
+#: views/admin/comment/browse.php:25
 msgid "Flag"
 msgstr "フラグ"
 
-#: views/admin/comment/browse.php:35
+#: views/admin/comment/browse.php:32
 msgid "Select All"
 msgstr "全選択"
 
@@ -244,14 +245,14 @@ msgstr "承認が必要"
 msgid "Flagged"
 msgstr "フラグ付き"
 
-#: views/public/comment.php:22
+#: views/public/comment.php:24
 msgid "Flag inappropriate"
 msgstr "不適切フラグ"
 
-#: views/public/comment.php:23
+#: views/public/comment.php:25
 msgid "Unflag inappropriate"
 msgstr "不適切フラグを解除する"
 
-#: views/public/comment.php:27
+#: views/public/comment.php:29
 msgid "Reply"
 msgstr "返信"
