@@ -19,6 +19,8 @@
     ?>
     <p class='comment-author-name'><?php echo $authorText?></p>
 </div>
+<div class="flagged-alert" role="alert"><?php echo __('Flagged inappropriate'); ?></div>
+<div class="sr-only unflagged-alert" role="alert"><?php echo __('Unflagged inappropriate'); ?></div>
 <div class="comment-body"><?php echo $comment->body; ?></div>
 <div class="action-links">
     <?php if(is_allowed('Commenting_Comment', 'unflag')): ?>

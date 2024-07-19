@@ -64,8 +64,7 @@ div#comments-container div.comment-children {
 }
 
 div.comment {
-    padding: 1rem 1rem 0;
-    margin: 1rem 0 0;
+    padding: 1rem;
     clear: both;
     overflow: hidden;
 }
@@ -76,8 +75,8 @@ div.comment-author {
 	width: 100px;
 }
 
-.comment.flagged > .comment-body {
-    background-color: pink;
+.comment.flagged {
+    border: 3px solid pink;
 }
 
 .action-links {
@@ -99,6 +98,20 @@ div.success {
 
 a.mceButton {
 	overflow: inherit;	
+}
+
+.flagged-alert {
+    display: none;
+    background-color: pink;
+    padding: .25rem;
+}
+
+.flagged .flagged-alert {
+    display: inline-block;
+}
+
+.flagged .unflagged-alert {
+    display: none;
 }
 
 .flagged > .action-links .flag-action .green,
