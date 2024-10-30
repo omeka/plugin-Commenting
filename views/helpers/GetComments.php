@@ -16,7 +16,7 @@ class Commenting_View_Helper_GetComments extends Zend_View_Helper_Abstract
         $html .= "</div>";
 
         if (is_allowed('Commenting_Comment', 'add')) {
-            $html .= '<div id="comments-status" aria-live="polite"></div>';
+            $html .= '<div id="comments-status" aria-live="polite" aria-atomic="true"></div>';
             $html .= $this->view->getCommentForm($record);
         }
         $html .= "</div>";

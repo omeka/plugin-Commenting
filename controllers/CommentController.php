@@ -88,8 +88,8 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         }
         $this->_helper->json(array(
             'message' => __('Your comment was posted succesfully'),
-            'fragment' => "comment-{$comment->id}",
-            'comments' => $this->view->getComments($record)
+            'fragment' => $requiresApproval ? "comment-status" : "comment-{$comment->id}",
+            'comments' => $this->view->getComments($record),
         ));
     }
 

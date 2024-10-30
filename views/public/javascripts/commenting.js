@@ -65,11 +65,15 @@
             var form = $(this);
             $.post(form.attr('action'), form.serialize())
                 .done(function (data) {
-                    tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, 'comment-form-body');
-                    $('#comments-container').replaceWith(data.comments);
-                    tinyMCE.EditorManager.execCommand('mceAddEditor', false, 'comment-form-body');
+                    if (data.comments) {
+                        tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, 'comment-form-body');
+                        $('#comments-container').replaceWith(data.comments);
+                        tinyMCE.EditorManager.execCommand('mceAddEditor', false, 'comment-form-body');
+                    }
                     $('#comments-status').addClass('success').removeClass('error').text(data.message);
-                    window.location.hash = data.fragment;
+                    if (data.fragment) {
+                        window.location.hash = data.fragment;
+                    }
                 })
                 .fail(function (jqXHR) {
                     $('#comments-status').addClass('error').removeClass('success').text(jqXHR.responseJSON.error);
