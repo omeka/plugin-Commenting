@@ -5,14 +5,13 @@
     <?php else: ?>
         <h2><?php echo $label; ?></h2>
     <?php endif; ?>
-    <div id='comments-flash'><?php echo flash(true); ?></div>
     <?php echo fire_plugin_hook('commenting_prepend_to_comments', array('comments' =>$comments)); ?>
 
     <?php if($threaded) :?>
         <?php echo $this->partial('threaded-comments.php', array('comments' => $comments, 'parent_id'=>null)); ?>
     <?php else: ?>
         <?php foreach($comments as $comment): ?>
-            <div id="comment-<?php echo $comment->id; ?>" class='comment <?php echo ($comment->flagged == 1) ? 'flagged' : ''; ?>''>
+            <div id="comment-<?php echo $comment->id; ?>" class="comment<?php echo ($comment->flagged == 1) ? ' flagged' : ''; ?>">
             <?php echo $this->partial('comment.php', 'commenting', array('comment' => $comment)); ?>
             </div>
         <?php endforeach; ?>

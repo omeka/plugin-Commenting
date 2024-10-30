@@ -58,6 +58,22 @@
             };
     
             tinyMCE.init($.extend(initParams, params));
+        },
+
+        submitForm: function (e) {
+            e.preventDefault();
+            var form = $(this);
+            $.post(form.attr('action'), form.serialize())
+                .done(function (data) {
+                    tinyMCE.EditorManager.execCommand('mceRemoveEditor', false, 'comment-form-body');
+                    $('#comments-container').replaceWith(data.comments);
+                    tinyMCE.EditorManager.execCommand('mceAddEditor', false, 'comment-form-body');
+                    $('#comments-status').addClass('success').removeClass('error').text(data.message);
+                    window.location.hash = data.fragment;
+                })
+                .fail(function (jqXHR) {
+                    $('#comments-status').addClass('error').removeClass('success').text(jqXHR.responseJSON.error);
+                });
         }
     };
     
@@ -65,6 +81,7 @@
         $("a.action").click(function(e) { e.preventDefault() });
         $('.reply-action').click(Commenting.handleReply);
         $('.flag-action').click(Commenting.flagToggle);
+        $('body').on('submit', '#comment-form', Commenting.submitForm);
         Commenting.wysiwyg();
         Commenting.pluginRoot = $('.comments').data('commentUrlBase');
     });

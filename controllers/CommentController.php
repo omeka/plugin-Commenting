@@ -41,7 +41,7 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
 
     public function addAction()
     {
-        $destination = $_POST['path'];
+        $this->_helper->viewRenderer->setNoRender(true);
 
         $comment = new Comment();
         if($user = current_user()) {
@@ -50,11 +50,15 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $comment->flagged = 0;
         $form = $this->getForm();
         $valid = $form->isValid($this->getRequest()->getPost());
-        if(!$valid) {
-            $destination .= "#comment-form";
-            $commentSession = new Zend_Session_Namespace('commenting');
-            $commentSession->post = serialize($_POST);
-            $this->_helper->redirector->gotoUrl($destination);
+        if (!$valid) {
+            $this->getResponse()->setHttpResponseCode(422);
+            $this->_helper->json(array('error' => __('Your submission was invalid. Please try again.')));
+        }
+
+        $record = get_record_by_id($_POST['record_type'], $_POST['record_id']);
+        if (!$record) {
+            $this->getResponse()->setHttpResponseCode(422);
+            $this->_helper->json(array('error' => __('Your submission was invalid. Please try again.')));
         }
 
         $user = current_user();
@@ -65,9 +69,6 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
         $reqAppPublicComment = (bool) get_option('commenting_require_public_moderation');
         $requiresApproval = $requiresApproval || (!is_object(current_user()) && $reqAppPublicComment);
         //end Daniel Lind contribution
-        if($requiresApproval) {
-            $this->_helper->flashMessenger(__("Your comment is awaiting moderation"), 'success');
-        }
 
         $purifier = $this->_getHtmlPurifier();
 
@@ -82,8 +83,14 @@ class Commenting_CommentController extends Omeka_Controller_AbstractActionContro
 
         $this->sendEmailNotifications($comment);
 
-        $destination .= "#comment-" . $comment->id;
-        $this->_helper->redirector->gotoUrl($destination);
+        if($requiresApproval) {
+            $this->_helper->json(array('message' => __('Your comment is awaiting moderation')));
+        }
+        $this->_helper->json(array(
+            'message' => __('Your comment was posted succesfully'),
+            'fragment' => "comment-{$comment->id}",
+            'comments' => $this->view->getComments($record)
+        ));
     }
 
     public function updateSpamAction()
