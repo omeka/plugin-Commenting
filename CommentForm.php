@@ -15,6 +15,9 @@ class Commenting_CommentForm extends Omeka_Form
         $emailOptions = array(
             'label' => __('Email (required)'),
             'required' => true,
+            'attribs' => array(
+                'required' => 'required',
+            ),
             'validators' => array(
                 array('validator' => 'EmailAddress')
             )
