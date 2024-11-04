@@ -70,10 +70,13 @@
                         $('#comments-container').replaceWith(data.comments);
                         tinyMCE.EditorManager.execCommand('mceAddEditor', false, 'comment-form-body');
                     }
-                    $('#comments-status').addClass('success').removeClass('error').text(data.message);
                     if (data.fragment) {
                         window.location.hash = data.fragment;
                     }
+                    $('#author_name').focus();
+                    setTimeout(function() { 
+                        $('#comments-status').addClass('success').removeClass('error').text(data.message);
+                    }, 1000);
                 })
                 .fail(function (jqXHR) {
                     $('#comments-status').addClass('error').removeClass('success').text(jqXHR.responseJSON.error);
