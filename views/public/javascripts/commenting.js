@@ -11,6 +11,7 @@
             commentId = Commenting.getCommentId(currentComment);
             $('#parent-id').val(commentId);
             tinyMCE.EditorManager.execCommand('mceAddEditor', false, 'comment-form-body');
+            $('#comment-form').find(':focusable').first().focus();
         },
     
         finalizeMove: function() {
