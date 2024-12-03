@@ -9,7 +9,6 @@
             var currentComment = $(event.target).closest('.comment');
             $('#comment-form').appendTo(currentComment);
             commentId = Commenting.getCommentId(currentComment);
-            console.log(commentId);
             $('#parent-id').val(commentId);
             tinyMCE.EditorManager.execCommand('mceAddEditor', false, 'comment-form-body');
         },
@@ -85,9 +84,18 @@
     };
     
     $(document).ready(function() {
-        $("a.action").click(function(e) { e.preventDefault() });
-        $('.reply-action').click(Commenting.handleReply);
-        $('.flag-action').click(Commenting.flagToggle);
+        $('body').on('click', 'a.action', function(e) {
+            e.preventDefault();
+            var actionLink = $(this);
+
+            if (actionLink.hasClass('reply-action')) {
+                Commenting.handleReply(e);
+            }
+            if (actionLink.hasClass('flag-action')) {
+                Commenting.flagToggle(e);
+            }
+        });
+        
         $('body').on('submit', '#comment-form', Commenting.submitForm);
         Commenting.wysiwyg();
         Commenting.pluginRoot = $('.comments').data('commentUrlBase');
