@@ -79,6 +79,10 @@ div.comment-author {
     border: 3px solid pink;
 }
 
+.comment.flagged .unflagged-alert {
+    display: none;
+}
+
 .action-links {
 	float: right;
     margin-top: .5rem;
