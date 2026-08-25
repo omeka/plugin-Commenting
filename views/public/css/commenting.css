@@ -1,3 +1,8 @@
+#comments-container {
+    break-inside: avoid;
+    margin-bottom: 1em;
+}
+
 #comments-container .comment-body {
     margin-left: 100px;
     padding: 6px;
